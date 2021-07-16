@@ -1,0 +1,124 @@
+<?php
+/**
+ * The plugin bootstrap file
+ *
+ * This file is read by WordPress to generate the plugin information in the plugin
+ * admin area. This file also includes all of the dependencies used by the plugin,
+ * registers the activation and deactivation functions, and defines a function
+ * that starts the plugin.
+ *
+ * @link              https://wbcomdesigns.com/
+ * @since             1.0.0
+ * @package           Infinite_Loader_For_Woocommerce
+ *
+ * @wordpress-plugin
+ * Plugin Name:       Wbcom Designs – Infinite Loader for WooCommerce
+ * Plugin URI:        https://wbcomdesigns.com/
+ * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Version:           1.0.0
+ * Author:            WBCOM Designs
+ * Author URI:        https://wbcomdesigns.com/
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain:       infinite-loader-for-woocommerce
+ * Domain Path:       /languages
+ */
+
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
+/**
+ * Currently plugin version.
+ * Start at version 1.0.0 and use SemVer - https://semver.org
+ * Rename this for your plugin and update it as you release new versions.
+ */
+define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION', '1.0.0' );
+
+/**
+ * The code that runs during plugin activation.
+ * This action is documented in includes/class-infinite-loader-for-woocommerce-activator.php
+ */
+function activate_infinite_loader_for_woocommerce() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-infinite-loader-for-woocommerce-activator.php';
+	Infinite_Loader_For_Woocommerce_Activator::activate();
+}
+
+/**
+ * The code that runs during plugin deactivation.
+ * This action is documented in includes/class-infinite-loader-for-woocommerce-deactivator.php
+ */
+function deactivate_infinite_loader_for_woocommerce() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-infinite-loader-for-woocommerce-deactivator.php';
+	Infinite_Loader_For_Woocommerce_Deactivator::deactivate();
+}
+
+register_activation_hook( __FILE__, 'activate_infinite_loader_for_woocommerce' );
+register_deactivation_hook( __FILE__, 'deactivate_infinite_loader_for_woocommerce' );
+
+if ( ! function_exists( 'infinite_loader_for_woocommerce_check_woocommerce' ) ) {
+
+	add_action( 'admin_init', 'infinite_loader_for_woocommerce_check_woocommerce' );
+
+	/**
+	 * Function check for woocommerce is installed and activate.
+	 *
+	 * @since    1.0.0
+	 */
+	function infinite_loader_for_woocommerce_check_woocommerce() {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			deactivate_plugins( plugin_basename( __FILE__ ) );
+			add_action( 'admin_notices', 'infinite_loader_for_woocommerce_admin_notice' );
+			unset( $_GET['activate'] );
+		} else {
+			run_infinite_loader_for_woocommerce();
+		}
+
+	}
+}
+
+if ( ! function_exists( 'infinite_loader_for_woocommerce_admin_notice' ) ) {
+
+	/**
+	 * Admin notice if WooCommerce not found.
+	 *
+	 * @since    1.0.0
+	 */
+	function infinite_loader_for_woocommerce_admin_notice() {
+
+		$infinite_loader_plugin = esc_html__( 'Infinite Loader for WooCommerce', 'infinite-loader-for-woocommerce' );
+		$woo_plugin             = esc_html__( 'WooCommerce', 'infinite-loader-for-woocommerce' );
+		echo '<div class="error"><p>';
+		/* Translators: %1$s: Cart Notice for WooCommerce, %2$s: WooCommerce   */
+		echo sprintf( esc_html__( '%1$s is ineffective now as it requires %2$s to be installed and active.', 'infinite-loader-for-woocommerce' ), '<strong>' . esc_html( $infinite_loader_plugin ) . '</strong>', '<strong>' . esc_html( $woo_plugin ) . '</strong>' );
+		echo '</p></div>';
+		if ( isset( $_GET['activate'] ) ) {
+			unset( $_GET['activate'] );
+		}
+
+	}
+}
+
+/**
+ * The core plugin class that is used to define internationalization,
+ * admin-specific hooks, and public-facing site hooks.
+ */
+require plugin_dir_path( __FILE__ ) . 'includes/class-infinite-loader-for-woocommerce.php';
+
+/**
+ * Begins execution of the plugin.
+ *
+ * Since everything within the plugin is registered via hooks,
+ * then kicking off the plugin from this point in the file does
+ * not affect the page life cycle.
+ *
+ * @since    1.0.0
+ */
+function run_infinite_loader_for_woocommerce() {
+
+	$plugin = new Infinite_Loader_For_Woocommerce();
+	$plugin->run();
+
+}
+run_infinite_loader_for_woocommerce();

@@ -1,0 +1,12 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+ .form-table .infinite-loader-style {
+     width: 65px;
+ }
+ .fomr-table, #infinite-loader-css-js-area {
+    width: 100%;
+    resize: vertical;
+    min-height: 200px;
+ }
