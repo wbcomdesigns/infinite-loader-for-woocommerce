@@ -192,6 +192,8 @@ class Infinite_Loader_For_Woocommerce {
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'infinite_loader_for_woocommerce_add_submenu_page_admin_settings' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'infinite_loader_for_woocommerce_init_plugin_settings' );
 		$this->loader->add_action( 'infinite_loader_load_more_buttom_preview', $plugin_admin, 'section_btn_custom_class' );
+		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_more_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_button_style' );
+		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_previous_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_previous_button_style' );
 	}
 
 	/**
@@ -207,7 +209,7 @@ class Infinite_Loader_For_Woocommerce {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
+		$this->loader->add_action( 'wp_head', $plugin_public, 'infinite_loader_for_woocommerce_display_custom_css' );
 	}
 
 	/**

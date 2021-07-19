@@ -71,7 +71,6 @@ class Infinite_Loader_For_Woocommerce_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/infinite-loader-for-woocommerce-public.css', array(), $this->version, 'all' );
 
 	}
@@ -99,4 +98,16 @@ class Infinite_Loader_For_Woocommerce_Public {
 
 	}
 
+	/**
+	 * Function set styles in wp_head WordPress action.
+	 *
+	 * @return void
+	 */
+	public function infinite_loader_for_woocommerce_display_custom_css() {
+		$infinite_loader_css_js_setting = get_option( 'infinite_loader_admin_css_js_option' );
+		$infinite_loader_custom_css     = isset( $infinite_loader_css_js_setting['custom_css'] ) ? $infinite_loader_css_js_setting['custom_css'] : '';
+		if ( ! empty( $infinite_loader_custom_css ) ) {
+			echo '<style type="text/css">' . wp_kses_post( $infinite_loader_custom_css ) . '</style>';
+		}
+	}
 }
