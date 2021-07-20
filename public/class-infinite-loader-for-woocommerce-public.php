@@ -94,7 +94,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/infinite-loader-for-woocommerce-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'infinite_loader_products', plugin_dir_url( __FILE__ ) . 'js/infinite-loader-for-woocommerce-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -108,6 +108,23 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$infinite_loader_custom_css     = isset( $infinite_loader_css_js_setting['custom_css'] ) ? $infinite_loader_css_js_setting['custom_css'] : '';
 		if ( ! empty( $infinite_loader_custom_css ) ) {
 			echo '<style type="text/css">' . wp_kses_post( $infinite_loader_custom_css ) . '</style>';
+		}
+	}
+
+	/**
+	 * Function to register font awesome css file.
+	 *
+	 * @return void
+	 */
+	public function infinite_loader_for_woocommerce_enqueue_fontawesome_file() {
+		$infinite_loader_css_js_setting = get_option( 'infinite_loader_admin_css_js_option' );
+		$infinite_loader_css_js_enable  = isset( $infinite_loader_css_js_setting['disable_font_awesome'] ) ? $infinite_loader_css_js_setting['disable_font_awesome'] : '';
+		if ( ! $infinite_loader_css_js_enable ) {
+			if ( 'fontawesome5' === $infinite_loader_css_js_setting['font_awesome_version'] ) {
+				wp_enqueue_style( 'font-awesome-5', plugins_url( 'css/fontawesome5.min.css', __FILE__ ), array(), $this->version, 'all' );
+			} else {
+				wp_enqueue_style( 'font-awesome-4', plugins_url( 'css/font-awesome.min.css', __FILE__ ), array(), $this->version, 'all' );
+			}
 		}
 	}
 }

@@ -210,6 +210,7 @@ class Infinite_Loader_For_Woocommerce {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_head', $plugin_public, 'infinite_loader_for_woocommerce_display_custom_css' );
+		$this->loader->add_action( 'init', $plugin_public, 'infinite_loader_for_woocommerce_enqueue_fontawesome_file' );
 	}
 
 	/**

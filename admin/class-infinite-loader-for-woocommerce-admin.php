@@ -244,11 +244,14 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 * Display load more preview button.
 	 */
 	public function infinite_loader_for_woocommerce_display_load_more_button() {
-		$infinite_loader_button_setting    = get_option( 'infinite_loader_admin_button_option' );
+		$infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_option' );
+		$infinite_loader_custom_class   = isset( $infinite_loader_button_setting['custom_class'] ) ? $infinite_loader_button_setting['custom_class'] : '';
+		$infinite_loader_button_text    = isset( $infinite_loader_button_setting['button_text'] ) ? $infinite_loader_button_setting['button_text'] : '';
+
 		$infinite_loader_load_more_button  = '<div class="infinite_load_more_button">';
-		$infinite_loader_load_more_button .= '<a class="infinite_loader_button ' . $infinite_loader_button_setting['custom_class'] . '" style="';
+		$infinite_loader_load_more_button .= '<a class="infinite_loader_button ' . $infinite_loader_custom_class . '" style="';
 		$infinite_loader_load_more_button .= apply_filters( 'infinite_loader_for_woocommerce_load_more_button_style', '', );
-		$infinite_loader_load_more_button .= '" href="#load_next_page">' . $infinite_loader_button_setting['button_text'] . '</a>';
+		$infinite_loader_load_more_button .= '" href="#load_next_page">' . $infinite_loader_button_text . '</a>';
 		$infinite_loader_load_more_button .= '</div>';
 		echo wp_kses_post( $infinite_loader_load_more_button );
 	}
