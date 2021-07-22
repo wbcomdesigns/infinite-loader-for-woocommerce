@@ -12,6 +12,8 @@
  */
 
 $infinite_loader_genral_setting = get_option( 'infinite_loader_admin_general_option' );
+
+$infinite_loader_selected_icon = isset( $infinite_loader_genral_setting['loading_image'] ) ? esc_attr( $infinite_loader_genral_setting['loading_image'] ) : '';
 ?>
 <div class="wbcom-tab-content">
 	<form method="post" action="options.php">
@@ -44,6 +46,21 @@ $infinite_loader_genral_setting = get_option( 'infinite_loader_admin_general_opt
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Products per page', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
 						<input type="number" name="infinite_loader_admin_general_option[product_per_page]" placeholder="<?php esc_html_e( 'Products per page', 'infinite-loader-for-woocommerce' ); ?>" value="<?php echo ( isset( $infinite_loader_genral_setting['product_per_page'] ) ) ? esc_attr( $infinite_loader_genral_setting['product_per_page'] ) : ''; ?>">
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="blogname"><?php esc_html_e( 'Loading Image', 'infinite-loader-for-woocommerce' ); ?></label></th>
+					<td>
+						<?php
+						echo '<div class="infinite_loader_select_fontawesome">';
+						echo Infinite_Loader_For_Woocommerce_Admin::infinite_loader_icon_popup();
+						echo '<input type="hidden" name="infinite_loader_admin_general_option[loading_image]" value="' . esc_attr( $infinite_loader_selected_icon ) . '" readonly class="infinite_icon_value"/>
+        						<span class="infinite_selected_icon"><i class="fa ' . esc_attr( $infinite_loader_selected_icon ) . '"></i></span>
+        						<input type="button" class="infinite_select_icon button" value="' . esc_html__( 'Font Awesome', 'infinite-loader-for-woocommerce' ) . '"/> ';
+						echo '<input type="button" class="infinite_remove_icon button" value="' . esc_html__( 'Remove', 'infinite-loader-for-woocommerce' ) . '"/>';
+						echo '</div>';
+
+						?>
 					</td>
 				</tr>
 				<tr>
