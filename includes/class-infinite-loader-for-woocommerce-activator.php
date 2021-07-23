@@ -30,7 +30,17 @@ class Infinite_Loader_For_Woocommerce_Activator {
 	 */
 	public static function activate() {
 
-		$infinite_loader_set_load_more_default_options = array(
+		$infinite_loader_set_default_genral_options = array(
+			'product_loading_type'   => 'load-more-button',
+			'product_per_page'       => '8',
+			'loading_image'          => 'fa-spinner',
+			'rotate_image'           => 'yes',
+			'do_not_update_url'      => 'no',
+			'js_css_use_use_wc_page' => 'yes',
+		);
+		update_option( 'infinite_loader_admin_general_option', $infinite_loader_set_default_genral_options );
+
+		$infinite_loader_set_default_load_more_btn_options = array(
 			'button_text'                  => 'Load More',
 			'background_color'             => '#1d76da',
 			'background_color_mouse_hover' => '#0e4da0',
@@ -43,9 +53,10 @@ class Infinite_Loader_For_Woocommerce_Activator {
 			'padding_bottom'               => '18',
 			'padding_left'                 => '25',
 		);
-		update_option( 'infinite_loader_admin_button_option', $infinite_loader_set_load_more_default_options );
+		update_option( 'infinite_loader_admin_button_option', $infinite_loader_set_default_load_more_btn_options );
 
-		$infinite_loader_set_load_previous_default_options = array(
+		$infinite_loader_set_default_previous_btn_options = array(
+			'enable_previous_button'       => 'yes',
 			'button_text'                  => 'Load Previous',
 			'background_color'             => '#1d76da',
 			'background_color_mouse_hover' => '#0e4da0',
@@ -58,7 +69,16 @@ class Infinite_Loader_For_Woocommerce_Activator {
 			'padding_bottom'               => '18',
 			'padding_left'                 => '25',
 		);
-		update_option( 'infinite_loader_admin_previous_button_option', $infinite_loader_set_load_previous_default_options );
+		update_option( 'infinite_loader_admin_previous_button_option', $infinite_loader_set_default_previous_btn_options );
+
+		$infinite_loader_set_default_selectors_options = array(
+			'product_container' => 'ul.products',
+			'product_item'      => 'li.product',
+			'pagination'        => 'nav.woocommerce-pagination',
+			'next_page'         => 'a.next.page-numbers',
+			'previous_page'     => 'a.prev.page-numbers',
+		);
+		update_option( 'infinite_loader_admin_selectors_option', $infinite_loader_set_default_selectors_options );
 	}
 
 }

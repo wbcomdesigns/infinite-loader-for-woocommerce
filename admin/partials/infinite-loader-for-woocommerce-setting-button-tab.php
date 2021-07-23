@@ -31,7 +31,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 					<td colspan="2">
 						<div class='infinite-loader-btn-preview-td'>
 							<h1 style='text-align: center;'><?php esc_html_e( 'Preview', 'infinite-loader-for-woocommerce' ); ?></h1>
-							<div class='infinite-loader-btn-preview-block'><?php Infinite_Loader_For_Woocommerce_Admin::infinite_loader_for_woocommerce_display_load_more_button(); ?></div>
+							<div class='infinite-loader-btn-preview-block'><?php echo Infinite_Loader_For_Woocommerce_Admin::infinite_loader_for_woocommerce_display_load_more_button(); ?></div>
 							</div>					
 					</td>
 				</tr>
@@ -44,8 +44,8 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 				<tr>
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Background color', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-							<input type="color" id="infinite_loader_default_bg_color" class="bg_btn_color" name="infinite_loader_admin_button_option[background_color]" value="<?php echo ( isset( $infinite_loader_button_setting['background_color'] ) ) ? esc_attr( $infinite_loader_button_setting['background_color'] ) : ''; ?>">
-							<input type="button" id="infinite-loader-default-color" value="Default" class="button">
+						<input type="color" id="infinite_loader_default_bg_color" class="bg_btn_color" name="infinite_loader_admin_button_option[background_color]" value="<?php echo ( isset( $infinite_loader_button_setting['background_color'] ) ) ? esc_attr( $infinite_loader_button_setting['background_color'] ) : ''; ?>">
+						<input type="button" id="infinite-loader-default-color" value="Default" class="button">
 					</td>
 				</tr>
 				<tr>

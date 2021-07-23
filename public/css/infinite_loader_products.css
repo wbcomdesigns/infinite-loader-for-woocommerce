@@ -1,0 +1,62 @@
+body {
+	overflow-anchor: none!important;
+}
+.infinite_loader_products_loading, .infinite_loader_btn_load {
+    width: 100%;
+    text-align: center;
+    clear: both;
+}
+.infinite_loader_products_loading .fa {
+    width: 56px;
+    height: 56px;
+    font-size: 28px;
+    line-height: 56px;
+}
+.infinite_loader_products_loading .fa img {
+    max-width: 100%;
+    max-height: 100%;
+}
+.br_loading_inside_lmp img.infinite_loader_rotate_image,
+.br_loading_inside_lmp .fa.infinite_loader_rotate_image:before,
+.infinite_loader_products_loading .infinite_loader_rotate_image,
+.infinite_loader_products_loading .fa.infinite_loader_rotate_image:before,
+.infinite_loader_products_loading .infinite_loader_rotate_image img {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-animation:spin 2s linear infinite;
+    -moz-animation:spin 2s linear infinite;
+    animation:spin 2s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.infinite_loader_btn_load .infinite_button {
+    position: relative;
+    display: inline-block;
+    font-size: 22px;
+    text-decoration: none;
+    line-height: 1em;
+    box-sizing: border-box;
+}
+.infinite_loader_btn_load .infinite_button img {
+    max-width: 100%;
+    max-height: 100%;
+}
+.infinite_loader_btn_load .infinite_button .br_lmp_hover_image {display: none;}
+.infinite_loader_btn_load .infinite_button:hover .br_lmp_button_image {display: none;}
+.infinite_loader_btn_load .infinite_button:hover .br_lmp_hover_image {display: initial;}
+.infinite_loader_btn_load .infinite_button .br_lmp_loading_image {display: none;}
+.infinite_loader_ajax_loading .infinite_loader_btn_load .infinite_button .br_lmp_button_image {display: none;}
+.infinite_loader_ajax_loading .infinite_loader_btn_load .infinite_button .br_lmp_hover_image {display: none;}
+.infinite_loader_ajax_loading .infinite_loader_btn_load .infinite_button .br_lmp_loading_image {display: initial;}
+.infinite_loader_btn_load .infinite_button .br_lmp_button_image {display: initial;}
+.infinite_loader_btn_load .infinite_button .br_loading_inside_image_lmp {
+    position: absolute;
+}
+.infinite_loader_preload {
+    position: fixed;
+    opacity: 1;
+    top:150%;
+}

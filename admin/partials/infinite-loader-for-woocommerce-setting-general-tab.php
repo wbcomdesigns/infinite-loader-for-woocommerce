@@ -61,6 +61,10 @@ $infinite_loader_selected_icon = isset( $infinite_loader_genral_setting['loading
 						echo '</div>';
 
 						?>
+						<label>
+							<input type="checkbox" name="infinite_loader_admin_general_option[rotate_image]" value="yes" <?php ( isset( $infinite_loader_genral_setting['rotate_image'] ) ) ? checked( $infinite_loader_genral_setting['rotate_image'], 'yes' ) : ''; ?>>
+							<span><?php esc_html_e( 'Rotate image on load', 'infinite-loader-for-woocommerce' ); ?></span>
+						</label>
 					</td>
 				</tr>
 				<tr>

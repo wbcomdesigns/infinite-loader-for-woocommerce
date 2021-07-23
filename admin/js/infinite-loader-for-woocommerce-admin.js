@@ -32,18 +32,19 @@
 		$('#infinity-loader-loading-type').selectize({
 		placeholder: "Select Button Action",
 		plugins: ['remove_button'],
-	});
-		var $button = jQuery('<a class="infinite_loader_button" href="#load_next_page"></a>');
-		$(document).on('mouseenter', '.infinite_load_more_button .infinite_loader_button', function () {
-			$button = $(this).parents('.form-table').first().find('.infinite_load_more_button .infinite_loader_button');
-			$button.css('background-color', $(this).parents('.form-table').first().find('.bg_btn_color_hover').val());
+		});
+		var $button = jQuery('<a class="infinite_button" href="#load_next_page"></a>');
+		
+		$(document).on('mouseenter', '.infinite_loader_btn_load .infinite_button', function () {
+			$button = $(this).parents('.form-table').first().find('.infinite_loader_btn_load .infinite_button');
+			$button.css('background_color', $(this).parents('.form-table').first().find('.bg_btn_color_hover').val());
 			$button.css('color', $(this).parents('.form-table').first().find('.txt_btn_color_hover').val());
 			$button.trigger('infinite_loader_button_changed');
 		});
 
-		$(document).on('mouseleave', '.infinite_load_more_button .infinite_loader_button', function () {
-			$button = $(this).parents('.form-table').first().find('.infinite_load_more_button .infinite_loader_button');
-			$button.css('background-color', $(this).parents('.form-table').first().find('.bg_btn_color').val());
+		$(document).on('mouseleave', '.infinite_loader_btn_load .infinite_button', function () {
+			$button = $(this).parents('.form-table').first().find('.infinite_loader_btn_load .infinite_button');
+			$button.css('background_color', $(this).parents('.form-table').first().find('.bg_btn_color').val());
 			$button.css('color', $(this).parents('.form-table').first().find('.txt_btn_color').val());
 			$button.trigger('infinite_loader_button_changed');
 		});

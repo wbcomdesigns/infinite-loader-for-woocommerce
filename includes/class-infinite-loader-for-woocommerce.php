@@ -77,7 +77,6 @@ class Infinite_Loader_For_Woocommerce {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -211,6 +210,10 @@ class Infinite_Loader_For_Woocommerce {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_head', $plugin_public, 'infinite_loader_for_woocommerce_display_custom_css' );
 		$this->loader->add_action( 'init', $plugin_public, 'infinite_loader_for_woocommerce_enqueue_fontawesome_file' );
+		$this->loader->add_action( 'wp_head', $plugin_public, 'infinite_loader_add_css_js_for_loading_products' );
+		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_more_button_styles', $plugin_public, 'infinite_loader_for_woocommerce_button_styles' );
+
+		$this->loader->add_filter( 'loop_shop_per_page', $plugin_public, 'infinite_loader_set_product_per_page', 20 );
 	}
 
 	/**
