@@ -304,7 +304,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		$infinite_loader_prev_button_text         = isset( $infinite_loader_previous_button_setting['button_text'] ) ? $infinite_loader_previous_button_setting['button_text'] : '';
 		$infinite_loader_prev_button_enable       = isset( $infinite_loader_previous_button_setting['enable_previous_button'] ) ? $infinite_loader_previous_button_setting['enable_previous_button'] : '';
 
-		$infinite_loader_previous_button  = '<div class="infinite_loader_btn_load infinite_loader_btn_setting">';
+		$infinite_loader_previous_button  = '<div class="infinite_loader_btn_load infinite_loader_prev_btn_setting">';
 		$infinite_loader_previous_button .= '<a class="infinite_button ' . esc_attr( $infinite_loader_prev_button_custom_class ) . '" style="';
 		$infinite_loader_previous_button .= apply_filters( 'infinite_loader_for_woocommerce_load_previous_button_style', '', );
 		$infinite_loader_previous_button .= '" href="#load_previous_page">' . esc_html( $infinite_loader_prev_button_text ) . '</a>';
