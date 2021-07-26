@@ -101,6 +101,20 @@ if ( ! function_exists( 'infinite_loader_for_woocommerce_admin_notice' ) ) {
 }
 
 /**
+ * Redirect to plugin settings page after activated.
+ *
+ * @param string $plugin Contains the plugin path.
+ */
+function infinite_loader_plugin_redirect_to_welcome_page( $plugin ) {
+
+	if ( plugin_basename( __FILE__ ) === $plugin ) {
+		wp_redirect( admin_url( 'admin.php?page=infinite-loader-for-woocommerce-settings' ) );
+		exit;
+	}
+}
+add_action( 'activated_plugin', 'infinite_loader_plugin_redirect_to_welcome_page' );
+
+/**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
