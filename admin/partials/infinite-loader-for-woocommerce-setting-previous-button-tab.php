@@ -24,13 +24,13 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 				<tr>
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Enable Previous Button', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-						<input type="checkbox" name="infinite_loader_admin_previous_button_option[enable_previous_button]"  value="yes" <?php ( isset( $infinite_loader_previous_button_setting['enable_previous_button'] ) ) ? checked( $infinite_loader_previous_button_setting['enable_previous_button'], 'yes' ) : ''; ?>>
+						<input type="checkbox" data-style="custom_css" name="infinite_loader_admin_previous_button_option[enable_previous_button]"  value="yes" <?php ( isset( $infinite_loader_previous_button_setting['enable_previous_button'] ) ) ? checked( $infinite_loader_previous_button_setting['enable_previous_button'], 'yes' ) : ''; ?>>
 					</td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Custom Class', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-						<input type="text" id="infinite_loader_default_custom_class" name="infinite_loader_admin_previous_button_option[custom_class]"  value="<?php echo ( isset( $infinite_loader_previous_button_setting['custom_class'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['custom_class'] ) : ''; ?>">
+						<input type="text" id="infinite_loader_default_custom_class"  class="infinite_loader_btn_settings" data-style="custom_css" name="infinite_loader_admin_previous_button_option[custom_class]"  value="<?php echo ( isset( $infinite_loader_previous_button_setting['custom_class'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['custom_class'] ) : ''; ?>">
 					</td>
 				</tr>
 				<tr>
@@ -38,19 +38,19 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 						<div class='infinite-loader-btn-preview-td'>
 							<h1 style="text-align: center;"><?php esc_html_e( 'Preview', 'infinite-loader-for-woocommerce' ); ?></h1>
 							<div class="infinite-loader-btn-preview-block"><?php echo Infinite_Loader_For_Woocommerce_Admin::infinite_loader_for_woocommerce_display_load_previous_button(); ?></div>
-							</div>					
+						</div>					
 					</td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Text on button', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-						<input type="text" id="infinite_loader_default_previous_botton_text" name="infinite_loader_admin_previous_button_option[button_text]"  placeholder="<?php esc_html_e( 'Load Previous', 'infinite-loader-for-woocommerce' ); ?>" value="<?php echo ( isset( $infinite_loader_previous_button_setting['button_text'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['button_text'] ) : 'Load Previous'; ?>">
+						<input type="text" id="infinite_loader_default_previous_botton_text" class="infinite_loader_btn_settings" data-default="Load Previous" data-style="text" name="infinite_loader_admin_previous_button_option[button_text]"  placeholder="<?php esc_html_e( 'Load Previous', 'infinite-loader-for-woocommerce' ); ?>" value="<?php echo ( isset( $infinite_loader_previous_button_setting['button_text'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['button_text'] ) : 'Load Previous'; ?>">
 					</td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Background color', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-						<input type="color" id="infinite_loader_default_bg_color" class="bg_btn_color" name="infinite_loader_admin_previous_button_option[background_color]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['background_color'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['background_color'] ) : ''; ?>">
+						<input type="color" id="infinite_loader_default_bg_color" class="bg_btn_color" data-default="#1d76da" name="infinite_loader_admin_previous_button_option[background_color]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['background_color'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['background_color'] ) : ''; ?>">
 						<input type="button" id="infinite-loader-default-color" value="Default" class="button">	
 					</td>
 				</tr>
@@ -64,7 +64,7 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 				<tr>
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Border color', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-						<input type="color" id="infinite_loader_default_border_color" name="infinite_loader_admin_previous_button_option[border_color]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_color'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_color'] ) : ''; ?>">
+						<input type="color"  class="btn_border_color" data-default="#000" data-color="#000" id="infinite_loader_default_border_color" name="infinite_loader_admin_previous_button_option[border_color]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_color'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_color'] ) : ''; ?>">
 						<input type="button" value="Default" class="button" id="infinite-loader-default-border-color">
 					</td>
 				</tr>
@@ -85,49 +85,49 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 				<tr>
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Font Size', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-						<input type="number"  id="infinite-loader_set-default-font-size" name="infinite_loader_admin_previous_button_option[text_font_size]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['text_font_size'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['text_font_size'] ) : ''; ?>">
+						<input type="number"  id="infinite-loader_set-default-font-size" class="infinite_loader_btn_settings" data-style="font-size" data-type="px" data-default="22"  name="infinite_loader_admin_previous_button_option[text_font_size]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['text_font_size'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['text_font_size'] ) : ''; ?>">
 					</td>
 				</tr>
 				<tr class="infinite-loader-padding-input">
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Paddings', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-						<input type="number" id="infinite-loader_set-default-padding-top" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[padding_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_top'] ) : '18'; ?>">
-						<input type="number" id="infinite-loader_set-default-padding-right" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[padding_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_right'] ) : '25'; ?>">
-						<input type="number" id="infinite-loader_set-default-padding-bottom" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[padding_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_bottom'] ) : '18'; ?>">
-						<input type="number" id="infinite-loader_set-default-padding-left" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[padding_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_left'] ) : '25'; ?>">
+						<input type="number" id="infinite-loader_set-default-padding-top" class="infinite-loader-style infinite_loader_btn_settings" data-style="padding-top" data-type="px" data-default="15" name="infinite_loader_admin_previous_button_option[padding_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_top'] ) : '15'; ?>">
+						<input type="number" id="infinite-loader_set-default-padding-right" class="infinite-loader-style infinite_loader_btn_settings" data-style="padding-right" data-type="px" data-default="15" name="infinite_loader_admin_previous_button_option[padding_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_right'] ) : '20'; ?>">
+						<input type="number" id="infinite-loader_set-default-padding-bottom" class="infinite-loader-style infinite_loader_btn_settings" data-style="padding-bottom" data-type="px" data-default="15" name="infinite_loader_admin_previous_button_option[padding_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_bottom'] ) : '15'; ?>">
+						<input type="number" id="infinite-loader_set-default-padding-left" class="infinite-loader-style infinite_loader_btn_settings" data-style="padding-left" data-type="px" data-default="15" name="infinite_loader_admin_previous_button_option[padding_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_left'] ) : '20'; ?>">
 					</td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Margin', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-						<input type="number" id="infinite-loader_set-default-margin-top" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[margin_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_top'] ) : ''; ?>">
-						<input type="number" id="infinite-loader_set-default-margin-right" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[margin_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_right'] ) : ''; ?>">
-						<input type="number" id="infinite-loader_set-default-margin-bottom" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[margin_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_bottom'] ) : ''; ?>">
-						<input type="number" id="infinite-loader_set-default-margin-left" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[margin_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_left'] ) : ''; ?>">
+						<input type="number" id="infinite-loader_set-default-margin-top" class="infinite-loader-style infinite_loader_btn_settings" data-style="margin-top" data-type="px" data-default="" name="infinite_loader_admin_previous_button_option[margin_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_top'] ) : ''; ?>">
+						<input type="number" id="infinite-loader_set-default-margin-right" class="infinite-loader-style infinite_loader_btn_settings" data-style="margin-right" data-type="px" data-default="" name="infinite_loader_admin_previous_button_option[margin_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_right'] ) : ''; ?>">
+						<input type="number" id="infinite-loader_set-default-margin-bottom" class="infinite-loader-style infinite_loader_btn_settings" data-style="margin-bottom" data-type="px" data-default="" name="infinite_loader_admin_previous_button_option[margin_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_bottom'] ) : ''; ?>">
+						<input type="number" id="infinite-loader_set-default-margin-left" class="infinite-loader-style infinite_loader_btn_settings" data-style="margin-left" data-type="px" data-default="" name="infinite_loader_admin_previous_button_option[margin_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_left'] ) : ''; ?>">
 					</td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Border', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-						<input type="number" id="infinite-loader_set-default-border-top" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[border_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_top'] ) : ''; ?>">
-						<input type="number" id="infinite-loader_set-default-border-right" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[border_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_right'] ) : ''; ?>">
-						<input type="number" id="infinite-loader_set-default-border-bottom" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[border_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_bottom'] ) : ''; ?>">
-						<input type="number" id="infinite-loader_set-default-border-left" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[border_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_left'] ) : ''; ?>">
+						<input type="number" class="infinite-loader-style infinite_loader_btn_settings" data-style="border-top" data-type="px" data-default=""  id="infinite-loader_set-default-border-top"  name="infinite_loader_admin_previous_button_option[border_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_top'] ) : ''; ?>">
+						<input type="number"  class="infinite-loader-style infinite_loader_btn_settings" data-style="border-right" data-type="px" data-default="" id="infinite-loader_set-default-border-right" name="infinite_loader_admin_previous_button_option[border_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_right'] ) : ''; ?>">
+						<input type="number"  class="infinite-loader-style infinite_loader_btn_settings" data-style="border-bottom" data-type="px" data-default="" id="infinite-loader_set-default-border-bottom" name="infinite_loader_admin_previous_button_option[border_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_bottom'] ) : ''; ?>">
+						<input type="number" class="infinite-loader-style infinite_loader_btn_settings" data-style="border-left" data-type="px" data-default="" id="infinite-loader_set-default-border-left" name="infinite_loader_admin_previous_button_option[border_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_left'] ) : ''; ?>">
 					</td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Border radius', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-						<input type="number" id="infinite-loader_set-default-border-radius-top" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[border_radius_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_top'] ) : ''; ?>">
-						<input type="number" id="infinite-loader_set-default-border-radius-right" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[border_radius_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_right'] ) : ''; ?>">
-						<input type="number" id="infinite-loader_set-default-border-radius-bottom" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[border_radius_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_bottom'] ) : ''; ?>">
-						<input type="number" id="infinite-loader_set-default-border-radius-left" class="infinite-loader-style" name="infinite_loader_admin_previous_button_option[border_radius_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_left'] ) : ''; ?>">
+						<input type="number" id="infinite-loader_set-default-border-radius-top" class="infinite-loader-style infinite_loader_btn_settings" data-type="px" data-style="border-top-left-radius"  data-default=""  name="infinite_loader_admin_previous_button_option[border_radius_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_top'] ) : ''; ?>">
+						<input type="number" id="infinite-loader_set-default-border-radius-right" class="infinite-loader-style infinite_loader_btn_settings" data-type="px" data-style="border-top-right-radius"  data-default=""  name="infinite_loader_admin_previous_button_option[border_radius_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_right'] ) : ''; ?>">
+						<input type="number" id="infinite-loader_set-default-border-radius-bottom" class="infinite-loader-style infinite_loader_btn_settings" data-type="px" data-style="border-bottom-left-radius"  data-default="" name="infinite_loader_admin_previous_button_option[border_radius_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_bottom'] ) : ''; ?>">
+						<input type="number" id="infinite-loader_set-default-border-radius-left" class="infinite-loader-style infinite_loader_btn_settings" data-type="px" data-style="border-bottom-right-radius"  data-default="" name="infinite_loader_admin_previous_button_option[border_radius_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_left'] ) : ''; ?>">
 					</td>
 				</tr>
 				<tr>
 					<th></th>
 					<td>
-						<input type="button" value="Set all to default" class="infinite-loader-set-load-previous-options button">
+						<input type="button" value="Set all to default" class="infinite-loader-set-load-more-options button">
 					</td>
 				</tr>
 			</tbody>
