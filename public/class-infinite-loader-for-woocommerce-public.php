@@ -212,4 +212,56 @@ class Infinite_Loader_For_Woocommerce_Public {
 
 		return $product_per_page;
 	}
+
+	/**
+	 * Display the load more product count.
+	 *
+	 * @param  string $template_name Hold the template name.
+	 */
+	public function infinite_loader_before_template_part( $template_name ) {
+		if ( $template_name == 'loop/result-count.php' ) {
+			add_filter( 'ngettext', array( $this, 'infinite_loader_products_count_additional' ), 1, 9999 );
+			add_filter( 'ngettext_with_context', array( $this, 'infinite_loader_products_count_additional' ), 1, 9999 );
+		}
+	}
+
+	/**
+	 * Display Woocommerce count.
+	 *
+	 * @param  string $text Get Text.
+	 * @return string
+	 */
+	public function infinite_loader_products_count_additional( $text ) {
+
+		remove_filter( 'ngettext', array( $this, 'infinite_loader_products_count_additional' ), 1, 9999 );
+		remove_filter( 'ngettext_with_context', array( $this, 'infinite_loader_products_count_additional' ), 1, 9999 );
+		if ( class_exists( 'WC_Query' ) && method_exists( 'WC_Query', 'product_query' ) && function_exists( 'wc_get_loop_prop' ) ) {
+
+			$total    = wc_get_loop_prop( 'total' );
+			$per_page = wc_get_loop_prop( 'per_page' );
+			$paged    = wc_get_loop_prop( 'current_page' );
+			$first    = ( $per_page * $paged ) - $per_page + 1;
+			$last     = min( $total, $per_page * $paged );
+		} else {
+			global $wp_query;
+			$paged    = max( 1, $wp_query->get( 'paged' ) );
+			$per_page = $wp_query->get( 'posts_per_page' );
+			$total    = $wp_query->found_posts;
+			$first    = ( $per_page * $paged ) - $per_page + 1;
+			$last     = min( $total, $wp_query->get( 'posts_per_page' ) * $paged );
+		}
+
+		echo '<span class="infinite_loader_product_count" style="display: none;" data-text="';
+		if ( 1 === $total ) {
+			esc_html( 'Showing the single result', 'infinite-loader-for-woocommerce' );
+		} elseif ( $total <= $per_page || -1 === $per_page ) {
+			/* translators: %d: total results */
+			printf( esc_html( 'Showing all %d result', 'Showing all %d results', $total, 'infinite-loader-for-woocommerce' ), $total );
+		} else {
+			/* translators: 1: first result 2: last result 3: total results */
+			printf( esc_html( 'Showing %1$d&ndash;%2$d of %3$d result', 'Showing %1$d&ndash;%2$d of %3$d results', $total, 'with first and last result', 'infinite-loader-for-woocommerce' ), -1, -2, $total );
+		}
+		echo '" data-start="', esc_attr( $first ), '" data-end="', esc_attr( $last ), '" data-laststart=', esc_attr( $first ), ' data-lastend=', esc_attr( $last ), '></span>';
+		return $text;
+	}
 }
