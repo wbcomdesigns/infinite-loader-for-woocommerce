@@ -159,7 +159,9 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$wc_next_page_selector                = isset( $infinite_loader_selectors_settings['next_page'] ) ? $infinite_loader_selectors_settings['next_page'] : '';
 		$wc_prev_page_selector                = isset( $infinite_loader_selectors_settings['previous_page'] ) ? $infinite_loader_selectors_settings['previous_page'] : '';
 		$infinite_loader_check_rotate         = isset( $infinite_loader_genral_settings['rotate_image'] ) ? $infinite_loader_genral_settings['rotate_image'] : '';
-		$rotate_image_class                   = '';
+		$infinite_loader_buffer_pixel         = isset( $infinite_loader_selectors_settings['buffer_pixels'] ) ? $infinite_loader_selectors_settings['buffer_pixels'] : '';
+
+		$rotate_image_class = '';
 		if ( $infinite_loader_check_rotate ) {
 			$rotate_image_class = 'infinite_loader_rotate_image';
 		}
@@ -182,7 +184,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 			'infinite_loader_product_data',
 			array(
 				'type'           => $infinite_loader_genral_settings['product_loading_type'],
-				'buffer'         => $infinite_loader_genral_settings['buffer_pixels'],
+				'buffer'         => $infinite_loader_buffer_pixel,
 				'use_prev_btn'   => $infinite_loader_prev_button_settings['enable_previous_button'],
 				'update_url'     => empty( $infinite_loader_genral_settings['do_not_update_url'] ), // if $general_options['update_url'] is set it means stop updating.
 				'load_image'     => $infnite_loader_icon,
@@ -264,4 +266,6 @@ class Infinite_Loader_For_Woocommerce_Public {
 		echo '" data-start="', esc_attr( $first ), '" data-end="', esc_attr( $last ), '" data-laststart=', esc_attr( $first ), ' data-lastend=', esc_attr( $last ), '></span>';
 		return $text;
 	}
+
 }
+

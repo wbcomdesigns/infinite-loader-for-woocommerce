@@ -12,6 +12,8 @@
  */
 
 $infinite_loader_css_js_setting = get_option( 'infinite_loader_admin_css_js_option' );
+
+$infinite_loader_font_awesome_version = isset( $infinite_loader_css_js_setting['font_awesome_version'] ) ? $infinite_loader_css_js_setting['font_awesome_version'] : '';
 ?>
 <div class="wbcom-tab-content">
 	<form method="post" action="options.php">
@@ -36,8 +38,8 @@ $infinite_loader_css_js_setting = get_option( 'infinite_loader_admin_css_js_opti
 					<td>
 						<label class="infinity-loader-switch">
 							<select id="infinity-loader-loading-type" name="infinite_loader_admin_css_js_option[font_awesome_version]">
-								<option value="fontawesome4" <?php selected( $infinite_loader_css_js_setting['font_awesome_version'], 'fontawesome5' ); ?>><?php esc_html_e( 'Font Awesome 4', 'infinite-loader-for-woocommerce' ); ?></option>
-								<option value="fontawesome5" <?php selected( $infinite_loader_css_js_setting['font_awesome_version'], 'fontawesome5' ); ?>><?php esc_html_e( 'Font Awesome 5', 'infinite-loader-for-woocommerce' ); ?></option>
+								<option value="fontawesome4" <?php selected( $infinite_loader_font_awesome_version, 'fontawesome5' ); ?>><?php esc_html_e( 'Font Awesome 4', 'infinite-loader-for-woocommerce' ); ?></option>
+								<option value="fontawesome5" <?php selected( $infinite_loader_font_awesome_version, 'fontawesome5' ); ?>><?php esc_html_e( 'Font Awesome 5', 'infinite-loader-for-woocommerce' ); ?></option>
 							</select>
 							<div class="infinity-loader-slider bupr-round"></div>
 						</label>
