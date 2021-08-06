@@ -181,11 +181,11 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		register_setting( 'infinite_loader_admin_general_options', 'infinite_loader_admin_general_option' );
 		add_settings_section( 'infinite-loader-for-woocommerce-general', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_general_content' ), 'infinite-loader-for-woocommerce-general' );
 
-		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-button'] = esc_html__( 'Button Setting', 'infinite-loader-for-woocommerce' );
+		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-button'] = esc_html__( 'Button Style', 'infinite-loader-for-woocommerce' );
 		register_setting( 'infinite_loader_admin_button_options', 'infinite_loader_admin_button_option' );
 		add_settings_section( 'infinite-loader-for-woocommerce-button', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_button_content' ), 'infinite-loader-for-woocommerce-button' );
 
-		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-previous-button'] = esc_html__( 'Previous Button Setting', 'infinite-loader-for-woocommerce' );
+		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-previous-button'] = esc_html__( 'Previous Button Style', 'infinite-loader-for-woocommerce' );
 		register_setting( 'infinite_loader_admin_previous_button_options', 'infinite_loader_admin_previous_button_option' );
 		add_settings_section( 'infinite-loader-for-woocommerce-previous-button', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_previous_button_content' ), 'infinite-loader-for-woocommerce-previous-button' );
 
@@ -214,14 +214,14 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	}
 
 	/**
-	 * Include infinite loader for woocommerce admin button setting tab content file.
+	 * Include infinite loader for woocommerce admin button style tab content file.
 	 */
 	public function infinite_loader_for_woocommerce_admin_button_content() {
 		include 'partials/infinite-loader-for-woocommerce-setting-button-tab.php';
 	}
 
 	/**
-	 * Include infinite loader for woocommerce admin previous button setting tab content file.
+	 * Include infinite loader for woocommerce admin previous button style tab content file.
 	 */
 	public function infinite_loader_for_woocommerce_admin_previous_button_content() {
 		include 'partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php';

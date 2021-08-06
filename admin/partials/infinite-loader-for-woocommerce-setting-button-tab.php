@@ -1,6 +1,6 @@
 <?php
 /**
- * Provide a admin button setting tab view for the plugin.
+ * Provide a admin button style tab view for the plugin.
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
@@ -49,7 +49,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><label for="blogname"><?php esc_html_e( 'Background color on mouse over', 'infinite-loader-for-woocommerce' ); ?></label></th>
+					<th scope="row"><label for="blogname"><?php esc_html_e( 'Background color on mouse hover', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
 						<input type="color" id="infinite_loader_default_bg_color_mouse_hover" class="bg_btn_color_hover" name="infinite_loader_admin_button_option[background_color_mouse_hover]" value="<?php echo ( isset( $infinite_loader_button_setting['background_color_mouse_hover'] ) ) ? esc_attr( $infinite_loader_button_setting['background_color_mouse_hover'] ) : ''; ?>">
 						<input type="button" value="Default" class="button" id="infinite-loader-default-bg-color-mouse-hover">
@@ -70,9 +70,9 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><label for="blogname"><?php esc_html_e( 'Text color on Mouse over', 'infinite-loader-for-woocommerce' ); ?></label></th>
+					<th scope="row"><label for="blogname"><?php esc_html_e( 'Text color on Mouse hover', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-						<input type="color" id="infinite_loader_default_text_color_mouse_hover" class="txt_btn_color_hover" name="infinite_loader_admin_button_option[text_color_mouse_over]" value="<?php echo ( isset( $infinite_loader_button_setting['text_color_mouse_over'] ) ) ? esc_attr( $infinite_loader_button_setting['text_color_mouse_over'] ) : ''; ?>">
+						<input type="color" id="infinite_loader_default_text_color_mouse_hover" class="txt_btn_color_hover" name="infinite_loader_admin_button_option[text_color_mouse_hover]" value="<?php echo ( isset( $infinite_loader_button_setting['text_color_mouse_hover'] ) ) ? esc_attr( $infinite_loader_button_setting['text_color_mouse_hover'] ) : ''; ?>">
 						<input type="button" value="Default" class="button" id="infinite-loader-default-text-color-mouse-hover">	
 					</td>
 				</tr>
