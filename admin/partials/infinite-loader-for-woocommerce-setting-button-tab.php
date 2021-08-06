@@ -28,11 +28,11 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
+					<th scope="row"><label for="blogname"><?php esc_html_e( 'Preview', 'infinite-loader-for-woocommerce' ); ?></label></th>
+					<td>
 						<div class='infinite-loader-btn-preview-td'>
-							<h1 style='text-align: center;'><?php esc_html_e( 'Preview', 'infinite-loader-for-woocommerce' ); ?></h1>
 							<div class='infinite-loader-btn-preview-block'><?php echo Infinite_Loader_For_Woocommerce_Admin::infinite_loader_for_woocommerce_display_load_more_button(); ?></div>
-							</div>					
+						</div>					
 					</td>
 				</tr>
 				<tr>

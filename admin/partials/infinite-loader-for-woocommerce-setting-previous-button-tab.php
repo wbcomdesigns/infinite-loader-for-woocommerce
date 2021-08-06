@@ -34,9 +34,9 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 					</td>
 				</tr>
 				<tr>
+					<th scope="row"><label for="blogname"><?php esc_html_e( 'Preview', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td colspan="2">
 						<div class='infinite-loader-btn-preview-td'>
-							<h1 style="text-align: center;"><?php esc_html_e( 'Preview', 'infinite-loader-for-woocommerce' ); ?></h1>
 							<div class="infinite-loader-btn-preview-block"><?php echo Infinite_Loader_For_Woocommerce_Admin::infinite_loader_for_woocommerce_display_load_previous_button(); ?></div>
 						</div>					
 					</td>
