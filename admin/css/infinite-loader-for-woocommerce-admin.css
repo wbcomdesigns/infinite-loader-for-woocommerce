@@ -171,3 +171,7 @@
 .form-table .infinite_remove_icon {
     margin-top: 18px;
 } 
+
+.infinite_loader_btn_load a {
+    text-decoration: none;
+} 
