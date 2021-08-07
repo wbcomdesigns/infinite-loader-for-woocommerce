@@ -39,7 +39,7 @@
 		});
 
 		$("#infinite-loader-default-bg-color-mouse-hover").click(function () {
-			document.getElementById("infinite_loader_default_bg_color_mouse_hover").value = "#1d76da";
+			document.getElementById("infinite_loader_default_bg_color_mouse_hover").value = "#0e4da0";
 		});
 
 		$("#infinite-loader-default-border-color").click(function () {
@@ -47,11 +47,11 @@
 		});
 
 		$("#infinite-loader-default-text-color").click(function () {
-			document.getElementById("infinite_loader_default_text_color").value = "#d6cccc";
+			document.getElementById("infinite_loader_default_text_color").value = "#ffffff";
 		});
 
 		$("#infinite-loader-default-text-color-mouse-hover").click(function () {
-			document.getElementById("infinite_loader_default_text_color_mouse_hover").value = "#d6cccc";
+			document.getElementById("infinite_loader_default_text_color_mouse_hover").value = "#ffffff";
 		});
 
 		
