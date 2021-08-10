@@ -299,7 +299,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 
 		echo '<style>';
 		$style     = '
-                .infinite_loader_btn_setting .infinite_button:hover {
+                .infinite_loader_prev_btn_setting .infinite_button:hover {
                     background-color: ' . $infinite_loader_previous_bg_hover_color . ' !important;
                     color: ' . $infinite_loader_previous_hover_txt_color . '!important;
                 }';
