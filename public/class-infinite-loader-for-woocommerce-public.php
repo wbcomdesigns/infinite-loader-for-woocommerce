@@ -267,5 +267,28 @@ class Infinite_Loader_For_Woocommerce_Public {
 		return $text;
 	}
 
+	/**
+	 * Add load more button Hover css on front-end.
+	 */
+	public function infinite_loader_add_load_more_hover_css() {
+		$infinite_loader_button_setting     = get_option( 'infinite_loader_admin_button_option' );
+		$infinite_loader_lm_bg_hover_color  = isset( $infinite_loader_button_setting['background_color_mouse_hover'] ) ? $infinite_loader_button_setting['background_color_mouse_hover'] : '';
+		$infinite_loader_lm_hover_txt_color = isset( $infinite_loader_button_setting['text_color_mouse_hover'] ) ? $infinite_loader_button_setting['text_color_mouse_hover'] : '';
+
+		echo '<style>';
+		$style     = '
+                .infinite_loader_btn_setting .infinite_button:hover {
+                    background-color: ' . $infinite_loader_lm_bg_hover_color . ' !important;
+                    color: ' . $infinite_loader_lm_hover_txt_color . '!important;
+                }';
+			$style = apply_filters( 'infinite_loader_lm_btn_hover_css', $style, $option_name, $options_btn );
+		if ( ! empty( $style ) ) {
+			echo wp_kses_post( $style );
+		}
+		echo '</style>';
+
+	}
+
+
 }
 
