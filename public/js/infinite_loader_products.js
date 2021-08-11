@@ -240,7 +240,8 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                         if( replace == 1 ) {
                             $(infinite_loader_product_data.pagination ).html( $pagination.html() );
                         } else if (infinite_loader_product_data.type == 'load-more-button-and-ajax-pagination' ) {
-                            pagination_replace_partial($data, replace);
+                            $(infinite_loader_product_data.pagination).html($pagination.html());
+                            //pagination_replace_partial($data, replace);
                         } else if( replace == 2 ) {
                             var $prev_page = jquery_get_prev_page();
                             var $new_prev_page = jquery_get_prev_page($data);
