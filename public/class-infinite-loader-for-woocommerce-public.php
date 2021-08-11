@@ -281,7 +281,7 @@ class Infinite_Loader_For_Woocommerce_Public {
                     background-color: ' . $infinite_loader_lm_bg_hover_color . ' !important;
                     color: ' . $infinite_loader_lm_hover_txt_color . '!important;
                 }';
-			$style = apply_filters( 'infinite_loader_lm_btn_hover_css', $style, $option_name, $options_btn );
+			$style = apply_filters( 'infinite_loader_lm_btn_hover_css', $style );
 		if ( ! empty( $style ) ) {
 			echo wp_kses_post( $style );
 		}
@@ -303,7 +303,7 @@ class Infinite_Loader_For_Woocommerce_Public {
                     background-color: ' . $infinite_loader_previous_bg_hover_color . ' !important;
                     color: ' . $infinite_loader_previous_hover_txt_color . '!important;
                 }';
-			$style = apply_filters( 'infinite_loader_previous_btn_hover_css', $style, $option_name, $options_btn );
+			$style = apply_filters( 'infinite_loader_previous_btn_hover_css', $style );
 		if ( ! empty( $style ) ) {
 			echo wp_kses_post( $style );
 		}
