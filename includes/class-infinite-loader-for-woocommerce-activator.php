@@ -88,6 +88,11 @@ class Infinite_Loader_For_Woocommerce_Activator {
 			'previous_page'     => 'a.prev.page-numbers',
 		);
 		update_option( 'infinite_loader_admin_selectors_option', $infinite_loader_set_default_selectors_options );
+
+		$infinite_loader_set_js_css_option = array(
+			'font_awesome_version' => 'fontawesome5',
+		);
+		update_option( 'infinite_loader_admin_css_js_option', $infinite_loader_set_js_css_option );
 	}
 
 }
