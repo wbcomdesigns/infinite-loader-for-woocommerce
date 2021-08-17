@@ -1,2 +1,0 @@
-# infinite-loader-for-woocommerce
- 
