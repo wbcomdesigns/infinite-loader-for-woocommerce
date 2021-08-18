@@ -135,7 +135,7 @@ function run_infinite_loader_for_woocommerce() {
 	$my_update_checker = Puc_v4_Factory::buildUpdateChecker(
 		'https://demos.wbcomdesigns.com/exporter/free-plugins/infinite-loader-for-woocommerce.json',
 		__FILE__, // Full path to the main plugin file or functions.php.
-		'infinite-loader-for-woocommerce',
+		'infinite-loader-for-woocommerce'
 	);
 
 	$plugin = new Infinite_Loader_For_Woocommerce();
