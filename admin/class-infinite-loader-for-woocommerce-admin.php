@@ -251,7 +251,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 
 		$infinite_loader_load_more_button  = '<div class="infinite_loader_btn_load infinite_loader_btn_setting">';
 		$infinite_loader_load_more_button .= '<a class="infinite_button ' . esc_attr( $infinite_loader_lm_custom_class ) . '" style="';
-		$infinite_loader_load_more_button .= apply_filters( 'infinite_loader_for_woocommerce_load_more_button_style', '', );
+		$infinite_loader_load_more_button .= apply_filters( 'infinite_loader_for_woocommerce_load_more_button_style', 'filter button style', $infinite_loader_button_setting );
 		$infinite_loader_load_more_button .= '" href="#load_next_page">' . esc_html( $infinite_loader_lm_button_text ) . '</a>';
 		$infinite_loader_load_more_button .= '</div>';
 		return $infinite_loader_load_more_button;
@@ -306,7 +306,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 
 		$infinite_loader_previous_button  = '<div class="infinite_loader_btn_load infinite_loader_prev_btn_setting">';
 		$infinite_loader_previous_button .= '<a class="infinite_button ' . esc_attr( $infinite_loader_prev_button_custom_class ) . '" style="';
-		$infinite_loader_previous_button .= apply_filters( 'infinite_loader_for_woocommerce_load_previous_button_style', '', );
+		$infinite_loader_previous_button .= apply_filters( 'infinite_loader_for_woocommerce_load_previous_button_style', 'filter previous button style', $infinite_loader_previous_button_setting );
 		$infinite_loader_previous_button .= '" href="#load_previous_page">' . esc_html( $infinite_loader_prev_button_text ) . '</a>';
 		$infinite_loader_previous_button .= '</div>';
 		return $infinite_loader_previous_button;
