@@ -71,10 +71,10 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/infinite-loader-for-woocommerce-admin.css', array(), $this->version, 'all' );
-		wp_enqueue_style( 'infinity-loader-selectize', plugin_dir_url( __FILE__ ) . 'css/selectize.css', array(), $this->version, 'all' );
-
+		if ( isset( $_GET['page'] ) && ( 'infinite-loader-for-woocommerce-settings' === $_GET['page'] ) ) {
+			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/infinite-loader-for-woocommerce-admin.css', array(), $this->version, 'all' );
+			wp_enqueue_style( 'infinity-loader-selectize', plugin_dir_url( __FILE__ ) . 'css/selectize.css', array(), $this->version, 'all' );
+		}
 	}
 
 	/**
@@ -95,11 +95,11 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/infinite-loader-for-woocommerce-admin.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( 'infinity-loader-selectize-min', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( 'admin-js', plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
-
+		if ( isset( $_GET['page'] ) && ( 'infinite-loader-for-woocommerce-settings' === $_GET['page'] ) ) {
+			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/infinite-loader-for-woocommerce-admin.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( 'infinity-loader-selectize-min', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( 'admin-js', plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
+		}
 	}
 
 	/**
