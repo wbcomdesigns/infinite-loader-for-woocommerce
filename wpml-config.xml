@@ -1,0 +1,10 @@
+<wpml-config>
+    <admin-texts>
+        <key name="infinite_loader_admin_button_option">
+            <key name="button_text" />
+        </key>
+		<key name="infinite_loader_admin_previous_button_option">
+            <key name="button_text" />
+        </key>
+    </admin-texts>
+</wpml-config>
