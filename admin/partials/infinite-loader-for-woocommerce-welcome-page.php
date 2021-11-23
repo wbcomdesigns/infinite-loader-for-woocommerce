@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<div class="col">
 						<h3><span class="dashicons dashicons-book"></span><?php esc_html_e( 'Documentation', 'infinite-loader-for-woocommerce' ); ?></h3>
 						<p><?php esc_html_e( 'We have prepared an extensive guide on Infinite Loader for Woocommerce to learn all aspects of the plugin. You will find most of your answers here.', 'infinite-loader-for-woocommerce' ); ?></p>
-						<a href="<?php echo esc_url( 'https://wbcomdesigns.com/docs/buddypress-paid-addons/buddypress-woocommerce-integration/' ); ?>" class="button button-primary button-welcome-support" target="_blank"><?php esc_html_e( 'Read Documentation', 'infinite-loader-for-woocommerce' ); ?></a>
+						<a href="<?php echo esc_url( 'https://wbcomdesigns.com/docs/woo-addons/infinite-loader-for-woocommerce/' ); ?>" class="button button-primary button-welcome-support" target="_blank"><?php esc_html_e( 'Read Documentation', 'infinite-loader-for-woocommerce' ); ?></a>
 					</div>
 
 					<div class="col">
