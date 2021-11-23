@@ -14,6 +14,21 @@
 $infinite_loader_css_js_setting = get_option( 'infinite_loader_admin_css_js_option' );
 
 $infinite_loader_font_awesome_version = isset( $infinite_loader_css_js_setting['font_awesome_version'] ) ? $infinite_loader_css_js_setting['font_awesome_version'] : '';
+$infinite_loader_custom_css           = isset( $infinite_loader_css_js_setting['custom_css'] ) ? $infinite_loader_css_js_setting['custom_css'] : '';
+$infinite_loader_before_update        = isset( $infinite_loader_css_js_setting['before_update'] ) ? $infinite_loader_css_js_setting['before_update'] : '';
+$infinite_loader_after_update         = isset( $infinite_loader_css_js_setting['after_update'] ) ? $infinite_loader_css_js_setting['after_update'] : '';
+$custom_css_value                     = '';
+$before_update_value                  = '';
+$after_update_value                   = '';
+if ( ! empty( $infinite_loader_custom_css ) ) {
+	$custom_css_value = $infinite_loader_custom_css;
+}
+if ( ! empty( $infinite_loader_before_update ) ) {
+	$before_update_value = $infinite_loader_before_update;
+}
+if ( ! empty( $infinite_loader_after_update ) ) {
+	$after_update_value = $infinite_loader_after_update;
+}
 ?>
 <div class="wbcom-tab-content">
 	<form method="post" action="options.php">
@@ -48,19 +63,19 @@ $infinite_loader_font_awesome_version = isset( $infinite_loader_css_js_setting['
 				<tr>
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Custom CSS ', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-						<?php echo '<textarea name="infinite_loader_admin_css_js_option[custom_css]" id="infinite-loader-css-js-area">' . esc_textarea( 'value=" ' . ( isset( $infinite_loader_css_js_setting['custom_css'] ) ) ? $infinite_loader_css_js_setting['custom_css'] : '' . ' " ' ) . '</textarea>'; ?>
+						<?php echo '<textarea name="infinite_loader_admin_css_js_option[custom_css]" id="infinite-loader-css-js-area">' . esc_textarea( $custom_css_value ) . '</textarea>'; ?>
 					</td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Before Update ', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-						<?php echo '<textarea name="infinite_loader_admin_css_js_option[before_update]" id="infinite-loader-css-js-area">' . esc_textarea( 'value=" ' . ( isset( $infinite_loader_css_js_setting['before_update'] ) ) ? $infinite_loader_css_js_setting['before_update'] : '' . ' " ' ) . '</textarea>'; ?>
+						<?php echo '<textarea name="infinite_loader_admin_css_js_option[before_update]" id="infinite-loader-css-js-area">' . esc_textarea( $before_update_value ) . '</textarea>'; ?>
 					</td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'After Update ', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
-						<?php echo '<textarea name="infinite_loader_admin_css_js_option[after_update]" id="infinite-loader-css-js-area">' . esc_textarea( 'value=" ' . ( isset( $infinite_loader_css_js_setting['after_update'] ) ) ? $infinite_loader_css_js_setting['after_update'] : '' . ' " ' ) . '</textarea>'; ?>
+						<?php echo '<textarea name="infinite_loader_admin_css_js_option[after_update]" id="infinite-loader-css-js-area">' . esc_textarea( $after_update_value ) . '</textarea>'; ?>
 					</td>
 				</tr>
 			</tbody>
