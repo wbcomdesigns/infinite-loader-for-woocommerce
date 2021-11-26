@@ -67,13 +67,13 @@ if ( ! empty( $infinite_loader_after_update ) ) {
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><label for="blogname"><?php esc_html_e( 'Before Update ', 'infinite-loader-for-woocommerce' ); ?></label></th>
+					<th scope="row"><label for="blogname"><?php esc_html_e( 'JS Before Update ', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
 						<?php echo '<textarea name="infinite_loader_admin_css_js_option[before_update]" id="infinite-loader-css-js-area">' . esc_textarea( $before_update_value ) . '</textarea>'; ?>
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><label for="blogname"><?php esc_html_e( 'After Update ', 'infinite-loader-for-woocommerce' ); ?></label></th>
+					<th scope="row"><label for="blogname"><?php esc_html_e( 'JS After Update ', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
 						<?php echo '<textarea name="infinite_loader_admin_css_js_option[after_update]" id="infinite-loader-css-js-area">' . esc_textarea( $after_update_value ) . '</textarea>'; ?>
 					</td>
