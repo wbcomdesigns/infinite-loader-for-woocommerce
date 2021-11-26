@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="wbcom-welcome-main-wrapper">
 		<div class="wbcom-welcome-head">
 			<h2 class="wbcom-welcome-title"><?php esc_html_e( 'Infinite Loader for Woocommerce', 'infinite-loader-for-woocommerce' ); ?></h2>
-			<p class="wbcom-welcome-description"><?php esc_html_e( 'Infinite Loader for Woocommerce Plugin will help to integrate WooCommerce with Buddypress.  You can sell your physical or digital products using WooCommerce on your social community website. This plugin allows you to manage your order directly from your profile page.', 'infinite-loader-for-woocommerce' ); ?></p>
+			<p class="wbcom-welcome-description"><?php esc_html_e( 'Infinite Loader for WooCommerce Plugin allows you to change the default product page pagination into Infinite Scroll or Ajax pagination with Lazy Load. When a user scrolls down to the bottom of the page, the next page loads automatically.', 'infinite-loader-for-woocommerce' ); ?></p>
 		</div><!-- .wbcom-welcome-head -->
 
 		<div class="wbcom-welcome-content">
