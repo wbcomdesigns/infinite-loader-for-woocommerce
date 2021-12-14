@@ -1,5 +1,5 @@
 === Wbcom Designs – Infinite Loader for WooCommerce ===
-Contributors: (this should be a list of wordpress.org userid's)
+Contributors: vapvarun,wbcomdesigns
 Donate link: https://wbcomdesigns.com/
 Tags: Woocommerce
 Requires at least: 3.0.1
@@ -8,11 +8,11 @@ Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-infinite Load products from next page via AJAX with infinite scrolling or load more products button.
+Load your all WooCommerce products on single store page.
 
 == Description ==
 
-infinite Load products from next page via AJAX with infinite scrolling or load more products button.
+Infinite Loader for WooCommerce Plugin allows you to change the default product page pagination into Infinite Scroll or Ajax pagination with Lazy Load. When a user scrolls down to the bottom of the page, the next page loads automatically.
 
 == Installation ==
 
