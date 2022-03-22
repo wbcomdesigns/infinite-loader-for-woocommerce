@@ -53,7 +53,7 @@ $infinite_loader_selected_icon = isset( $infinite_loader_genral_setting['loading
 					<td>
 						<?php
 						echo '<div class="infinite_loader_select_fontawesome">';
-						echo Infinite_Loader_For_Woocommerce_Admin::infinite_loader_icon_popup();
+						echo Infinite_Loader_For_Woocommerce_Admin::infinite_loader_icon_popup(); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						echo '<input type="hidden" name="infinite_loader_admin_general_option[loading_image]" value="' . esc_attr( $infinite_loader_selected_icon ) . '" readonly class="infinite_icon_value"/>
         						<span class="infinite_selected_icon"><i class="fa ' . esc_attr( $infinite_loader_selected_icon ) . '"></i></span>
         						<input type="button" class="infinite_select_icon button" value="' . esc_html__( 'Font Awesome', 'infinite-loader-for-woocommerce' ) . '"/> ';

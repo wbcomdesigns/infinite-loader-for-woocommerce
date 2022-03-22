@@ -31,7 +31,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 					<th scope="row"><label for="blogname"><?php esc_html_e( 'Preview', 'infinite-loader-for-woocommerce' ); ?></label></th>
 					<td>
 						<div class='infinite-loader-btn-preview-td'>
-							<div class='infinite-loader-btn-preview-block'><?php echo Infinite_Loader_For_Woocommerce_Admin::infinite_loader_for_woocommerce_display_load_more_button(); ?></div>
+							<div class='infinite-loader-btn-preview-block'><?php echo Infinite_Loader_For_Woocommerce_Admin::infinite_loader_for_woocommerce_display_load_more_button(); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 						</div>					
 					</td>
 				</tr>

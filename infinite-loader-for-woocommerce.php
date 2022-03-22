@@ -70,7 +70,6 @@ if ( ! function_exists( 'infinite_loader_for_woocommerce_check_woocommerce' ) ) 
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			deactivate_plugins( plugin_basename( __FILE__ ) );
 			add_action( 'admin_notices', 'infinite_loader_for_woocommerce_admin_notice' );
-			unset( $_GET['activate'] );
 		} else {
 			run_infinite_loader_for_woocommerce();
 		}
@@ -93,9 +92,6 @@ if ( ! function_exists( 'infinite_loader_for_woocommerce_admin_notice' ) ) {
 		/* Translators: %1$s: Cart Notice for WooCommerce, %2$s: WooCommerce   */
 		echo sprintf( esc_html__( '%1$s is ineffective now as it requires %2$s to be installed and active.', 'infinite-loader-for-woocommerce' ), '<strong>' . esc_html( $infinite_loader_plugin ) . '</strong>', '<strong>' . esc_html( $woo_plugin ) . '</strong>' );
 		echo '</p></div>';
-		if ( isset( $_GET['activate'] ) ) {
-			unset( $_GET['activate'] );
-		}
 
 	}
 }

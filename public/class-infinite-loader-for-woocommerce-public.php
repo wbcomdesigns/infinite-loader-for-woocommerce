@@ -121,7 +121,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$infinite_loader_css_js_enable        = isset( $infinite_loader_css_js_setting['disable_font_awesome'] ) ? $infinite_loader_css_js_setting['disable_font_awesome'] : '';
 		$infinite_loader_font_awesome_version = isset( $infinite_loader_css_js_setting['font_awesome_version'] ) ? $infinite_loader_css_js_setting['font_awesome_version'] : '';
 		if ( ! $infinite_loader_css_js_enable ) {
-			if ( isset( $_GET['page'] ) && ( 'infinite-loader-for-woocommerce-settings' === $_GET['page'] ) ) {
+			if ( isset( $_GET['page'] ) && ( 'infinite-loader-for-woocommerce-settings' === $_GET['page'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				if ( 'fontawesome5' === $infinite_loader_font_awesome_version ) {
 					wp_enqueue_style( 'font-awesome-5', plugins_url( 'css/fontawesome5.min.css', __FILE__ ), array(), $this->version, 'all' );
 				} else {
@@ -261,10 +261,10 @@ class Infinite_Loader_For_Woocommerce_Public {
 			esc_html( 'Showing the single result', 'infinite-loader-for-woocommerce' );
 		} elseif ( $total <= $per_page || -1 === $per_page ) {
 			/* translators: %d: total results */
-			printf( esc_html( 'Showing all %d result', 'Showing all %d results', $total, 'infinite-loader-for-woocommerce' ), $total );
+			printf( esc_html__( 'Showing all %d result', 'Showing all %d results', $total, 'infinite-loader-for-woocommerce' ), $total ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		} else {
 			/* translators: 1: first result 2: last result 3: total results */
-			printf( esc_html( 'Showing %1$d&ndash;%2$d of %3$d result', 'Showing %1$d&ndash;%2$d of %3$d results', $total, 'with first and last result', 'infinite-loader-for-woocommerce' ), -1, -2, $total );
+			printf( esc_html( 'Showing %1$d&ndash;%2$d of %3$d result', 'Showing %1$d&ndash;%2$d of %3$d results', $total, 'with first and last result', 'infinite-loader-for-woocommerce' ), -1, -2, $total ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 		echo '" data-start="', esc_attr( $first ), '" data-end="', esc_attr( $last ), '" data-laststart=', esc_attr( $first ), ' data-lastend=', esc_attr( $last ), '></span>';
 		return $text;
