@@ -14,6 +14,11 @@
 $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_option' );
 ?>
 <div class="wbcom-tab-content">
+	<div class="wbcom-welcome-main-wrapper">
+		<div class="wbcom-welcome-head">
+			<h2 class="wbcom-welcome-title"><?php esc_html_e( 'Button Style', 'infinite-loader-for-woocommerce' ); ?></h2>
+		</div><!-- .wbcom-welcome-head -->
+	<div class="wbcom-wrapper-section">
 	<form method="post" action="options.php">
 		<?php
 		settings_fields( 'infinite_loader_admin_button_options' );
@@ -130,5 +135,5 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 		<?php submit_button(); ?>
 	</form>
 </div>
-
-
+</div>
+</div>

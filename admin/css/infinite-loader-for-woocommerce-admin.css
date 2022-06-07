@@ -2,6 +2,54 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+ .nav-tab-wrapper ul li a#infinite-loader-for-woocommerce-general-tab.nav-tab:before{
+   content: "\f111";
+ }
+ .nav-tab-wrapper ul li a#infinite-loader-for-woocommerce-button-tab.nav-tab:before{
+   content: "\f11a";
+ }
+ .nav-tab-wrapper ul li a#infinite-loader-for-woocommerce-previous-button-tab.nav-tab:before{
+   content: "\f100";
+ }
+ .nav-tab-wrapper ul li a#infinite-loader-for-woocommerce-selectors-tab.nav-tab:before{
+   content: "\f138";
+ }
+ .nav-tab-wrapper ul li a#infinite-loader-for-woocommerce-css-js-tab.nav-tab:before{
+   content: "\f150";
+ }
+
+ .wbcom-welcome-head h2.wbcom-welcome-title,
+ .wcctp-tab-header h3 {
+     padding: 18px 25px;
+     font-size: 15px;
+     background: #2094f3;
+     color: #fff;
+     margin: 0 -15px 20px;
+ }
+ .wbcom-welcome-support-info {
+     border: 1px solid #ddd;
+     box-shadow: none;
+     margin-bottom: 0;
+ }
+ .wbcom-welcome-main-wrapper,
+ .wcctp-adming-setting {
+     position: relative;
+     font-size: 15px;
+     background: #f6f6f6;
+     overflow: hidden;
+     padding: 0 15px 15px;
+     margin: 25px 0;
+ }
+ .wbcom-welcome-support-info hr {
+     margin-top: 30px;
+     margin-bottom: 30px;
+ }
+ .wbcom-wrapper-section {
+     background: #fff;
+     overflow: hidden;
+     padding: 15px 15px 20px;
+ }
+
  .form-table .infinite-loader-style {
      width: 65px;
  }
@@ -164,11 +212,20 @@
 }
 .form-table .infinite_select_icon {
     margin-top: 18px;
-} 
+}
 .form-table .infinite_remove_icon {
     margin-top: 18px;
-} 
+}
 
 .infinite_loader_btn_load a {
     text-decoration: none;
-} 
+}
+.wb-infinite-loader .form-table td input[type="color"] {
+    width: 40px;
+    height: 38px;
+    box-shadow: none !important;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-top: -3px;
+}

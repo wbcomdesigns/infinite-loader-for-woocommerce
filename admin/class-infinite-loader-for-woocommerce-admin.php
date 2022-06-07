@@ -137,7 +137,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 					<?php esc_html_e( 'Infinite Loader for WooCommerce Settings', 'infinite-loader-for-woocommerce' ); ?>
 				</h1>
 			</div>
-			<div class="wbcom-admin-settings-page">
+			<div class="wbcom-admin-settings-page wb-infinite-loader">
 				<?php
 				settings_errors();
 				$this->infinite_loader_for_woocommerce_plugin_settings_tabs();

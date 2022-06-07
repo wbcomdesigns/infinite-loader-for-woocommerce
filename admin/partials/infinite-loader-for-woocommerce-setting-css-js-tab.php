@@ -31,6 +31,11 @@ if ( ! empty( $infinite_loader_after_update ) ) {
 }
 ?>
 <div class="wbcom-tab-content">
+	<div class="wbcom-welcome-main-wrapper">
+		<div class="wbcom-welcome-head">
+			<h2 class="wbcom-welcome-title"><?php esc_html_e( 'Button Style', 'infinite-loader-for-woocommerce' ); ?></h2>
+		</div><!-- .wbcom-welcome-head -->
+	<div class="wbcom-wrapper-section">
 	<form method="post" action="options.php">
 		<?php
 		settings_fields( 'infinite_loader_admin_css_js_options' );
@@ -83,5 +88,5 @@ if ( ! empty( $infinite_loader_after_update ) ) {
 		<?php submit_button(); ?>
 	</form>
 </div>
-
-
+</div>
+</div>

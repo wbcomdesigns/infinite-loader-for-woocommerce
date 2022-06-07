@@ -16,6 +16,11 @@ $infinite_loader_genral_setting = get_option( 'infinite_loader_admin_general_opt
 $infinite_loader_selected_icon = isset( $infinite_loader_genral_setting['loading_image'] ) ? esc_attr( $infinite_loader_genral_setting['loading_image'] ) : '';
 ?>
 <div class="wbcom-tab-content">
+	<div class="wbcom-welcome-main-wrapper">
+		<div class="wbcom-welcome-head">
+			<h2 class="wbcom-welcome-title"><?php esc_html_e( 'General Setting', 'infinite-loader-for-woocommerce' ); ?></h2>
+		</div><!-- .wbcom-welcome-head -->
+	<div class="wbcom-wrapper-section">
 	<form method="post" action="options.php">
 		<?php
 		settings_fields( 'infinite_loader_admin_general_options' );
@@ -90,5 +95,5 @@ $infinite_loader_selected_icon = isset( $infinite_loader_genral_setting['loading
 		<?php submit_button(); ?>
 	</form>
 </div>
-
-
+</div>
+</div>
