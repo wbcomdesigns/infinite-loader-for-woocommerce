@@ -110,7 +110,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 * @author   Wbcom Designs
 	 */
 	public function infinite_loader_for_woocommerce_add_submenu_page_admin_settings() {
-		if ( empty( $GLOBALS['admin_page_hooks']['wbcomplugins'] ) ) {
+		if ( empty( $GLOBALS['admin_page_hooks']['wbcomplugins'] ) && class_exists( 'WooCommerce' ) ) {
 			add_menu_page( esc_html__( 'WB Plugins', 'infinite-loader-for-woocommerce' ), esc_html__( 'WB Plugins', 'infinite-loader-for-woocommerce' ), 'manage_options', 'wbcomplugins', array( $this, 'infinite_loader_for_woocommerce_admin_options_page' ), 'dashicons-lightbulb', 59 );
 			add_submenu_page( 'wbcomplugins', esc_html__( 'General', 'infinite-loader-for-woocommerce' ), esc_html__( 'General', 'infinite-loader-for-woocommerce' ), 'manage_options', 'wbcomplugins' );
 

@@ -92,7 +92,10 @@ if ( ! function_exists( 'infinite_loader_for_woocommerce_admin_notice' ) ) {
 		/* Translators: %1$s: Cart Notice for WooCommerce, %2$s: WooCommerce   */
 		echo sprintf( esc_html__( '%1$s is ineffective now as it requires %2$s to be installed and active.', 'infinite-loader-for-woocommerce' ), '<strong>' . esc_html( $infinite_loader_plugin ) . '</strong>', '<strong>' . esc_html( $woo_plugin ) . '</strong>' );
 		echo '</p></div>';
-
+		if ( null !== filter_input( INPUT_GET, 'activate' ) ) {
+			$activate = filter_input( INPUT_GET, 'activate' );
+			unset( $activate );
+		}
 	}
 }
 
@@ -103,8 +106,8 @@ if ( ! function_exists( 'infinite_loader_for_woocommerce_admin_notice' ) ) {
  */
 function infinite_loader_plugin_redirect_to_welcome_page( $plugin ) {
 
-	if ( plugin_basename( __FILE__ ) === $plugin ) {
-		wp_redirect( admin_url( 'admin.php?page=infinite-loader-for-woocommerce-settings' ) );
+	if ( plugin_basename( __FILE__ ) === $plugin && class_exists( 'WooCommerce' ) ) {
+		wp_safe_redirect( admin_url( 'admin.php?page=infinite-loader-for-woocommerce-settings' ) );
 		exit;
 	}
 }
