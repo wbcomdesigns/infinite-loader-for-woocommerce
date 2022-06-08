@@ -88,9 +88,21 @@ if ( ! function_exists( 'infinite_loader_for_woocommerce_admin_notice' ) ) {
 
 		$infinite_loader_plugin = esc_html__( 'Infinite Loader for WooCommerce', 'infinite-loader-for-woocommerce' );
 		$woo_plugin             = esc_html__( 'WooCommerce', 'infinite-loader-for-woocommerce' );
+		$action                 = 'install-plugin';
+		$slug                   = 'woocommerce';
+		$plugin_install_link    = '<a href="' . wp_nonce_url(
+			add_query_arg(
+				array(
+					'action' => $action,
+					'plugin' => $slug,
+				),
+				admin_url( 'update.php' )
+			),
+			$action . '_' . $slug
+		) . '">' . $woo_plugin . '</a>';
 		echo '<div class="error"><p>';
 		/* Translators: %1$s: Cart Notice for WooCommerce, %2$s: WooCommerce   */
-		echo sprintf( esc_html__( '%1$s is ineffective now as it requires %2$s to be installed and active.', 'infinite-loader-for-woocommerce' ), '<strong>' . esc_html( $infinite_loader_plugin ) . '</strong>', '<strong>' . esc_html( $woo_plugin ) . '</strong>' );
+		echo sprintf( esc_html__( '%1$s is ineffective now as it requires %2$s to be installed and active.', 'infinite-loader-for-woocommerce' ), '<strong>' . esc_html( $infinite_loader_plugin ) . '</strong>', '<strong>' . wp_kses_post( $plugin_install_link ) . '</strong>' );
 		echo '</p></div>';
 		if ( null !== filter_input( INPUT_GET, 'activate' ) ) {
 			$activate = filter_input( INPUT_GET, 'activate' );
