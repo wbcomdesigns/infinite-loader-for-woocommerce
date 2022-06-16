@@ -28,6 +28,12 @@ This section describes how to install the plugin and get it working.
 Woocommerce
 
 == Changelog ==
+= 1.2.0 =
+*Fix: (#20) Fixed plugin redirection issue when woocommerce is not activated
+*Fix: (#21) Improved Admin UI
+*Fix: (#22) Added link for the plugin activate
+*Fix: Fixed WPCS issues 
+
 = 1.1.0 =
 *Fix: (#19) Update javascript/css tab string
 *Fix: (#18) Changed welcome tab description
