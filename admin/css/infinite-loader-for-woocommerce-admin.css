@@ -32,6 +32,20 @@
     box-sizing: border-box;
 }
 
+input.infinite-loader-set-load-more-options.button[value="Set all to default"] {
+    background: #e20101;
+    line-height: 55px;
+    padding: 0 30px;
+    font-size: 15px;
+    text-shadow: none;
+    color:#fff;
+    font-weight: 600;
+    border: 0;
+    transition: all 0.3s;
+    box-shadow: 0px 10px 25px rgba(32, 53, 85, 0.35);
+    border-radius: 12px;
+}
+
 /* FONT AWESOME ICON SELECTOR */
 
 .infinite_loader_select_fontawesome {
@@ -181,4 +195,19 @@
     cursor: pointer;
     padding: 0;
     margin-top: -3px;
+}
+.nav-tab-wrapper ul li a#infinite-loader-for-woocommerce-general-tab:before {
+    content: "\f111" !important;
+}
+.nav-tab-wrapper ul li a#infinite-loader-for-woocommerce-button-tab.nav-tab:before {
+    content: "\f11a";
+}
+.nav-tab-wrapper ul li a#infinite-loader-for-woocommerce-previous-button-tab.nav-tab:before {
+    content: "\f100";
+}
+.nav-tab-wrapper ul li a#infinite-loader-for-woocommerce-selectors-tab.nav-tab:before {
+    content: "\f138";
+}
+.nav-tab-wrapper ul li a#infinite-loader-for-woocommerce-css-js-tab.nav-tab:before {
+    content: "\f150";
 }
