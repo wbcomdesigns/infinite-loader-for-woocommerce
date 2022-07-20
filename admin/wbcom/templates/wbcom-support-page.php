@@ -9,8 +9,7 @@
 	<div class="wbcom-wrap wbcom-plugin-wrapper">
 		<div class="wbcom_admin_header-wrapper">
 			<div id="wb_admin_plugin_name">
-				<?php esc_html_e( 'Infinite Loader for WooCommerce', 'infinite-loader-for-woocommerce' ); ?>
-				<span><?php printf( __( 'Version %s', 'infinite-loader-for-woocommerce' ), INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION ); ?></span>
+				<?php esc_html_e( 'Help & Support', 'infinite-loader-for-woocommerce' ); ?>
 			</div>
 			<?php echo do_shortcode( '[wbcom_admin_setting_header]' ); ?>
 		</div>        

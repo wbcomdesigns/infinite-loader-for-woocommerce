@@ -193,6 +193,7 @@ class Infinite_Loader_For_Woocommerce {
 		$this->loader->add_action( 'infinite_loader_load_more_buttom_preview', $plugin_admin, 'section_btn_custom_class' );
 		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_more_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_button_style' );
 		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_previous_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_previous_button_style' );
+		$this->loader->add_action( 'in_admin_header', $plugin_admin, 'wbcom_hide_all_admin_notices_from_setting_page' );
 	}
 
 	/**
