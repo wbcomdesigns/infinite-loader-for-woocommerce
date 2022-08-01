@@ -57,6 +57,20 @@ input.infinite-loader-set-load-more-options.button[value="Set all to default"] {
     min-height: 35px;
     height: inherit;
 }
+.infinite_loader_select_fontawesome input.infinite_select_icon.button,
+.infinite_loader_select_fontawesome input.infinite_remove_icon.button {
+    background: #2a32ef;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    padding: 6px 25px;
+    font-size: 13px;
+    margin-right: 10px;
+}
+.infinite_loader_select_fontawesome input.infinite_remove_icon.button {
+    background: #ee0000 !important;
+}
+
 /* FONT AWESOME ICON SELECTOR */
 
 .infinite_loader_select_fontawesome {
