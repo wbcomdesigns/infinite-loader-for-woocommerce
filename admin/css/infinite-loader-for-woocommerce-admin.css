@@ -3,6 +3,9 @@
  * included in this file.
  */
 
+.wbcom-settings-section-wrap{
+    overflow: inherit;
+}
  .form-table .infinite-loader-style {
      width: 65px;
  }
@@ -45,7 +48,15 @@ input.infinite-loader-set-load-more-options.button[value="Set all to default"] {
     box-shadow: 0px 10px 25px rgba(32, 53, 85, 0.35);
     border-radius: 12px;
 }
+.infinity-loader-switch .selectize-input.items.full.has-items {
+    height: inherit;
+    line-height: 25px;
+}
 
+.infinity-loader-switch .selectize-input.items input[type="text"]{
+    min-height: 35px;
+    height: inherit;
+}
 /* FONT AWESOME ICON SELECTOR */
 
 .infinite_loader_select_fontawesome {
