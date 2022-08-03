@@ -4,7 +4,7 @@ Donate link: https://wbcomdesigns.com/
 Tags: Woocommerce
 Requires at least: 3.0.1
 Tested up to: 5.8.2
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,9 @@ This section describes how to install the plugin and get it working.
 Woocommerce
 
 == Changelog ==
+= 1.2.1 =
+*Fix: Update admin wrapper UI
+
 = 1.2.0 =
 *Fix: (#20) Fixed plugin redirection issue when woocommerce is not activated
 *Fix: (#21) Improved Admin UI
