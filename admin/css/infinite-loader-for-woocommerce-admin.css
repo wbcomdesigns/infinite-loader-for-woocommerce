@@ -205,8 +205,8 @@ input.infinite-loader-set-load-more-options.button[value="Set all to default"] {
 .form-table .infinite_select_icon {
     margin-top: 18px;
 }
-.form-table .infinite_remove_icon {
-    margin-top: 18px;
+.form-table .infinite_default_icon {
+    margin-top: 24px;
 }
 
 .infinite_loader_btn_load a {

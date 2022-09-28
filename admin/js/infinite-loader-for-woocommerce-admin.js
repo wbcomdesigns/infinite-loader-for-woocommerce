@@ -92,10 +92,10 @@
 				$(infinite_select_icon_for).parents('.infinite_loader_select_fontawesome').find(".infinite_remove_icons").hide();
 			}
         });
-		$(document).on('click', '.infinite_loader_select_fontawesome .infinite_remove_icon',function(event) {
+		$(document).on('click', '.infinite_loader_select_fontawesome .infinite_default_icon',function(event) {
             event.preventDefault();
-			$(this).parents('.infinite_loader_select_fontawesome').find('.infinite_selected_icon').html('');
-			$(this).parents('.infinite_loader_select_fontawesome').find('.infinite_icon_value').val('').trigger('change');
+			$(this).parents('.infinite_loader_select_fontawesome').find('.infinite_selected_icon').html('<i class="fa fa-spinner"></i>');
+			$(this).parents('.infinite_loader_select_fontawesome').find('.infinite_icon_value').val('fa-spinner').trigger('change');
         });
 		$(document).on('keyup', '.infinite_loader_select_fontawesome .infinite_icons_search', function() {
 			var $parent = $(this).parents('.infinite_loader_select_fontawesome').first();
