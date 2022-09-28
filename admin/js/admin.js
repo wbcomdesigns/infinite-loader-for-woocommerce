@@ -155,7 +155,6 @@
       "click",
       ".infinite-loader-set-load-more-options",
       function (event) {
-        alert();
         event.preventDefault();
         $(
           ".form-table .infinite_loader_btn_settings, .form-table .lmp_button_settings_hover"
