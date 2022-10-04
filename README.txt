@@ -4,7 +4,7 @@ Donate link: https://wbcomdesigns.com/
 Tags: Woocommerce
 Requires at least: 3.0.1
 Tested up to: 6.0.1
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,12 @@ This section describes how to install the plugin and get it working.
 Woocommerce
 
 == Changelog ==
+= 1.2.1 =
+* Fix: (#25)Fixed save setting notice display
+* Fix: (#24)Fixed set all to default btn show empty alert box
+* Fix: (#23)Fixed update loader button icon removed
+
+
 = 1.2.1 =
 * Fix: Update admin wrapper UI
 
