@@ -28,11 +28,10 @@ This section describes how to install the plugin and get it working.
 Woocommerce
 
 == Changelog ==
-= 1.2.1 =
+= 1.2.2 =
 * Fix: (#25)Fixed save setting notice display
 * Fix: (#24)Fixed set all to default btn show empty alert box
 * Fix: (#23)Fixed update loader button icon removed
-
 
 = 1.2.1 =
 * Fix: Update admin wrapper UI
