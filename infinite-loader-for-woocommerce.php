@@ -15,7 +15,7 @@
  * Plugin Name:       Wbcom Designs – Infinite Loader for WooCommerce
  * Plugin URI:        https://wbcomdesigns.com/
  * Description:       infinite Load products from next page via AJAX with infinite scrolling or load more products button.
- * Version:           1.2.1
+ * Version:           1.2.2
  * Author:            Wbcom Designs
  * Author URI:        https://wbcomdesigns.com/
  * License:           GPL-2.0+
@@ -34,7 +34,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION', '1.2.1' );
+define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION', '1.2.2' );
 
 /**
  * The code that runs during plugin activation.
