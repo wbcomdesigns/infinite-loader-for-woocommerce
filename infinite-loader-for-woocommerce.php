@@ -119,8 +119,10 @@ if ( ! function_exists( 'infinite_loader_for_woocommerce_admin_notice' ) ) {
 function infinite_loader_plugin_redirect_to_welcome_page( $plugin ) {
 
 	if ( plugin_basename( __FILE__ ) === $plugin && class_exists( 'WooCommerce' ) ) {
-		wp_safe_redirect( admin_url( 'admin.php?page=infinite-loader-for-woocommerce-settings' ) );
-		exit;
+		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action']  == 'activate' && isset( $_REQUEST['plugin'] ) && $_REQUEST['plugin'] == $plugin) {
+			wp_safe_redirect( admin_url( 'admin.php?page=infinite-loader-for-woocommerce-settings' ) );
+			exit;
+		}
 	}
 }
 add_action( 'activated_plugin', 'infinite_loader_plugin_redirect_to_welcome_page' );
