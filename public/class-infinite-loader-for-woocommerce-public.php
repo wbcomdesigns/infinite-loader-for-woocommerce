@@ -261,7 +261,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 			esc_html( 'Showing the single result', 'infinite-loader-for-woocommerce' );
 		} elseif ( $total <= $per_page || -1 === $per_page ) {
 			/* translators: %d: total results */
-			printf( esc_html__( 'Showing all %d result', 'infinite-loader-for-woocommerce', $total, 'infinite-loader-for-woocommerce' ), $total ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			printf( esc_html__( 'Showing all %d result', 'infinite-loader-for-woocommerce', $total, 'infinite-loader-for-woocommerce' ), $total ); //phpcs:ignore
 		} else {
 			/* translators: 1: first result 2: last result 3: total results */
 			printf( esc_html( 'Showing %1$d&ndash;%2$d of %3$d result', 'Showing %1$d&ndash;%2$d of %3$d results', $total, 'with first and last result', 'infinite-loader-for-woocommerce' ), -1, -2, $total ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
