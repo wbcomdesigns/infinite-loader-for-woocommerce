@@ -149,8 +149,10 @@ function run_infinite_loader_for_woocommerce() {
 }
 run_infinite_loader_for_woocommerce();
 require plugin_dir_path( __FILE__ ) . 'wc-infinite-loader-update-checker/wc-infinite-loader-update-checker.php';
-	$my_update_checker = Puc_v4_Factory::buildUpdateChecker(
-		'https://demos.wbcomdesigns.com/exporter/free-plugins/infinite-loader-for-woocommerce.json',
-		__FILE__, // Full path to the main plugin file or functions.php.
-		'infinite-loader-for-woocommerce'
-	);
+
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+$my_update_checker = PucFactory::buildUpdateChecker(
+	'https://demos.wbcomdesigns.com/exporter/free-plugins/infinite-loader-for-woocommerce.json',
+	__FILE__, // Full path to the main plugin file or functions.php.
+	'infinite-loader-for-woocommerce'
+);
