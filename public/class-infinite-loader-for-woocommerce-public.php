@@ -50,7 +50,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
-
+	
 	}
 
 	/**
@@ -71,7 +71,9 @@ class Infinite_Loader_For_Woocommerce_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/infinite-loader-for-woocommerce-public.css', array(), $this->version, 'all' );
+		if( is_shop() ) {
+			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/infinite-loader-for-woocommerce-public.css', array(), $this->version, 'all' ); 
+		}		
 
 	}
 
@@ -93,9 +95,11 @@ class Infinite_Loader_For_Woocommerce_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		wp_enqueue_script( 'infinite_loader_products', plugin_dir_url( __FILE__ ) . 'js/infinite-loader-for-woocommerce-public.js', array( 'jquery' ), $this->version, false );
-
+		
+		if( is_shop() ) {
+			wp_enqueue_script( 'infinite_loader_products', plugin_dir_url( __FILE__ ) . 'js/infinite-loader-for-woocommerce-public.js', array( 'jquery' ), $this->version, false );
+		}
+		
 	}
 
 	/**
@@ -135,9 +139,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 	 * Function includes the css and js of loading products.
 	 */
 	public function infinite_loader_add_css_js_for_loading_products() {
-		$infinite_loader_genral_settings = get_option( 'infinite_loader_admin_general_option' );
-		$infinite_loader_only_woo_pages  = isset( $infinite_loader_genral_settings['js_css_use_use_wc_page'] ) ? esc_attr( $infinite_loader_genral_settings['js_css_use_use_wc_page'] ) : '';
-		if ( is_shop() || is_product_category() || is_product_tag() || is_product_taxonomy() || empty( $infinite_loader_only_woo_pages ) ) {
+		if ( is_shop() || is_product_category() || is_product_tag() || is_product_taxonomy() ) {
 			wp_enqueue_script( 'infinite_loader_products_js', plugins_url( 'js/infinite_loader_products.js', __FILE__ ), array( 'jquery' ), array(), $this->version, 'all' );
 			wp_register_style( 'infinite_loader_products_css', plugins_url( 'css/infinite_loader_products.css', __FILE__ ), array(), $this->version, 'all' );
 			wp_enqueue_style( 'infinite_loader_products_css' );
@@ -181,7 +183,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 		}
 		$infinite_loader_load_more_button = Infinite_Loader_For_Woocommerce_Admin::infinite_loader_for_woocommerce_display_load_more_button();
 		$infinite_loader_previous_button  = Infinite_Loader_For_Woocommerce_Admin::infinite_loader_for_woocommerce_display_load_previous_button();
-
+		
 		wp_localize_script(
 			'infinite_loader_products_js',
 			'infinite_loader_product_data',

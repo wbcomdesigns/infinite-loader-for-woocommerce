@@ -35,8 +35,7 @@ class Infinite_Loader_For_Woocommerce_Activator {
 			'product_per_page'       => '8',
 			'loading_image'          => 'fa-spinner',
 			'rotate_image'           => 'yes',
-			'do_not_update_url'      => 'no',
-			'js_css_use_use_wc_page' => 'yes',
+			'do_not_update_url'      => 'no'
 		);
 		update_option( 'infinite_loader_admin_general_option', $infinite_loader_set_default_genral_options );
 

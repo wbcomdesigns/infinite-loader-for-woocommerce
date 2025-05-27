@@ -87,12 +87,6 @@ $infinite_loader_selected_icon = isset( $infinite_loader_genral_setting['loading
 							<input type="checkbox" name="infinite_loader_admin_general_option[do_not_update_url]" value="yes" <?php ( isset( $infinite_loader_genral_setting['do_not_update_url'] ) ) ? checked( $infinite_loader_genral_setting['do_not_update_url'], 'yes' ) : ''; ?>>
 						</div>
 					</div>
-					<div class="wbcom-settings-section-wrap">
-						<div class="wbcom-settings-section-options-heading"><label for="blogname"><?php esc_html_e( 'JavaScript and CSS is used on WooCommerce pages only', 'infinite-loader-for-woocommerce' ); ?></label></div>
-						<div class="wbcom-settings-section-options">
-							<input type="checkbox" name="infinite_loader_admin_general_option[js_css_use_use_wc_page]" value="yes" <?php ( isset( $infinite_loader_genral_setting['js_css_use_use_wc_page'] ) ) ? checked( $infinite_loader_genral_setting['js_css_use_use_wc_page'], 'yes' ) : ''; ?>>
-						</div>
-					</div>
 				</div>
 				<?php submit_button(); ?>
 			</form>
