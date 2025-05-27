@@ -247,4 +247,19 @@ input.infinite-loader-set-load-more-options.button[value="Set all to default"] {
     border: none;
     box-shadow: none;
     color: #10AB00;
+    display: inline-block !important;
+    margin: 0;
+}
+
+@media screen and (max-width: 1189px) {
+    #setting-error-settings_updated {
+        margin: 0;
+        position: relative;
+        right: auto;
+        left: auto;
+    }
+}
+
+#setting-error-settings_updated button.notice-dismiss:before {
+    color: red !important;
 }
