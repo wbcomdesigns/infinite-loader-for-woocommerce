@@ -32,6 +32,7 @@ $infinite_loader_selected_icon = isset( $infinite_loader_general_setting['loadin
 							<label for="infinity-loader-shop-tab">
 								<?php esc_html_e( 'Products Loading Type', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
+							<p><?php esc_html_e('Choose how products are loaded on the shop page.', 'infinite-loader-for-woocommerce'); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<label class="infinity-loader-switch">
@@ -47,7 +48,9 @@ $infinite_loader_selected_icon = isset( $infinite_loader_general_setting['loadin
 						</div>
 					</div>
 					<div class="wbcom-settings-section-wrap">
-						<div class="wbcom-settings-section-options-heading"><label for="blogname"><?php esc_html_e( 'Products per page', 'infinite-loader-for-woocommerce' ); ?></label></div>
+						<div class="wbcom-settings-section-options-heading"><label for="blogname"><?php esc_html_e( 'Products Per Page', 'infinite-loader-for-woocommerce' ); ?></label>
+							<p><?php esc_html_e('Specify the number of products to display per page.', 'infinite-loader-for-woocommerce'); ?></p>
+						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="number" name="infinite_loader_admin_general_option[product_per_page]" placeholder="<?php esc_html_e( 'Products per page', 'infinite-loader-for-woocommerce' ); ?>" value="<?php echo ( isset( $infinite_loader_general_setting['product_per_page'] ) ) ? esc_attr( $infinite_loader_general_setting['product_per_page'] ) : ''; ?>">
 						</div>
@@ -57,6 +60,7 @@ $infinite_loader_selected_icon = isset( $infinite_loader_general_setting['loadin
 							<label for="blogname">
 								<?php esc_html_e( 'Loading Image', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
+							<p><?php esc_html_e('Select the loading animation icon displayed while new products are loading.', 'infinite-loader-for-woocommerce'); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<?php
@@ -71,18 +75,22 @@ $infinite_loader_selected_icon = isset( $infinite_loader_general_setting['loadin
 							?>
 							<label>
 								<input type="checkbox" name="infinite_loader_admin_general_option[rotate_image]" value="yes" <?php ( isset( $infinite_loader_general_setting['rotate_image'] ) ) ? checked( $infinite_loader_general_setting['rotate_image'], 'yes' ) : ''; ?>>
-								<span><?php esc_html_e( 'Rotate image on load', 'infinite-loader-for-woocommerce' ); ?></span>
+								<span><?php esc_html_e( 'Rotate image while loading', 'infinite-loader-for-woocommerce' ); ?></span>
 							</label>
 						</div>
 					</div>
 					<div class="wbcom-settings-section-wrap">
-						<div class="wbcom-settings-section-options-heading"><label for="blogname"><?php esc_html_e( 'Buffer Pixels', 'infinite-loader-for-woocommerce' ); ?></label></div>
+						<div class="wbcom-settings-section-options-heading"><label for="blogname"><?php esc_html_e( 'Buffer Pixels', 'infinite-loader-for-woocommerce' ); ?></label>
+						<p><?php esc_html_e( 'Set the pixel distance from the bottom of the page at which loading should trigger.', 'infinite-loader-for-woocommerce' ); ?></p>
+						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="number" name="infinite_loader_admin_general_option[buffer_pixels]" placeholder="<?php esc_html_e( 'Buffer Pixels', 'infinite-loader-for-woocommerce' ); ?>" value="<?php echo ( isset( $infinite_loader_general_setting['buffer_pixels'] ) ) ? esc_attr( $infinite_loader_general_setting['buffer_pixels'] ) : ''; ?>">
 						</div>
 					</div>
 					<div class="wbcom-settings-section-wrap">
-						<div class="wbcom-settings-section-options-heading"><label for="blogname"><?php esc_html_e( "Don't update url when next page shown", 'infinite-loader-for-woocommerce' ); ?></label></div>
+						<div class="wbcom-settings-section-options-heading"><label for="blogname"><?php esc_html_e( "Prevent URL Update on Page Load", 'infinite-loader-for-woocommerce' ); ?></label>
+						<p><?php esc_html_e('Enable this option to avoid updating the page URL when new products are loaded.', 'infinite-loader-for-woocommerce'); ?></p>
+						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="checkbox" name="infinite_loader_admin_general_option[do_not_update_url]" value="yes" <?php ( isset( $infinite_loader_general_setting['do_not_update_url'] ) ) ? checked( $infinite_loader_general_setting['do_not_update_url'], 'yes' ) : ''; ?>>
 						</div>
