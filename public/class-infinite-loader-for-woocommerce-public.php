@@ -157,14 +157,16 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$infinite_loader_prev_button_settings = get_option( 'infinite_loader_admin_previous_button_option' );
 		$infinite_loader_selectors_settings   = get_option( 'infinite_loader_admin_selectors_option' );
 		$infinite_loader_css_js_settings      = get_option( 'infinite_loader_admin_css_js_option' );
-		$wc_products_selector                 = isset( $infinite_loader_selectors_settings['product_container'] ) ? $infinite_loader_selectors_settings['product_container'] : '';
-		$wc_item_selector                     = isset( $infinite_loader_selectors_settings['product_item'] ) ? $infinite_loader_selectors_settings['product_item'] : '';
-		$wc_pagination_selector               = isset( $infinite_loader_selectors_settings['pagination'] ) ? $infinite_loader_selectors_settings['pagination'] : '';
-		$wc_next_page_selector                = isset( $infinite_loader_selectors_settings['next_page'] ) ? $infinite_loader_selectors_settings['next_page'] : '';
-		$wc_prev_page_selector                = isset( $infinite_loader_selectors_settings['previous_page'] ) ? $infinite_loader_selectors_settings['previous_page'] : '';
 		$infinite_loader_check_rotate         = isset( $infinite_loader_genral_settings['rotate_image'] ) ? $infinite_loader_genral_settings['rotate_image'] : '';
 		$infinite_loader_buffer_pixel         = isset( $infinite_loader_selectors_settings['buffer_pixels'] ) ? $infinite_loader_selectors_settings['buffer_pixels'] : '';
 		$infinite_loader_enable_prev_btn      = isset( $infinite_loader_prev_button_settings['enable_previous_button'] ) ? $infinite_loader_prev_button_settings['enable_previous_button'] : '';
+
+		/** Hard coded this as to remove the selectors tab. */
+		$wc_products_selector                 = 'ul.products';
+		$wc_item_selector                     = 'li.product';
+		$wc_pagination_selector               = 'nav.woocommerce-pagination';
+		$wc_next_page_selector                = 'a.next.page-numbers';
+		$wc_prev_page_selector                = 'a.prev.page-numbers';
 
 		$rotate_image_class = '';
 		if ( $infinite_loader_check_rotate ) {

@@ -224,10 +224,6 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		register_setting( 'infinite_loader_admin_previous_button_options', 'infinite_loader_admin_previous_button_option' );
 		add_settings_section( 'infinite-loader-for-woocommerce-previous-button', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_previous_button_content' ), 'infinite-loader-for-woocommerce-previous-button' );
 
-		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-selectors'] = esc_html__( 'Selectors', 'infinite-loader-for-woocommerce' );
-		register_setting( 'infinite_loader_admin_selectors_options', 'infinite_loader_admin_selectors_option' );
-		add_settings_section( 'infinite-loader-for-woocommerce-selectors', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_selectors_content' ), 'infinite-loader-for-woocommerce-selectors' );
-
 		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-css-js'] = esc_html__( 'JavaScript/CSS', 'infinite-loader-for-woocommerce' );
 		register_setting( 'infinite_loader_admin_css_js_options', 'infinite_loader_admin_css_js_option' );
 		add_settings_section( 'infinite-loader-for-woocommerce-css-js', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_js_css_content' ), 'infinite-loader-for-woocommerce-css-js' );
@@ -260,13 +256,6 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function infinite_loader_for_woocommerce_admin_previous_button_content() {
 		include 'partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php';
-	}
-
-	/**
-	 * Include infinite loader for woocommerce admin selectors setting tab content file.
-	 */
-	public function infinite_loader_for_woocommerce_admin_selectors_content() {
-		include 'partials/infinite-loader-for-woocommerce-setting-selectors-tab.php';
 	}
 
 	/**

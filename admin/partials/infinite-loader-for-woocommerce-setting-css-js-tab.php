@@ -33,7 +33,7 @@ if ( ! empty( $infinite_loader_after_update ) ) {
 <div class="wbcom-tab-content">
 	<div class="wbcom-welcome-main-wrapper">
 		<div class="wbcom-admin-title-section">
-			<h3><?php esc_html_e( 'Button Style', 'infinite-loader-for-woocommerce' ); ?></h3>
+			<h3><?php esc_html_e( 'Custom CSS and Javascript Settings', 'infinite-loader-for-woocommerce' ); ?></h3>
 		</div><!-- .wbcom-welcome-head -->
 		<div class="wbcom-admin-option-wrap wbcom-admin-option-wrap-view">
 			<form method="post" action="options.php">

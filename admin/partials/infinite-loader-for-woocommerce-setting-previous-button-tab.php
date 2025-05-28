@@ -16,7 +16,7 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 <div class="wbcom-tab-content">
 	<div class="wbcom-welcome-main-wrapper">
 		<div class="wbcom-admin-title-section">
-			<h3><?php esc_html_e( 'Previous Button Style', 'infinite-loader-for-woocommerce' ); ?></h3>
+			<h3><?php esc_html_e( 'Previous Button Style Settings', 'infinite-loader-for-woocommerce' ); ?></h3>
 		</div><!-- .wbcom-welcome-head -->
 		<div class="wbcom-admin-option-wrap wbcom-admin-option-wrap-view">
 			<form method="post" action="options.php">

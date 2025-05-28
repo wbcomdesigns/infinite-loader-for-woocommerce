@@ -18,7 +18,7 @@ $infinite_loader_selected_icon = isset( $infinite_loader_general_setting['loadin
 <div class="wbcom-tab-content">
 	<div class="wbcom-welcome-main-wrapper">
 		<div class="wbcom-admin-title-section">
-			<h3><?php esc_html_e( 'General Setting', 'infinite-loader-for-woocommerce' ); ?></h3>
+			<h3><?php esc_html_e( 'General Settings', 'infinite-loader-for-woocommerce' ); ?></h3>
 		</div><!-- .wbcom-welcome-head -->
 		<div class="wbcom-admin-option-wrap wbcom-admin-option-wrap-view">
 			<form method="post" action="options.php">
