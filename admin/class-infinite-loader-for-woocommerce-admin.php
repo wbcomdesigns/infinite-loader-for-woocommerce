@@ -80,7 +80,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		if ( isset( $_GET['page'] ) && ( 'infinite-loader-for-woocommerce-settings' === $_GET['page'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_GET['page'] ) && ( $_GET['page'] === 'infinite-loader-for-woocommerce-settings' || $_GET['page'] === 'wbcomplugins' ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/infinite-loader-for-woocommerce-admin.css', array(), $this->version, 'all' );
 			wp_enqueue_style( 'infinity-loader-selectize', plugin_dir_url( __FILE__ ) . 'css/selectize.css', array(), $this->version, 'all' );
 		}
