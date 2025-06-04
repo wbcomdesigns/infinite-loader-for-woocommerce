@@ -28,17 +28,6 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 					<div class="wbcom-settings-section-wrap">
 						<div class="wbcom-settings-section-options-heading">
 							<label for="blogname">
-								<?php esc_html_e( 'Enable Previous Button', 'infinite-loader-for-woocommerce' ); ?>
-							</label>
-							<p><?php esc_html_e( 'Enable this option to display the "Load Previous" button.', 'infinite-loader-for-woocommerce' ) ?></p>
-						</div>
-						<div class="wbcom-settings-section-options">
-							<input type="checkbox" data-style="custom_css" name="infinite_loader_admin_previous_button_option[enable_previous_button]"  value="yes" <?php ( isset( $infinite_loader_previous_button_setting['enable_previous_button'] ) ) ? checked( $infinite_loader_previous_button_setting['enable_previous_button'], 'yes' ) : ''; ?>>
-						</div>
-					</div>
-					<div class="wbcom-settings-section-wrap">
-						<div class="wbcom-settings-section-options-heading">
-							<label for="blogname">
 								<?php esc_html_e( 'Custom CSS Class', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
 							<p><?php esc_html_e( 'Specify a custom CSS class to style the Load Previous button.', 'infinite-loader-for-woocommerce' ) ?></p>

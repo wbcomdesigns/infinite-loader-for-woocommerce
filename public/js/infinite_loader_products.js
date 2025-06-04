@@ -238,9 +238,6 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                             var $pagination = $data.find(infinite_loader_product_data.pagination);
                             if (replace == 1) {
                                 $(infinite_loader_product_data.pagination).html($pagination.html());
-                            } else if (infinite_loader_product_data.type == 'load-more-button-and-ajax-pagination') {
-                                $(infinite_loader_product_data.pagination).html($pagination.html());
-                                //pagination_replace_partial($data, replace);
                             } else if (replace == 2) {
                                 var $prev_page = jquery_get_prev_page();
                                 var $new_prev_page = jquery_get_prev_page($data);
@@ -416,13 +413,6 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                     }
                 } else if (style == 'pagination') {
                     $(infinite_loader_product_data.pagination).show();
-                } else if (style == 'load-more-button-and-ajax-pagination') {
-                    $(infinite_loader_product_data.pagination).show();
-                    if ($next_page.length > 0) {
-                        $('.infinite_loader_btn_load.infinite_loader_btn_setting').show();
-                    } else {
-                        setTimeout(test_next_page, 4000);
-                    }
                 }
                 var $prev_page = jquery_get_prev_page();
                 if ($prev_page.length > 0) {
@@ -544,6 +534,22 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
             } catch (e) { }
         }
     });
+
+    var offset = 100;
+    var speed = 250;
+    var duration = 500;
+    $(window).scroll(function () {
+        if ($(this).scrollTop() < offset) {
+            $('.infinity_loader_topbutton').fadeOut(duration);
+        } else {
+            $('.infinity_loader_topbutton').fadeIn(duration);
+        }
+    });
+    $('.infinity_loader_topbutton').on('click', function () {
+        $('html, body').animate({ scrollTop: 0 }, speed);
+        return false;
+    });
+
 })(jQuery);
 function infinite_loader_exc_js(func) {
     if (infinite_loader_product_data.javascript != 'undefined'

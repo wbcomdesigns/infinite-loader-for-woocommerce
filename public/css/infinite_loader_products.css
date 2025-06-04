@@ -60,3 +60,14 @@ body {
     opacity: 1;
     top:150%;
 }
+
+.infinity_loader_topbutton {
+    height: 50px;
+    width: 50px;
+    position: fixed;
+    right: 5px;
+    bottom: 5px;
+    Z-index: 1;
+    background-repeat: no-repeat;
+    display: none;
+}

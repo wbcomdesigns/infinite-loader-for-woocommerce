@@ -64,7 +64,6 @@ class Infinite_Loader_For_Woocommerce_Activator {
 		
 		if( empty( get_option( 'infinite_loader_admin_previous_button_option' ) ) ) {
 			$infinite_loader_set_default_previous_btn_options = array(
-				'enable_previous_button'       => 'yes',
 				'button_text'                  => 'Load Previous',
 				'background_color'             => '#1d76da',
 				'background_color_mouse_hover' => '#0e4da0',
@@ -84,18 +83,8 @@ class Infinite_Loader_For_Woocommerce_Activator {
 			);
 			update_option( 'infinite_loader_admin_previous_button_option', $infinite_loader_set_default_previous_btn_options );
 		}
-		
-		if( empty( get_option( 'infinite_loader_admin_selectors_option' ) ) ) { 
-			$infinite_loader_set_default_selectors_options = array(
-				'product_container' => 'ul.products',
-				'product_item'      => 'li.product',
-				'pagination'        => 'nav.woocommerce-pagination',
-				'next_page'         => 'a.next.page-numbers',
-				'previous_page'     => 'a.prev.page-numbers',
-			);
-			update_option( 'infinite_loader_admin_selectors_option', $infinite_loader_set_default_selectors_options );
-		}
-		
+
+	
 		if( empty( get_option( 'infinite_loader_admin_css_js_option' ) ) ) { 
 			$infinite_loader_set_js_css_option = array(
 			'font_awesome_version' => 'fontawesome5',

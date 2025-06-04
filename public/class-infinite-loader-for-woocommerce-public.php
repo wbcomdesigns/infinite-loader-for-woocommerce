@@ -159,7 +159,8 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$infinite_loader_css_js_settings      = get_option( 'infinite_loader_admin_css_js_option' );
 		$infinite_loader_check_rotate         = isset( $infinite_loader_genral_settings['rotate_image'] ) ? $infinite_loader_genral_settings['rotate_image'] : '';
 		$infinite_loader_buffer_pixel         = isset( $infinite_loader_selectors_settings['buffer_pixels'] ) ? $infinite_loader_selectors_settings['buffer_pixels'] : '';
-		$infinite_loader_enable_prev_btn      = isset( $infinite_loader_prev_button_settings['enable_previous_button'] ) ? $infinite_loader_prev_button_settings['enable_previous_button'] : '';
+		$infinite_loader_page_loading_type    = isset( $infinite_loader_genral_settings['product_loading_type'] ) ? $infinite_loader_genral_settings['product_loading_type'] : '';
+		$infinite_loader_use_prev_btn         = ( 'load-more-button' === $infinite_loader_page_loading_type || 'infinity-scroll' === $infinite_loader_page_loading_type)  ? 'yes' : '';
 
 		/** Hard coded this as to remove the selectors tab. */
 		$wc_products_selector                 = 'ul.products';
@@ -192,7 +193,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 			array(
 				'type'           => $infinite_loader_genral_settings['product_loading_type'],
 				'buffer'         => $infinite_loader_buffer_pixel,
-				'use_prev_btn'   => $infinite_loader_enable_prev_btn,
+				'use_prev_btn'   => $infinite_loader_use_prev_btn,
 				'update_url'     => empty( $infinite_loader_genral_settings['do_not_update_url'] ), // if $general_options['update_url'] is set it means stop updating.
 				'load_image'     => $infnite_loader_icon,
 				'load_img_class' => '.infinite_loader_products_loading',
@@ -318,5 +319,18 @@ class Infinite_Loader_For_Woocommerce_Public {
 
 	}
 
+	/** 
+	 * This function adds the scroll to top button for Load More button and Infinity Scroll loading type.
+	 * 
+	 * @since 1.2.3
+	 */
+	public function infinite_loader_for_woo_scroll_top_button() { 
 
+		$infinite_loader_general_settings  = get_option( 'infinite_loader_admin_general_option' );
+
+		if( ! empty( $infinite_loader_general_settings['product_loading_type'] ) && ( 'load-more-button' === $infinite_loader_general_settings['product_loading_type'] || 'infinity-scroll' === $infinite_loader_general_settings['product_loading_type'] ) ) { ?>
+		<a href="#" class="infinity_loader_topbutton"><i class="fa-solid fa-circle-arrow-up fa-bounce fa-2xl"></i></a>
+	
+		<?php }
+	} 
 }

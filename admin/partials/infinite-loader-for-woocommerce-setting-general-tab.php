@@ -40,8 +40,7 @@ $infinite_loader_selected_icon = isset( $infinite_loader_general_setting['loadin
 									<option value="none" <?php selected( $infinite_loader_general_setting['product_loading_type'], 'none' ); ?>><?php esc_html_e( 'None', 'infinite-loader-for-woocommerce' ); ?></option>
 									<option value="infinity-scroll" <?php selected( $infinite_loader_general_setting['product_loading_type'], 'infinity-scroll' ); ?>><?php esc_html_e( 'Infinity Scroll', 'infinite-loader-for-woocommerce' ); ?></option>
 									<option value="load-more-button" <?php selected( $infinite_loader_general_setting['product_loading_type'], 'load-more-button' ); ?>><?php esc_html_e( 'Load More Button', 'infinite-loader-for-woocommerce' ); ?></option>
-									<option value="pagination" <?php selected( $infinite_loader_general_setting['product_loading_type'], 'pagination' ); ?>><?php esc_html_e( 'AJAX Pagination', 'infinite-loader-for-woocommerce' ); ?></option>
-									<option value="load-more-button-and-ajax-pagination" <?php selected( $infinite_loader_general_setting['product_loading_type'], 'load-more-button-and-ajax-pagination' ); ?>><?php esc_html_e( 'Load More Button + AJAX Pagination', 'infinite-loader-for-woocommerce' ); ?></option>
+									<option value="pagination" <?php selected( $infinite_loader_general_setting['product_loading_type'], 'pagination' ); ?>><?php esc_html_e( 'Pagination', 'infinite-loader-for-woocommerce' ); ?></option>
 								</select>
 								<div class="infinity-loader-slider bupr-round"></div>
 							</label>
