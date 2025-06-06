@@ -205,6 +205,8 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function infinite_loader_for_woocommerce_init_plugin_settings() {
 
+		//phpcs:disable
+
 		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-welcome'] = esc_html__( 'Welcome', 'infinite-loader-for-woocommerce' );
 		register_setting( 'infinite_loader_for_woocommerce_admin_welcome_options', 'infinite_loader_for_woocommerce_admin_welcome_options' );
 		add_settings_section( 'infinite-loader-for-woocommerce-welcome', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_welcome_content' ), 'infinite-loader-for-woocommerce-welcome' );
@@ -225,6 +227,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		register_setting( 'infinite_loader_admin_css_js_options', 'infinite_loader_admin_css_js_option' );
 		add_settings_section( 'infinite-loader-for-woocommerce-css-js', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_js_css_content' ), 'infinite-loader-for-woocommerce-css-js' );
 
+		//phpcs:enable
 	}
 
 	/**
