@@ -81,8 +81,16 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		 * class.
 		 */
 		if ( isset( $_GET['page'] ) && ( $_GET['page'] === 'infinite-loader-for-woocommerce-settings' || $_GET['page'] === 'wbcomplugins' ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/infinite-loader-for-woocommerce-admin.css', array(), $this->version, 'all' );
-			wp_enqueue_style( 'infinity-loader-selectize', plugin_dir_url( __FILE__ ) . 'css/selectize.css', array(), $this->version, 'all' );
+			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+				$extension = is_rtl() ? '.rtl.css' : '.css';
+				$path      = is_rtl() ? '/rtl' : '';
+			} else {
+				$extension = is_rtl() ? '.rtl.css' : '.min.css';
+				$path      = is_rtl() ? '/rtl' : '/min';
+			}
+
+			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css' . $path . '/infinite-loader-for-woocommerce-admin' . $extension, array(), $this->version, 'all' );
+			wp_enqueue_style( 'infinity-loader-selectize', plugin_dir_url( __FILE__ ) . 'css/vendor/selectize.css', array(), $this->version, 'all' );
 		}
 	}
 
@@ -105,9 +113,17 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		 * class.
 		 */
 		if ( isset( $_GET['page'] ) && ( 'infinite-loader-for-woocommerce-settings' === $_GET['page'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/infinite-loader-for-woocommerce-admin.js', array( 'jquery' ), $this->version, false );
-			wp_enqueue_script( 'infinity-loader-selectize-min', plugin_dir_url( __FILE__ ) . 'js/selectize.min.js', array( 'jquery' ), $this->version, false );
-			wp_enqueue_script( 'admin-js', plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
+			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+				$extension = '.js';
+				$path      = '';
+			} else {
+				$extension = '.min.js';
+				$path      = '/min';
+			}
+
+			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js' . $path . '/infinite-loader-for-woocommerce-admin' . $extension, array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( 'infinity-loader-selectize-min', plugin_dir_url( __FILE__ ) . 'js/vendor/selectize.min.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( 'admin-js', plugin_dir_url( __FILE__ ) . 'js' . $path . '/admin' . $extension, array( 'jquery' ), $this->version, false );
 		}
 	}
 

@@ -72,7 +72,15 @@ class Infinite_Loader_For_Woocommerce_Public {
 		 * class.
 		 */
 		if( is_shop() ) {
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/infinite-loader-for-woocommerce-public.css', array(), $this->version, 'all' ); 
+			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+				$extension = is_rtl() ? '.rtl.css' : '.css';
+				$path      = is_rtl() ? '/rtl' : '';
+			} else {
+				$extension = is_rtl() ? '.rtl.css' : '.min.css';
+				$path      = is_rtl() ? '/rtl' : '/min';
+			}
+
+			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css' . $path . '/infinite-loader-for-woocommerce-public' . $extension, array(), $this->version, 'all' ); 
 		}		
 
 	}
@@ -97,7 +105,15 @@ class Infinite_Loader_For_Woocommerce_Public {
 		 */
 		
 		if( is_shop() ) {
-			wp_enqueue_script( 'infinite_loader_products', plugin_dir_url( __FILE__ ) . 'js/infinite-loader-for-woocommerce-public.js', array( 'jquery' ), $this->version, false );
+			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+				$extension = '.js';
+				$path      = '';
+			} else {
+				$extension = '.min.js';
+				$path      = '/min';
+			}
+
+			wp_enqueue_script( 'infinite_loader_products', plugin_dir_url( __FILE__ ) . 'js' . $path . '/infinite-loader-for-woocommerce-public' . $extension, array( 'jquery' ), $this->version, false );
 		}
 		
 	}
@@ -127,9 +143,9 @@ class Infinite_Loader_For_Woocommerce_Public {
 		if ( ! $infinite_loader_css_js_enable ) {
 			if ( isset( $_GET['page'] ) && ( 'infinite-loader-for-woocommerce-settings' === $_GET['page'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				if ( 'fontawesome5' === $infinite_loader_font_awesome_version ) {
-					wp_enqueue_style( 'font-awesome-5', plugins_url( 'css/fontawesome5.min.css', __FILE__ ), array(), $this->version, 'all' );
+					wp_enqueue_style( 'font-awesome-5', plugins_url( 'css/vendor/fontawesome5.min.css', __FILE__ ), array(), $this->version, 'all' );
 				} else {
-					wp_enqueue_style( 'font-awesome-4', plugins_url( 'css/font-awesome.min.css', __FILE__ ), array(), $this->version, 'all' );
+					wp_enqueue_style( 'font-awesome-4', plugins_url( 'css/vendor/font-awesome.min.css', __FILE__ ), array(), $this->version, 'all' );
 				}
 			}
 		}
@@ -140,8 +156,22 @@ class Infinite_Loader_For_Woocommerce_Public {
 	 */
 	public function infinite_loader_add_css_js_for_loading_products() {
 		if ( is_shop() || is_product_category() || is_product_tag() || is_product_taxonomy() ) {
-			wp_enqueue_script( 'infinite_loader_products_js', plugins_url( 'js/infinite_loader_products.js', __FILE__ ), array( 'jquery' ), array(), $this->version, 'all' );
-			wp_register_style( 'infinite_loader_products_css', plugins_url( 'css/infinite_loader_products.css', __FILE__ ), array(), $this->version, 'all' );
+			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+				$css_extension = is_rtl() ? '.rtl.css' : '.css';
+				$css_path      = is_rtl() ? '/rtl' : '';
+
+				$js_extension = '.js';
+				$js_path      = '';
+			} else {
+				$css_extension = is_rtl() ? '.rtl.css' : '.min.css';
+				$css_path      = is_rtl() ? '/rtl' : '/min';
+
+				$js_extension = '.min.js';
+				$js_path      = '/min';
+			}
+
+			wp_enqueue_script( 'infinite_loader_products_js', plugins_url( 'js' . $js_path . '/infinite_loader_products' . $js_extension, __FILE__ ), array( 'jquery' ), array(), $this->version, 'all' );
+			wp_register_style( 'infinite_loader_products_css', plugins_url( 'css' . $css_path . '/infinite_loader_products' . $css_extension, __FILE__ ), array(), $this->version, 'all' );
 			wp_enqueue_style( 'infinite_loader_products_css' );
 			$this->infinite_loader_for_woocommerce_display_button();
 		}
