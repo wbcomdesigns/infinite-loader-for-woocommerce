@@ -38,7 +38,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
             infinite_loader_init_buttons();
             current_style();
             if (infinite_loader_type != 'none') {
-                $(window).resize(function () {
+                $(window).on( 'resize', function () {
                     current_style();
                 });
                 if (typeof infinite_loader_product_data.update_url != "undefined" && infinite_loader_product_data.update_url == 1) {
@@ -105,7 +105,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 $(document).on('infinite_loader_ajax_filter_end', function () {
                     infinite_loader_loading = false;
                 });
-                $(window).scroll(function () {
+                $(window).on( 'scroll', function () {
 
                     if (!infinite_loader_loading) {
                         br_load_more_html5();
@@ -538,7 +538,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
     var offset = 100;
     var speed = 250;
     var duration = 500;
-    $(window).scroll(function () {
+    $(window).on( 'scroll', function () {
         if ($(this).scrollTop() < offset) {
             $('.infinity_loader_topbutton').fadeOut(duration);
         } else {
