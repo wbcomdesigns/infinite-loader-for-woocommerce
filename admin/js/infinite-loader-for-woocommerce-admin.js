@@ -31,7 +31,7 @@
 	jQuery(document).ready(function ($) {
 		$('#infinity-loader-loading-type').select2({
 			placeholder: "Select Button Action",
-			plugins: ['remove_button'],
+			allowClear: true // If you want a remove (clear) button
 		});
 
 		$(document).on('click',"#infinite-loader-default-color", function () {
