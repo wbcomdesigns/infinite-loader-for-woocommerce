@@ -29,28 +29,28 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 	jQuery(document).ready(function ($) {
-		$('#infinity-loader-loading-type').selectize({
-		placeholder: "Select Button Action",
-		plugins: ['remove_button'],
+		$('#infinity-loader-loading-type').select2({
+			placeholder: "Select Button Action",
+			plugins: ['remove_button'],
 		});
 
-		$("#infinite-loader-default-color").click(function () {
+		$(document).on('click',"#infinite-loader-default-color", function () {
 			document.getElementById("infinite_loader_default_bg_color").value = "#1d76da";
 		});
 
-		$("#infinite-loader-default-bg-color-mouse-hover").click(function () {
+		$(document).on('click',"#infinite-loader-default-bg-color-mouse-hover", function () {
 			document.getElementById("infinite_loader_default_bg_color_mouse_hover").value = "#0e4da0";
 		});
 
-		$("#infinite-loader-default-border-color").click(function () {
+		$(document).on('click',"#infinite-loader-default-border-color", function () {
 			document.getElementById("infinite_loader_default_border_color").value = "#1d76da";
 		});
 
-		$("#infinite-loader-default-text-color").click(function () {
+		$(document).on('click',"#infinite-loader-default-text-color", function () {
 			document.getElementById("infinite_loader_default_text_color").value = "#ffffff";
 		});
 
-		$("#infinite-loader-default-text-color-mouse-hover").click(function () {
+		$(document).on('click',"#infinite-loader-default-text-color-mouse-hover", function () {
 			document.getElementById("infinite_loader_default_text_color_mouse_hover").value = "#ffffff";
 		});
 

@@ -90,7 +90,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 			}
 
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css' . $path . '/infinite-loader-for-woocommerce-admin' . $extension, array(), $this->version, 'all' );
-			wp_enqueue_style( 'infinity-loader-selectize', plugin_dir_url( __FILE__ ) . 'css/vendor/selectize.css', array(), $this->version, 'all' );
+			wp_enqueue_style( 'infinity-loader-select2', plugin_dir_url( __FILE__ ) . 'css/vendor/select2.min.css', array(), $this->version, 'all' );
 		}
 	}
 
@@ -122,7 +122,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 			}
 
 			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js' . $path . '/infinite-loader-for-woocommerce-admin' . $extension, array( 'jquery' ), $this->version, false );
-			wp_enqueue_script( 'infinity-loader-selectize-min', plugin_dir_url( __FILE__ ) . 'js/vendor/selectize.min.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( 'infinity-loader-select2-min', plugin_dir_url( __FILE__ ) . 'js/vendor/select2.min.js', array( 'jquery' ), $this->version, false );
 			wp_enqueue_script( 'admin-js', plugin_dir_url( __FILE__ ) . 'js' . $path . '/admin' . $extension, array( 'jquery' ), $this->version, false );
 		}
 	}
