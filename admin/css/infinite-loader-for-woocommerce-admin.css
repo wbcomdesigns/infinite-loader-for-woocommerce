@@ -102,6 +102,10 @@ select#infinity-loader-loading-type+.select2-container--default .select2-selecti
     height: 36px;
 }
 
+select#infinity-loader-loading-type+.select2-container--default .select2-selection--single .select2-selection__clear {
+    display: none;
+}
+
 /* FONT AWESOME ICON SELECTOR */
 
 .infinite_loader_select_fontawesome {
