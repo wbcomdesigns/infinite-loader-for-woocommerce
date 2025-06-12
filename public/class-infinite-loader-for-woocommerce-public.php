@@ -186,7 +186,6 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$infinite_loader_selectors_settings   = get_option( 'infinite_loader_admin_selectors_option' );
 		$infinite_loader_css_js_settings      = get_option( 'infinite_loader_admin_css_js_option' );
 		$infinite_loader_check_rotate         = isset( $infinite_loader_genral_settings['rotate_image'] ) ? $infinite_loader_genral_settings['rotate_image'] : '';
-		$infinite_loader_buffer_pixel         = isset( $infinite_loader_selectors_settings['buffer_pixels'] ) ? $infinite_loader_selectors_settings['buffer_pixels'] : '';
 		$infinite_loader_page_loading_type    = isset( $infinite_loader_genral_settings['product_loading_type'] ) ? $infinite_loader_genral_settings['product_loading_type'] : '';
 		$infinite_loader_use_prev_btn         = ( 'load-more-button' === $infinite_loader_page_loading_type || 'infinity-scroll' === $infinite_loader_page_loading_type)  ? 'yes' : '';
 
@@ -220,7 +219,6 @@ class Infinite_Loader_For_Woocommerce_Public {
 			'infinite_loader_product_data',
 			array(
 				'type'           => $infinite_loader_genral_settings['product_loading_type'],
-				'buffer'         => $infinite_loader_buffer_pixel,
 				'use_prev_btn'   => $infinite_loader_use_prev_btn,
 				'update_url'     => empty( $infinite_loader_genral_settings['do_not_update_url'] ), // if $general_options['update_url'] is set it means stop updating.
 				'load_image'     => $infnite_loader_icon,

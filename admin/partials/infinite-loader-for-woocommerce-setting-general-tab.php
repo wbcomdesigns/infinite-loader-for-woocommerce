@@ -85,14 +85,6 @@ $infinite_loader_selected_icon = isset( $infinite_loader_general_setting['loadin
 						</div>
 					<?php } ?>
 					<div class="wbcom-settings-section-wrap">
-						<div class="wbcom-settings-section-options-heading"><label for="blogname"><?php esc_html_e( 'Buffer Pixels', 'infinite-loader-for-woocommerce' ); ?></label>
-						<p><?php esc_html_e( 'Set the pixel distance from the bottom of the page at which loading should trigger.', 'infinite-loader-for-woocommerce' ); ?></p>
-						</div>
-						<div class="wbcom-settings-section-options">
-							<input type="number" name="infinite_loader_admin_general_option[buffer_pixels]" placeholder="<?php esc_html_e( 'Buffer Pixels', 'infinite-loader-for-woocommerce' ); ?>" value="<?php echo ( isset( $infinite_loader_general_setting['buffer_pixels'] ) ) ? esc_attr( $infinite_loader_general_setting['buffer_pixels'] ) : ''; ?>">
-						</div>
-					</div>
-					<div class="wbcom-settings-section-wrap">
 						<div class="wbcom-settings-section-options-heading"><label for="blogname"><?php esc_html_e( "Prevent URL Update on Page Load", 'infinite-loader-for-woocommerce' ); ?></label>
 						<p><?php esc_html_e('Enable this option to avoid updating the page URL when new products are loaded.', 'infinite-loader-for-woocommerce'); ?></p>
 						</div>

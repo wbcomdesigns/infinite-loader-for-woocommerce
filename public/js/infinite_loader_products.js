@@ -105,20 +105,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 $(document).on('infinite_loader_ajax_filter_end', function () {
                     infinite_loader_loading = false;
                 });
-                $(window).on( 'scroll', function () {
-
-                    if (!infinite_loader_loading) {
-                        br_load_more_html5();
-                        if (infinite_loader_type == 'infinity-scroll') {
-                            var products_bottom = $(infinite_loader_product_data.products).offset().top + $(infinite_loader_product_data.products).height() - infinite_loader_product_data.buffer;
-                            var bottom_position = $(window).scrollTop() + $(window).height();
-                            if (products_bottom < bottom_position && !infinite_loader_loading) {
-                                infinite_loader_update_state();
-                                infinite_loader_load_next_page();
-                            }
-                        }
-                    }
-                });
+                
                 $(document).on('click', '.infinite_loader_btn_setting .infinite_button', function (event) {
                     event.preventDefault();
                     infinite_loader_load_next_page();
