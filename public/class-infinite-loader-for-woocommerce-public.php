@@ -141,12 +141,10 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$infinite_loader_css_js_enable        = isset( $infinite_loader_css_js_setting['disable_font_awesome'] ) ? $infinite_loader_css_js_setting['disable_font_awesome'] : '';
 		$infinite_loader_font_awesome_version = isset( $infinite_loader_css_js_setting['font_awesome_version'] ) ? $infinite_loader_css_js_setting['font_awesome_version'] : '';
 		if ( ! $infinite_loader_css_js_enable ) {
-			if ( isset( $_GET['page'] ) && ( 'infinite-loader-for-woocommerce-settings' === $_GET['page'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				if ( 'fontawesome5' === $infinite_loader_font_awesome_version ) {
-					wp_enqueue_style( 'font-awesome-5', plugins_url( 'css/vendor/fontawesome5.min.css', __FILE__ ), array(), $this->version, 'all' );
-				} else {
-					wp_enqueue_style( 'font-awesome-4', plugins_url( 'css/vendor/font-awesome.min.css', __FILE__ ), array(), $this->version, 'all' );
-				}
+			if ( 'fontawesome5' === $infinite_loader_font_awesome_version ) {
+				wp_enqueue_style( 'font-awesome-5', plugins_url( 'css/fontawesome5.min.css', __FILE__ ), array(), $this->version, 'all' );
+			} else {
+				wp_enqueue_style( 'font-awesome-4', plugins_url( 'css/font-awesome.min.css', __FILE__ ), array(), $this->version, 'all' );
 			}
 		}
 	}
@@ -154,7 +152,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 	/**
 	 * Function includes the css and js of loading products.
 	 */
-	public function infinite_loader_add_css_js_for_loading_products() {
+	public function infinite_loader_add_css_js_for_loading_products() { 
 		if ( is_shop() || is_product_category() || is_product_tag() || is_product_taxonomy() ) {
 			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
 				$css_extension = is_rtl() ? '.rtl.css' : '.css';

@@ -54,30 +54,36 @@ $infinite_loader_selected_icon = isset( $infinite_loader_general_setting['loadin
 							<input type="number" name="infinite_loader_admin_general_option[product_per_page]" placeholder="<?php esc_html_e( 'Products per page', 'infinite-loader-for-woocommerce' ); ?>" value="<?php echo ( isset( $infinite_loader_general_setting['product_per_page'] ) ) ? esc_attr( $infinite_loader_general_setting['product_per_page'] ) : ''; ?>">
 						</div>
 					</div>
-					<div class="wbcom-settings-section-wrap">
-						<div class="wbcom-settings-section-options-heading">
-							<label for="blogname">
-								<?php esc_html_e( 'Loading Image', 'infinite-loader-for-woocommerce' ); ?>
-							</label>
-							<p><?php esc_html_e('Select the loading animation icon displayed while new products are loading.', 'infinite-loader-for-woocommerce'); ?></p>
-						</div>
-						<div class="wbcom-settings-section-options">
-							<?php
-							echo '<div class="infinite_loader_select_fontawesome">';
-							echo Infinite_Loader_For_Woocommerce_Admin::infinite_loader_icon_popup(); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-							echo '<input type="hidden" name="infinite_loader_admin_general_option[loading_image]" value="' . esc_attr( $infinite_loader_selected_icon ) . '" readonly class="infinite_icon_value"/>
-									<span class="infinite_selected_icon"><i class="fa ' . esc_attr( $infinite_loader_selected_icon ) . '"></i></span>
-									<input type="button" class="infinite_select_icon button" value="' . esc_html__( 'Font Awesome', 'infinite-loader-for-woocommerce' ) . '"/> ';
-							echo '<input type="button" class="infinite_default_icon button" value="' . esc_html__( 'Default', 'infinite-loader-for-woocommerce' ) . '"/>';
-							echo '</div>';
+					<?php 
+					$infinite_loader_css_js_setting = get_option( 'infinite_loader_admin_css_js_option' );
+					$infinite_loader_css_js_enable  = isset( $infinite_loader_css_js_setting['disable_font_awesome'] ) ? $infinite_loader_css_js_setting['disable_font_awesome'] : '';
+					if ( ! $infinite_loader_css_js_enable ) {
+						?>
+						<div class="wbcom-settings-section-wrap">
+							<div class="wbcom-settings-section-options-heading">
+								<label for="blogname">
+									<?php esc_html_e( 'Loading Image', 'infinite-loader-for-woocommerce' ); ?>
+								</label>
+								<p><?php esc_html_e('Select the loading animation icon displayed while new products are loading.', 'infinite-loader-for-woocommerce'); ?></p>
+							</div>
+							<div class="wbcom-settings-section-options">
+								<?php
+								echo '<div class="infinite_loader_select_fontawesome">';
+								echo Infinite_Loader_For_Woocommerce_Admin::infinite_loader_icon_popup(); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								echo '<input type="hidden" name="infinite_loader_admin_general_option[loading_image]" value="' . esc_attr( $infinite_loader_selected_icon ) . '" readonly class="infinite_icon_value"/>
+										<span class="infinite_selected_icon"><i class="fa ' . esc_attr( $infinite_loader_selected_icon ) . '"></i></span>
+										<input type="button" class="infinite_select_icon button" value="' . esc_html__( 'Font Awesome', 'infinite-loader-for-woocommerce' ) . '"/> ';
+								echo '<input type="button" class="infinite_default_icon button" value="' . esc_html__( 'Default', 'infinite-loader-for-woocommerce' ) . '"/>';
+								echo '</div>';
 
-							?>
-							<label>
-								<input type="checkbox" name="infinite_loader_admin_general_option[rotate_image]" value="yes" <?php ( isset( $infinite_loader_general_setting['rotate_image'] ) ) ? checked( $infinite_loader_general_setting['rotate_image'], 'yes' ) : ''; ?>>
-								<span><?php esc_html_e( 'Rotate image while loading', 'infinite-loader-for-woocommerce' ); ?></span>
-							</label>
+								?>
+								<label>
+									<input type="checkbox" name="infinite_loader_admin_general_option[rotate_image]" value="yes" <?php ( isset( $infinite_loader_general_setting['rotate_image'] ) ) ? checked( $infinite_loader_general_setting['rotate_image'], 'yes' ) : ''; ?>>
+									<span><?php esc_html_e( 'Rotate image while loading', 'infinite-loader-for-woocommerce' ); ?></span>
+								</label>
+							</div>
 						</div>
-					</div>
+					<?php } ?>
 					<div class="wbcom-settings-section-wrap">
 						<div class="wbcom-settings-section-options-heading"><label for="blogname"><?php esc_html_e( 'Buffer Pixels', 'infinite-loader-for-woocommerce' ); ?></label>
 						<p><?php esc_html_e( 'Set the pixel distance from the bottom of the page at which loading should trigger.', 'infinite-loader-for-woocommerce' ); ?></p>

@@ -47,7 +47,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'public/css/', // Source directory for frontend CSS files
-          src: ['*.css', '!*.min.css', '!vendor/*.css', '!webfonts/*.css'], // Minify all frontend CSS files except already minified ones
+          src: ['*.css', '!*.min.css', '!vendor/*.css', '!webfonts/*.css', '!font-awesome.min.css', '!fontawesome5.min.css'], // Minify all frontend CSS files except already minified ones
           dest: 'public/css/min', // Destination directory for minified frontend CSS
           ext: '.min.css', // Extension for minified files
         }],
@@ -154,8 +154,8 @@ module.exports = function (grunt) {
         files: [
           {
             expand: true,
-            cwd: 'public/css/', // Source directory for public CSS
-            src: ['**/*.min.css', '!vendor/**/*.css', '!webfonts/**/*.css'], // Source files, excluding vendor CSS
+            cwd: 'public/css/', // Source directory for public CSS 
+            src: ['**/*.min.css', '!vendor/**/*.css', '!webfonts/**/*.css', '!font-awesome.min.css', '!fontawesome5.min.css' ], // Source files, excluding vendor CSS
             dest: 'public/css/rtl/', // Destination directory for public RTL CSS
             ext: '.rtl.css', // Extension for RTL files
             flatten: true // Prevents creating subdirectories

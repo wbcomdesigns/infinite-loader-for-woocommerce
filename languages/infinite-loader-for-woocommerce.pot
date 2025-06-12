@@ -9,9 +9,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-12T13:24:23+05:30\n"
+"POT-Creation-Date: 2025-06-12T11:19:35+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: infinite-loader-for-woocommerce\n"
 
 #. Plugin Name of the plugin
@@ -54,6 +54,7 @@ msgstr ""
 #. translators: %s:
 #: admin/class-infinite-loader-for-woocommerce-admin.php:183
 #: admin/wbcom/templates/wbcom-license-page.php:11
+#, php-format
 msgid "Version %s"
 msgstr ""
 
@@ -299,40 +300,40 @@ msgstr ""
 msgid "Products per page"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:60
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:65
 msgid "Loading Image"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:62
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:67
 msgid "Select the loading animation icon displayed while new products are loading."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:70
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:75
 msgid "Font Awesome"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:71
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:76
 msgid "Default"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:77
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:82
 msgid "Rotate image while loading"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:82
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:86
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:88
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:92
 msgid "Buffer Pixels"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:83
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:89
 msgid "Set the pixel distance from the bottom of the page at which loading should trigger."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:90
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:96
 msgid "Prevent URL Update on Page Load"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:91
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:97
 msgid "Enable this option to avoid updating the page URL when new products are loaded."
 msgstr ""
 
@@ -1111,10 +1112,12 @@ msgstr ""
 
 #. Translators: %1$s: Cart Notice for WooCommerce, %2$s: WooCommerce
 #: infinite-loader-for-woocommerce.php:105
+#, php-format
 msgid "%1$s is ineffective now as it requires %2$s to be installed and active."
 msgstr ""
 
 #. translators: %d: total results
-#: public/class-infinite-loader-for-woocommerce-public.php:299
+#: public/class-infinite-loader-for-woocommerce-public.php:297
+#, php-format
 msgid "Showing all %d result"
 msgstr ""
