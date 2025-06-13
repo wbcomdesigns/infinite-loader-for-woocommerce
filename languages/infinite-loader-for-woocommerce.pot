@@ -9,9 +9,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-13T06:53:09+00:00\n"
+"POT-Creation-Date: 2025-06-13T14:13:00+05:30\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.12.0\n"
+"X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: infinite-loader-for-woocommerce\n"
 
 #. Plugin Name of the plugin
@@ -20,19 +20,24 @@ msgid "Wbcom Designs – Infinite Loader for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin
-#. Author URI of the plugin
 #: infinite-loader-for-woocommerce.php
-msgid "https://wbcomdesigns.com/"
+msgid "https://wbcomdesigns.com/downloads/infinite-loader-for-woocommerce/"
 msgstr ""
 
 #. Description of the plugin
 #: infinite-loader-for-woocommerce.php
-msgid "infinite Load products from next page via AJAX with infinite scrolling or load more products button."
+#: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:22
+msgid "Streamline product browsing with AJAX-powered infinite scroll or a \"Load More\" button. Enhance user experience, reduce page loads, and keep customers engaged on your WooCommerce store."
 msgstr ""
 
 #. Author of the plugin
 #: infinite-loader-for-woocommerce.php
 msgid "Wbcom Designs"
+msgstr ""
+
+#. Author URI of the plugin
+#: infinite-loader-for-woocommerce.php
+msgid "https://wbcomdesigns.com/"
 msgstr ""
 
 #: admin/class-infinite-loader-for-woocommerce-admin.php:155
@@ -47,14 +52,13 @@ msgstr ""
 #: admin/class-infinite-loader-for-woocommerce-admin.php:159
 #: admin/class-infinite-loader-for-woocommerce-admin.php:181
 #: admin/wbcom/templates/wbcom-license-page.php:9
-#: infinite-loader-for-woocommerce.php:89
+#: infinite-loader-for-woocommerce.php:83
 msgid "Infinite Loader for WooCommerce"
 msgstr ""
 
 #. translators: %s:
 #: admin/class-infinite-loader-for-woocommerce-admin.php:183
 #: admin/wbcom/templates/wbcom-license-page.php:11
-#, php-format
 msgid "Version %s"
 msgstr ""
 
@@ -115,7 +119,7 @@ msgid "Background Color"
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:68
-msgid "Choose a background color for the Load More button."
+msgid "Select the background color for the Load More button."
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:78
@@ -208,55 +212,39 @@ msgstr ""
 msgid "Adjust the border radius for rounded corners (in pixels)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:36
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:34
 msgid "Custom CSS and Javascript Settings"
 msgstr ""
 
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:46
+msgid "Enable Font Awesome"
+msgstr ""
+
 #: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:48
-msgid "Disable Font Awesome"
+msgid "Enable the loading of Font Awesome icons within the plugin."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:50
-msgid "Disable the loading of Font Awesome icons within the plugin."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:59
-msgid "Font Awesome Version"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:61
-msgid "Select the version of Font Awesome to use for the icons."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:66
-msgid "Font Awesome 4"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:67
-msgid "Font Awesome 5"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:76
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:57
 msgid "Custom CSS"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:78
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:59
 msgid "Add your custom CSS styles to customize the button appearance."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:87
-msgid "JavaScript Before Update "
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:68
+msgid "JavaScript Before Update"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:89
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:70
 msgid "Add custom JavaScript code that will run before the page updates."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:98
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:79
 msgid "JavaScript After Update"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:100
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:81
 msgid "Add custom JavaScript code that will run after the page updates."
 msgstr ""
 
@@ -269,7 +257,7 @@ msgid "Products Loading Type"
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:35
-msgid "Choose how products are loaded on the shop page."
+msgid "Select how products are displayed and loaded on your shop page."
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:40
@@ -300,32 +288,32 @@ msgstr ""
 msgid "Products per page"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:65
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:68
 msgid "Loading Image"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:67
-msgid "Select the loading animation icon displayed while new products are loading."
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:70
+msgid "Select the loading animation icon that appears while new products are being loaded."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:75
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:78
 msgid "Font Awesome"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:76
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:79
 msgid "Default"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:82
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:85
 msgid "Rotate image while loading"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:88
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:90
 msgid "Prevent URL Update on Page Load"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:89
-msgid "Enable this option to avoid updating the page URL when new products are loaded."
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:91
+msgid "Enable this setting to prevent the page URL from changing when new products are loaded."
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:19
@@ -352,16 +340,12 @@ msgstr ""
 msgid "Choose a background color for the Load Previous button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:22
-msgid "Infinite Loader for WooCommerce Plugin allows you to change the default product page pagination into Infinite Scroll or Ajax pagination with Lazy Load. When a user scrolls down to the bottom of the page, the next page loads automatically."
-msgstr ""
-
 #: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:26
 msgid "Help &amp; Support Resources"
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:27
-msgid "Here are all the resources you may need to get help from us. Documentation is usually the best place to start. Should you require help anytime, our customer care team is available to assist you at the support center."
+msgid "If you need assistance, here are some helpful resources. Our documentation is a great place to start, and our support team is available if you require further help."
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:31
@@ -369,7 +353,7 @@ msgid "Documentation"
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:32
-msgid "We have prepared an extensive guide on Infinite Loader for Woocommerce to learn all aspects of the plugin. You will find most of your answers here."
+msgid "Explore our detailed guide on Infinite Loader for WooCommerce to understand all the features and how to make the most of them."
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:33
@@ -381,7 +365,7 @@ msgid "Support Center"
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:40
-msgid "We strive to offer the best customer care via our support center. Once your theme is activated, you can ask us for help anytime."
+msgid "Our support team is here to assist you with any questions or issues. Feel free to contact us anytime through our support center."
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:41
@@ -389,11 +373,11 @@ msgid "Get Support"
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:46
-msgid "Got Feedback?"
+msgid "Share Your Feedback"
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:47
-msgid "We want to hear about your experience with the plugin. We would also love to hear any suggestions you may for future updates."
+msgid "We’d love to hear about your experience with the plugin. Your feedback and suggestions help us improve future updates."
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:48
@@ -1068,7 +1052,7 @@ msgid "Contact Us"
 msgstr ""
 
 #: admin/wbcom/templates/wbcom-support-page.php:42
-msgid "Create a new thread on our plugin page, participation is open to anyone from all around the world. We'll be there to help as well but can't guarantee any delay."
+msgid "Create a new thread on our plugin page - participation is open to anyone from around the world. We'll be there to help as well, but we can't guarantee response times."
 msgstr ""
 
 #: admin/wbcom/wbcom-admin-settings.php:200
@@ -1097,18 +1081,16 @@ msgstr ""
 msgid "Themes & Extension"
 msgstr ""
 
-#: infinite-loader-for-woocommerce.php:90
+#: infinite-loader-for-woocommerce.php:84
 msgid "WooCommerce"
 msgstr ""
 
 #. Translators: %1$s: Cart Notice for WooCommerce, %2$s: WooCommerce
-#: infinite-loader-for-woocommerce.php:105
-#, php-format
+#: infinite-loader-for-woocommerce.php:99
 msgid "%1$s is ineffective now as it requires %2$s to be installed and active."
 msgstr ""
 
 #. translators: %d: total results
-#: public/class-infinite-loader-for-woocommerce-public.php:295
-#, php-format
+#: public/class-infinite-loader-for-woocommerce-public.php:293
 msgid "Showing all %d result"
 msgstr ""

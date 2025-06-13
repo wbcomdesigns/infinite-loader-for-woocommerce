@@ -161,101 +161,104 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                         method: "GET", url: next_page, beforeSend: function (xhr) {
                             xhr.setRequestHeader('X-Braapfdisable', '1');
                         }, success: function (data) {
-                            infinite_loader_ajax_instance = false;
-                            var $data = $('<div>' + data + '</div>');
-                            if (infinite_loader_product_data.lazy_load_m && $(window).width() <= infinite_loader_product_data.mobile_width || infinite_loader_product_data.lazy_load && $(window).width() > infinite_loader_product_data.mobile_width) {
-                                $data.find(infinite_loader_product_data.products + ' .lazy,' + infinite_loader_product_data.item + ', .infinite_loader_extra_data').find('img').each(function (i, o) {
-                                    $(o).attr('data-src', $(o).attr('src')).removeAttr('src');
-                                    $(o).attr('data-srcset', $(o).attr('srcset')).removeAttr('srcset');
-                                });
-                                $data.find(infinite_loader_product_data.item + ', .infinite_loader_extra_data').addClass('lazy');
-                            }
-                            if ($data.find(infinite_loader_product_data.products).find(infinite_loader_product_data.item).first().length) {
-                                $data.find(infinite_loader_product_data.products).find(infinite_loader_product_data.item).first().addClass('infinite_loader_btn').attr('data-url', decodeURIComponent(next_page));
-                            }
-                            if ($data.find(infinite_loader_product_data.products).find('.infinite_loader_extra_data').first().length) {
-                                $data.find(infinite_loader_product_data.products).find('.infinite_loader_extra_data').first().addClass('infinite_loader_btn').attr('data-url', decodeURIComponent(next_page));
-                            }
-                            var $products = $data.find(infinite_loader_product_data.products).html();
-                            if (replace == 1) {
-                                $(infinite_loader_product_data.products).html($products);
-                            } else if (replace == 2) {
-                                $products = $data.find(infinite_loader_product_data.products);
-                                $products.find(infinite_loader_product_data.item).addClass('infnite_loader_hidden');
-                                var count_images = $products.find(infinite_loader_product_data.item).find('img').length;
-                                $products = $products.html();
-                                $(infinite_loader_product_data.products).prepend($products);
-                                infinite_loader_display_hidden_executed = false;
-                                function infinite_loader_display_hidden() {
-                                    if (!infinite_loader_display_hidden_executed) {
-                                        infinite_loader_display_hidden_executed = true;
-                                        var object = $(infinite_loader_product_data.products).find(infinite_loader_product_data.item + ':not(".infnite_loader_hidden")').first();
-                                        var positionOld = object.offset().top;
-                                        var scrollTop = $(window).scrollTop();
-                                        $('.infnite_loader_hidden').removeClass('infnite_loader_hidden');
-                                        end_ajax_loading();
-                                        var positionNew = object.offset().top;
-                                        $(window).scrollTop(positionNew - (positionOld - scrollTop));
+                            
+                            setTimeout( function(){
+                                infinite_loader_ajax_instance = false;
+                                var $data = $('<div>' + data + '</div>');
+                                if (infinite_loader_product_data.lazy_load_m && $(window).width() <= infinite_loader_product_data.mobile_width || infinite_loader_product_data.lazy_load && $(window).width() > infinite_loader_product_data.mobile_width) {
+                                    $data.find(infinite_loader_product_data.products + ' .lazy,' + infinite_loader_product_data.item + ', .infinite_loader_extra_data').find('img').each(function (i, o) {
+                                        $(o).attr('data-src', $(o).attr('src')).removeAttr('src');
+                                        $(o).attr('data-srcset', $(o).attr('srcset')).removeAttr('srcset');
+                                    });
+                                    $data.find(infinite_loader_product_data.item + ', .infinite_loader_extra_data').addClass('lazy');
+                                }
+                                if ($data.find(infinite_loader_product_data.products).find(infinite_loader_product_data.item).first().length) {
+                                    $data.find(infinite_loader_product_data.products).find(infinite_loader_product_data.item).first().addClass('infinite_loader_btn').attr('data-url', decodeURIComponent(next_page));
+                                }
+                                if ($data.find(infinite_loader_product_data.products).find('.infinite_loader_extra_data').first().length) {
+                                    $data.find(infinite_loader_product_data.products).find('.infinite_loader_extra_data').first().addClass('infinite_loader_btn').attr('data-url', decodeURIComponent(next_page));
+                                }
+                                var $products = $data.find(infinite_loader_product_data.products).html();
+                                if (replace == 1) {
+                                    $(infinite_loader_product_data.products).html($products);
+                                } else if (replace == 2) {
+                                    $products = $data.find(infinite_loader_product_data.products);
+                                    $products.find(infinite_loader_product_data.item).addClass('infnite_loader_hidden');
+                                    var count_images = $products.find(infinite_loader_product_data.item).find('img').length;
+                                    $products = $products.html();
+                                    $(infinite_loader_product_data.products).prepend($products);
+                                    infinite_loader_display_hidden_executed = false;
+                                    function infinite_loader_display_hidden() {
+                                        if (!infinite_loader_display_hidden_executed) {
+                                            infinite_loader_display_hidden_executed = true;
+                                            var object = $(infinite_loader_product_data.products).find(infinite_loader_product_data.item + ':not(".infnite_loader_hidden")').first();
+                                            var positionOld = object.offset().top;
+                                            var scrollTop = $(window).scrollTop();
+                                            $('.infnite_loader_hidden').removeClass('infnite_loader_hidden');
+                                            end_ajax_loading();
+                                            var positionNew = object.offset().top;
+                                            $(window).scrollTop(positionNew - (positionOld - scrollTop));
+                                        }
+                                    }
+                                    $(infinite_loader_product_data.products).find('.infnite_loader_hidden').find('img').on('load error', function () {
+                                        count_images--;
+                                        if (count_images <= 1) {
+                                            infinite_loader_display_hidden();
+                                        }
+                                    });
+                                    setTimeout(infinite_loader_display_hidden, 2500);
+                                } else {
+                                    $(infinite_loader_product_data.products).append($products);
+                                }
+                                infinite_loader_update_lazyload();
+                                if (infinite_loader_type !== 'pagination') {
+                                    if ($data.find('.infinite_loader_product_count').length && (infinite_count_start || infinite_count_end)) {
+                                        infinite_count_text = $data.find('.infinite_loader_product_count').data('text');
+                                        if (replace == 2) {
+                                            infinite_count_start = $data.find('.infinite_loader_product_count').data('start');
+                                        } else {
+                                            infinite_count_end = $data.find('.infinite_loader_product_count').data('end');
+                                        }
+                                        infinite_count_lastend = $data.find('.infinite_loader_product_count').data('end');
+                                        infinite_count_laststart = $data.find('.infinite_loader_product_count').data('start');
+                                        text_count = infinite_count_text;
+                                        text_count = text_count.replace('-1', infinite_count_start);
+                                        text_count = text_count.replace('-2', infinite_count_end);
+                                        $('.woocommerce-result-count').text(text_count);
+                                    } else {
+                                        $('.woocommerce-result-count').text($data.find('.woocommerce-result-count:first').text());
                                     }
                                 }
-                                $(infinite_loader_product_data.products).find('.infnite_loader_hidden').find('img').on('load error', function () {
-                                    count_images--;
-                                    if (count_images <= 1) {
-                                        infinite_loader_display_hidden();
-                                    }
-                                });
-                                setTimeout(infinite_loader_display_hidden, 2500);
-                            } else {
-                                $(infinite_loader_product_data.products).append($products);
-                            }
-                            infinite_loader_update_lazyload();
-                            if (infinite_loader_type !== 'pagination') {
-                                if ($data.find('.infinite_loader_product_count').length && (infinite_count_start || infinite_count_end)) {
-                                    infinite_count_text = $data.find('.infinite_loader_product_count').data('text');
-                                    if (replace == 2) {
-                                        infinite_count_start = $data.find('.infinite_loader_product_count').data('start');
-                                    } else {
-                                        infinite_count_end = $data.find('.infinite_loader_product_count').data('end');
-                                    }
-                                    infinite_count_lastend = $data.find('.infinite_loader_product_count').data('end');
-                                    infinite_count_laststart = $data.find('.infinite_loader_product_count').data('start');
-                                    text_count = infinite_count_text;
-                                    text_count = text_count.replace('-1', infinite_count_start);
-                                    text_count = text_count.replace('-2', infinite_count_end);
-                                    $('.woocommerce-result-count').text(text_count);
-                                } else {
+                                else {
                                     $('.woocommerce-result-count').text($data.find('.woocommerce-result-count:first').text());
                                 }
-                            }
-                            else {
-                                $('.woocommerce-result-count').text($data.find('.woocommerce-result-count:first').text());
-                            }
 
-                            var $pagination = $data.find(infinite_loader_product_data.pagination);
-                            if (replace == 1) {
-                                $(infinite_loader_product_data.pagination).html($pagination.html());
-                            } else if (replace == 2) {
-                                var $prev_page = jquery_get_prev_page();
-                                var $new_prev_page = jquery_get_prev_page($data);
-                                if ($new_prev_page.length) {
-                                    $prev_page.replaceWith($new_prev_page);
+                                var $pagination = $data.find(infinite_loader_product_data.pagination);
+                                if (replace == 1) {
+                                    $(infinite_loader_product_data.pagination).html($pagination.html());
+                                } else if (replace == 2) {
+                                    var $prev_page = jquery_get_prev_page();
+                                    var $new_prev_page = jquery_get_prev_page($data);
+                                    if ($new_prev_page.length) {
+                                        $prev_page.replaceWith($new_prev_page);
+                                    } else {
+                                        $prev_page.remove();
+                                    }
                                 } else {
-                                    $prev_page.remove();
+                                    var $next_page = jquery_get_next_page();
+                                    var $new_next_page = jquery_get_next_page($data);
+                                    if ($new_next_page.length) {
+                                        $next_page.replaceWith($new_next_page);
+                                    } else {
+                                        $next_page.remove();
+                                    }
                                 }
-                            } else {
-                                var $next_page = jquery_get_next_page();
-                                var $new_next_page = jquery_get_next_page($data);
-                                if ($new_next_page.length) {
-                                    $next_page.replaceWith($new_next_page);
-                                } else {
-                                    $next_page.remove();
+                                current_style();
+                                infinite_loader_load_products();
+                                if (replace != 2) {
+                                    end_ajax_loading();
                                 }
-                            }
-                            current_style();
-                            infinite_loader_load_products();
-                            if (replace != 2) {
-                                end_ajax_loading();
-                            }
+                            }, 80);
                         }
                     });
                 }

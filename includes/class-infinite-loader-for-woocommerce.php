@@ -86,6 +86,8 @@ class Infinite_Loader_For_Woocommerce {
 	 * @access   public
 	 */
 	public function define_constants() {
+		
+		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION', '1.2.2' );
 		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_FILE', __FILE__ );
 		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_URL', plugin_dir_url( dirname( __FILE__ ) ) );
 		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PATH', plugin_dir_path( dirname( __FILE__ ) ) );
