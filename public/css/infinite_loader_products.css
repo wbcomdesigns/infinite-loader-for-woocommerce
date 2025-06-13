@@ -38,6 +38,7 @@ body {
     font-size: 22px;
     text-decoration: none;
     line-height: 1em;
+    border: 1px solid #1d76da;
     box-sizing: border-box;
     transition: all 0.3s;
 }
