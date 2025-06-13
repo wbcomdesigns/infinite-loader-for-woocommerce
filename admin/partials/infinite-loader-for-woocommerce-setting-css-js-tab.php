@@ -47,7 +47,7 @@ if ( ! empty( $infinite_loader_after_update ) ) {
 							<label for="blogname">
 								<?php esc_html_e( 'Disable Font Awesome', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p><?php esc_html_e( 'Disable the loading of Font Awesome icons within the plugin.', 'infinite-loader-for-woocommerce' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Disable the loading of Font Awesome icons within the plugin.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="checkbox" name="infinite_loader_admin_css_js_option[disable_font_awesome]"  value="yes" <?php ( isset( $infinite_loader_css_js_setting['disable_font_awesome'] ) ) ? checked( $infinite_loader_css_js_setting['disable_font_awesome'], 'yes' ) : ''; ?>>
@@ -58,7 +58,7 @@ if ( ! empty( $infinite_loader_after_update ) ) {
 							<label for="infinity-loader-shop-tab">
 								<?php esc_html_e( 'Font Awesome Version', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p><?php esc_html_e( 'Select the version of Font Awesome to use for the icons.', 'infinite-loader-for-woocommerce' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Select the version of Font Awesome to use for the icons.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<label class="infinity-loader-switch">
@@ -75,7 +75,7 @@ if ( ! empty( $infinite_loader_after_update ) ) {
 							<label for="blogname">
 								<?php esc_html_e( 'Custom CSS', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p><?php esc_html_e( 'Add your custom CSS styles to customize the button appearance.', 'infinite-loader-for-woocommerce' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Add your custom CSS styles to customize the button appearance.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<?php echo '<textarea name="infinite_loader_admin_css_js_option[custom_css]" id="infinite-loader-css-js-area">' . esc_textarea( $custom_css_value ) . '</textarea>'; ?>
@@ -86,7 +86,7 @@ if ( ! empty( $infinite_loader_after_update ) ) {
 							<label for="blogname">
 								<?php esc_html_e( 'JavaScript Before Update ', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p><?php esc_html_e( 'Add custom JavaScript code that will run before the page updates.', 'infinite-loader-for-woocommerce' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Add custom JavaScript code that will run before the page updates.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<?php echo '<textarea name="infinite_loader_admin_css_js_option[before_update]" id="infinite-loader-css-js-area">' . esc_textarea( $before_update_value ) . '</textarea>'; ?>
@@ -97,7 +97,7 @@ if ( ! empty( $infinite_loader_after_update ) ) {
 							<label for="blogname">
 								<?php esc_html_e( 'JavaScript After Update', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p><?php esc_html_e( 'Add custom JavaScript code that will run after the page updates.', 'infinite-loader-for-woocommerce' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Add custom JavaScript code that will run after the page updates.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<?php echo '<textarea name="infinite_loader_admin_css_js_option[after_update]" id="infinite-loader-css-js-area">' . esc_textarea( $after_update_value ) . '</textarea>'; ?>
