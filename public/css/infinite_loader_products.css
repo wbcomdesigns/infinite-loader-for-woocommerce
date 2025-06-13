@@ -39,6 +39,7 @@ body {
     text-decoration: none;
     line-height: 1em;
     box-sizing: border-box;
+    transition: all 0.3s;
 }
 .infinite_loader_btn_load .infinite_button img {
     max-width: 100%;
