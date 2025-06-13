@@ -96,11 +96,10 @@ if ( ! function_exists( 'infinite_loader_for_woocommerce_admin_notice' ) ) {
 		) . '">' . $woo_plugin . '</a>';
 		echo '<div class="error"><p>';
 		/* Translators: %1$s: Cart Notice for WooCommerce, %2$s: WooCommerce   */
-		echo sprintf( esc_html__( '%1$s is ineffective now as it requires %2$s to be installed and active.', 'infinite-loader-for-woocommerce' ), '<strong>' . esc_html( $infinite_loader_plugin ) . '</strong>', '<strong>' . wp_kses_post( $plugin_install_link ) . '</strong>' );
+		echo sprintf( esc_html__( '%1$s requires %2$s plugin to be installed and active.', 'infinite-loader-for-woocommerce' ), '<strong>' . esc_html( $infinite_loader_plugin ) . '</strong>', '<strong>' . wp_kses_post( $plugin_install_link ) . '</strong>' );
 		echo '</p></div>';
 		if ( null !== filter_input( INPUT_GET, 'activate' ) ) {
-			$activate = filter_input( INPUT_GET, 'activate' );
-			unset( $activate );
+			unset( $_GET['activate'] );
 		}
 	}
 }
@@ -142,11 +141,4 @@ function run_infinite_loader_for_woocommerce() {
 
 }
 run_infinite_loader_for_woocommerce();
-require plugin_dir_path( __FILE__ ) . 'wc-infinite-loader-update-checker/wc-infinite-loader-update-checker.php';
 
-use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
-$my_update_checker = PucFactory::buildUpdateChecker(
-	'https://demos.wbcomdesigns.com/exporter/free-plugins/infinite-loader-for-woocommerce.json',
-	__FILE__, // Full path to the main plugin file or functions.php.
-	'infinite-loader-for-woocommerce'
-);

@@ -6,9 +6,7 @@
 	<div class="wbcom-wrap wbcom-plugin-wrapper">
 		<div class="wbcom_admin_header-wrapper">
 			<div id="wb_admin_plugin_name">
-				<?php esc_html_e( 'Infinite Loader for WooCommerce', 'infinite-loader-for-woocommerce' ); ?>
-				<?php /* translators: %s: */ ?>
-				<span><?php printf( esc_html__( 'Version %s', 'infinite-loader-for-woocommerce' ), INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION );//phpcs:ignore ?></span>
+				<?php esc_html_e( 'License', 'infinite-loader-for-woocommerce' ); ?>
 			</div>
 			<?php echo do_shortcode( '[wbcom_admin_setting_header]' ); ?>
 		</div>

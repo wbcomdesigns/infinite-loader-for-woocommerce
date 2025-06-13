@@ -156,6 +156,12 @@ class Infinite_Loader_For_Woocommerce {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-infinite-loader-for-woocommerce-public.php';
 
+		/** This file adds the plugin license module UI. */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wbcom/wbcom-paid-plugin-settings.php';
+
+		/** This file is responsible for the plugin license functionality. */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'edd-license/edd-plugin-license.php';
+
 		$this->loader = new Infinite_Loader_For_Woocommerce_Loader();
 
 	}
