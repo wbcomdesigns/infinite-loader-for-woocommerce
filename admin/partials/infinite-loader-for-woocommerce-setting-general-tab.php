@@ -66,7 +66,7 @@ $infinite_loader_selected_icon = isset( $infinite_loader_general_setting['loadin
 							<label for="blogname">
 								<?php esc_html_e( 'Loading Image', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p><?php esc_html_e('Select the loading animation icon that appears while new products are being loaded.', 'infinite-loader-for-woocommerce'); ?></p>
+							<p class="description"><?php esc_html_e('Select the loading animation icon that appears while new products are being loaded.', 'infinite-loader-for-woocommerce'); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<?php
