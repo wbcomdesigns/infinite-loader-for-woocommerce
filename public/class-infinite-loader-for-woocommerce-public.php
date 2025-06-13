@@ -138,14 +138,10 @@ class Infinite_Loader_For_Woocommerce_Public {
 	 */
 	public function infinite_loader_for_woocommerce_enqueue_fontawesome_file() {
 		$infinite_loader_css_js_setting       = get_option( 'infinite_loader_admin_css_js_option' );
-		$infinite_loader_css_js_enable        = isset( $infinite_loader_css_js_setting['disable_font_awesome'] ) ? $infinite_loader_css_js_setting['disable_font_awesome'] : '';
-		$infinite_loader_font_awesome_version = isset( $infinite_loader_css_js_setting['font_awesome_version'] ) ? $infinite_loader_css_js_setting['font_awesome_version'] : '';
-		if ( ! $infinite_loader_css_js_enable ) {
-			if ( 'fontawesome5' === $infinite_loader_font_awesome_version ) {
-				wp_enqueue_style( 'font-awesome-5', plugins_url( 'css/fontawesome5.min.css', __FILE__ ), array(), $this->version, 'all' );
-			} else {
-				wp_enqueue_style( 'font-awesome-4', plugins_url( 'css/font-awesome.min.css', __FILE__ ), array(), $this->version, 'all' );
-			}
+		$infinite_loader_css_js_enable        = isset( $infinite_loader_css_js_setting['enable_font_awesome'] ) ? $infinite_loader_css_js_setting['enable_font_awesome'] : '';
+		
+		if ( $infinite_loader_css_js_enable ) {
+			wp_enqueue_style( 'font-awesome-5', plugins_url( 'css/fontawesome5.min.css', __FILE__ ), array(), $this->version, 'all' );
 		}
 	}
 
@@ -200,20 +196,22 @@ class Infinite_Loader_For_Woocommerce_Public {
 		if ( $infinite_loader_check_rotate ) {
 			$rotate_image_class = 'infinite_loader_rotate_image';
 		}
-
-		$infnite_loader_icon = '<div class="infinite_loader_products_loading">';
-		if ( $infinite_loader_genral_settings['loading_image'] ) {
+		
+		$infinite_loader_icon = '<div class="infinite_loader_products_loading">';
+		if ( isset( $infinite_loader_genral_settings['loading_image'] ) && isset( $infinite_loader_css_js_settings['enable_font_awesome'] ) ) {
 			if ( substr( $infinite_loader_genral_settings['loading_image'], 0, 3 ) === 'fa-' ) {
-				$infnite_loader_icon .= '<i class="fa ' . esc_attr( $infinite_loader_genral_settings['loading_image'] ) . ' ' . esc_attr( $rotate_image_class ) . '"></i>';
+				$infinite_loader_icon .= '<i class="fa ' . esc_attr( $infinite_loader_genral_settings['loading_image'] ) . ' ' . esc_attr( $rotate_image_class ) . '"></i>';
 			} else {
-				$infnite_loader_icon .= '<i class="fa ' . esc_attr( $rotate_image_class ) . '"><img class="infinite_loader_icon" src="' . esc_url( $infinite_loader_genral_settings['loading_image'] ) . '" alt=""></i>';
+				$infinite_loader_icon .= '<i class="fa ' . esc_attr( $rotate_image_class ) . '"><img class="infinite_loader_icon" src="' . esc_url( $infinite_loader_genral_settings['loading_image'] ) . '" alt=""></i>';
 			}
 		} else {
-			$infnite_loader_icon .= '<i class="fa fa-spinner ' . esc_attr( $rotate_image_class ) . '"></i>';
+			$infinite_loader_icon .= '<i class="fa fa-spinner ' . esc_attr( $rotate_image_class ) . '"></i>';
 		}
 		$infinite_loader_load_more_button = Infinite_Loader_For_Woocommerce_Admin::infinite_loader_for_woocommerce_display_load_more_button();
 		$infinite_loader_previous_button  = Infinite_Loader_For_Woocommerce_Admin::infinite_loader_for_woocommerce_display_load_previous_button();
 		
+		$infinite_loader_icon = apply_filters( 'wbcom_infinite_loader_image', $infinite_loader_icon );
+
 		wp_localize_script(
 			'infinite_loader_products_js',
 			'infinite_loader_product_data',
@@ -221,7 +219,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 				'type'           => $infinite_loader_genral_settings['product_loading_type'],
 				'use_prev_btn'   => $infinite_loader_use_prev_btn,
 				'update_url'     => empty( $infinite_loader_genral_settings['do_not_update_url'] ), // if $general_options['update_url'] is set it means stop updating.
-				'load_image'     => $infnite_loader_icon,
+				'load_image'     => $infinite_loader_icon,
 				'load_img_class' => '.infinite_loader_products_loading',
 
 				'load_more'      => $infinite_loader_load_more_button,

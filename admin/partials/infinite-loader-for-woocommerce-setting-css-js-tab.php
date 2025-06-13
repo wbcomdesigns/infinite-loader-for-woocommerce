@@ -11,9 +11,7 @@
  * @subpackage Infinite_Loader_For_Woocommerce/admin/partials
  */
 
-$infinite_loader_css_js_setting = get_option( 'infinite_loader_admin_css_js_option' );
-
-$infinite_loader_font_awesome_version = isset( $infinite_loader_css_js_setting['font_awesome_version'] ) ? $infinite_loader_css_js_setting['font_awesome_version'] : '';
+$infinite_loader_css_js_setting       = get_option( 'infinite_loader_admin_css_js_option' );
 $infinite_loader_custom_css           = isset( $infinite_loader_css_js_setting['custom_css'] ) ? $infinite_loader_css_js_setting['custom_css'] : '';
 $infinite_loader_before_update        = isset( $infinite_loader_css_js_setting['before_update'] ) ? $infinite_loader_css_js_setting['before_update'] : '';
 $infinite_loader_after_update         = isset( $infinite_loader_css_js_setting['after_update'] ) ? $infinite_loader_css_js_setting['after_update'] : '';
@@ -45,29 +43,12 @@ if ( ! empty( $infinite_loader_after_update ) ) {
 					<div class="wbcom-settings-section-wrap">
 						<div class="wbcom-settings-section-options-heading">
 							<label for="blogname">
-								<?php esc_html_e( 'Disable Font Awesome', 'infinite-loader-for-woocommerce' ); ?>
+								<?php esc_html_e( 'Enable Font Awesome', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Disable the loading of Font Awesome icons within the plugin.', 'infinite-loader-for-woocommerce' ); ?></p>
+							<p><?php esc_html_e( 'Enable the loading of Font Awesome icons within the plugin.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
-							<input type="checkbox" name="infinite_loader_admin_css_js_option[disable_font_awesome]"  value="yes" <?php ( isset( $infinite_loader_css_js_setting['disable_font_awesome'] ) ) ? checked( $infinite_loader_css_js_setting['disable_font_awesome'], 'yes' ) : ''; ?>>
-						</div>
-					</div>
-					<div class="wbcom-settings-section-wrap">
-						<div class="wbcom-settings-section-options-heading">
-							<label for="infinity-loader-shop-tab">
-								<?php esc_html_e( 'Font Awesome Version', 'infinite-loader-for-woocommerce' ); ?>
-							</label>
-							<p class="description"><?php esc_html_e( 'Select the version of Font Awesome to use for the icons.', 'infinite-loader-for-woocommerce' ); ?></p>
-						</div>
-						<div class="wbcom-settings-section-options">
-							<label class="infinity-loader-switch">
-								<select id="infinity-loader-loading-type" name="infinite_loader_admin_css_js_option[font_awesome_version]">
-									<option value="fontawesome4" <?php selected( $infinite_loader_font_awesome_version, 'fontawesome5' ); ?>><?php esc_html_e( 'Font Awesome 4', 'infinite-loader-for-woocommerce' ); ?></option>
-									<option value="fontawesome5" <?php selected( $infinite_loader_font_awesome_version, 'fontawesome5' ); ?>><?php esc_html_e( 'Font Awesome 5', 'infinite-loader-for-woocommerce' ); ?></option>
-								</select>
-								<div class="infinity-loader-slider bupr-round"></div>
-							</label>
+							<input type="checkbox" name="infinite_loader_admin_css_js_option[enable_font_awesome]"  value="yes" <?php ( isset( $infinite_loader_css_js_setting['enable_font_awesome'] ) ) ? checked( $infinite_loader_css_js_setting['enable_font_awesome'], 'yes' ) : ''; ?>>
 						</div>
 					</div>
 					<div class="wbcom-settings-section-wrap">
