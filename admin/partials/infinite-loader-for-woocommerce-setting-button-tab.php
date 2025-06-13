@@ -65,7 +65,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<label for="blogname">
 								<?php esc_html_e( 'Background Color', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Choose a background color for the Load More button.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Select the background color for the Load More button.', 'infinite-loader-for-woocommerce' ) ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="color" id="infinite_loader_default_bg_color" class="bg_btn_color" data-default="#1d76da" name="infinite_loader_admin_button_option[background_color]" value="<?php echo ( isset( $infinite_loader_button_setting['background_color'] ) ) ? esc_attr( $infinite_loader_button_setting['background_color'] ) : ''; ?>">

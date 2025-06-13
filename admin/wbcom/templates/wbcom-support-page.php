@@ -39,7 +39,7 @@
 					<div class="wbcom_help_support_details">
 						<div class="wbcom_help_support_inner_details">
 							<h4><?php esc_html_e( 'Contact Us', 'infinite-loader-for-woocommerce' ); ?></h4>
-							<p><?php esc_html_e( 'Create a new thread on our plugin page, participation is open to anyone from all around the world. We\'ll be there to help as well but can\'t guarantee any delay.', 'infinite-loader-for-woocommerce' ); ?></p>
+							<p><?php esc_html_e( 'Create a new thread on our plugin page - participation is open to anyone from around the world. We\'ll be there to help as well, but we can\'t guarantee response times.', 'infinite-loader-for-woocommerce' ); ?></p>
 							<div class="wbcom_help_support_button">
 								<a href="https://wbcomdesigns.com/contact/" class="wb_btn wb_btn_default" target="_blank">
 									<?php esc_html_e( 'Contact Us', 'infinite-loader-for-woocommerce' ); ?>

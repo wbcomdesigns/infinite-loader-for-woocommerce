@@ -254,7 +254,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	}
 
 	/**
-	 * Include infinite loader for woocommerce admin genral setting tab content file.
+	 * Include infinite loader for woocommerce admin general setting tab content file.
 	 */
 	public function infinite_loader_for_woocommerce_admin_general_content() {
 		include 'partials/infinite-loader-for-woocommerce-setting-general-tab.php';

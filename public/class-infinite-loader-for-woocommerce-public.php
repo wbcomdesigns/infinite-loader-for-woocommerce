@@ -176,13 +176,13 @@ class Infinite_Loader_For_Woocommerce_Public {
 	 */
 	public function infinite_loader_for_woocommerce_display_button() {
 
-		$infinite_loader_genral_settings      = get_option( 'infinite_loader_admin_general_option' );
+		$infinite_loader_general_settings      = get_option( 'infinite_loader_admin_general_option' );
 		$infinite_loader_lm_button_settings   = get_option( 'infinite_loader_admin_button_option' );
 		$infinite_loader_prev_button_settings = get_option( 'infinite_loader_admin_previous_button_option' );
 		$infinite_loader_selectors_settings   = get_option( 'infinite_loader_admin_selectors_option' );
 		$infinite_loader_css_js_settings      = get_option( 'infinite_loader_admin_css_js_option' );
-		$infinite_loader_check_rotate         = isset( $infinite_loader_genral_settings['rotate_image'] ) ? $infinite_loader_genral_settings['rotate_image'] : '';
-		$infinite_loader_page_loading_type    = isset( $infinite_loader_genral_settings['product_loading_type'] ) ? $infinite_loader_genral_settings['product_loading_type'] : '';
+		$infinite_loader_check_rotate         = isset( $infinite_loader_general_settings['rotate_image'] ) ? $infinite_loader_general_settings['rotate_image'] : '';
+		$infinite_loader_page_loading_type    = isset( $infinite_loader_general_settings['product_loading_type'] ) ? $infinite_loader_general_settings['product_loading_type'] : '';
 		$infinite_loader_use_prev_btn         = ( 'load-more-button' === $infinite_loader_page_loading_type || 'infinity-scroll' === $infinite_loader_page_loading_type)  ? 'yes' : '';
 
 		/** Hard coded this as to remove the selectors tab. */
@@ -198,11 +198,11 @@ class Infinite_Loader_For_Woocommerce_Public {
 		}
 		
 		$infinite_loader_icon = '<div class="infinite_loader_products_loading">';
-		if ( isset( $infinite_loader_genral_settings['loading_image'] ) && isset( $infinite_loader_css_js_settings['enable_font_awesome'] ) ) {
-			if ( substr( $infinite_loader_genral_settings['loading_image'], 0, 3 ) === 'fa-' ) {
-				$infinite_loader_icon .= '<i class="fa ' . esc_attr( $infinite_loader_genral_settings['loading_image'] ) . ' ' . esc_attr( $rotate_image_class ) . '"></i>';
+		if ( isset( $infinite_loader_general_settings['loading_image'] ) && isset( $infinite_loader_css_js_settings['enable_font_awesome'] ) ) {
+			if ( substr( $infinite_loader_general_settings['loading_image'], 0, 3 ) === 'fa-' ) {
+				$infinite_loader_icon .= '<i class="fa ' . esc_attr( $infinite_loader_general_settings['loading_image'] ) . ' ' . esc_attr( $rotate_image_class ) . '"></i>';
 			} else {
-				$infinite_loader_icon .= '<i class="fa ' . esc_attr( $rotate_image_class ) . '"><img class="infinite_loader_icon" src="' . esc_url( $infinite_loader_genral_settings['loading_image'] ) . '" alt=""></i>';
+				$infinite_loader_icon .= '<i class="fa ' . esc_attr( $rotate_image_class ) . '"><img class="infinite_loader_icon" src="' . esc_url( $infinite_loader_general_settings['loading_image'] ) . '" alt=""></i>';
 			}
 		} else {
 			$infinite_loader_icon .= '<i class="fa fa-spinner ' . esc_attr( $rotate_image_class ) . '"></i>';
@@ -216,9 +216,9 @@ class Infinite_Loader_For_Woocommerce_Public {
 			'infinite_loader_products_js',
 			'infinite_loader_product_data',
 			array(
-				'type'           => $infinite_loader_genral_settings['product_loading_type'],
+				'type'           => $infinite_loader_general_settings['product_loading_type'],
 				'use_prev_btn'   => $infinite_loader_use_prev_btn,
-				'update_url'     => empty( $infinite_loader_genral_settings['do_not_update_url'] ), // if $general_options['update_url'] is set it means stop updating.
+				'update_url'     => empty( $infinite_loader_general_settings['do_not_update_url'] ), // if $general_options['update_url'] is set it means stop updating.
 				'load_image'     => $infinite_loader_icon,
 				'load_img_class' => '.infinite_loader_products_loading',
 
@@ -241,8 +241,8 @@ class Infinite_Loader_For_Woocommerce_Public {
 	 */
 	public function infinite_loader_set_product_per_page( $product_per_page ) {
 
-		$infinite_loader_genral_settings = get_option( 'infinite_loader_admin_general_option' );
-		$product_per_page                = ( isset( $infinite_loader_genral_settings['product_per_page'] ) && ! empty( $infinite_loader_genral_settings['product_per_page'] ) ) ? $infinite_loader_genral_settings['product_per_page'] : '16';
+		$infinite_loader_general_settings = get_option( 'infinite_loader_admin_general_option' );
+		$product_per_page                = ( isset( $infinite_loader_general_settings['product_per_page'] ) && ! empty( $infinite_loader_general_settings['product_per_page'] ) ) ? $infinite_loader_general_settings['product_per_page'] : '16';
 
 		return $product_per_page;
 	}

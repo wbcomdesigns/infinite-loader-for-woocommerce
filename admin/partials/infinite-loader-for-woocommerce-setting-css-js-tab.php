@@ -65,7 +65,7 @@ if ( ! empty( $infinite_loader_after_update ) ) {
 					<div class="wbcom-settings-section-wrap">
 						<div class="wbcom-settings-section-options-heading">
 							<label for="blogname">
-								<?php esc_html_e( 'JavaScript Before Update ', 'infinite-loader-for-woocommerce' ); ?>
+								<?php esc_html_e( 'JavaScript Before Update', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
 							<p class="description"><?php esc_html_e( 'Add custom JavaScript code that will run before the page updates.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>

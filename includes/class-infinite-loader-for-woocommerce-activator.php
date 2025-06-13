@@ -31,14 +31,14 @@ class Infinite_Loader_For_Woocommerce_Activator {
 	public static function activate() {
 
 		if( empty( get_option('infinite_loader_admin_general_option' ) ) ) {
-			$infinite_loader_set_default_genral_options = array(
+			$infinite_loader_set_default_general_options = array(
 				'product_loading_type'   => 'load-more-button',
 				'product_per_page'       => '8',
 				'loading_image'          => 'fa-spinner',
 				'rotate_image'           => 'yes',
 				'do_not_update_url'      => 'no'
 			);
-			update_option( 'infinite_loader_admin_general_option', $infinite_loader_set_default_genral_options );
+			update_option( 'infinite_loader_admin_general_option', $infinite_loader_set_default_general_options );
 		}
 		
 		if( empty( get_option( 'infinite_loader_admin_button_option' ) ) ) {
