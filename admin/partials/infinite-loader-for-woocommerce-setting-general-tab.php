@@ -37,7 +37,6 @@ $infinite_loader_selected_icon = isset( $infinite_loader_general_setting['loadin
 						<div class="wbcom-settings-section-options">
 							<label class="infinity-loader-switch">
 								<select id="infinity-loader-loading-type" name="infinite_loader_admin_general_option[product_loading_type]">
-									<option value="none" <?php isset($infinite_loader_general_setting['product_loading_type']) ? selected( $infinite_loader_general_setting['product_loading_type'], 'none' ) : '';?>><?php esc_html_e( 'None', 'infinite-loader-for-woocommerce' ); ?></option>
 									<option value="infinity-scroll" <?php isset($infinite_loader_general_setting['product_loading_type']) ? selected( $infinite_loader_general_setting['product_loading_type'], 'infinity-scroll' ): ''; ?>><?php esc_html_e( 'Infinity Scroll', 'infinite-loader-for-woocommerce' ); ?></option>
 									<option value="load-more-button" <?php isset($infinite_loader_general_setting['product_loading_type']) ? selected( $infinite_loader_general_setting['product_loading_type'], 'load-more-button' ): ''; ?>><?php esc_html_e( 'Load More Button', 'infinite-loader-for-woocommerce' ); ?></option>
 									<option value="pagination" <?php isset($infinite_loader_general_setting['product_loading_type']) ? selected( $infinite_loader_general_setting['product_loading_type'], 'pagination' ): ''; ?>><?php esc_html_e( 'Pagination', 'infinite-loader-for-woocommerce' ); ?></option>

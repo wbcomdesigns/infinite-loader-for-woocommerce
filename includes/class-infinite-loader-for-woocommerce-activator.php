@@ -32,7 +32,7 @@ class Infinite_Loader_For_Woocommerce_Activator {
 
 		if( empty( get_option('infinite_loader_admin_general_option' ) ) ) {
 			$infinite_loader_set_default_general_options = array(
-				'product_loading_type'   => 'load-more-button',
+				'product_loading_type'   => 'pagination',
 				'product_per_page'       => '8',
 				'loading_image'          => 'fa-spinner',
 				'rotate_image'           => 'yes',
@@ -87,7 +87,7 @@ class Infinite_Loader_For_Woocommerce_Activator {
 	
 		if( empty( get_option( 'infinite_loader_admin_css_js_option' ) ) ) { 
 			$infinite_loader_set_js_css_option = array(
-			'font_awesome_version' => 'fontawesome5',
+			'enable_font_awesome' => 'yes',
 		);
 		update_option( 'infinite_loader_admin_css_js_option', $infinite_loader_set_js_css_option );
 		}

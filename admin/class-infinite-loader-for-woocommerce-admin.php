@@ -302,8 +302,11 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function infinite_loader_for_woocommerce_button_style() {
 		$infinite_loader_load_more_button_style = '';
-		$infinite_loader_button_setting         = get_option( 'infinite_loader_admin_button_option' );
+		$infinite_loader_button_setting         = get_option( 'infinite_loader_admin_button_option', array() );
 
+		if( empty( $infinite_loader_button_setting ) ) {
+			return;
+		}
 		$infinite_loader_lm_button_margin_top    = ( isset( $infinite_loader_button_setting['margin_top'] ) && ! empty( $infinite_loader_button_setting['margin_top'] ) ) ? $infinite_loader_button_setting['margin_top'] : '0';
 		$infinite_loader_lm_button_margin_right  = ( isset( $infinite_loader_button_setting['margin_right'] ) && ! empty( $infinite_loader_button_setting['margin_right'] ) ) ? $infinite_loader_button_setting['margin_right'] : '0';
 		$infinite_loader_lm_button_margin_bottom = ( isset( $infinite_loader_button_setting['margin_bottom'] ) && ! empty( $infinite_loader_button_setting['margin_bottom'] ) ) ? $infinite_loader_button_setting['margin_bottom'] : '0';
@@ -339,7 +342,9 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 * Display load previews preview button.
 	 */
 	public static function infinite_loader_for_woocommerce_display_load_previous_button() {
+
 		$infinite_loader_previous_button_setting  = get_option( 'infinite_loader_admin_previous_button_option' );
+
 		$infinite_loader_prev_button_custom_class = isset( $infinite_loader_previous_button_setting['custom_class'] ) ? $infinite_loader_previous_button_setting['custom_class'] : '';
 		$infinite_loader_prev_button_text         = isset( $infinite_loader_previous_button_setting['button_text'] ) ? $infinite_loader_previous_button_setting['button_text'] : '';
 
@@ -357,7 +362,12 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function infinite_loader_for_woocommerce_previous_button_style() {
 		$infinite_loader_load_previous_button_style = '';
-		$infinite_loader_previous_button_setting    = get_option( 'infinite_loader_admin_previous_button_option' );
+		$infinite_loader_previous_button_setting    = get_option( 'infinite_loader_admin_previous_button_option', array() );
+
+		if( empty( $infinite_loader_previous_button_setting ) ) {
+			return;
+		}
+
 		$infinite_loader_prev_button_margin_top     = ( isset( $infinite_loader_previous_button_setting['margin_top'] ) && ! empty( $infinite_loader_previous_button_setting['margin_top'] ) ) ? $infinite_loader_previous_button_setting['margin_top'] : '0';
 		$infinite_loader_prev_button_margin_right   = ( isset( $infinite_loader_previous_button_setting['margin_right'] ) && ! empty( $infinite_loader_previous_button_setting['margin_right'] ) ) ? $infinite_loader_previous_button_setting['margin_right'] : '0';
 		$infinite_loader_prev_button_margin_bottom  = ( isset( $infinite_loader_previous_button_setting['margin_bottom'] ) && ! empty( $infinite_loader_previous_button_setting['margin_bottom'] ) ) ? $infinite_loader_previous_button_setting['margin_bottom'] : '0';
