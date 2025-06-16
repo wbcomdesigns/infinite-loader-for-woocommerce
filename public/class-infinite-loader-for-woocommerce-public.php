@@ -186,11 +186,11 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$infinite_loader_use_prev_btn         = ( 'load-more-button' === $infinite_loader_page_loading_type || 'infinity-scroll' === $infinite_loader_page_loading_type)  ? 'yes' : '';
 
 		/** Hard coded this as to remove the selectors tab. */
-		$wc_products_selector                 = 'ul.products';
-		$wc_item_selector                     = 'li.product';
-		$wc_pagination_selector               = 'nav.woocommerce-pagination';
-		$wc_next_page_selector                = 'a.next.page-numbers';
-		$wc_prev_page_selector                = 'a.prev.page-numbers';
+		$wc_products_selector                 = apply_filters( 'infinite_loader_products_selector', 'ul.products' );
+		$wc_item_selector                     = apply_filters( 'infinite_loader_item_selector', 'li.product' );
+		$wc_pagination_selector               = apply_filters( 'infinite_loader_pagination_selector', 'nav.woocommerce-pagination' );
+		$wc_next_page_selector                = apply_filters( 'infinite_loader_next_page_selector', 'a.next.page-numbers' );
+		$wc_prev_page_selector                = apply_filters( 'infinite_loader_prev_page_selector', 'a.prev.page-numbers' );
 
 		$rotate_image_class = '';
 		if ( $infinite_loader_check_rotate ) {
