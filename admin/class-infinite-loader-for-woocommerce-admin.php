@@ -80,7 +80,8 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		if ( isset( $_GET['page'] ) && ( $_GET['page'] === 'infinite-loader-for-woocommerce-settings' || $_GET['page'] === 'wbcomplugins' ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$wbcom_setting_page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';  //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( 'infinite-loader-for-woocommerce-settings' === $wbcom_setting_page || 'wbcomplugins' === $wbcom_setting_page  ) { 
 			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
 				$extension = is_rtl() ? '.rtl.css' : '.css';
 				$path      = is_rtl() ? '/rtl' : '';
@@ -112,7 +113,8 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		if ( isset( $_GET['page'] ) && ( 'infinite-loader-for-woocommerce-settings' === $_GET['page'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$wbcom_setting_page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';  //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ( 'infinite-loader-for-woocommerce-settings' === $wbcom_setting_page ) ) { 
 			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
 				$extension = '.js';
 				$path      = '';
@@ -134,7 +136,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function wbcom_hide_all_admin_notices_from_setting_page() {
 		$wbcom_pages_array  = array( 'wbcomplugins', 'wbcom-plugins-page', 'wbcom-support-page', 'infinite-loader-for-woocommerce-settings' );
-		$wbcom_setting_page = filter_input( INPUT_GET, 'page' ) ? filter_input( INPUT_GET, 'page' ) : '';
+		$wbcom_setting_page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';  //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( in_array( $wbcom_setting_page, $wbcom_pages_array, true ) ) {
 			remove_all_actions( 'admin_notices' );
@@ -167,7 +169,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function infinite_loader_for_woocommerce_admin_options_page() {
 		global $allowedposttags;
-		$tab = filter_input( INPUT_GET, 'tab' ) ? filter_input( INPUT_GET, 'tab' ) : 'infinite-loader-for-woocommerce-welcome';
+		$tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'infinite-loader-for-woocommerce-welcome';
 		?>
 	<div class="wrap">
 		<div class="wbcom-bb-plugins-offer-wrapper">
@@ -202,7 +204,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 * Actions performed to create tabs on the sub menu page.
 	 */
 	public function infinite_loader_for_woocommerce_plugin_settings_tabs() {
-		$current_tab = filter_input( INPUT_GET, 'tab' ) ? filter_input( INPUT_GET, 'tab' ) : 'infinite-loader-for-woocommerce-welcome';
+		$current_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'infinite-loader-for-woocommerce-welcome';
 		// xprofile setup tab.
 		echo '<div class="wbcom-tabs-section"><div class="nav-tab-wrapper"><div class="wb-responsive-menu"><span>' . esc_html( 'Menu' ) . '</span><input class="wb-toggle-btn" type="checkbox" id="wb-toggle-btn"><label class="wb-toggle-icon" for="wb-toggle-btn"><span class="wb-icon-bars"></span></label></div><ul>';
 		foreach ( $this->plugin_settings_tabs as $tab_key => $tab_caption ) {
