@@ -230,6 +230,13 @@ class Infinite_Loader_For_Woocommerce_Public {
 				'pagination'     => $wc_pagination_selector,
 				'next_page'      => $wc_next_page_selector,
 				'prev_page'      => $wc_prev_page_selector,
+				'infinite_loader_btn_setting_load_image' => '',
+				'infinite_loader_btn_setting_use_image' => '',
+				'infinite_loader_prev_btn_setting_load_image' => '',
+				'infinite_loader_prev_btn_setting_use_image' => '',
+				'error_message' => esc_html__( 'Unable to load more products. Please try again.', 'infinite-loader-for-woocommerce' ),
+				'retry_text' => esc_html__( 'Retry', 'infinite-loader-for-woocommerce' ),
+				
 			)
 		);
 	}
