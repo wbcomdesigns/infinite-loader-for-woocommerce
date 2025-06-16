@@ -249,8 +249,21 @@ class Infinite_Loader_For_Woocommerce_Public {
 	public function infinite_loader_set_product_per_page( $product_per_page ) {
 
 		$infinite_loader_general_settings = get_option( 'infinite_loader_admin_general_option' );
-		$product_per_page                = ( isset( $infinite_loader_general_settings['product_per_page'] ) && ! empty( $infinite_loader_general_settings['product_per_page'] ) ) ? $infinite_loader_general_settings['product_per_page'] : '16';
-
+		
+		// Validate and sanitize the input
+		if ( isset( $infinite_loader_general_settings['product_per_page'] ) ) {
+			$product_per_page = absint( $infinite_loader_general_settings['product_per_page'] );
+			
+			// Set reasonable limits
+			if ( $product_per_page < 1 ) {
+				$product_per_page = 1;
+			} elseif ( $product_per_page > 100 ) {
+				$product_per_page = 100;
+			}
+		} else {
+			$product_per_page = 16; // Default value
+		}
+		
 		return $product_per_page;
 	}
 

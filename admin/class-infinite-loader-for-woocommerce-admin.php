@@ -391,13 +391,16 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		$infinite_loader_load_previous_button_style .= 'margin-bottom:' . $infinite_loader_prev_button_margin_bottom . 'px;';
 		$infinite_loader_load_previous_button_style .= 'margin-left:' . $infinite_loader_prev_button_margin_left . 'px;';
 		$infinite_loader_load_previous_button_style .= 'border-top: ' . $infinite_loader_prev_button_border_top . 'px solid ' . ( ! empty( $infinite_loader_previous_button_setting['border_color'] ) ? $infinite_loader_previous_button_setting['border_color'] : '#000' ) . ';';
-		$infinite_loader_load_previous_button_style .= 'border-right: ' . $infinite_loader_prev_button_border_bottom . 'px solid ' . ( ! empty( $infinite_loader_previous_button_setting['border_color'] ) ? $infinite_loader_previous_button_setting['border_color'] : '#000' ) . ';';
-		$infinite_loader_load_previous_button_style .= 'border-bottom: ' . $infinite_loader_prev_button_border_left . 'px solid ' . ( ! empty( $infinite_loader_previous_button_setting['border_color'] ) ? $infinite_loader_previous_button_setting['border_color'] : '#000' ) . ';';
-		$infinite_loader_load_previous_button_style .= 'border-left: ' . $infinite_loader_prev_button_border_right . 'px solid ' . ( ! empty( $infinite_loader_previous_button_setting['border_color'] ) ? $infinite_loader_previous_button_setting['border_color'] : '#000' ) . ';';
+		$infinite_loader_load_previous_button_style .= 'border-right: ' . $infinite_loader_prev_button_border_right . 'px solid ' . ( ! empty( $infinite_loader_previous_button_setting['border_color'] ) ? $infinite_loader_previous_button_setting['border_color'] : '#000' ) . ';';
+		$infinite_loader_load_previous_button_style .= 'border-bottom: ' . $infinite_loader_prev_button_border_bottom . 'px solid ' . ( ! empty( $infinite_loader_previous_button_setting['border_color'] ) ? $infinite_loader_previous_button_setting['border_color'] : '#000' ) . ';';
+		$infinite_loader_load_previous_button_style .= 'border-left: ' . $infinite_loader_prev_button_border_left . 'px solid ' . ( ! empty( $infinite_loader_previous_button_setting['border_color'] ) ? $infinite_loader_previous_button_setting['border_color'] : '#000' ) . ';';
 		$infinite_loader_load_previous_button_style .= 'border-top-left-radius: ' . ( ( isset( $infinite_loader_previous_button_setting['border_radius_top'] ) && ! empty( $infinite_loader_previous_button_setting['border_radius_top'] ) ) ? $infinite_loader_previous_button_setting['border_radius_top'] : '0' ) . 'px;';
 		$infinite_loader_load_previous_button_style .= 'border-top-right-radius: ' . ( ( isset( $infinite_loader_previous_button_setting['border_radius_right'] ) && ! empty( $infinite_loader_previous_button_setting['border_radius_right'] ) ) ? $infinite_loader_previous_button_setting['border_radius_right'] : '0' ) . 'px;';
 		$infinite_loader_load_previous_button_style .= 'border-bottom-left-radius: ' . ( ( isset( $infinite_loader_previous_button_setting['border_radius_bottom'] ) && ! empty( $infinite_loader_previous_button_setting['border_radius_bottom'] ) ) ? $infinite_loader_previous_button_setting['border_radius_bottom'] : '0' ) . 'px;';
 		$infinite_loader_load_previous_button_style .= 'border-bottom-right-radius: ' . ( ( isset( $infinite_loader_previous_button_setting['border_radius_left'] ) && ! empty( $infinite_loader_previous_button_setting['border_radius_left'] ) ) ? $infinite_loader_previous_button_setting['border_radius_left'] : '0' ) . 'px;';
+
+		
+    
 		return $infinite_loader_load_previous_button_style;
 	}
 
