@@ -55,6 +55,10 @@ input.infinite-loader-set-load-more-options.button[value="Set all to default"] {
     border-radius: 12px;
 }
 
+input.infinite-loader-set-load-more-options.button[value="Set all to default"]:hover {
+    background: #bf0101;
+}
+
 .infinity-loader-switch .selectize-input.items.full.has-items {
     height: inherit;
     line-height: 25px;
