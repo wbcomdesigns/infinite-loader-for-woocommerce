@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-16T12:29:12+05:30\n"
+"POT-Creation-Date: 2025-06-17T14:49:54+05:30\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: infinite-loader-for-woocommerce\n"
@@ -205,34 +205,26 @@ msgid "Custom CSS and Javascript Settings"
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:46
-msgid "Enable Font Awesome"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:48
-msgid "Enable the loading of Font Awesome icons within the plugin."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:57
 msgid "Custom CSS"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:59
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:48
 msgid "Add your custom CSS styles to customize the button appearance."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:68
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:57
 msgid "JavaScript Before Update"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:70
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:59
 msgid "Add custom JavaScript code that will run before the page updates."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:79
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:68
 msgid "JavaScript After Update"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:81
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:70
 msgid "Add custom JavaScript code that will run after the page updates."
 msgstr ""
 
@@ -272,31 +264,39 @@ msgstr ""
 msgid "Products per page"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:67
-msgid "Loading Image"
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:59
+msgid "Enable Font Awesome"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:69
-msgid "Select the loading animation icon that appears while new products are being loaded."
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:61
+msgid "Enable the loading of Font Awesome icons within the plugin."
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:77
+msgid "Loading Image"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:79
+msgid "Select the loading animation icon that appears while new products are being loaded."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:87
 msgid "Font Awesome"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:78
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:88
 msgid "Default"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:84
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:94
 msgid "Rotate image while loading"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:89
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:99
 msgid "Prevent URL Update on Page Load"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:90
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:100
 msgid "Enable this setting to prevent the page URL from changing when new products are loaded."
 msgstr ""
 
@@ -1211,6 +1211,6 @@ msgid "Retry"
 msgstr ""
 
 #. translators: %d: total results
-#: public/class-infinite-loader-for-woocommerce-public.php:300
+#: public/class-infinite-loader-for-woocommerce-public.php:313
 msgid "Showing all %d result"
 msgstr ""

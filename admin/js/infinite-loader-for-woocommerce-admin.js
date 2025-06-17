@@ -33,6 +33,14 @@
 			placeholder: "Select Button Action",
 			allowClear: true // If you want a remove (clear) button
 		});
+		
+		$(document).on('click',"#infinite_loader_enable_font_awesome", function () {
+			if( $(this).is(':checked') ){
+				$(document).find('.infinite_loader_image_wrapper').show();
+			}else{
+				$(document).find('.infinite_loader_image_wrapper').hide();
+			}
+		});
 
 		$(document).on('click',"#infinite-loader-default-color", function () {
 			document.getElementById("infinite_loader_default_bg_color").value = "#1d76da";

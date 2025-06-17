@@ -137,8 +137,8 @@ class Infinite_Loader_For_Woocommerce_Public {
 	 * @return void
 	 */
 	public function infinite_loader_for_woocommerce_enqueue_fontawesome_file() {
-		$infinite_loader_css_js_setting       = get_option( 'infinite_loader_admin_css_js_option' );
-		$infinite_loader_css_js_enable        = isset( $infinite_loader_css_js_setting['enable_font_awesome'] ) ? $infinite_loader_css_js_setting['enable_font_awesome'] : '';
+		$infinite_loader_general_setting       = get_option( 'infinite_loader_admin_general_option' );
+		$infinite_loader_css_js_enable        = isset( $infinite_loader_general_setting['enable_font_awesome'] ) ? $infinite_loader_general_setting['enable_font_awesome'] : '';
 		
 		if ( $infinite_loader_css_js_enable ) {
 			wp_enqueue_style( 'font-awesome-5', plugins_url( 'css/fontawesome5.min.css', __FILE__ ), array(), $this->version, 'all' );
@@ -198,7 +198,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 		}
 		
 		$infinite_loader_icon = '<div class="infinite_loader_products_loading">';
-		if ( isset( $infinite_loader_general_settings['loading_image'] ) && isset( $infinite_loader_css_js_settings['enable_font_awesome'] ) ) {
+		if ( isset( $infinite_loader_general_settings['loading_image'] ) && isset( $infinite_loader_general_settings['enable_font_awesome'] ) ) {
 			if ( substr( $infinite_loader_general_settings['loading_image'], 0, 3 ) === 'fa-' ) {
 				$infinite_loader_icon .= '<i class="fa ' . esc_attr( $infinite_loader_general_settings['loading_image'] ) . ' ' . esc_attr( $rotate_image_class ) . '"></i>';
 			} else {

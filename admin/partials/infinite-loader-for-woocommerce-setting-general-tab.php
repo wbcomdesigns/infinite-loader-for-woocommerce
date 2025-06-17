@@ -53,15 +53,25 @@ $infinite_loader_selected_icon = isset( $infinite_loader_general_setting['loadin
 							<input type="number" name="infinite_loader_admin_general_option[product_per_page]" placeholder="<?php esc_html_e( 'Products per page', 'infinite-loader-for-woocommerce' ); ?>" value="<?php echo ( isset( $infinite_loader_general_setting['product_per_page'] ) ) ? esc_attr( $infinite_loader_general_setting['product_per_page'] ) : ''; ?>">
 						</div>
 					</div>
+					<div class="wbcom-settings-section-wrap">
+						<div class="wbcom-settings-section-options-heading">
+							<label for="blogname">
+								<?php esc_html_e( 'Enable Font Awesome', 'infinite-loader-for-woocommerce' ); ?>
+							</label>
+							<p class="description"><?php esc_html_e( 'Enable the loading of Font Awesome icons within the plugin.', 'infinite-loader-for-woocommerce' ); ?></p>
+						</div>
+						<div class="wbcom-settings-section-options">
+							<input type="checkbox" name="infinite_loader_admin_general_option[enable_font_awesome]" id="infinite_loader_enable_font_awesome"  value="yes" <?php ( isset( $infinite_loader_general_setting['enable_font_awesome'] ) ) ? checked( $infinite_loader_general_setting['enable_font_awesome'], 'yes' ) : ''; ?>>
+						</div>
+					</div>
 					<?php 
-					$infinite_loader_css_js_setting = get_option( 'infinite_loader_admin_css_js_option' );
-					$infinite_loader_css_js_enable  = isset( $infinite_loader_css_js_setting['enable_font_awesome'] ) ? $infinite_loader_css_js_setting['enable_font_awesome'] : '';
+					$infinite_loader_css_js_enable  = isset( $infinite_loader_general_setting['enable_font_awesome'] ) ? $infinite_loader_general_setting['enable_font_awesome'] : '';
 
 					$infinite_loading_image_section = '';
 					if( ! $infinite_loader_css_js_enable ) {
 						$infinite_loading_image_section = 'display :none';
 					} ?>
-					<div class="wbcom-settings-section-wrap" style="<?php echo esc_attr( $infinite_loading_image_section ); ?>">
+					<div class="wbcom-settings-section-wrap infinite_loader_image_wrapper" style="<?php echo esc_attr( $infinite_loading_image_section ); ?>">
 						<div class="wbcom-settings-section-options-heading">
 							<label for="blogname">
 								<?php esc_html_e( 'Loading Image', 'infinite-loader-for-woocommerce' ); ?>

@@ -43,17 +43,6 @@ if ( ! empty( $infinite_loader_after_update ) ) {
 					<div class="wbcom-settings-section-wrap">
 						<div class="wbcom-settings-section-options-heading">
 							<label for="blogname">
-								<?php esc_html_e( 'Enable Font Awesome', 'infinite-loader-for-woocommerce' ); ?>
-							</label>
-							<p class="description"><?php esc_html_e( 'Enable the loading of Font Awesome icons within the plugin.', 'infinite-loader-for-woocommerce' ); ?></p>
-						</div>
-						<div class="wbcom-settings-section-options">
-							<input type="checkbox" name="infinite_loader_admin_css_js_option[enable_font_awesome]"  value="yes" <?php ( isset( $infinite_loader_css_js_setting['enable_font_awesome'] ) ) ? checked( $infinite_loader_css_js_setting['enable_font_awesome'], 'yes' ) : ''; ?>>
-						</div>
-					</div>
-					<div class="wbcom-settings-section-wrap">
-						<div class="wbcom-settings-section-options-heading">
-							<label for="blogname">
 								<?php esc_html_e( 'Custom CSS', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
 							<p class="description"><?php esc_html_e( 'Add your custom CSS styles to customize the button appearance.', 'infinite-loader-for-woocommerce' ); ?></p>

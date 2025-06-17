@@ -36,7 +36,8 @@ class Infinite_Loader_For_Woocommerce_Activator {
 				'product_per_page'       => '8',
 				'loading_image'          => 'fa-spinner',
 				'rotate_image'           => 'yes',
-				'do_not_update_url'      => 'no'
+				'do_not_update_url'      => 'no',
+				'enable_font_awesome' => 'yes',
 			);
 			update_option( 'infinite_loader_admin_general_option', $infinite_loader_set_default_general_options );
 		}
@@ -82,14 +83,6 @@ class Infinite_Loader_For_Woocommerce_Activator {
 				'border_radius_left'           => '50',
 			);
 			update_option( 'infinite_loader_admin_previous_button_option', $infinite_loader_set_default_previous_btn_options );
-		}
-
-	
-		if( empty( get_option( 'infinite_loader_admin_css_js_option' ) ) ) { 
-			$infinite_loader_set_js_css_option = array(
-				'enable_font_awesome' => 'yes',
-			);
-			update_option( 'infinite_loader_admin_css_js_option', $infinite_loader_set_js_css_option );
 		}
 		
 	}
