@@ -169,7 +169,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function infinite_loader_for_woocommerce_admin_options_page() {
 		global $allowedposttags;
-		$tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'infinite-loader-for-woocommerce-welcome';
+		$tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'infinite-loader-for-woocommerce-welcome';	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		?>
 	<div class="wrap">
 		<div class="wbcom-bb-plugins-offer-wrapper">
@@ -204,7 +204,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 * Actions performed to create tabs on the sub menu page.
 	 */
 	public function infinite_loader_for_woocommerce_plugin_settings_tabs() {
-		$current_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'infinite-loader-for-woocommerce-welcome';
+		$current_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'infinite-loader-for-woocommerce-welcome';	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// xprofile setup tab.
 		echo '<div class="wbcom-tabs-section"><div class="nav-tab-wrapper"><div class="wb-responsive-menu"><span>' . esc_html( 'Menu' ) . '</span><input class="wb-toggle-btn" type="checkbox" id="wb-toggle-btn"><label class="wb-toggle-icon" for="wb-toggle-btn"><span class="wb-icon-bars"></span></label></div><ul>';
 		foreach ( $this->plugin_settings_tabs as $tab_key => $tab_caption ) {
