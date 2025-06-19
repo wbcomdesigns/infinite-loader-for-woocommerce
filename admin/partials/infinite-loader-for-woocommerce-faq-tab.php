@@ -37,12 +37,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</button>
 						<div class="wbcom-faq-panel">
 							<p><?php esc_html_e( 'Yes, this plugin requires WooCommerce to be installed and activated.', 'infinite-loader-for-woocommerce' ); ?></p>
-							<p><strong><?php esc_html_e( 'Minimum Requirements:', 'infinite-loader-for-woocommerce' ); ?></strong></p>
-							<ul>
-								<li><?php esc_html_e( 'WordPress 5.0 or higher', 'infinite-loader-for-woocommerce' ); ?></li>
-								<li><?php esc_html_e( 'WooCommerce 3.0 or higher', 'infinite-loader-for-woocommerce' ); ?></li>
-								<li><?php esc_html_e( 'PHP 7.4 or higher', 'infinite-loader-for-woocommerce' ); ?></li>
-							</ul>
 						</div>
 					</div>
 				</div>
