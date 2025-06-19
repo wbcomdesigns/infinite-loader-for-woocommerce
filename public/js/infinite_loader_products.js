@@ -75,14 +75,14 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
             if (domCache.products.find(infinite_loader_product_data.item).first().length) {
                 domCache.products.find(infinite_loader_product_data.item).first()
                     .addClass('infinite_loader_btn')
-                    .attr('data-url', encodeURI(decodeURIComponent(location.href)));
+                    .attr('data-url', safe_encode_url(location.href));
             }
             
             // Handle extra data elements
             if (domCache.products.find('.infinite_loader_extra_data').first().length) {
                 domCache.products.find('.infinite_loader_extra_data').first()
                     .addClass('infinite_loader_btn')
-                    .attr('data-url', encodeURI(decodeURIComponent(location.href)));
+                    .attr('data-url', safe_encode_url(location.href));
             }
             
             // Initialize count tracking
@@ -249,7 +249,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 if (!infinite_loader_loading) {
                     infinite_loader_loading = true;
                     
-                    var targetUrl = encodeURI(decodeURIComponent(location.href));
+                    var targetUrl = safe_encode_url(location.href);
                     var $target = $('.infinite_loader_btn[data-url="' + targetUrl + '"]');
                     if ($target.length) {
                         $('html, body').stop().animate({
@@ -299,6 +299,14 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
             }
         }
         
+        function safe_encode_url(url) {
+            try {
+                return encodeURI(decodeURIComponent(url));
+            } catch (e) {
+                return encodeURI(url);
+            }
+        }
+        
         function handle_ajax_error(xhr, status, error) {
             console.error('Infinite Loader Error:', error);
             
@@ -321,7 +329,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
             infinite_loader_loading = true;
             domCache.body.addClass('infinite_loader_ajax_loading');
             
-            // Execute before update callback
+            // Execute before update callback safely
             infinite_loader_exc_js(infinite_loader_product_data.javascript.before_update);
             
             $(document).trigger('infinite_loader_product_start');
@@ -352,7 +360,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
             $(document).trigger('infinite_loader_ajax_load_products');
             $(document).trigger('infinite_loader_ajax_btn_end');
             
-            // Execute after update callback
+            // Execute after update callback safely
             infinite_loader_exc_js(infinite_loader_product_data.javascript.after_update);
             
             domCache.body.removeClass('infinite_loader_ajax_loading');
@@ -468,7 +476,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
         }
         
         function mark_first_item($data, next_page) {
-            var validUrl = encodeURI(decodeURIComponent(next_page));
+            var validUrl = safe_encode_url(next_page);
             
             var $first_item = $data.find(infinite_loader_product_data.products).find(infinite_loader_product_data.item).first();
             if ($first_item.length) {
@@ -727,7 +735,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
             if (!domCache.products.find(infinite_loader_product_data.item).first().is('.infinite_loader_btn')) {
                 domCache.products.find(infinite_loader_product_data.item).first()
                     .addClass('infinite_loader_btn')
-                    .attr('data-url', encodeURI(decodeURIComponent(location.href)));
+                    .attr('data-url', safe_encode_url(location.href));
             }
             
             current_style();

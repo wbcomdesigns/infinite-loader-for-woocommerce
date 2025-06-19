@@ -123,7 +123,9 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$custom_css     = isset( $css_js_setting['custom_css'] ) ? $css_js_setting['custom_css'] : '';
 		
 		if ( ! empty( $custom_css ) ) {
-			echo '<style type="text/css">' . wp_strip_all_tags( $custom_css ) . '</style>';
+			// Additional sanitization before output
+			$custom_css = wp_strip_all_tags( $custom_css );
+			echo '<style type="text/css" id="infinite-loader-custom-css">' . esc_html( $custom_css ) . '</style>';
 		}
 	}
 
@@ -262,14 +264,15 @@ class Infinite_Loader_For_Woocommerce_Public {
 		
 		$rotate_image_class = $check_rotate ? 'infinite_loader_rotate_image' : '';
 		
-		// Build loading icon
+		// Build loading icon with proper escaping
 		$infinite_loader_icon = '<div class="infinite_loader_products_loading">';
 		
 		if ( isset( $general_settings['loading_image'] ) && isset( $general_settings['enable_font_awesome'] ) && 'yes' === $general_settings['enable_font_awesome'] ) {
-			if ( substr( $general_settings['loading_image'], 0, 3 ) === 'fa-' ) {
-				$infinite_loader_icon .= '<i class="fa ' . esc_attr( $general_settings['loading_image'] ) . ' ' . esc_attr( $rotate_image_class ) . '"></i>';
+			$loading_image = sanitize_text_field( $general_settings['loading_image'] );
+			if ( substr( $loading_image, 0, 3 ) === 'fa-' ) {
+				$infinite_loader_icon .= '<i class="fa ' . esc_attr( $loading_image ) . ' ' . esc_attr( $rotate_image_class ) . '"></i>';
 			} else {
-				$infinite_loader_icon .= '<i class="fa ' . esc_attr( $rotate_image_class ) . '"><img class="infinite_loader_icon" src="' . esc_url( $general_settings['loading_image'] ) . '" alt=""></i>';
+				$infinite_loader_icon .= '<i class="fa ' . esc_attr( $rotate_image_class ) . '"><img class="infinite_loader_icon" src="' . esc_url( $loading_image ) . '" alt="' . esc_attr__( 'Loading', 'infinite-loader-for-woocommerce' ) . '"></i>';
 			}
 		} else {
 			$infinite_loader_icon .= '<i class="fa fa-spinner ' . esc_attr( $rotate_image_class ) . '"></i>';
@@ -281,7 +284,13 @@ class Infinite_Loader_For_Woocommerce_Public {
 		
 		$infinite_loader_icon = apply_filters( 'wbcom_infinite_loader_image', $infinite_loader_icon );
 		
-		// Prepare data for JavaScript
+		// Sanitize JavaScript settings
+		$safe_js_settings = array(
+			'before_update' => isset( $css_js_settings['before_update'] ) ? $css_js_settings['before_update'] : '',
+			'after_update'  => isset( $css_js_settings['after_update'] ) ? $css_js_settings['after_update'] : ''
+		);
+		
+		// Prepare data for JavaScript with security enhancements
 		$js_data = array(
 			'ajax_url'       => admin_url( 'admin-ajax.php' ),
 			'ajax_nonce'     => wp_create_nonce( 'infinite_loader_ajax_nonce' ),
@@ -292,18 +301,20 @@ class Infinite_Loader_For_Woocommerce_Public {
 			'load_img_class' => '.infinite_loader_products_loading',
 			'load_more'      => $load_more_button,
 			'load_prev'      => $previous_button,
-			'javascript'     => apply_filters( 'infinite_loader_js_function', $css_js_settings ),
-			'products'       => $selectors['products'],
-			'item'           => $selectors['item'],
-			'pagination'     => $selectors['pagination'],
-			'next_page'      => $selectors['next_page'],
-			'prev_page'      => $selectors['prev_page'],
+			'javascript'     => apply_filters( 'infinite_loader_js_function', $safe_js_settings ),
+			'products'       => esc_attr( $selectors['products'] ),
+			'item'           => esc_attr( $selectors['item'] ),
+			'pagination'     => esc_attr( $selectors['pagination'] ),
+			'next_page'      => esc_attr( $selectors['next_page'] ),
+			'prev_page'      => esc_attr( $selectors['prev_page'] ),
 			'error_message'  => esc_html__( 'Unable to load more products. Please try again.', 'infinite-loader-for-woocommerce' ),
 			'retry_text'     => esc_html__( 'Retry', 'infinite-loader-for-woocommerce' ),
 			'no_more_text'   => esc_html__( 'No more products', 'infinite-loader-for-woocommerce' ),
 			'loading_text'   => esc_html__( 'Loading...', 'infinite-loader-for-woocommerce' ),
 			'is_mobile'      => wp_is_mobile(),
 			'debug_mode'     => defined( 'WP_DEBUG' ) && WP_DEBUG,
+			'site_url'       => esc_url( home_url() ),
+			'is_ssl'         => is_ssl(),
 		);
 		
 		// Add compatibility data
@@ -378,10 +389,10 @@ class Infinite_Loader_For_Woocommerce_Public {
 			echo esc_attr__( 'Showing the single result', 'infinite-loader-for-woocommerce' );
 		} elseif ( $total <= $per_page || -1 === $per_page ) {
 			/* translators: %d: total results */
-			printf( esc_attr__( 'Showing all %d results', 'infinite-loader-for-woocommerce' ), $total );
+			printf( esc_attr__( 'Showing all %d results', 'infinite-loader-for-woocommerce' ), esc_attr( $total ) );
 		} else {
 			/* translators: 1: first result 2: last result 3: total results */
-			printf( esc_attr__( 'Showing %1$d&ndash;%2$d of %3$d results', 'infinite-loader-for-woocommerce' ), -1, -2, $total );
+			printf( esc_attr__( 'Showing %1$d&ndash;%2$d of %3$d results', 'infinite-loader-for-woocommerce' ), -1, -2, esc_attr( $total ) );
 		}
 		
 		echo '" data-start="' . esc_attr( $first ) . '" data-end="' . esc_attr( $last ) . '" data-laststart="' . esc_attr( $first ) . '" data-lastend="' . esc_attr( $last ) . '"></span>';
@@ -401,6 +412,10 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$bg_hover_color    = isset( $button_setting['background_color_mouse_hover'] ) ? $button_setting['background_color_mouse_hover'] : '#0e4da0';
 		$hover_text_color  = isset( $button_setting['text_color_mouse_hover'] ) ? $button_setting['text_color_mouse_hover'] : '#ffffff';
 		
+		// Sanitize colors
+		$bg_hover_color   = $this->sanitize_hex_color( $bg_hover_color, '#0e4da0' );
+		$hover_text_color = $this->sanitize_hex_color( $hover_text_color, '#ffffff' );
+		
 		$style = '
 		.infinite_loader_btn_setting .infinite_button:hover {
 			background-color: ' . esc_attr( $bg_hover_color ) . ' !important;
@@ -410,7 +425,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$style = apply_filters( 'infinite_loader_lm_btn_hover_css', $style );
 		
 		if ( ! empty( $style ) ) {
-			echo '<style type="text/css">' . wp_strip_all_tags( $style ) . '</style>';
+			echo '<style type="text/css" id="infinite-loader-hover-css">' . wp_strip_all_tags( $style ) . '</style>';
 		}
 	}
 
@@ -426,6 +441,10 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$bg_hover_color    = isset( $button_setting['background_color_mouse_hover'] ) ? $button_setting['background_color_mouse_hover'] : '#0e4da0';
 		$hover_text_color  = isset( $button_setting['text_color_mouse_hover'] ) ? $button_setting['text_color_mouse_hover'] : '#ffffff';
 		
+		// Sanitize colors
+		$bg_hover_color   = $this->sanitize_hex_color( $bg_hover_color, '#0e4da0' );
+		$hover_text_color = $this->sanitize_hex_color( $hover_text_color, '#ffffff' );
+		
 		$style = '
 		.infinite_loader_prev_btn_setting .infinite_button:hover {
 			background-color: ' . esc_attr( $bg_hover_color ) . ' !important;
@@ -435,7 +454,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$style = apply_filters( 'infinite_loader_previous_btn_hover_css', $style );
 		
 		if ( ! empty( $style ) ) {
-			echo '<style type="text/css">' . wp_strip_all_tags( $style ) . '</style>';
+			echo '<style type="text/css" id="infinite-loader-prev-hover-css">' . wp_strip_all_tags( $style ) . '</style>';
 		}
 	}
 
@@ -477,6 +496,26 @@ class Infinite_Loader_For_Woocommerce_Public {
 		}
 		
 		return $cached;
+	}
+
+	/**
+	 * Sanitize hex color
+	 *
+	 * @param  string $color   Hex color.
+	 * @param  string $default Default color.
+	 * @return string          Sanitized hex color.
+	 */
+	private function sanitize_hex_color( $color, $default = '' ) {
+		if ( '' === $color ) {
+			return $default;
+		}
+		
+		// 3 or 6 hex digits, or the empty string.
+		if ( preg_match( '|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) ) {
+			return $color;
+		}
+		
+		return $default;
 	}
 
 	/**

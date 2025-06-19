@@ -387,12 +387,29 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	public function validate_css_js_settings( $input ) {
 		$validated = array();
 		
-		// Allow basic CSS but strip any script tags
-		$validated['custom_css'] = isset( $input['custom_css'] ) ? wp_strip_all_tags( $input['custom_css'] ) : '';
+		// Sanitize custom CSS
+		if ( isset( $input['custom_css'] ) ) {
+			// Remove any script tags and PHP
+			$validated['custom_css'] = wp_strip_all_tags( $input['custom_css'] );
+			
+			// Remove @import statements to prevent external resource loading
+			$validated['custom_css'] = preg_replace( '/@import\s+(?:url\s*\(\s*)?["\']?[^"\')]+["\']?\s*\)?[^;]*;?/i', '', $validated['custom_css'] );
+			
+			// Remove JavaScript URLs
+			$validated['custom_css'] = preg_replace( '/javascript\s*:/i', '', $validated['custom_css'] );
+		} else {
+			$validated['custom_css'] = '';
+		}
 		
-		// For JavaScript, we need to be more careful
-		$validated['before_update'] = isset( $input['before_update'] ) ? $this->sanitize_javascript( $input['before_update'] ) : '';
-		$validated['after_update'] = isset( $input['after_update'] ) ? $this->sanitize_javascript( $input['after_update'] ) : '';
+		// Sanitize JavaScript fields
+		$js_fields = array( 'before_update', 'after_update' );
+		foreach ( $js_fields as $field ) {
+			if ( isset( $input[ $field ] ) ) {
+				$validated[ $field ] = $this->sanitize_javascript( $input[ $field ] );
+			} else {
+				$validated[ $field ] = '';
+			}
+		}
 		
 		return $validated;
 	}
@@ -409,6 +426,29 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		
 		// Remove script tags
 		$js = preg_replace( '/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/mi', '', $js );
+		
+		// Check for dangerous functions and patterns
+		$dangerous_patterns = array(
+			'/\beval\s*\(/i',
+			'/\bnew\s+Function\s*\([^)]*\)/i',
+			'/\bdocument\.write/i',
+			'/\bdocument\.writeln/i',
+			'/\bdocument\.cookie/i',
+			'/\blocalStorage/i',
+			'/\bsessionStorage/i',
+			'/\bwindow\.location\s*=/i',
+			'/\bdocument\.location\s*=/i',
+		);
+		
+		foreach ( $dangerous_patterns as $pattern ) {
+			if ( preg_match( $pattern, $js ) ) {
+				// Log security issue
+				error_log( 'Infinite Loader: Potentially dangerous JavaScript detected: ' . $pattern );
+				
+				// Remove the dangerous code
+				$js = preg_replace( $pattern, '/* Code removed for security */', $js );
+			}
+		}
 		
 		return $js;
 	}
@@ -490,7 +530,11 @@ class Infinite_Loader_For_Woocommerce_Admin {
 
 		$infinite_loader_load_more_button  = '<div class="infinite_loader_btn_load infinite_loader_btn_setting">';
 		$infinite_loader_load_more_button .= '<a class="infinite_button ' . esc_attr( $infinite_loader_lm_custom_class ) . '" style="';
-		$infinite_loader_load_more_button .= esc_attr( apply_filters( 'infinite_loader_for_woocommerce_load_more_button_style', '', $infinite_loader_button_setting ) );
+		
+		// Get filtered styles
+		$button_styles = apply_filters( 'infinite_loader_for_woocommerce_load_more_button_style', '', $infinite_loader_button_setting );
+		$infinite_loader_load_more_button .= esc_attr( $button_styles );
+		
 		$infinite_loader_load_more_button .= '" href="#load_next_page">' . esc_html( $infinite_loader_lm_button_text ) . '</a>';
 		$infinite_loader_load_more_button .= '</div>';
 		
@@ -507,7 +551,11 @@ class Infinite_Loader_For_Woocommerce_Admin {
 
 		$infinite_loader_previous_button  = '<div class="infinite_loader_btn_load infinite_loader_prev_btn_setting">';
 		$infinite_loader_previous_button .= '<a class="infinite_button ' . esc_attr( $infinite_loader_prev_button_custom_class ) . '" style="';
-		$infinite_loader_previous_button .= esc_attr( apply_filters( 'infinite_loader_for_woocommerce_load_previous_button_style', '', $infinite_loader_previous_button_setting ) );
+		
+		// Get filtered styles
+		$button_styles = apply_filters( 'infinite_loader_for_woocommerce_load_previous_button_style', '', $infinite_loader_previous_button_setting );
+		$infinite_loader_previous_button .= esc_attr( $button_styles );
+		
 		$infinite_loader_previous_button .= '" href="#load_previous_page">' . esc_html( $infinite_loader_prev_button_text ) . '</a>';
 		$infinite_loader_previous_button .= '</div>';
 		
@@ -1134,11 +1182,38 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		<div class="infinite_icons_lists">';
 		
 		foreach ( $infinite_icons as $infinite_icon ) {
-			$result .= '<span class="infinite_fa_fa_icon"><span class="infinite_icon_hover"></span><span class="infinite_icon_preview"><i class="fa ' . esc_attr( $infinite_icon ) . '"></i><span>' . esc_html( $infinite_icon ) . '</span></span></span>';
+			// Properly escape the icon class
+			$escaped_icon = esc_attr( $infinite_icon );
+			$result .= '<span class="infinite_fa_fa_icon"><span class="infinite_icon_hover"></span><span class="infinite_icon_preview"><i class="fa ' . $escaped_icon . '"></i><span>' . esc_html( $infinite_icon ) . '</span></span></span>';
 		}
 		
 		$result .= '</div></div></div>';
 		
 		return $result;
+	}
+
+	/**
+	 * Handle AJAX requests with nonce verification
+	 *
+	 * @since 1.0.0
+	 */
+	public function handle_infinite_loader_ajax() {
+		// Check if this is an infinite loader AJAX request
+		if ( ! isset( $_REQUEST['infinite_loader_ajax'] ) ) {
+			return;
+		}
+		
+		// Verify nonce
+		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'infinite_loader_ajax_nonce' ) ) {
+			wp_die( esc_html__( 'Security check failed', 'infinite-loader-for-woocommerce' ), 403 );
+		}
+		
+		// Add security headers
+		header( 'X-Content-Type-Options: nosniff' );
+		header( 'X-Frame-Options: SAMEORIGIN' );
+		header( 'X-Robots-Tag: noindex, nofollow' );
+		
+		// Let WordPress continue with normal page rendering
+		// The JavaScript will parse the response
 	}
 }
