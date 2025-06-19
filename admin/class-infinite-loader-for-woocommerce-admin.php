@@ -323,29 +323,28 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		 // Validate required fields exist
 		$required_fields = array( 'text_font_size', 'text_color', 'background_color' );
 		foreach ( $required_fields as $field ) {
-			error_log( "Infinite Loader: Everything is in." );
 			if ( ! isset( $infinite_loader_button_setting[ $field ] ) ) {
 				error_log( "Infinite Loader: Missing required button setting: {$field}" );
 				return '';
 			}
 		}
-		$infinite_loader_lm_button_margin_top    = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'margin_top', '0' );
+		$infinite_loader_lm_button_margin_top    = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'margin_top', '0' );
 		
-		$infinite_loader_lm_button_margin_right  = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'margin_right', '0' );
-		$infinite_loader_lm_button_margin_bottom = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'margin_bottom', '0' );
-		$infinite_loader_lm_button_margin_left   = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'margin_left', '0' ); 
-		$infinite_loader_lm_button_border_top    = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'border_top', '1' );
-		$infinite_loader_lm_button_border_bottom = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'border_bottom', '1' );
-		$infinite_loader_lm_button_border_left   = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'border_left', '1' ); 
-		$infinite_loader_lm_button_border_right  = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'border_right', '1' );
+		$infinite_loader_lm_button_margin_right  = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'margin_right', '0' );
+		$infinite_loader_lm_button_margin_bottom = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'margin_bottom', '0' );
+		$infinite_loader_lm_button_margin_left   = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'margin_left', '0' ); 
+		$infinite_loader_lm_button_border_top    = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'border_top', '1' );
+		$infinite_loader_lm_button_border_bottom = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'border_bottom', '1' );
+		$infinite_loader_lm_button_border_left   = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'border_left', '1' ); 
+		$infinite_loader_lm_button_border_right  = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'border_right', '1' );
 
-		$infinite_loader_load_more_button_style .= 'font-size: ' . self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'text_font_size' ). 'px;';
+		$infinite_loader_load_more_button_style .= 'font-size: ' . self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'text_font_size' ). 'px;';
 		$infinite_loader_load_more_button_style .= 'color: ' . self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'text_color' ). ';';
 		$infinite_loader_load_more_button_style .= 'background-color: ' .self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'background_color' ). ';';
-		$infinite_loader_load_more_button_style .= 'padding-top:' . self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'padding_top' ).'px;';
-		$infinite_loader_load_more_button_style .= 'padding-right:' . self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'padding_right' ). 'px;';
-		$infinite_loader_load_more_button_style .= 'padding-bottom:' . self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'padding_bottom' ) .'px;';
-		$infinite_loader_load_more_button_style .= 'padding-left:' . self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'padding_left' ) . 'px;';
+		$infinite_loader_load_more_button_style .= 'padding-top:' . self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'padding_top' ).'px;';
+		$infinite_loader_load_more_button_style .= 'padding-right:' . self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'padding_right' ). 'px;';
+		$infinite_loader_load_more_button_style .= 'padding-bottom:' . self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'padding_bottom' ) .'px;';
+		$infinite_loader_load_more_button_style .= 'padding-left:' . self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'padding_left' ) . 'px;';
 		$infinite_loader_load_more_button_style .= 'margin-top:' . $infinite_loader_lm_button_margin_top . 'px;';
 		$infinite_loader_load_more_button_style .= 'margin-right:' . $infinite_loader_lm_button_margin_right . 'px;';
 		$infinite_loader_load_more_button_style .= 'margin-bottom:' . $infinite_loader_lm_button_margin_bottom . 'px;';
@@ -354,10 +353,10 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		$infinite_loader_load_more_button_style .= 'border-bottom: ' . $infinite_loader_lm_button_border_bottom . 'px solid ' . ( self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'border_color', '#000' ) ) . ';';
 		$infinite_loader_load_more_button_style .= 'border-left: ' . $infinite_loader_lm_button_border_left . 'px solid ' . ( self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'border_color', '#000' ) ) . ';';
 		$infinite_loader_load_more_button_style .= 'border-right: ' . $infinite_loader_lm_button_border_right . 'px solid ' . ( self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'border_color', '#000' ) ) . ';';
-		$infinite_loader_load_more_button_style .= 'border-top-left-radius: ' . ( self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'border_radius_top', '0' ) ) . 'px;';
-		$infinite_loader_load_more_button_style .= 'border-top-right-radius: ' . ( self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'border_radius_right', '0' )) . 'px;';
-		$infinite_loader_load_more_button_style .= 'border-bottom-left-radius: ' . ( self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'border_radius_bottom', '0' )) . 'px;';
-		$infinite_loader_load_more_button_style .= 'border-bottom-right-radius: ' . ( self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'border_radius_left', '0' )) . 'px;';
+		$infinite_loader_load_more_button_style .= 'border-top-left-radius: ' . ( self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'border_radius_top', '0' ) ) . 'px;';
+		$infinite_loader_load_more_button_style .= 'border-top-right-radius: ' . ( self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'border_radius_right', '0' )) . 'px;';
+		$infinite_loader_load_more_button_style .= 'border-bottom-left-radius: ' . ( self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'border_radius_bottom', '0' )) . 'px;';
+		$infinite_loader_load_more_button_style .= 'border-bottom-right-radius: ' . ( self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'border_radius_left', '0' )) . 'px;';
 		return $infinite_loader_load_more_button_style;
 	}
 
@@ -391,22 +390,23 @@ class Infinite_Loader_For_Woocommerce_Admin {
 			return;
 		}
 
-		$infinite_loader_prev_button_margin_top     = self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'margin_top', '0' );
-		$infinite_loader_prev_button_margin_right   = self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'margin_right', '0' );
-		$infinite_loader_prev_button_margin_bottom  = self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'margin_bottom', '0' );
-		$infinite_loader_prev_button_margin_left    = self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'margin_left', '0' );
-		$infinite_loader_prev_button_border_top     = self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'border_top', '1' ); 
-		$infinite_loader_prev_button_border_bottom  = self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'border_bottom', '1' );
-		$infinite_loader_prev_button_border_left    = self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'border_left', '1' );
-		$infinite_loader_prev_button_border_right   = self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'border_right', '1' );
+		$infinite_loader_prev_button_margin_top     = self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'margin_top', '0' );
+		$infinite_loader_prev_button_margin_right   = self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'margin_right', '0' );
+		$infinite_loader_prev_button_margin_bottom  = self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'margin_bottom', '0' );
+		$infinite_loader_prev_button_margin_left    = self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'margin_left', '0' );
+		$infinite_loader_prev_button_border_top     = self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'border_top', '1' ); 
+		$infinite_loader_prev_button_border_bottom  = self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'border_bottom', '1' );
+		$infinite_loader_prev_button_border_left    = self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'border_left', '1' );
+		$infinite_loader_prev_button_border_right   = self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'border_right', '1' );
+		
 
-		$infinite_loader_load_previous_button_style .= 'font-size: ' . self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'text_font_size') . 'px;';
+		$infinite_loader_load_previous_button_style .= 'font-size: ' . self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'text_font_size') . 'px;';
 		$infinite_loader_load_previous_button_style .= 'color: ' . self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'text_color') . ';';
 		$infinite_loader_load_previous_button_style .= 'background-color: ' . self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'background_color') . ';'; 
-		$infinite_loader_load_previous_button_style .= 'padding-top:' . self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'padding_top'). 'px;';
-		$infinite_loader_load_previous_button_style .= 'padding-right:' . self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'padding_right') . 'px;'; 
-		$infinite_loader_load_previous_button_style .= 'padding-bottom:' . self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'padding_bottom') . 'px;'; 
-		$infinite_loader_load_previous_button_style .= 'padding-left:' . self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'padding_left')  . 'px;';
+		$infinite_loader_load_previous_button_style .= 'padding-top:' . self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'padding_top'). 'px;';
+		$infinite_loader_load_previous_button_style .= 'padding-right:' . self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'padding_right') . 'px;'; 
+		$infinite_loader_load_previous_button_style .= 'padding-bottom:' . self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'padding_bottom') . 'px;'; 
+		$infinite_loader_load_previous_button_style .= 'padding-left:' . self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'padding_left')  . 'px;';
 		$infinite_loader_load_previous_button_style .= 'margin-top:' . $infinite_loader_prev_button_margin_top . 'px;';
 		$infinite_loader_load_previous_button_style .= 'margin-right:' . $infinite_loader_prev_button_margin_right . 'px;';
 		$infinite_loader_load_previous_button_style .= 'margin-bottom:' . $infinite_loader_prev_button_margin_bottom . 'px;';
@@ -415,10 +415,10 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		$infinite_loader_load_previous_button_style .= 'border-right: ' . $infinite_loader_prev_button_border_right . 'px solid ' . ( self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'border_color', '#000' ) ) . ';';
 		$infinite_loader_load_previous_button_style .= 'border-bottom: ' . $infinite_loader_prev_button_border_bottom . 'px solid ' . (self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'border_color', '#000' ) ) . ';';
 		$infinite_loader_load_previous_button_style .= 'border-left: ' . $infinite_loader_prev_button_border_left . 'px solid ' . ( self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'border_color', '#000' ) ) . ';';
-		$infinite_loader_load_previous_button_style .= 'border-top-left-radius: ' . ( self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'border_radius_top', '0' ) ) . 'px;';
-		$infinite_loader_load_previous_button_style .= 'border-top-right-radius: ' . ( self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'border_radius_right', '0' ) )  . 'px;';
-		$infinite_loader_load_previous_button_style .= 'border-bottom-left-radius: ' . ( self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'border_radius_bottom', '0' ) ) . 'px;';
-		$infinite_loader_load_previous_button_style .= 'border-bottom-right-radius: ' . ( self::infinite_loader_get_option_value( $infinite_loader_previous_button_setting, 'border_radius_left', '0' ) ) . 'px;';
+		$infinite_loader_load_previous_button_style .= 'border-top-left-radius: ' . ( self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'border_radius_top', '0' ) ) . 'px;';
+		$infinite_loader_load_previous_button_style .= 'border-top-right-radius: ' . ( self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'border_radius_right', '0' ) )  . 'px;';
+		$infinite_loader_load_previous_button_style .= 'border-bottom-left-radius: ' . ( self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'border_radius_bottom', '0' ) ) . 'px;';
+		$infinite_loader_load_previous_button_style .= 'border-bottom-right-radius: ' . ( self::infinite_loader_get_dimension_value( $infinite_loader_previous_button_setting, 'border_radius_left', '0' ) ) . 'px;';
 
 		
 		return $infinite_loader_load_previous_button_style;
@@ -942,5 +942,23 @@ class Infinite_Loader_For_Woocommerce_Admin {
 			return $default;
 		}
 		return isset( $options[ $key ] ) && ! empty( $options[ $key ] ) ? $options[ $key ] : $default;
+	}
+
+	/**
+	 * Get button dimension value with validation
+	 *
+	 * @param array  $settings Button settings
+	 * @param string $key      Setting key
+	 * @param string $default  Default value
+	 * @return string Validated dimension value
+	 */
+	private static function infinite_loader_get_dimension_value( $settings, $key, $default = '0' ) {
+		$value = self::infinite_loader_get_option_value( $settings, $key, $default );
+		
+		// Ensure numeric value
+		$numeric_value = absint( $value );
+		
+		// Limit reasonable range (0-999px)
+		return (string) max( 0, min( 999, $numeric_value ) );
 	}
 }
