@@ -71,17 +71,19 @@ class Infinite_Loader_For_Woocommerce_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		if( is_shop() ) {
-			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-				$extension = is_rtl() ? '.rtl.css' : '.css';
-				$path      = is_rtl() ? '/rtl' : '';
-			} else {
-				$extension = is_rtl() ? '.rtl.css' : '.min.css';
-				$path      = is_rtl() ? '/rtl' : '/min';
-			}
-
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css' . $path . '/infinite-loader-for-woocommerce-public' . $extension, array(), $this->version, 'all' ); 
-		}		
+		 // Only load on relevant pages
+		if ( ! $this->infinite_loader_should_load_assets() ) {
+			return;
+		}
+		$infinite_loader_asset_config = $this->infinite_loader_get_asset_config();
+		
+		wp_enqueue_style( 
+			$this->plugin_name, 
+			plugin_dir_url( __FILE__ ) . 'css' . $infinite_loader_asset_config['css_path'] . '/infinite-loader-for-woocommerce-public' . $infinite_loader_asset_config['css_extension'], 
+			array(), 
+			$this->version, 
+			'all' 
+		);
 
 	}
 
@@ -103,18 +105,19 @@ class Infinite_Loader_For_Woocommerce_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		
-		if( is_shop() ) {
-			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-				$extension = '.js';
-				$path      = '';
-			} else {
-				$extension = '.min.js';
-				$path      = '/min';
-			}
 
-			wp_enqueue_script( 'infinite_loader_products', plugin_dir_url( __FILE__ ) . 'js' . $path . '/infinite-loader-for-woocommerce-public' . $extension, array( 'jquery' ), $this->version, false );
+		 if ( ! $this->infinite_loader_should_load_assets() ) {
+			return;
 		}
+		
+		$infinite_loader_asset_config = $this->infinite_loader_get_asset_config();
+		wp_enqueue_script( 
+			'infinite_loader_products', 
+			plugin_dir_url( __FILE__ ) . 'js' . $infinite_loader_asset_config['js_path'] . '/infinite-loader-for-woocommerce-public' . $infinite_loader_asset_config['js_extension'], 
+			array( 'jquery' ), 
+			$this->version, 
+			true // Load in footer for better performance
+		);
 		
 	}
 
@@ -129,6 +132,33 @@ class Infinite_Loader_For_Woocommerce_Public {
 		if ( ! empty( $infinite_loader_custom_css ) ) {
 			echo '<style type="text/css">' . wp_kses_post( $infinite_loader_custom_css ) . '</style>';
 		}
+	}
+
+	/**
+	 * Check if assets should be loaded on current page
+	 *
+	 * @return bool True if assets should be loaded
+	 */
+	private function infinite_loader_should_load_assets() {
+		// Load on shop pages and product archives
+		return is_shop() || is_product_category() || is_product_tag() || is_product_taxonomy();
+	}
+
+	/**
+	 * Get asset configuration for current environment
+	 *
+	 * @return array Asset paths and extensions
+	 */
+	private function infinite_loader_get_asset_config() {
+		$is_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
+		$is_rtl   = is_rtl();
+		
+		return array(
+			'css_extension' => $is_debug ? ( $is_rtl ? '.rtl.css' : '.css' ) : ( $is_rtl ? '.rtl.css' : '.min.css' ),
+			'css_path'      => $is_debug ? ( $is_rtl ? '/rtl' : '' ) : ( $is_rtl ? '/rtl' : '/min' ),
+			'js_extension'  => $is_debug ? '.js' : '.min.js',
+			'js_path'       => $is_debug ? '' : '/min',
+		);
 	}
 
 	/**
