@@ -245,6 +245,10 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		register_setting( 'infinite_loader_admin_css_js_options', 'infinite_loader_admin_css_js_option' );
 		add_settings_section( 'infinite-loader-for-woocommerce-css-js', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_js_css_content' ), 'infinite-loader-for-woocommerce-css-js' );
 
+		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-faq'] = esc_html__( 'FAQ', 'infinite-loader-for-woocommerce' );
+		register_setting( 'infinite_loader_for_woocommerce_admin_faq_options', 'infinite_loader_for_woocommerce_admin_faq_options' );
+		add_settings_section( 'infinite-loader-for-woocommerce-faq', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_faq_content' ), 'infinite-loader-for-woocommerce-faq' );
+
 		//phpcs:enable
 	}
 
@@ -281,6 +285,13 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function infinite_loader_for_woocommerce_admin_js_css_content() {
 		include 'partials/infinite-loader-for-woocommerce-setting-css-js-tab.php';
+	}
+
+	/**
+	 * Include infinite loader for woocommerce admin faq setting tab content file.
+	 */
+	public function infinite_loader_for_woocommerce_admin_faq_content() {
+		include 'partials/infinite-loader-for-woocommerce-faq-tab.php';
 	}
 
 	/**
