@@ -320,6 +320,15 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		if( empty( $infinite_loader_button_setting ) ) {
 			return;
 		}
+		 // Validate required fields exist
+		$required_fields = array( 'text_font_size', 'text_color', 'background_color' );
+		foreach ( $required_fields as $field ) {
+			error_log( "Infinite Loader: Everything is in." );
+			if ( ! isset( $infinite_loader_button_setting[ $field ] ) ) {
+				error_log( "Infinite Loader: Missing required button setting: {$field}" );
+				return '';
+			}
+		}
 		$infinite_loader_lm_button_margin_top    = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'margin_top', '0' );
 		
 		$infinite_loader_lm_button_margin_right  = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'margin_right', '0' );
