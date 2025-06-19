@@ -158,7 +158,11 @@ function infinite_loader_for_woocommerce_version_notice() {
  */
 function infinite_loader_plugin_redirect_to_welcome_page( $plugin ) {
 	if ( plugin_basename( __FILE__ ) === $plugin && class_exists( 'WooCommerce' ) ) {
-		$redirect = isset( $_REQUEST['action'] ) && 'activate' === $_REQUEST['action'] && 
+		// Check nonce for security
+		$nonce_verified = isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'activate-plugin_' . $plugin );
+		
+		$redirect = $nonce_verified && 
+		           isset( $_REQUEST['action'] ) && 'activate' === $_REQUEST['action'] && 
 		           isset( $_REQUEST['plugin'] ) && $_REQUEST['plugin'] === $plugin;
 		
 		if ( $redirect && ! isset( $_REQUEST['activate-multi'] ) ) {

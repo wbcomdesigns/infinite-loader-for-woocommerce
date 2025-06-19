@@ -28,3 +28,63 @@
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
+
+// Check user capabilities
+if ( ! current_user_can( 'activate_plugins' ) ) {
+	return;
+}
+
+// Check if it's the correct plugin
+$plugin = isset( $_REQUEST['plugin'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['plugin'] ) ) : '';
+$action = isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : '';
+
+if ( $plugin !== 'infinite-loader-for-woocommerce/infinite-loader-for-woocommerce.php' || $action !== 'delete-plugin' ) {
+	return;
+}
+
+// Security check
+check_admin_referer( 'delete-plugin' );
+
+// For Single site
+if ( ! is_multisite() ) {
+	// Delete plugin options
+	delete_option( 'infinite_loader_admin_general_option' );
+	delete_option( 'infinite_loader_admin_button_option' );
+	delete_option( 'infinite_loader_admin_previous_button_option' );
+	delete_option( 'infinite_loader_admin_css_js_option' );
+	delete_option( 'infinite_loader_license_key' );
+	delete_option( 'infinite_loader_license_status' );
+	
+	// Delete transients
+	delete_transient( 'infinite_loader_license_data' );
+	
+	// Clear any cached data
+	wp_cache_flush();
+} else {
+	// For Multisite
+	global $wpdb;
+	
+	// Get all blog ids
+	$blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
+	$original_blog_id = get_current_blog_id();
+	
+	foreach ( $blog_ids as $blog_id ) {
+		switch_to_blog( $blog_id );
+		
+		// Delete plugin options
+		delete_option( 'infinite_loader_admin_general_option' );
+		delete_option( 'infinite_loader_admin_button_option' );
+		delete_option( 'infinite_loader_admin_previous_button_option' );
+		delete_option( 'infinite_loader_admin_css_js_option' );
+		delete_option( 'infinite_loader_license_key' );
+		delete_option( 'infinite_loader_license_status' );
+		
+		// Delete transients
+		delete_transient( 'infinite_loader_license_data' );
+	}
+	
+	switch_to_blog( $original_blog_id );
+	
+	// Clear any cached data
+	wp_cache_flush();
+}

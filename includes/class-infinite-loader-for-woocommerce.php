@@ -12,6 +12,11 @@
  * @subpackage Infinite_Loader_For_Woocommerce/includes
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * The core plugin class.
  *
@@ -72,6 +77,7 @@ class Infinite_Loader_For_Woocommerce {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'infinite-loader-for-woocommerce';
+		
 		$this->define_constants();
 		$this->load_dependencies();
 		$this->set_locale();
@@ -83,11 +89,9 @@ class Infinite_Loader_For_Woocommerce {
 	 * Define plugin constants that are use entire plugin.
 	 *
 	 * @since    1.0.0
-	 * @access   public
+	 * @access   private
 	 */
-	public function define_constants() {
-		
-		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION', '1.2.2' );
+	private function define_constants() {
 		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_FILE', __FILE__ );
 		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_URL', plugin_dir_url( dirname( __FILE__ ) ) );
 		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PATH', plugin_dir_path( dirname( __FILE__ ) ) );
@@ -127,7 +131,6 @@ class Infinite_Loader_For_Woocommerce {
 	 * @access   private
 	 */
 	private function load_dependencies() {
-
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
@@ -141,9 +144,11 @@ class Infinite_Loader_For_Woocommerce {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-infinite-loader-for-woocommerce-i18n.php';
 
 		/**
-		* The class responsible add wrapper of admin settings.
-		*/
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wbcom/wbcom-admin-settings.php';
+		 * The class responsible add wrapper of admin settings.
+		 */
+		if ( file_exists( plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wbcom/wbcom-admin-settings.php' ) ) {
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wbcom/wbcom-admin-settings.php';
+		}
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
@@ -157,13 +162,16 @@ class Infinite_Loader_For_Woocommerce {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-infinite-loader-for-woocommerce-public.php';
 
 		/** This file adds the plugin license module UI. */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wbcom/wbcom-paid-plugin-settings.php';
+		if ( file_exists( plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wbcom/wbcom-paid-plugin-settings.php' ) ) {
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wbcom/wbcom-paid-plugin-settings.php';
+		}
 
 		/** This file is responsible for the plugin license functionality. */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'edd-license/edd-plugin-license.php';
+		if ( file_exists( plugin_dir_path( dirname( __FILE__ ) ) . 'edd-license/edd-plugin-license.php' ) ) {
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'edd-license/edd-plugin-license.php';
+		}
 
 		$this->loader = new Infinite_Loader_For_Woocommerce_Loader();
-
 	}
 
 	/**
@@ -176,11 +184,8 @@ class Infinite_Loader_For_Woocommerce {
 	 * @access   private
 	 */
 	private function set_locale() {
-
 		$plugin_i18n = new Infinite_Loader_For_Woocommerce_I18n();
-
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -191,16 +196,14 @@ class Infinite_Loader_For_Woocommerce {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-
 		$plugin_admin = new Infinite_Loader_For_Woocommerce_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'infinite_loader_for_woocommerce_add_submenu_page_admin_settings' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'infinite_loader_for_woocommerce_init_plugin_settings' );
-		$this->loader->add_action( 'infinite_loader_load_more_buttom_preview', $plugin_admin, 'section_btn_custom_class' );
-		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_more_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_button_style' );
-		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_previous_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_previous_button_style' );
+		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_more_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_button_style', 10, 2 );
+		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_previous_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_previous_button_style', 10, 2 );
 		$this->loader->add_action( 'in_admin_header', $plugin_admin, 'wbcom_hide_all_admin_notices_from_setting_page' );
 	}
 
@@ -212,7 +215,6 @@ class Infinite_Loader_For_Woocommerce {
 	 * @access   private
 	 */
 	private function define_public_hooks() {
-
 		$plugin_public = new Infinite_Loader_For_Woocommerce_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
@@ -223,7 +225,6 @@ class Infinite_Loader_For_Woocommerce {
 		$this->loader->add_action( 'init', $plugin_public, 'infinite_loader_for_woocommerce_enqueue_fontawesome_file' );
 		$this->loader->add_action( 'wp_head', $plugin_public, 'infinite_loader_add_css_js_for_loading_products' );
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'infinite_loader_for_woo_scroll_top_button' );
-		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_more_button_styles', $plugin_public, 'infinite_loader_for_woocommerce_button_styles' );
 		$this->loader->add_action( 'woocommerce_before_template_part', $plugin_public, 'infinite_loader_before_template_part', 1 );
 		$this->loader->add_filter( 'loop_shop_per_page', $plugin_public, 'infinite_loader_set_product_per_page', 20 );
 	}
@@ -267,5 +268,4 @@ class Infinite_Loader_For_Woocommerce {
 	public function get_version() {
 		return $this->version;
 	}
-
 }

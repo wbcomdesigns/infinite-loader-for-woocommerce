@@ -12,6 +12,11 @@
  * @subpackage Infinite_Loader_For_Woocommerce/includes
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Define the internationalization functionality.
  *
@@ -25,22 +30,16 @@
  */
 class Infinite_Loader_For_Woocommerce_I18n {
 
-
 	/**
 	 * Load the plugin text domain for translation.
 	 *
 	 * @since    1.0.0
 	 */
 	public function load_plugin_textdomain() {
-
 		load_plugin_textdomain(
 			'infinite-loader-for-woocommerce',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);
-
 	}
-
-
-
 }
