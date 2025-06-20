@@ -22,6 +22,7 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       infinite-loader-for-woocommerce
  * Domain Path:       /languages
+ * Requires Plugins: woocommerce
  * Requires at least: 5.0
  * Tested up to:      6.4
  * WC requires at least: 3.0
@@ -73,6 +74,7 @@ if ( ! function_exists( 'infinite_loader_for_woocommerce_check_woocommerce' ) ) 
 	 */
 	function infinite_loader_for_woocommerce_check_woocommerce() {
 		if ( ! class_exists( 'WooCommerce' ) ) {
+			deactivate_plugins( plugin_basename( __FILE__ ) );
 			add_action( 'admin_notices', 'infinite_loader_for_woocommerce_admin_notice' );
 			return;
 		}
