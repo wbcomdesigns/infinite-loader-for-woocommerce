@@ -367,37 +367,87 @@ class Infinite_Loader_For_Woocommerce_Public {
 	public function infinite_loader_products_count_additional( $text ) {
 		remove_filter( 'ngettext', array( $this, 'infinite_loader_products_count_additional' ), 1, 9999 );
 		remove_filter( 'ngettext_with_context', array( $this, 'infinite_loader_products_count_additional' ), 1, 9999 );
+
+		// Get product count data with fallback
+		$infinite_loader_count_data = $this->infinite_loader_get_product_count_data();
 		
-		if ( class_exists( 'WC_Query' ) && method_exists( 'WC_Query', 'product_query' ) && function_exists( 'wc_get_loop_prop' ) ) {
-			$total    = wc_get_loop_prop( 'total' );
-			$per_page = wc_get_loop_prop( 'per_page' );
-			$paged    = wc_get_loop_prop( 'current_page' );
-			$first    = ( $per_page * $paged ) - $per_page + 1;
-			$last     = min( $total, $per_page * $paged );
-		} else {
-			global $wp_query;
-			$paged    = max( 1, $wp_query->get( 'paged' ) );
-			$per_page = $wp_query->get( 'posts_per_page' );
-			$total    = $wp_query->found_posts;
-			$first    = ( $per_page * $paged ) - $per_page + 1;
-			$last     = min( $total, $wp_query->get( 'posts_per_page' ) * $paged );
+		if ( ! $infinite_loader_count_data ) {
+			return $text;
 		}
+		
+		extract( $infinite_loader_count_data );
 
 		echo '<span class="infinite_loader_product_count" style="display: none;" data-text="';
 		
 		if ( 1 === $total ) {
-			echo esc_attr__( 'Showing the single result', 'infinite-loader-for-woocommerce' );
+			echo esc_html__( 'Showing the single result', 'infinite-loader-for-woocommerce' );
 		} elseif ( $total <= $per_page || -1 === $per_page ) {
 			/* translators: %d: total results */
-			printf( esc_attr__( 'Showing all %d results', 'infinite-loader-for-woocommerce' ), esc_attr( $total ) );
+			printf(esc_html( _n( 'Showing %d result', 'Showing %d results', $total, 'infinite-loader-for-woocommerce' ) ), 
+            number_format_i18n( $total ));
 		} else {
-			/* translators: 1: first result 2: last result 3: total results */
-			printf( esc_attr__( 'Showing %1$d&ndash;%2$d of %3$d results', 'infinite-loader-for-woocommerce' ), -1, -2, esc_attr( $total ) );
+			printf( 
+				/* translators: 1: first result number 2: last result number 3: total results */
+            esc_html__( 'Showing %1$s&ndash;%2$s of %3$s results', 'infinite-loader-for-woocommerce' ), 
+            number_format_i18n( $first ), 
+            number_format_i18n( $last ), 
+            number_format_i18n( $total ) );
 		}
-		
-		echo '" data-start="' . esc_attr( $first ) . '" data-end="' . esc_attr( $last ) . '" data-laststart="' . esc_attr( $first ) . '" data-lastend="' . esc_attr( $last ) . '"></span>';
+		printf( 
+			'" data-start="%d" data-end="%d" data-laststart="%d" data-lastend="%d"></span>',
+			esc_attr( $first ),
+			esc_attr( $last ),
+			esc_attr( $first ),
+			esc_attr( $last )
+		);
 		
 		return $text;
+	}
+
+	/**
+	 * Get product count data with proper error handling
+	 *
+	 * @return array|false Product count data or false on error
+	 */
+	private function infinite_loader_get_product_count_data() {
+		try {
+			if ( class_exists( 'WC_Query' ) && method_exists( 'WC_Query', 'product_query' ) && function_exists( 'wc_get_loop_prop' ) ) {
+				$total    = wc_get_loop_prop( 'total' );
+				$per_page = wc_get_loop_prop( 'per_page' );
+				$paged    = wc_get_loop_prop( 'current_page' );
+				
+				// Validate WooCommerce data
+				if ( ! is_numeric( $total ) || ! is_numeric( $per_page ) || ! is_numeric( $paged ) ) {
+					throw new Exception( 'Invalid WooCommerce loop properties' );
+				}
+				
+			} else {
+				global $wp_query;
+				
+				if ( ! isset( $wp_query ) || ! is_object( $wp_query ) ) {
+					throw new Exception( 'WP_Query not available' );
+				}
+				
+				$paged    = max( 1, $wp_query->get( 'paged' ) );
+				$per_page = $wp_query->get( 'posts_per_page' );
+				$total    = $wp_query->found_posts;
+			}
+			
+			// Calculate first and last with bounds checking
+			$first = max( 1, ( $per_page * $paged ) - $per_page + 1 );
+			$last  = min( $total, $per_page * $paged );
+			
+			// Ensure logical consistency
+			if ( $first > $last || $last > $total ) {
+				throw new Exception( 'Inconsistent pagination calculation' );
+			}
+			
+			return compact( 'total', 'per_page', 'paged', 'first', 'last' );
+			
+		} catch ( Exception $e ) {
+			error_log( 'Infinite Loader: Product count calculation failed - ' . $e->getMessage() );
+			return false;
+		}
 	}
 
 	/**
