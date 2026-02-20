@@ -89,11 +89,11 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		}
 
 		$wbcom_setting_page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		
+
 		if ( 'infinite-loader-for-woocommerce-settings' === $wbcom_setting_page || 'wbcomplugins' === $wbcom_setting_page ) {
 			$extension = is_rtl() ? '.rtl.css' : '.css';
 			$path      = is_rtl() ? '/rtl' : '';
-			
+
 			if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
 				$extension = is_rtl() ? '.rtl.css' : '.min.css';
 				$path      = is_rtl() ? '/rtl' : '/min';
@@ -128,11 +128,11 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		}
 
 		$wbcom_setting_page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		
+
 		if ( 'infinite-loader-for-woocommerce-settings' === $wbcom_setting_page ) {
 			$extension = '.js';
 			$path      = '';
-			
+
 			if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
 				$extension = '.min.js';
 				$path      = '/min';
@@ -228,7 +228,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function infinite_loader_for_woocommerce_admin_options_page() {
 		$this->verify_admin_request();
-		
+
 		$tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'infinite-loader-for-woocommerce-welcome'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		?>
 		<div class="wrap">
@@ -264,7 +264,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function infinite_loader_for_woocommerce_plugin_settings_tabs() {
 		$current_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'infinite-loader-for-woocommerce-welcome'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		
+
 		echo '<div class="wbcom-tabs-section"><div class="nav-tab-wrapper"><div class="wb-responsive-menu"><span>' . esc_html( 'Menu' ) . '</span><input class="wb-toggle-btn" type="checkbox" id="wb-toggle-btn"><label class="wb-toggle-icon" for="wb-toggle-btn"><span class="wb-icon-bars"></span></label></div><ul>';
 		
 		foreach ( $this->plugin_settings_tabs as $tab_key => $tab_caption ) {
