@@ -11,6 +11,11 @@
  * @subpackage Infinite_Loader_For_Woocommerce/admin/partials
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_option' );
 ?>
 <div class="wbcom-tab-content">
@@ -30,7 +35,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<label for="blogname">
 								<?php esc_html_e( 'Custom CSS Class', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Add a custom CSS class to apply additional styling to the Load More button.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Add a custom CSS class to apply additional styling to the Load More button.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="text" class="infinite_loader_btn_settings" data-style="custom_css" id="infinite_loader_default_custom_class" name="infinite_loader_admin_button_option[custom_class]"  value="<?php echo ( isset( $infinite_loader_button_setting['custom_class'] ) ) ? esc_attr( $infinite_loader_button_setting['custom_class'] ) : ''; ?>">
@@ -41,7 +46,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<label for="blogname">
 								<?php esc_html_e( 'Button Preview', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Preview how the Load More button will appear with your current settings.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Preview how the Load More button will appear with your current settings.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<div class='infinite-loader-btn-preview-td'>
@@ -54,7 +59,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<label for="blogname">
 								<?php esc_html_e( 'Load More Button Text', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Enter the text to display on the Load More button (e.g., “Load More”, “View More”).', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Enter the text to display on the Load More button (e.g., “Load More”, “View More”).', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="text" class="infinite_loader_btn_settings" data-default="Load More" data-style="text"  id="infinite_loader_default_load_more_botton_text" name="infinite_loader_admin_button_option[button_text]"  placeholder="<?php esc_html_e( 'Load More', 'infinite-loader-for-woocommerce' ); ?>" value="<?php echo ( isset( $infinite_loader_button_setting['button_text'] ) ) ? esc_attr( $infinite_loader_button_setting['button_text'] ) : 'Load More'; ?>">
@@ -65,7 +70,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<label for="blogname">
 								<?php esc_html_e( 'Button Background Color', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Select the background color of the Load More button.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Select the background color of the Load More button.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="color" id="infinite_loader_default_bg_color" class="bg_btn_color" data-default="#1d76da" name="infinite_loader_admin_button_option[background_color]" value="<?php echo ( isset( $infinite_loader_button_setting['background_color'] ) ) ? esc_attr( $infinite_loader_button_setting['background_color'] ) : ''; ?>">
@@ -77,7 +82,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<label for="blogname">
 								<?php esc_html_e( 'Button Hover Background Color', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Choose the background color that appears when hovering over the button.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Choose the background color that appears when hovering over the button.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="color" id="infinite_loader_default_bg_color_mouse_hover" class="bg_btn_color_hover" name="infinite_loader_admin_button_option[background_color_mouse_hover]" value="<?php echo ( isset( $infinite_loader_button_setting['background_color_mouse_hover'] ) ) ? esc_attr( $infinite_loader_button_setting['background_color_mouse_hover'] ) : ''; ?>">
@@ -89,7 +94,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<label for="blogname">
 								<?php esc_html_e( 'Button Border Color', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Set the border color of the Load More button.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Set the border color of the Load More button.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="color" class="btn_border_color" data-default="#000" data-color="#000" id="infinite_loader_default_border_color" name="infinite_loader_admin_button_option[border_color]" value="<?php echo ( isset( $infinite_loader_button_setting['border_color'] ) ) ? esc_attr( $infinite_loader_button_setting['border_color'] ) : ''; ?>">
@@ -101,7 +106,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<label for="blogname">
 								<?php esc_html_e( 'Button Text Color', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Choose the text color for the Load More button.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Choose the text color for the Load More button.', 'infinite-loader-for-woocommerce' ); ?></p>
 
 						</div>
 						<div class="wbcom-settings-section-options">
@@ -114,7 +119,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<label for="blogname">
 								<?php esc_html_e( 'Button Hover Text Color', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Set the text color when the button is hovered over.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Set the text color when the button is hovered over.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="color" id="infinite_loader_default_text_color_mouse_hover" class="txt_btn_color_hover" name="infinite_loader_admin_button_option[text_color_mouse_hover]" value="<?php echo ( isset( $infinite_loader_button_setting['text_color_mouse_hover'] ) ) ? esc_attr( $infinite_loader_button_setting['text_color_mouse_hover'] ) : ''; ?>">
@@ -126,7 +131,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<label for="blogname">
 								<?php esc_html_e( 'Button Font Size', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Define the font size of the button text (in pixels).', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Define the font size of the button text (in pixels).', 'infinite-loader-for-woocommerce' ); ?></p>
 
 						</div>
 						<div class="wbcom-settings-section-options">
@@ -138,7 +143,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<label for="blogname">
 								<?php esc_html_e( 'Button Padding', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Set the inner spacing of the button (Top, Right, Bottom, Left in pixels).', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Set the inner spacing of the button (Top, Right, Bottom, Left in pixels).', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 						<input type="number" class="infinite-loader-style infinite_loader_btn_settings" data-style="padding-top" data-type="px" data-default="13" id="infinite-loader_set-default-padding-top"  name="infinite_loader_admin_button_option[padding_top]" value="<?php echo ( isset( $infinite_loader_button_setting['padding_top'] ) ) ? esc_attr( $infinite_loader_button_setting['padding_top'] ) : '13'; ?>">
@@ -153,7 +158,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<label for="blogname">
 								<?php esc_html_e( 'Button Margin', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Set the outer spacing of the button (Top, Right, Bottom, Left in pixels).', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Set the outer spacing of the button (Top, Right, Bottom, Left in pixels).', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="number" class="infinite-loader-style infinite_loader_btn_settings" data-style="margin-top" data-type="px" data-default=""  id="infinite-loader_set-default-margin-top" name="infinite_loader_admin_button_option[margin_top]" value="<?php echo ( isset( $infinite_loader_button_setting['margin_top'] ) ) ? esc_attr( $infinite_loader_button_setting['margin_top'] ) : ''; ?>">
@@ -167,7 +172,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<label for="blogname">
 								<?php esc_html_e( 'Button Border Width', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Specify the thickness of the button\'s border (in pixels).', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Specify the thickness of the button\'s border (in pixels).', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="number" class="infinite-loader-style infinite_loader_btn_settings" data-field="border" data-style="border-top" data-type="px" data-default="1"  id="infinite-loader_set-default-border-top"  name="infinite_loader_admin_button_option[border_top]" value="<?php echo ( isset( $infinite_loader_button_setting['border_top'] ) ) ? esc_attr( $infinite_loader_button_setting['border_top'] ) : '1'; ?>">
@@ -181,7 +186,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<label for="blogname">
 								<?php esc_html_e( 'Button Border Radius', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Adjust the roundness of the button corners (in pixels).', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Adjust the roundness of the button corners (in pixels).', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="number" class="infinite-loader-style infinite_loader_btn_settings" data-type="px" data-style="border-top-left-radius"  data-default="50" id="infinite-loader_set-default-border-radius-top"  name="infinite_loader_admin_button_option[border_radius_top]" value="<?php echo ( isset( $infinite_loader_button_setting['border_radius_top'] ) ) ? esc_attr( $infinite_loader_button_setting['border_radius_top'] ) : '50'; ?>">

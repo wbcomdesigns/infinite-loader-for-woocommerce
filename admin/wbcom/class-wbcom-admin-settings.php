@@ -45,7 +45,6 @@ if ( ! class_exists( 'Wbcom_Admin_Settings' ) ) {
 				echo esc_html( $display_extention );
 				die;
 			}
-
 		}
 
 		/**
@@ -174,7 +173,7 @@ if ( ! class_exists( 'Wbcom_Admin_Settings' ) ) {
 		 */
 		public function wbcom_enqueue_admin_scripts() {
 			if ( ! wp_style_is( 'font-awesome', 'enqueued' ) ) {
-				wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' );
+				wp_enqueue_style( 'font-awesome', INFINITE_LOADER_FOR_WOOCOMMERCE_URL . 'public/css/font-awesome.min.css', array(), '4.7.0' );
 			}
 			if ( ! wp_script_is( 'wbcom_admin_setting_js', 'enqueued' ) ) {
 				if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
@@ -215,7 +214,7 @@ if ( ! class_exists( 'Wbcom_Admin_Settings' ) ) {
 					$path      = is_rtl() ? '/rtl' : '/min';
 				}
 
-				wp_enqueue_style( 'wbcom-admin-setting-css', INFINITE_LOADER_FOR_WOOCOMMERCE_URL . 'admin/wbcom/assets/css' . $path . '/wbcom-admin-setting' . $extension );
+				wp_enqueue_style( 'wbcom-admin-setting-css', INFINITE_LOADER_FOR_WOOCOMMERCE_URL . 'admin/wbcom/assets/css' . $path . '/wbcom-admin-setting' . $extension, array(), INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION );
 			}
 		}
 
@@ -289,8 +288,11 @@ if ( ! class_exists( 'Wbcom_Admin_Settings' ) ) {
 		 * @access public
 		 */
 		public function wbcom_admin_setting_header_html() {
-			$page          = filter_input( INPUT_GET, 'page' ) ? filter_input( INPUT_GET, 'page' ) : 'wbcom-themes-page';
-			$plugin_active = $theme_active = $support_active = $settings_active = '';
+			$page            = filter_input( INPUT_GET, 'page' ) ? filter_input( INPUT_GET, 'page' ) : 'wbcom-themes-page';
+			$plugin_active   = '';
+			$theme_active    = '';
+			$support_active  = '';
+			$settings_active = '';
 			switch ( $page ) {
 				case 'wbcom-plugins-page':
 					$plugin_active = 'is_active';
@@ -332,17 +334,8 @@ if ( ! class_exists( 'Wbcom_Admin_Settings' ) ) {
 			</div>
 			<?php
 		}
-
 	}
 
-	/**
-	 * Initialte Wbcom plugin manager.
-	 *
-	 * @return void
-	 */
-	function instantiate_wbcom_plugin_manager() {
-		new Wbcom_Admin_Settings();
-	}
-
-	instantiate_wbcom_plugin_manager();
+	// Instantiate the Wbcom Admin Settings.
+	new Wbcom_Admin_Settings();
 }

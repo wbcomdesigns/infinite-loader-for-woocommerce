@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * The admin-specific functionality of the plugin.
  *
- * Defines the plugin name, version, and two examples hooks for how to
+ * Defines the plugin name, version, and two hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
  * @package    Infinite_Loader_For_Woocommerce
@@ -43,7 +43,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
-	
+
 	/**
 	 * Plugin_settings_tabs
 	 *
@@ -99,20 +99,20 @@ class Infinite_Loader_For_Woocommerce_Admin {
 				$path      = is_rtl() ? '/rtl' : '/min';
 			}
 
-			wp_enqueue_style( 
-				$this->plugin_name, 
-				plugin_dir_url( __FILE__ ) . 'css' . $path . '/infinite-loader-for-woocommerce-admin' . $extension, 
-				array(), 
-				$this->version, 
-				'all' 
+			wp_enqueue_style(
+				$this->plugin_name,
+				plugin_dir_url( __FILE__ ) . 'css' . $path . '/infinite-loader-for-woocommerce-admin' . $extension,
+				array(),
+				$this->version,
+				'all'
 			);
-			
-			wp_enqueue_style( 
-				'infinity-loader-select2', 
-				plugin_dir_url( __FILE__ ) . 'css/vendor/select2.min.css', 
-				array(), 
-				$this->version, 
-				'all' 
+
+			wp_enqueue_style(
+				'infinity-loader-select2',
+				plugin_dir_url( __FILE__ ) . 'css/vendor/select2.min.css',
+				array(),
+				$this->version,
+				'all'
 			);
 		}
 	}
@@ -138,31 +138,31 @@ class Infinite_Loader_For_Woocommerce_Admin {
 				$path      = '/min';
 			}
 
-			wp_enqueue_script( 
-				$this->plugin_name, 
-				plugin_dir_url( __FILE__ ) . 'js' . $path . '/infinite-loader-for-woocommerce-admin' . $extension, 
-				array( 'jquery', 'wp-color-picker' ), 
-				$this->version, 
-				false 
+			wp_enqueue_script(
+				$this->plugin_name,
+				plugin_dir_url( __FILE__ ) . 'js' . $path . '/infinite-loader-for-woocommerce-admin' . $extension,
+				array( 'jquery', 'wp-color-picker' ),
+				$this->version,
+				false
 			);
-			
-			wp_enqueue_script( 
-				'infinity-loader-select2-min', 
-				plugin_dir_url( __FILE__ ) . 'js/vendor/select2.min.js', 
-				array( 'jquery' ), 
-				$this->version, 
-				false 
+
+			wp_enqueue_script(
+				'infinity-loader-select2-min',
+				plugin_dir_url( __FILE__ ) . 'js/vendor/select2.min.js',
+				array( 'jquery' ),
+				$this->version,
+				false
 			);
-			
-			wp_enqueue_script( 
-				'admin-js', 
-				plugin_dir_url( __FILE__ ) . 'js' . $path . '/admin' . $extension, 
-				array( 'jquery', 'wp-color-picker' ), 
-				$this->version, 
-				false 
+
+			wp_enqueue_script(
+				'admin-js',
+				plugin_dir_url( __FILE__ ) . 'js' . $path . '/admin' . $extension,
+				array( 'jquery', 'wp-color-picker' ),
+				$this->version,
+				false
 			);
-			
-			// Add color picker
+
+			// Add color picker.
 			wp_enqueue_style( 'wp-color-picker' );
 		}
 	}
@@ -191,32 +191,32 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function infinite_loader_for_woocommerce_add_submenu_page_admin_settings() {
 		if ( empty( $GLOBALS['admin_page_hooks']['wbcomplugins'] ) && class_exists( 'WooCommerce' ) ) {
-			add_menu_page( 
-				esc_html__( 'WB Plugins', 'infinite-loader-for-woocommerce' ), 
-				esc_html__( 'WB Plugins', 'infinite-loader-for-woocommerce' ), 
-				'manage_woocommerce', 
-				'wbcomplugins', 
-				array( $this, 'infinite_loader_for_woocommerce_admin_options_page' ), 
-				'dashicons-lightbulb', 
-				59 
+			add_menu_page(
+				esc_html__( 'WB Plugins', 'infinite-loader-for-woocommerce' ),
+				esc_html__( 'WB Plugins', 'infinite-loader-for-woocommerce' ),
+				'manage_woocommerce',
+				'wbcomplugins',
+				array( $this, 'infinite_loader_for_woocommerce_admin_options_page' ),
+				'dashicons-lightbulb',
+				59
 			);
-			
-			add_submenu_page( 
-				'wbcomplugins', 
-				esc_html__( 'General', 'infinite-loader-for-woocommerce' ), 
-				esc_html__( 'General', 'infinite-loader-for-woocommerce' ), 
-				'manage_woocommerce', 
-				'wbcomplugins' 
+
+			add_submenu_page(
+				'wbcomplugins',
+				esc_html__( 'General', 'infinite-loader-for-woocommerce' ),
+				esc_html__( 'General', 'infinite-loader-for-woocommerce' ),
+				'manage_woocommerce',
+				'wbcomplugins'
 			);
 		}
-		
-		add_submenu_page( 
-			'wbcomplugins', 
-			esc_html__( 'Infinite Loader for WooCommerce', 'infinite-loader-for-woocommerce' ), 
-			esc_html__( 'Infinite Loader for WooCommerce', 'infinite-loader-for-woocommerce' ), 
-			'manage_woocommerce', 
-			'infinite-loader-for-woocommerce-settings', 
-			array( $this, 'infinite_loader_for_woocommerce_admin_options_page' ) 
+
+		add_submenu_page(
+			'wbcomplugins',
+			esc_html__( 'Infinite Loader for WooCommerce', 'infinite-loader-for-woocommerce' ),
+			esc_html__( 'Infinite Loader for WooCommerce', 'infinite-loader-for-woocommerce' ),
+			'manage_woocommerce',
+			'infinite-loader-for-woocommerce-settings',
+			array( $this, 'infinite_loader_for_woocommerce_admin_options_page' )
 		);
 	}
 
@@ -266,12 +266,12 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		$current_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'infinite-loader-for-woocommerce-welcome'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		echo '<div class="wbcom-tabs-section"><div class="nav-tab-wrapper"><div class="wb-responsive-menu"><span>' . esc_html( 'Menu' ) . '</span><input class="wb-toggle-btn" type="checkbox" id="wb-toggle-btn"><label class="wb-toggle-icon" for="wb-toggle-btn"><span class="wb-icon-bars"></span></label></div><ul>';
-		
+
 		foreach ( $this->plugin_settings_tabs as $tab_key => $tab_caption ) {
 			$active = $current_tab === $tab_key ? 'nav-tab-active' : '';
 			echo '<li><a class="nav-tab ' . esc_attr( $active ) . '" id="' . esc_attr( $tab_key ) . '-tab" href="?page=infinite-loader-for-woocommerce-settings&tab=' . esc_attr( $tab_key ) . '">' . esc_html( $tab_caption ) . '</a></li>';
 		}
-		
+
 		echo '</div></ul></div>';
 	}
 
@@ -284,7 +284,13 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function infinite_loader_for_woocommerce_init_plugin_settings() {
 		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-welcome'] = esc_html__( 'Welcome', 'infinite-loader-for-woocommerce' );
-		register_setting( 'infinite_loader_for_woocommerce_admin_welcome_options', 'infinite_loader_for_woocommerce_admin_welcome_options' );
+		register_setting(
+			'infinite_loader_for_woocommerce_admin_welcome_options',
+			'infinite_loader_for_woocommerce_admin_welcome_options',
+			array(
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
 		add_settings_section( 'infinite-loader-for-woocommerce-welcome', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_welcome_content' ), 'infinite-loader-for-woocommerce-welcome' );
 
 		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-general'] = esc_html__( 'General', 'infinite-loader-for-woocommerce' );
@@ -304,7 +310,13 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		add_settings_section( 'infinite-loader-for-woocommerce-css-js', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_js_css_content' ), 'infinite-loader-for-woocommerce-css-js' );
 
 		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-faq'] = esc_html__( 'FAQ', 'infinite-loader-for-woocommerce' );
-		register_setting( 'infinite_loader_for_woocommerce_admin_faq_options', 'infinite_loader_for_woocommerce_admin_faq_options' );
+		register_setting(
+			'infinite_loader_for_woocommerce_admin_faq_options',
+			'infinite_loader_for_woocommerce_admin_faq_options',
+			array(
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
 		add_settings_section( 'infinite-loader-for-woocommerce-faq', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_faq_content' ), 'infinite-loader-for-woocommerce-faq' );
 	}
 
@@ -316,29 +328,29 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function validate_general_settings( $input ) {
 		$validated = array();
-		
-		// Validate product loading type
-		$allowed_types = array( 'infinity-scroll', 'load-more-button', 'pagination' );
-		$validated['product_loading_type'] = isset( $input['product_loading_type'] ) && in_array( $input['product_loading_type'], $allowed_types, true ) 
-			? $input['product_loading_type'] 
+
+		// Validate product loading type.
+		$allowed_types                     = array( 'infinity-scroll', 'load-more-button', 'pagination' );
+		$validated['product_loading_type'] = isset( $input['product_loading_type'] ) && in_array( $input['product_loading_type'], $allowed_types, true )
+			? $input['product_loading_type']
 			: 'pagination';
-		
-		// Validate products per page
+
+		// Validate products per page.
 		$validated['product_per_page'] = isset( $input['product_per_page'] ) ? absint( $input['product_per_page'] ) : 8;
 		if ( $validated['product_per_page'] < 1 ) {
 			$validated['product_per_page'] = 8;
 		} elseif ( $validated['product_per_page'] > 100 ) {
 			$validated['product_per_page'] = 100;
 		}
-		
-		// Validate checkboxes
+
+		// Validate checkboxes.
 		$validated['enable_font_awesome'] = isset( $input['enable_font_awesome'] ) && 'yes' === $input['enable_font_awesome'] ? 'yes' : '';
-		$validated['rotate_image'] = isset( $input['rotate_image'] ) && 'yes' === $input['rotate_image'] ? 'yes' : '';
-		$validated['do_not_update_url'] = isset( $input['do_not_update_url'] ) && 'yes' === $input['do_not_update_url'] ? 'yes' : '';
-		
-		// Validate loading image
+		$validated['rotate_image']        = isset( $input['rotate_image'] ) && 'yes' === $input['rotate_image'] ? 'yes' : '';
+		$validated['do_not_update_url']   = isset( $input['do_not_update_url'] ) && 'yes' === $input['do_not_update_url'] ? 'yes' : '';
+
+		// Validate loading image.
 		$validated['loading_image'] = isset( $input['loading_image'] ) ? sanitize_text_field( $input['loading_image'] ) : 'fa-spinner';
-		
+
 		return $validated;
 	}
 
@@ -350,31 +362,44 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function validate_button_settings( $input ) {
 		$validated = array();
-		
-		// Text fields
+
+		// Text fields.
 		$validated['custom_class'] = isset( $input['custom_class'] ) ? sanitize_html_class( $input['custom_class'] ) : '';
-		$validated['button_text'] = isset( $input['button_text'] ) ? sanitize_text_field( $input['button_text'] ) : 'Load More';
-		
-		// Colors
-		$validated['background_color'] = isset( $input['background_color'] ) ? $this->sanitize_hex_color( $input['background_color'] ) : '#1d76da';
+		$validated['button_text']  = isset( $input['button_text'] ) ? sanitize_text_field( $input['button_text'] ) : 'Load More';
+
+		// Colors.
+		$validated['background_color']             = isset( $input['background_color'] ) ? $this->sanitize_hex_color( $input['background_color'] ) : '#1d76da';
 		$validated['background_color_mouse_hover'] = isset( $input['background_color_mouse_hover'] ) ? $this->sanitize_hex_color( $input['background_color_mouse_hover'] ) : '#0e4da0';
-		$validated['border_color'] = isset( $input['border_color'] ) ? $this->sanitize_hex_color( $input['border_color'] ) : '#1d76da';
-		$validated['text_color'] = isset( $input['text_color'] ) ? $this->sanitize_hex_color( $input['text_color'] ) : '#ffffff';
-		$validated['text_color_mouse_hover'] = isset( $input['text_color_mouse_hover'] ) ? $this->sanitize_hex_color( $input['text_color_mouse_hover'] ) : '#ffffff';
-		
-		// Dimensions
+		$validated['border_color']                 = isset( $input['border_color'] ) ? $this->sanitize_hex_color( $input['border_color'] ) : '#1d76da';
+		$validated['text_color']                   = isset( $input['text_color'] ) ? $this->sanitize_hex_color( $input['text_color'] ) : '#ffffff';
+		$validated['text_color_mouse_hover']       = isset( $input['text_color_mouse_hover'] ) ? $this->sanitize_hex_color( $input['text_color_mouse_hover'] ) : '#ffffff';
+
+		// Dimensions.
 		$dimension_fields = array(
-			'text_font_size', 'padding_top', 'padding_right', 'padding_bottom', 'padding_left',
-			'margin_top', 'margin_right', 'margin_bottom', 'margin_left',
-			'border_top', 'border_right', 'border_bottom', 'border_left',
-			'border_radius_top', 'border_radius_right', 'border_radius_bottom', 'border_radius_left'
+			'text_font_size',
+			'padding_top',
+			'padding_right',
+			'padding_bottom',
+			'padding_left',
+			'margin_top',
+			'margin_right',
+			'margin_bottom',
+			'margin_left',
+			'border_top',
+			'border_right',
+			'border_bottom',
+			'border_left',
+			'border_radius_top',
+			'border_radius_right',
+			'border_radius_bottom',
+			'border_radius_left',
 		);
-		
+
 		foreach ( $dimension_fields as $field ) {
 			$validated[ $field ] = isset( $input[ $field ] ) ? absint( $input[ $field ] ) : 0;
 			$validated[ $field ] = min( 999, $validated[ $field ] );
 		}
-		
+
 		return $validated;
 	}
 
@@ -386,22 +411,22 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	public function validate_css_js_settings( $input ) {
 		$validated = array();
-		
-		// Sanitize custom CSS
+
+		// Sanitize custom CSS.
 		if ( isset( $input['custom_css'] ) ) {
-			// Remove any script tags and PHP
+			// Remove any script tags and PHP.
 			$validated['custom_css'] = wp_strip_all_tags( $input['custom_css'] );
-			
-			// Remove @import statements to prevent external resource loading
+
+			// Remove @import statements to prevent external resource loading.
 			$validated['custom_css'] = preg_replace( '/@import\s+(?:url\s*\(\s*)?["\']?[^"\')]+["\']?\s*\)?[^;]*;?/i', '', $validated['custom_css'] );
-			
-			// Remove JavaScript URLs
+
+			// Remove JavaScript URLs.
 			$validated['custom_css'] = preg_replace( '/javascript\s*:/i', '', $validated['custom_css'] );
 		} else {
 			$validated['custom_css'] = '';
 		}
-		
-		// Sanitize JavaScript fields
+
+		// Sanitize JavaScript fields.
 		$js_fields = array( 'before_update', 'after_update' );
 		foreach ( $js_fields as $field ) {
 			if ( isset( $input[ $field ] ) ) {
@@ -410,7 +435,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 				$validated[ $field ] = '';
 			}
 		}
-		
+
 		return $validated;
 	}
 
@@ -421,13 +446,13 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 * @return string     Sanitized JavaScript.
 	 */
 	private function sanitize_javascript( $js ) {
-		// Remove PHP tags
+		// Remove PHP tags.
 		$js = str_replace( array( '<?php', '<?', '?>' ), '', $js );
-		
-		// Remove script tags
+
+		// Remove script tags.
 		$js = preg_replace( '/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/mi', '', $js );
-		
-		// Check for dangerous functions and patterns
+
+		// Check for dangerous functions and patterns.
 		$dangerous_patterns = array(
 			'/\beval\s*\(/i',
 			'/\bnew\s+Function\s*\([^)]*\)/i',
@@ -439,17 +464,17 @@ class Infinite_Loader_For_Woocommerce_Admin {
 			'/\bwindow\.location\s*=/i',
 			'/\bdocument\.location\s*=/i',
 		);
-		
+
 		foreach ( $dangerous_patterns as $pattern ) {
 			if ( preg_match( $pattern, $js ) ) {
-				// Log security issue
+				// Log security issue.
 				error_log( 'Infinite Loader: Potentially dangerous JavaScript detected: ' . $pattern );
-				
-				// Remove the dangerous code
+
+				// Remove the dangerous code.
 				$js = preg_replace( $pattern, '/* Code removed for security */', $js );
 			}
 		}
-		
+
 		return $js;
 	}
 
@@ -463,12 +488,12 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		if ( '' === $color ) {
 			return '';
 		}
-		
+
 		// 3 or 6 hex digits, or the empty string.
 		if ( preg_match( '|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) ) {
 			return $color;
 		}
-		
+
 		return '';
 	}
 
@@ -530,14 +555,14 @@ class Infinite_Loader_For_Woocommerce_Admin {
 
 		$infinite_loader_load_more_button  = '<div class="infinite_loader_btn_load infinite_loader_btn_setting">';
 		$infinite_loader_load_more_button .= '<a class="infinite_button ' . esc_attr( $infinite_loader_lm_custom_class ) . '" style="';
-		
-		// Get filtered styles
-		$button_styles = apply_filters( 'infinite_loader_for_woocommerce_load_more_button_style', '', $infinite_loader_button_setting );
+
+		// Get filtered styles.
+		$button_styles                     = apply_filters( 'infinite_loader_for_woocommerce_load_more_button_style', '', $infinite_loader_button_setting );
 		$infinite_loader_load_more_button .= esc_attr( $button_styles );
-		
+
 		$infinite_loader_load_more_button .= '" href="#load_next_page">' . esc_html( $infinite_loader_lm_button_text ) . '</a>';
 		$infinite_loader_load_more_button .= '</div>';
-		
+
 		return $infinite_loader_load_more_button;
 	}
 
@@ -551,14 +576,14 @@ class Infinite_Loader_For_Woocommerce_Admin {
 
 		$infinite_loader_previous_button  = '<div class="infinite_loader_btn_load infinite_loader_prev_btn_setting">';
 		$infinite_loader_previous_button .= '<a class="infinite_button ' . esc_attr( $infinite_loader_prev_button_custom_class ) . '" style="';
-		
-		// Get filtered styles
-		$button_styles = apply_filters( 'infinite_loader_for_woocommerce_load_previous_button_style', '', $infinite_loader_previous_button_setting );
+
+		// Get filtered styles.
+		$button_styles                    = apply_filters( 'infinite_loader_for_woocommerce_load_previous_button_style', '', $infinite_loader_previous_button_setting );
 		$infinite_loader_previous_button .= esc_attr( $button_styles );
-		
+
 		$infinite_loader_previous_button .= '" href="#load_previous_page">' . esc_html( $infinite_loader_prev_button_text ) . '</a>';
 		$infinite_loader_previous_button .= '</div>';
-		
+
 		return $infinite_loader_previous_button;
 	}
 
@@ -577,58 +602,58 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		}
 
 		$styles = array();
-		
-		// Font size
+
+		// Font size.
 		$font_size = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, 'text_font_size', '16' );
-		$styles[] = 'font-size: ' . $font_size . 'px';
-		
-		// Colors
-		$text_color = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'text_color', '#ffffff' );
-		$bg_color = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'background_color', '#1d76da' );
+		$styles[]  = 'font-size: ' . $font_size . 'px';
+
+		// Colors.
+		$text_color   = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'text_color', '#ffffff' );
+		$bg_color     = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'background_color', '#1d76da' );
 		$border_color = self::infinite_loader_get_option_value( $infinite_loader_button_setting, 'border_color', '#1d76da' );
-		
+
 		$styles[] = 'color: ' . $text_color;
 		$styles[] = 'background-color: ' . $bg_color;
-		
-		// Padding
-		$padding_fields = array( 'padding_top', 'padding_right', 'padding_bottom', 'padding_left' );
+
+		// Padding.
+		$padding_fields   = array( 'padding_top', 'padding_right', 'padding_bottom', 'padding_left' );
 		$padding_defaults = array( '13', '30', '13', '30' );
-		
+
 		foreach ( $padding_fields as $index => $field ) {
-			$value = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, $field, $padding_defaults[ $index ] );
+			$value    = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, $field, $padding_defaults[ $index ] );
 			$styles[] = str_replace( '_', '-', $field ) . ': ' . $value . 'px';
 		}
-		
-		// Margin
+
+		// Margin.
 		$margin_fields = array( 'margin_top', 'margin_right', 'margin_bottom', 'margin_left' );
-		
+
 		foreach ( $margin_fields as $field ) {
-			$value = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, $field, '0' );
+			$value    = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, $field, '0' );
 			$styles[] = str_replace( '_', '-', $field ) . ': ' . $value . 'px';
 		}
-		
-		// Border
+
+		// Border.
 		$border_fields = array( 'border_top', 'border_right', 'border_bottom', 'border_left' );
-		
+
 		foreach ( $border_fields as $field ) {
-			$width = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, $field, '1' );
-			$side = str_replace( 'border_', '', $field );
+			$width    = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, $field, '1' );
+			$side     = str_replace( 'border_', '', $field );
 			$styles[] = 'border-' . $side . ': ' . $width . 'px solid ' . $border_color;
 		}
-		
-		// Border radius
+
+		// Border radius.
 		$radius_map = array(
-			'border_radius_top' => 'border-top-left-radius',
-			'border_radius_right' => 'border-top-right-radius',
+			'border_radius_top'    => 'border-top-left-radius',
+			'border_radius_right'  => 'border-top-right-radius',
 			'border_radius_bottom' => 'border-bottom-right-radius',
-			'border_radius_left' => 'border-bottom-left-radius'
+			'border_radius_left'   => 'border-bottom-left-radius',
 		);
-		
+
 		foreach ( $radius_map as $field => $css_property ) {
-			$value = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, $field, '50' );
+			$value    = self::infinite_loader_get_dimension_value( $infinite_loader_button_setting, $field, '50' );
 			$styles[] = $css_property . ': ' . $value . 'px';
 		}
-		
+
 		return implode( '; ', $styles );
 	}
 
@@ -640,7 +665,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 * @return string          Button style.
 	 */
 	public function infinite_loader_for_woocommerce_previous_button_style( $style, $setting = array() ) {
-		// Use the same logic as load more button
+		// Use the same logic as load more button.
 		return $this->infinite_loader_for_woocommerce_button_style( $style, $setting );
 	}
 
@@ -656,7 +681,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		if ( ! is_array( $options ) ) {
 			return $default;
 		}
-		
+
 		return isset( $options[ $key ] ) && '' !== $options[ $key ] ? $options[ $key ] : $default;
 	}
 
@@ -670,15 +695,15 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 */
 	private static function infinite_loader_get_dimension_value( $settings, $key, $default = '0' ) {
 		$value = self::infinite_loader_get_option_value( $settings, $key, $default );
-		
-		// Ensure numeric value
+
+		// Ensure numeric value.
 		if ( ! is_numeric( $value ) ) {
 			return $default;
 		}
-		
+
 		$numeric_value = absint( $value );
-		
-		// Limit reasonable range (0-999px)
+
+		// Limit reasonable range (0-999px).
 		return (string) min( 999, max( 0, $numeric_value ) );
 	}
 
@@ -1180,15 +1205,15 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		$result         = '<div class="infinite_display_icon_popup"><div class="infinite_icons_popup">
 		<input type="text" class="infinite_icons_search"><span class="infinite_close_popup"><i class="fa fa-times"></i></span>
 		<div class="infinite_icons_lists">';
-		
+
 		foreach ( $infinite_icons as $infinite_icon ) {
-			// Properly escape the icon class
+			// Properly escape the icon class.
 			$escaped_icon = esc_attr( $infinite_icon );
-			$result .= '<span class="infinite_fa_fa_icon"><span class="infinite_icon_hover"></span><span class="infinite_icon_preview"><i class="fa ' . $escaped_icon . '"></i><span>' . esc_html( $infinite_icon ) . '</span></span></span>';
+			$result      .= '<span class="infinite_fa_fa_icon"><span class="infinite_icon_hover"></span><span class="infinite_icon_preview"><i class="fa ' . $escaped_icon . '"></i><span>' . esc_html( $infinite_icon ) . '</span></span></span>';
 		}
-		
+
 		$result .= '</div></div></div>';
-		
+
 		return $result;
 	}
 
@@ -1198,22 +1223,22 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 * @since 1.0.0
 	 */
 	public function handle_infinite_loader_ajax() {
-		// Check if this is an infinite loader AJAX request
+		// Check if this is an infinite loader AJAX request.
 		if ( ! isset( $_REQUEST['infinite_loader_ajax'] ) ) {
 			return;
 		}
-		
-		// Verify nonce
+
+		// Verify nonce.
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'infinite_loader_ajax_nonce' ) ) {
 			wp_die( esc_html__( 'Security check failed', 'infinite-loader-for-woocommerce' ), 403 );
 		}
-		
-		// Add security headers
+
+		// Add security headers.
 		header( 'X-Content-Type-Options: nosniff' );
 		header( 'X-Frame-Options: SAMEORIGIN' );
 		header( 'X-Robots-Tag: noindex, nofollow' );
-		
-		// Let WordPress continue with normal page rendering
-		// The JavaScript will parse the response
+
+		// Let WordPress continue with normal page rendering.
+		// The JavaScript will parse the response.
 	}
 }

@@ -10,6 +10,11 @@
  * @subpackage Infinite_Loader_For_Woocommerce/edd-license
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! defined( 'EDD_INFINITE_LOADER_STORE_URL' ) ) {
 	define( 'EDD_INFINITE_LOADER_STORE_URL', 'https://wbcomdesigns.com/' ); // you should use your own CONSTANT name, and be sure to replace it throughout this file.
 }
@@ -24,7 +29,7 @@ if ( ! defined( 'EDD_INFINITE_LOADER_PLUGIN_LICENSE_PAGE' ) ) {
 
 if ( ! class_exists( 'EDD_WB_Infinite_Loader_Plugin_Updater' ) ) {
 	// load our custom updater.
-	include dirname( __FILE__ ) . '/EDD_WB_Infinite_Loader_Plugin_Updater.php';
+	include __DIR__ . '/class-edd-wb-infinite-loader-plugin-updater.php';
 }
 
 /**
@@ -69,7 +74,7 @@ add_action( 'admin_init', 'edd_wbcom_infinite_loader_register_option' );
  */
 function edd_infinite_loader_sanitize_license( $new ) {
 	$old = get_option( 'edd_wbcom_infinite_loader_license_key' );
-	if ( $old && $old != $new ) {
+	if ( $old && $old !== $new ) {
 		delete_option( 'edd_wbcom_infinite_loader_license_status' ); // new license has been entered, so must reactivate.
 	}
 	return $new;
@@ -95,7 +100,7 @@ function edd_wbcom_infinite_loader_activate_license() {
 		$api_params = array(
 			'edd_action' => 'activate_license',
 			'license'    => $license,
-			'item_name'  => urlencode( EDD_INFINITE_LOADER_ITEM_NAME ), // the name of our product in EDD.
+			'item_name'  => rawurlencode( EDD_INFINITE_LOADER_ITEM_NAME ), // the name of our product in EDD.
 			'url'        => home_url(),
 		);
 
@@ -123,9 +128,9 @@ function edd_wbcom_infinite_loader_activate_license() {
 				switch ( $license_data->error ) {
 					case 'expired':
 						$message = sprintf(
-							/* translators: %1$s: Expire Time*/
+							/* translators: %s: Expiration date. */
 							__( 'Your license key expired on %s.', 'infinite-loader-for-woocommerce' ),
-							date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, current_time( 'timestamp' ) ) )
+							date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, time() ) )
 						);
 						break;
 
@@ -143,7 +148,7 @@ function edd_wbcom_infinite_loader_activate_license() {
 						break;
 
 					case 'item_name_mismatch':
-						/* translators: %1$s: Item Name*/
+						/* translators: %s: Item name. */
 						$message = sprintf( __( 'This appears to be an invalid license key for %s.', 'infinite-loader-for-woocommerce' ), EDD_INFINITE_LOADER_ITEM_NAME );
 						break;
 
@@ -166,7 +171,7 @@ function edd_wbcom_infinite_loader_activate_license() {
 			$redirect = add_query_arg(
 				array(
 					'wb_infinite_loader_activation' => 'false',
-					'message'                   => urlencode( $message ),
+					'message'                       => rawurlencode( $message ),
 				),
 				$base_url
 			);
@@ -209,7 +214,7 @@ function edd_wbcom_infinite_loader_deactivate_license() {
 		$api_params = array(
 			'edd_action' => 'deactivate_license',
 			'license'    => $license,
-			'item_name'  => urlencode( EDD_INFINITE_LOADER_ITEM_NAME ), // the name of our product in EDD.
+			'item_name'  => rawurlencode( EDD_INFINITE_LOADER_ITEM_NAME ), // the name of our product in EDD.
 			'url'        => home_url(),
 		);
 
@@ -235,7 +240,7 @@ function edd_wbcom_infinite_loader_deactivate_license() {
 			$redirect = add_query_arg(
 				array(
 					'wb_infinite_loader_activation' => 'false',
-					'message'                   => urlencode( $message ),
+					'message'                       => rawurlencode( $message ),
 				),
 				$base_url
 			);
@@ -260,15 +265,10 @@ function edd_wbcom_infinite_loader_deactivate_license() {
 add_action( 'admin_init', 'edd_wbcom_infinite_loader_deactivate_license' );
 
 /**
- * This illustrates how to check if
- * a license key is still valid
- * the updater does this for you,
- * so this is only needed if you
- * want to do something custom
+ * Check if a license key is still valid.
  *
- * @return void
+ * @return false|void
  */
-add_action( 'admin_init', 'edd_wbcom_infinite_loader_check_license' );
 function edd_wbcom_infinite_loader_check_license() {
 	global $wp_version, $pagenow;
 
@@ -277,12 +277,12 @@ function edd_wbcom_infinite_loader_check_license() {
 		$license_data = get_transient( 'edd_wbcom_infinite_loader_license_key_data' );
 		$license      = trim( get_option( 'edd_wbcom_infinite_loader_license_key' ) );
 
-		if ( empty( $license_data ) && $license != '' ) {
+		if ( empty( $license_data ) && '' !== $license ) {
 
 			$api_params = array(
 				'edd_action' => 'check_license',
 				'license'    => $license,
-				'item_name'  => urlencode( EDD_INFINITE_LOADER_ITEM_NAME ),
+				'item_name'  => rawurlencode( EDD_INFINITE_LOADER_ITEM_NAME ),
 				'url'        => home_url(),
 			);
 
@@ -308,9 +308,12 @@ function edd_wbcom_infinite_loader_check_license() {
 		}
 	}
 }
+add_action( 'admin_init', 'edd_wbcom_infinite_loader_check_license' );
 
 /**
- * This is a means of catching errors from the activation method above and displaying it to the customer
+ * Display admin notices for license activation errors.
+ *
+ * @return void
  */
 function edd_wbcom_infinite_loader_admin_notices() {
 	$license_activation = filter_input( INPUT_GET, 'wb_infinite_loader_activation' ) ? filter_input( INPUT_GET, 'wb_infinite_loader_activation' ) : '';
@@ -318,8 +321,8 @@ function edd_wbcom_infinite_loader_admin_notices() {
 	$license_data       = get_transient( 'edd_wbcom_infinite_loader_license_key_data' );
 	$license            = trim( get_option( 'edd_wbcom_infinite_loader_license_key' ) );
 
-	if ( isset( $license_activation ) && ! empty( $error_message ) || ( ! empty( $license_data ) && $license_data->license == 'expired' ) ) {
-		if ( $license_activation === '' ) {
+	if ( ( isset( $license_activation ) && ! empty( $error_message ) ) || ( ! empty( $license_data ) && 'expired' === $license_data->license ) ) {
+		if ( '' === $license_activation ) {
 			$license_activation = $license_data->license ?? '';
 		}
 		switch ( $license_activation ) {
@@ -329,9 +332,9 @@ function edd_wbcom_infinite_loader_admin_notices() {
 				<p>
 				<?php
 				$message = sprintf(
-							/* translators: %1$s: Expire Time*/
+							/* translators: %s: Expiration date. */
 					__( 'Your Infinite Loader For Woocommerce plugin license key expired on %s.', 'infinite-loader-for-woocommerce' ),
-					date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, current_time( 'timestamp' ) ) )
+					date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, time() ) )
 				);
 				echo esc_html( $message );
 				?>
@@ -356,7 +359,7 @@ function edd_wbcom_infinite_loader_admin_notices() {
 		}
 	}
 
-	if ( $license === '' ) {
+	if ( '' === $license ) {
 		?>
 		<div class="notice notice-error is-dismissible">
 			<p>
@@ -367,7 +370,6 @@ function edd_wbcom_infinite_loader_admin_notices() {
 		</div>
 		<?php
 	}
-
 }
 add_action( 'admin_notices', 'edd_wbcom_infinite_loader_admin_notices' );
 
@@ -385,14 +387,14 @@ function edd_wbcom_infinite_loader_render_license_section() {
 
 	$license_output = edd_infinite_loader_active_license_message();
 
-	if ( false !== $status && 'valid' === $status && ! empty( $license_output ) && $license_output['license_data']->license == 'valid' ) {
+	if ( false !== $status && 'valid' === $status && ! empty( $license_output ) && 'valid' === $license_output['license_data']->license ) {
 		$status_class = 'active';
 		$status_text  = 'Active';
-	} else if ( ! empty( $license_output ) && isset( $license_output['license_data']->license ) && $license_output['license_data']->license != '' && $license_output['license_data']->license == 'expired' ) {
+	} elseif ( ! empty( $license_output ) && isset( $license_output['license_data']->license ) && '' !== $license_output['license_data']->license && 'expired' === $license_output['license_data']->license ) {
 		$status_class = 'expired';
 		$status_text  = ucfirst( str_replace( '_', ' ', $license_output['license_data']->license ) );
 
-	} else if ( ! empty( $license_output ) && isset( $license_output['license_data']->license ) && $license_output['license_data']->license != '' && $license_output['license_data']->license == 'invalid' ) {
+	} elseif ( ! empty( $license_output ) && isset( $license_output['license_data']->license ) && '' !== $license_output['license_data']->license && 'invalid' === $license_output['license_data']->license ) {
 		$status_class = 'invalid';
 		$status_text  = ucfirst( str_replace( '_', ' ', $license_output['license_data']->license ) );
 
@@ -419,13 +421,13 @@ function edd_wbcom_infinite_loader_render_license_section() {
 		<?php settings_fields( 'edd_wbcom_infinite_loader_license' ); ?>
 		<table class="form-table wb-license-form-table">
 			<tr>
-				<td class="wb-plugin-name"><?php esc_html_e( $plugin_name, 'infinite-loader-for-woocommerce' ); ?></td>
-				<td class="wb-plugin-version"><?php esc_html_e( $plugin_version, 'infinite-loader-for-woocommerce' ); ?></td>
+				<td class="wb-plugin-name"><?php echo esc_html( $plugin_name ); ?></td>
+				<td class="wb-plugin-version"><?php echo esc_html( $plugin_version ); ?></td>
 				<td class="wb-plugin-license-key">
-					<input id="edd_wbcom_infinite_loader_license_key" name="edd_wbcom_infinite_loader_license_key" type="text" class="regular-text" value="<?php esc_attr_e( $license, 'infinite-loader-for-woocommerce' ); ?>" />
+					<input id="edd_wbcom_infinite_loader_license_key" name="edd_wbcom_infinite_loader_license_key" type="text" class="regular-text" value="<?php echo esc_attr( $license ); ?>" />
 					<p><?php echo esc_html( $license_output['message'] ); ?></p>
 				</td>
-				<td class="wb-license-status <?php echo esc_attr( $status_class ); ?>"><?php esc_html_e( $status_text, 'infinite-loader-for-woocommerce' ); ?></td>
+				<td class="wb-license-status <?php echo esc_attr( $status_class ); ?>"><?php echo esc_html( $status_text ); ?></td>
 				<td class="wb-license-action">
 					<?php
 					if ( false !== $status && 'valid' === $status ) {
@@ -463,7 +465,7 @@ function edd_infinite_loader_active_license_message() {
 			$api_params = array(
 				'edd_action' => 'check_license',
 				'license'    => $license,
-				'item_name'  => urlencode( EDD_INFINITE_LOADER_ITEM_NAME ),
+				'item_name'  => rawurlencode( EDD_INFINITE_LOADER_ITEM_NAME ),
 				'url'        => home_url(),
 			);
 
@@ -481,10 +483,10 @@ function edd_infinite_loader_active_license_message() {
 			return false;
 		}
 
-			$output = array();
+			$output                 = array();
 			$output['license_data'] = json_decode( wp_remote_retrieve_body( $response ) );
-			$message = '';
-			// make sure the response came back okay
+			$message                = '';
+			// Make sure the response came back okay.
 		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
 
 			if ( is_wp_error( $response ) ) {
@@ -494,25 +496,25 @@ function edd_infinite_loader_active_license_message() {
 			}
 		} else {
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-			// Get expire date
+			// Get expire date.
 			$expires = false;
-			if ( isset( $license_data->expires ) && 'lifetime' != $license_data->expires ) {
-				$expires    = date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, current_time( 'timestamp' ) ) );
-			} elseif ( isset( $license_data->expires ) && 'lifetime' == $license_data->expires ) {
+			if ( isset( $license_data->expires ) && 'lifetime' !== $license_data->expires ) {
+				$expires = date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, time() ) );
+			} elseif ( isset( $license_data->expires ) && 'lifetime' === $license_data->expires ) {
 				$expires = 'lifetime';
 			}
 
-			if ( $license_data->license == 'valid' ) {
-				// Get site counts
+			if ( 'valid' === $license_data->license ) {
+				// Get site counts.
 				$site_count    = $license_data->site_count;
 				$license_limit = $license_data->license_limit;
-				$message = 'License key is active.';
-				if ( isset( $expires ) && 'lifetime' != $expires ) {
-					/* translate %s */
+				$message       = 'License key is active.';
+				if ( isset( $expires ) && 'lifetime' !== $expires ) {
+					/* translators: %s: Expiration date. */
 					$message .= sprintf( __( 'Expires %s.', 'infinite-loader-for-woocommerce' ), $expires ) . ' ';
 				}
 				if ( $license_limit ) {
-					/* translate  %1$s/%2$s */
+					/* translators: %1$s: Active site count, %2$s: License limit. */
 					$message .= sprintf( __( 'You have %1$s/%2$s-sites activated.', 'infinite-loader-for-woocommerce' ), $site_count, $license_limit );
 				}
 			}

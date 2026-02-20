@@ -9,7 +9,7 @@
  * @subpackage Infinite_Loader_For_Woocommerce/includes
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -34,35 +34,34 @@ class Infinite_Loader_For_Woocommerce_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-		// Check if WooCommerce is active
+		// Check if WooCommerce is active.
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			deactivate_plugins( plugin_basename( __FILE__ ) );
-			wp_die( 
+			wp_die(
 				esc_html__( 'Infinite Loader for WooCommerce requires WooCommerce to be installed and activated.', 'infinite-loader-for-woocommerce' ),
 				esc_html__( 'Plugin Activation Error', 'infinite-loader-for-woocommerce' ),
 				array( 'back_link' => true )
 			);
 		}
 
-		// Use atomic operations for option creation
-   		 $infinite_loader_default_options = self::infinite_loader_get_default_options();
+		// Use atomic operations for option creation.
+		$infinite_loader_default_options = self::infinite_loader_get_default_options();
 
 		foreach ( $infinite_loader_default_options as $option_name => $default_values ) {
 			$existing_option = get_option( $option_name );
-			
+
 			if ( false === $existing_option ) {
-				// Option doesn't exist, create it
+				// Option doesn't exist, create it.
 				add_option( $option_name, $default_values );
 			} else {
-				// Option exists, merge with defaults for new keys
+				// Option exists, merge with defaults for new keys.
 				$merged_options = array_merge( $default_values, $existing_option );
 				update_option( $option_name, $merged_options );
 			}
 		}
 
-		// Set activation flag for welcome redirect
-    	set_transient( 'infinite_loader_activation_redirect', true, 30 );
-		
+		// Set activation flag for welcome redirect.
+		set_transient( 'infinite_loader_activation_redirect', true, 30 );
 	}
 
 	/**
@@ -72,7 +71,7 @@ class Infinite_Loader_For_Woocommerce_Activator {
 	 */
 	private static function infinite_loader_get_default_options() {
 		return array(
-			'infinite_loader_admin_general_option' => array(
+			'infinite_loader_admin_general_option'         => array(
 				'product_loading_type' => 'pagination',
 				'product_per_page'     => '8',
 				'loading_image'        => 'fa-spinner',
@@ -80,7 +79,7 @@ class Infinite_Loader_For_Woocommerce_Activator {
 				'do_not_update_url'    => 'no',
 				'enable_font_awesome'  => 'yes',
 			),
-			'infinite_loader_admin_button_option' => array(
+			'infinite_loader_admin_button_option'          => array(
 				'button_text'                  => 'Load More',
 				'background_color'             => '#1d76da',
 				'background_color_mouse_hover' => '#0e4da0',

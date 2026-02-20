@@ -15,7 +15,7 @@
  * Plugin Name:       Wbcom Designs – Infinite Loader for WooCommerce
  * Plugin URI:        https://wbcomdesigns.com/downloads/infinite-loader-for-woocommerce/
  * Description:       Streamline product browsing with AJAX-powered infinite scroll or a "Load More" button. Enhance user experience, reduce page loads, and keep customers engaged on your WooCommerce store.
- * Version:           1.2.2
+ * Version:           1.2.4
  * Author:            Wbcom Designs
  * Author URI:        https://wbcomdesigns.com/
  * License:           GPL-2.0+
@@ -24,7 +24,7 @@
  * Domain Path:       /languages
  * Requires Plugins: woocommerce
  * Requires at least: 5.0
- * Tested up to:      6.4
+ * Tested up to:      6.9
  * WC requires at least: 3.0
  * WC tested up to:   8.5
  */
@@ -37,7 +37,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION', '1.2.2' );
+define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION', '1.2.4' );
 
 /**
  * The code that runs during plugin activation.
@@ -78,13 +78,13 @@ if ( ! function_exists( 'infinite_loader_for_woocommerce_check_woocommerce' ) ) 
 			add_action( 'admin_notices', 'infinite_loader_for_woocommerce_admin_notice' );
 			return;
 		}
-		
-		// Check WooCommerce version
+
+		// Check WooCommerce version.
 		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '3.0', '<' ) ) {
 			add_action( 'admin_notices', 'infinite_loader_for_woocommerce_version_notice' );
 			return;
 		}
-		
+
 		run_infinite_loader_for_woocommerce();
 	}
 }
@@ -101,7 +101,7 @@ function infinite_loader_for_woocommerce_admin_notice() {
 
 	$infinite_loader_plugin = esc_html__( 'Infinite Loader for WooCommerce', 'infinite-loader-for-woocommerce' );
 	$woo_plugin             = esc_html__( 'WooCommerce', 'infinite-loader-for-woocommerce' );
-	
+
 	$install_url = wp_nonce_url(
 		add_query_arg(
 			array(
@@ -112,18 +112,18 @@ function infinite_loader_for_woocommerce_admin_notice() {
 		),
 		'install-plugin_woocommerce'
 	);
-	
+
 	?>
 	<div class="notice notice-error">
 		<p>
 			<?php
-			/* translators: 1: Plugin name 2: WooCommerce */
 			printf(
+				/* translators: 1: Plugin name, 2: WooCommerce. */
 				esc_html__( '%1$s requires %2$s to be installed and active.', 'infinite-loader-for-woocommerce' ),
 				'<strong>' . esc_html( $infinite_loader_plugin ) . '</strong>',
 				'<strong>' . esc_html( $woo_plugin ) . '</strong>'
 			);
-			
+
 			if ( current_user_can( 'install_plugins' ) ) {
 				echo ' <a href="' . esc_url( $install_url ) . '">' . esc_html__( 'Install WooCommerce', 'infinite-loader-for-woocommerce' ) . '</a>';
 			}
@@ -160,19 +160,19 @@ function infinite_loader_for_woocommerce_version_notice() {
  */
 function infinite_loader_plugin_redirect_to_welcome_page( $plugin ) {
 	if ( plugin_basename( __FILE__ ) === $plugin && class_exists( 'WooCommerce' ) ) {
-		// Check nonce for security
+		// Check nonce for security.
 		$nonce_verified = isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'activate-plugin_' . $plugin );
-		
-		$redirect = $nonce_verified && 
-		           isset( $_REQUEST['action'] ) && 'activate' === $_REQUEST['action'] && 
-		           isset( $_REQUEST['plugin'] ) && $_REQUEST['plugin'] === $plugin;
-		
+
+		$redirect = $nonce_verified &&
+					isset( $_REQUEST['action'] ) && 'activate' === $_REQUEST['action'] &&
+					isset( $_REQUEST['plugin'] ) && $_REQUEST['plugin'] === $plugin;
+
 		if ( $redirect && ! isset( $_REQUEST['activate-multi'] ) ) {
-			wp_safe_redirect( 
-				add_query_arg( 
-					array( 'page' => 'infinite-loader-for-woocommerce-settings' ), 
-					admin_url( 'admin.php' ) 
-				) 
+			wp_safe_redirect(
+				add_query_arg(
+					array( 'page' => 'infinite-loader-for-woocommerce-settings' ),
+					admin_url( 'admin.php' )
+				)
 			);
 			exit;
 		}
@@ -212,9 +212,9 @@ function infinite_loader_for_woocommerce_plugin_action_links( $links ) {
 		esc_url( admin_url( 'admin.php?page=infinite-loader-for-woocommerce-settings' ) ),
 		esc_html__( 'Settings', 'infinite-loader-for-woocommerce' )
 	);
-	
+
 	array_unshift( $links, $settings_link );
-	
+
 	return $links;
 }
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'infinite_loader_for_woocommerce_plugin_action_links' );
@@ -222,8 +222,11 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'infinite_load
 /**
  * Declare HPOS compatibility
  */
-add_action( 'before_woocommerce_init', function() {
-	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+add_action(
+	'before_woocommerce_init',
+	function () {
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+		}
 	}
-} );
+);

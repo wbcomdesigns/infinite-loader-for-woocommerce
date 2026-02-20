@@ -12,7 +12,7 @@
  * @subpackage Infinite_Loader_For_Woocommerce/includes
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -77,7 +77,7 @@ class Infinite_Loader_For_Woocommerce {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'infinite-loader-for-woocommerce';
-		
+
 		$this->define_constants();
 		$this->load_dependencies();
 		$this->set_locale();
@@ -94,9 +94,9 @@ class Infinite_Loader_For_Woocommerce {
 	 */
 	private function define_constants() {
 		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_FILE', __FILE__ );
-		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_URL', plugin_dir_url( dirname( __FILE__ ) ) );
-		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PATH', plugin_dir_path( dirname( __FILE__ ) ) );
-		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_TEMPLATE_PATH', plugin_dir_path( dirname( __FILE__ ) ) . '/templates/' );
+		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_URL', plugin_dir_url( __DIR__ ) );
+		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PATH', plugin_dir_path( __DIR__ ) );
+		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_TEMPLATE_PATH', plugin_dir_path( __DIR__ ) . '/templates/' );
 	}
 
 	/**
@@ -136,40 +136,40 @@ class Infinite_Loader_For_Woocommerce {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-infinite-loader-for-woocommerce-loader.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-infinite-loader-for-woocommerce-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-infinite-loader-for-woocommerce-i18n.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-infinite-loader-for-woocommerce-i18n.php';
 
 		/**
 		 * The class responsible add wrapper of admin settings.
 		 */
-		if ( file_exists( plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wbcom/wbcom-admin-settings.php' ) ) {
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wbcom/wbcom-admin-settings.php';
+		if ( file_exists( plugin_dir_path( __DIR__ ) . 'admin/wbcom/class-wbcom-admin-settings.php' ) ) {
+			require_once plugin_dir_path( __DIR__ ) . 'admin/wbcom/class-wbcom-admin-settings.php';
 		}
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-infinite-loader-for-woocommerce-admin.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-infinite-loader-for-woocommerce-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-infinite-loader-for-woocommerce-public.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/class-infinite-loader-for-woocommerce-public.php';
 
 		/** This file adds the plugin license module UI. */
-		if ( file_exists( plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wbcom/wbcom-paid-plugin-settings.php' ) ) {
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/wbcom/wbcom-paid-plugin-settings.php';
+		if ( file_exists( plugin_dir_path( __DIR__ ) . 'admin/wbcom/class-wbcom-paid-plugin-settings.php' ) ) {
+			require_once plugin_dir_path( __DIR__ ) . 'admin/wbcom/class-wbcom-paid-plugin-settings.php';
 		}
 
 		/** This file is responsible for the plugin license functionality. */
-		if ( file_exists( plugin_dir_path( dirname( __FILE__ ) ) . 'edd-license/edd-plugin-license.php' ) ) {
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'edd-license/edd-plugin-license.php';
+		if ( file_exists( plugin_dir_path( __DIR__ ) . 'edd-license/edd-plugin-license.php' ) ) {
+			require_once plugin_dir_path( __DIR__ ) . 'edd-license/edd-plugin-license.php';
 		}
 
 		$this->loader = new Infinite_Loader_For_Woocommerce_Loader();
@@ -206,8 +206,8 @@ class Infinite_Loader_For_Woocommerce {
 		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_more_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_button_style', 10, 2 );
 		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_previous_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_previous_button_style', 10, 2 );
 		$this->loader->add_action( 'in_admin_header', $plugin_admin, 'wbcom_hide_all_admin_notices_from_setting_page' );
-		
-		// Add AJAX handler
+
+		// Add AJAX handler.
 		$this->loader->add_action( 'template_redirect', $plugin_admin, 'handle_infinite_loader_ajax' );
 	}
 
@@ -240,13 +240,13 @@ class Infinite_Loader_For_Woocommerce {
 	 * @access   private
 	 */
 	private function define_security_hooks() {
-		// Add Content Security Policy headers
+		// Add Content Security Policy headers.
 		$this->loader->add_action( 'send_headers', $this, 'add_security_headers' );
-		
-		// Sanitize options on save
+
+		// Sanitize options on save.
 		$this->loader->add_filter( 'pre_update_option_infinite_loader_admin_css_js_option', $this, 'sanitize_css_js_option', 10, 2 );
-		
-		// Add rate limiting check
+
+		// Add rate limiting check.
 		$this->loader->add_action( 'init', $this, 'check_rate_limit' );
 	}
 
@@ -254,26 +254,26 @@ class Infinite_Loader_For_Woocommerce {
 	 * Add security headers
 	 */
 	public function add_security_headers() {
-		// Only add headers on frontend where plugin is active
+		// Only add headers on frontend where plugin is active.
 		if ( is_admin() ) {
 			return;
 		}
-		
-		// Check if we're on a WooCommerce page
+
+		// Check if we're on a WooCommerce page.
 		if ( ! is_shop() && ! is_product_category() && ! is_product_tag() && ! is_product_taxonomy() ) {
 			return;
 		}
-		
-		// Prevent XSS attacks
+
+		// Prevent XSS attacks.
 		header( 'X-XSS-Protection: 1; mode=block' );
-		
-		// Prevent clickjacking
+
+		// Prevent clickjacking.
 		header( 'X-Frame-Options: SAMEORIGIN' );
-		
-		// Prevent MIME type sniffing
+
+		// Prevent MIME type sniffing.
 		header( 'X-Content-Type-Options: nosniff' );
-		
-		// Referrer Policy
+
+		// Referrer Policy.
 		header( 'Referrer-Policy: strict-origin-when-cross-origin' );
 	}
 
@@ -288,34 +288,34 @@ class Infinite_Loader_For_Woocommerce {
 		if ( ! is_array( $new_value ) ) {
 			return $old_value;
 		}
-		
-		// Sanitize custom CSS - remove any script tags
+
+		// Sanitize custom CSS - remove any script tags.
 		if ( isset( $new_value['custom_css'] ) ) {
 			$new_value['custom_css'] = wp_strip_all_tags( $new_value['custom_css'] );
-			
-			// Remove any @import statements that could load external resources
+
+			// Remove any @import statements that could load external resources.
 			$new_value['custom_css'] = preg_replace( '/@import\s+(?:url\s*\(\s*)?["\']?[^"\')]+["\']?\s*\)?[^;]*;?/i', '', $new_value['custom_css'] );
-			
-			// Remove JavaScript URLs
+
+			// Remove JavaScript URLs.
 			$new_value['custom_css'] = preg_replace( '/javascript\s*:/i', '', $new_value['custom_css'] );
-			
-			// Remove expression() which can execute JavaScript in older IE
+
+			// Remove expression() which can execute JavaScript in older IE.
 			$new_value['custom_css'] = preg_replace( '/expression\s*\(/i', '', $new_value['custom_css'] );
 		}
-		
-		// Sanitize JavaScript - remove potentially dangerous code
+
+		// Sanitize JavaScript - remove potentially dangerous code.
 		$js_fields = array( 'before_update', 'after_update' );
 		foreach ( $js_fields as $field ) {
 			if ( isset( $new_value[ $field ] ) ) {
 				$js = $new_value[ $field ];
-				
-				// Remove PHP tags
+
+				// Remove PHP tags.
 				$js = str_replace( array( '<?php', '<?', '?>' ), '', $js );
-				
-				// Remove script tags
+
+				// Remove script tags.
 				$js = preg_replace( '/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/mi', '', $js );
-				
-				// Check for dangerous functions
+
+				// Check for dangerous functions.
 				$dangerous_patterns = array(
 					'/\beval\s*\(/i',
 					'/\bnew\s+Function\s*\([^)]*\)/i',
@@ -332,21 +332,21 @@ class Infinite_Loader_For_Woocommerce {
 					'/\bsetTimeout\s*\(\s*["\']/',
 					'/\bsetInterval\s*\(\s*["\']/',
 				);
-				
+
 				foreach ( $dangerous_patterns as $pattern ) {
 					if ( preg_match( $pattern, $js ) ) {
-						// Log potential security issue
+						// Log potential security issue.
 						error_log( 'Infinite Loader: Potentially dangerous JavaScript pattern detected: ' . $pattern );
-						
-						// Remove the dangerous code
+
+						// Remove the dangerous code.
 						$js = preg_replace( $pattern, '/* Code removed for security */', $js );
 					}
 				}
-				
+
 				$new_value[ $field ] = $js;
 			}
 		}
-		
+
 		return $new_value;
 	}
 
@@ -354,32 +354,32 @@ class Infinite_Loader_For_Woocommerce {
 	 * Check rate limit for AJAX requests
 	 */
 	public function check_rate_limit() {
-		// Only check for AJAX requests
+		// Only check for AJAX requests.
 		if ( ! isset( $_REQUEST['infinite_loader_ajax'] ) ) {
 			return;
 		}
-		
-		$user_ip = $this->get_client_ip();
+
+		$user_ip       = $this->get_client_ip();
 		$transient_key = 'infinite_loader_rate_' . md5( $user_ip );
-		$requests = get_transient( $transient_key );
-		
+		$requests      = get_transient( $transient_key );
+
 		if ( false === $requests ) {
 			$requests = 0;
 		}
-		
-		$requests++;
-		
-		// Default rate limit: 30 requests per minute
+
+		++$requests;
+
+		// Default rate limit: 30 requests per minute.
 		$rate_limit = apply_filters( 'infinite_loader_rate_limit', 30 );
-		
+
 		if ( $requests > $rate_limit ) {
-			wp_die( 
-				esc_html__( 'Rate limit exceeded. Please try again later.', 'infinite-loader-for-woocommerce' ), 
+			wp_die(
+				esc_html__( 'Rate limit exceeded. Please try again later.', 'infinite-loader-for-woocommerce' ),
 				esc_html__( 'Too Many Requests', 'infinite-loader-for-woocommerce' ),
 				array( 'response' => 429 )
 			);
 		}
-		
+
 		set_transient( $transient_key, $requests, MINUTE_IN_SECONDS );
 	}
 
@@ -390,20 +390,20 @@ class Infinite_Loader_For_Woocommerce {
 	 */
 	private function get_client_ip() {
 		$ip_keys = array( 'HTTP_CF_CONNECTING_IP', 'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR' );
-		
+
 		foreach ( $ip_keys as $key ) {
-			if ( array_key_exists( $key, $_SERVER ) === true ) {
-				foreach ( explode( ',', $_SERVER[ $key ] ) as $ip ) {
+			if ( true === array_key_exists( $key, $_SERVER ) ) {
+				foreach ( explode( ',', sanitize_text_field( wp_unslash( $_SERVER[ $key ] ) ) ) as $ip ) {
 					$ip = trim( $ip );
-					
-					if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) !== false ) {
+
+					if ( false !== filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
 						return $ip;
 					}
 				}
 			}
 		}
-		
-		return isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0';
+
+		return isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '0.0.0.0';
 	}
 
 	/**
