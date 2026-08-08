@@ -26,6 +26,32 @@ Every surface this product is known by. When these drift, a site owner reports a
 | Basecamp board | `Infinite Loader for WooCommerce` (42374799) |
 | Basecamp URL | https://3.basecamp.com/5798509/projects/42374799 |
 
+## Current Task List
+
+Ordered by how many store owners are affected, not by how interesting the code is.
+Derived from a code audit on 2026-08-08 that verified every open Basecamp card against this branch.
+**Work happens on this branch (`1.2.4`).**
+
+### 1. Ship blocker - gate this release on it
+- [ ] **The shipped `.min.js` is stale and every production site runs it.** Built at `13506ed` (16 Jun); the AJAX hardening landed at `5127dcd` (20 Jun) and was never rebuilt. Customers run code with no timeout, no URL validation, no scroll throttle, and a retry handler bound inside `complete:` that duplicates on every request - the repeating-products symptom. `public/class-infinite-loader-for-woocommerce-public.php:150-158` serves min whenever `SCRIPT_DEBUG` is off.
+- [ ] **Add a build gate** that fails the release if any `.min.js` is older than its source, or this recurs silently.
+
+### 2. Performance the owner will feel
+- [ ] **Page caching is defeated** - a per-user nonce is appended to the archive URL (`public/js/infinite_loader_products.js:224-227`) so every request misses Varnish/WP Rocket/Cloudflare. That nonce is never verified for this request. Dropping it is a one-line change.
+- [ ] **Each load re-renders the whole page** (`:221-223`, `:402`) and discards header/footer/menus. ~125 full renders to browse a 2,000-product catalogue.
+- [ ] **Infinite scroll has no bottom-proximity check** (`:141-152`) - it chain-loads the catalogue on any scroll event.
+
+### 3. Later - kills the theme-selector bug class
+- [ ] Replace selector-based DOM scraping (`get_woocommerce_selectors()`, `:166-185`) with a REST route returning only product HTML. Size L. Not before the build fix.
+
+### Do not rework
+Four bug cards were closed on 2026-08-08 as already-fixed or wrong-premise. In particular, the proposed 5s TTL DOM cache would be a **regression** - the cache must invalidate on append, which `refresh()` at `:443` already does.
+
+### Ground rules for this list
+- A card is a lead, not a spec. Several open cards were found to be already fixed or factually wrong about this tree - re-verify before building.
+- Fix at the seam, not on the screen that reported it. Where a fix has a shared cause, the entry below says so.
+- Most customers do not run our themes. Verify on a generic theme (Storefront or a block theme), not only on Reign/BuddyX.
+
 ## What It Does
 Replaces WooCommerce's default shop pagination with infinite scroll or a Load More / Load Previous button. Products for the next page are fetched over AJAX and appended in place, so browsing a catalogue never triggers a full page load.
 
