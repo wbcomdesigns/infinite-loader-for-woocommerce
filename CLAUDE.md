@@ -12,6 +12,20 @@
 - **Pro Version:** none (single tier, EDD-licensed)
 - **Basecamp:** https://3.basecamp.com/5798509/projects/42374799
 
+## Names & Identity
+
+Every surface this product is known by. When these drift, a site owner reports a bug under one name and support searches for another.
+
+| Surface | Value |
+|---|---|
+| Plugin Name (what the site owner sees) | `Wbcom Designs – Infinite Loader for WooCommerce` |
+| Install slug (`wp-content/plugins/`) | `infinite-loader-for-woocommerce` |
+| Git repo | `infinite-loader-for-woocommerce` |
+| Text domain | `infinite-loader-for-woocommerce` |
+| readme.txt title | `Wbcom Designs – Infinite Loader for WooCommerce` |
+| Basecamp board | `Infinite Loader for WooCommerce` (42374799) |
+| Basecamp URL | https://3.basecamp.com/5798509/projects/42374799 |
+
 ## What It Does
 Replaces WooCommerce's default shop pagination with infinite scroll or a Load More / Load Previous button. Products for the next page are fetched over AJAX and appended in place, so browsing a catalogue never triggers a full page load.
 
