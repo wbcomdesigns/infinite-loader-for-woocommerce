@@ -33,8 +33,8 @@ Two places, deliberately, and they reconcile:
 | | |
 |---|---|
 | **Basecamp board** | [Infinite Loader for WooCommerce](https://3.basecamp.com/5798509/projects/42374799) |
-| **Cards to work** | **7** — 2 in Bugs, 4 in Scope, 1 in Ready for Development |
-| **Checklist below** | **22** items on branch `1.2.4` |
+| **Cards to work** | **8** — 2 in Bugs, 5 in Scope, 1 in Ready for Development |
+| **Checklist below** | **31** items on branch `1.2.4` |
 
 **Why the two numbers differ.** A card is the trackable unit a person picks up; a checklist item is one verifiable step inside it. The portfolio-floor items in particular repeat across all 12 plugins — four suite-wide faults, counted once per plugin here.
 
@@ -82,6 +82,34 @@ Four bug cards were closed on 2026-08-08 as already-fixed or wrong-premise. In p
 - [ ] Its real problems are not code-health ones: the stale minified bundle and the cache-defeating nonce (main task list). Do those first.
 - [ ] **No block and no shortcode** - the load-more surface cannot be placed on a block theme.
 - [ ] 20 advisory violations remain, mostly focus rings and logical properties - the portfolio floor pass covers them.
+
+### Rebuild the admin panel to the standard shell
+
+The one screen every store owner sees, and the least invested-in across the suite. Build to the pattern in
+**Who Viewed My Profile** (`who-viewed-my-profile`, `/wp-admin/admin.php?page=bp-profile-views-settings` on the
+release-skill site) - roughly 2,000 lines, already solved, copy it rather than reinvent.
+
+```
+includes/admin/class-<prefix>-admin.php   controller + get_tabs() registry + get_overview_stats()
+includes/admin/views/shell.php            page header, sidebar nav, body slot
+includes/admin/views/overview.php         stat tiles + config snapshot + quick actions
+includes/admin/views/settings-*.php       one file per settings group
+assets/css/admin.css
+```
+
+- [ ] **Land on an Overview, not a settings form.** Opening the plugin answers "what is this doing on my store right now?" before offering a single input.
+- [ ] **This plugin's Overview should surface:** load mode in use (scroll or button), products per load, and which theme selectors resolved on this site.
+- [ ] **Stat tiles each carry an explanatory caption.** A bare number is not information - the reference writes "Every row recorded in the profile-views table" under its count.
+- [ ] **A "Current configuration" snapshot** written as consequences, not stored values - "Yes, anonymous visits are stored but filtered out of aggregate counts", never `exclude_logout_user_count: 1`.
+- [ ] **Quick actions** routing to the tab that changes the thing just described.
+- [ ] **Sidebar generated from a tab registry** - one array keyed by slug with `label`, `icon`, `group` (main / settings / account). Adding a screen touches one array, not markup in three places.
+- [ ] **Version pill in the header; dependency state shown on screen** rather than rendering an empty dashboard.
+- [ ] **Replace the shared `admin/wbcom/` header/nav framework** where present - do not layer the new shell on top of it.
+- [ ] **Verify at 1440px and 390px, light and dark, LTR and RTL.** Colours from CSS custom properties, never hardcoded hex.
+
+**Two things that will bite:**
+- `<hr class="wp-header-end">` immediately after the header is **required**. Without it core's `common.js` re-parents every `.notice` to the first `<h1>` and the "Settings saved" banner lands between the title and subtitle. The reference documents this in a comment - keep the comment.
+- Call `settings_errors()` yourself in the shell, after that marker.
 
 ### The standard every plugin in this suite is measured against
 We are not auditing against each plugin's own history - we are auditing against what a WooCommerce plugin **should** provide a store owner and a developer extending it. Scored across all 12 plugins on 2026-08-08.
