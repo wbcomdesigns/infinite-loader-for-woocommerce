@@ -65,7 +65,6 @@ infinite-loader-for-woocommerce/
 │   │   └── infinite-loader-for-woocommerce-admin.js
 │   └── partials/
 │       ├── infinite-loader-for-woocommerce-setting-*.php
-│       └── infinite-loader-for-woocommerce-welcome-page.php
 ├── includes/
 │   ├── class-infinite-loader-for-woocommerce.php
 │   ├── class-infinite-loader-for-woocommerce-activator.php
@@ -117,6 +116,27 @@ $(document).trigger('infinite_loader_after_style_set');
 ```
 
 ### Filters
+
+#### Loading Behaviour Filters
+
+```php
+// How close to the end of the product list infinite scroll starts loading,
+// in pixels. Default 300. Raise it to prefetch earlier, lower it to load
+// later. Before 1.2.4 there was no distance check at all and the whole
+// catalogue loaded from the first scroll event.
+add_filter( 'infinite_loader_scroll_threshold', function () {
+    return 800;
+} );
+
+// Answer a load-more request with the product grid alone (default), or return
+// false to render the full archive and let the script scrape it, as versions
+// before 1.2.4 did.
+//
+// Only worth turning off for a theme that builds its shop loop somewhere
+// other than the standard WooCommerce loop templates, where the appended
+// markup can come back different from the markup rendered on first paint.
+add_filter( 'infinite_loader_render_products_only', '__return_false' );
+```
 
 #### Selector Filters
 ```php

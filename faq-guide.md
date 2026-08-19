@@ -52,7 +52,7 @@ Yes, the plugin is free to use. We also offer a Pro version with additional feat
 
 ### How do I set it up quickly?
 1. Install and activate the plugin
-2. Go to WB Plugins → Infinite Loader for WooCommerce
+2. Go to WB Plugins → Infinite Loader
 3. Choose your loading type in General settings
 4. Save changes and visit your shop page
 

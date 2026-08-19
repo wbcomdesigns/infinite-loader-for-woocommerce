@@ -1,17 +1,17 @@
-# Copyright (C) 2025 Wbcom Designs
+# Copyright (C) 2026 Wbcom Designs
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Wbcom Designs – Infinite Loader for WooCommerce 1.2.2\n"
+"Project-Id-Version: Wbcom Designs – Infinite Loader for WooCommerce 1.2.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/infinite-loader-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-19T15:20:20+05:30\n"
+"POT-Creation-Date: 2026-08-19T07:11:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: infinite-loader-for-woocommerce\n"
 
 #. Plugin Name of the plugin
@@ -26,7 +26,6 @@ msgstr ""
 
 #. Description of the plugin
 #: infinite-loader-for-woocommerce.php
-#: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:22
 msgid "Streamline product browsing with AJAX-powered infinite scroll or a \"Load More\" button. Enhance user experience, reduce page loads, and keep customers engaged on your WooCommerce store."
 msgstr ""
 
@@ -40,44 +39,124 @@ msgstr ""
 msgid "https://wbcomdesigns.com/"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:157
+#: admin/class-infinite-loader-for-woocommerce-admin.php:79
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:210
+#: admin/class-infinite-loader-for-woocommerce-admin.php:211
+#: admin/class-infinite-loader-for-woocommerce-admin.php:260
+msgid "Infinite Loader"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:212
+msgid "Load more and infinite scroll for WooCommerce"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:213
+msgid "Infinite Loader settings sections"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:214
+msgid "Pro"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:234
+#: admin/class-infinite-loader-for-woocommerce-admin.php:235
+#: lib/wbcom-settings/class-wbcom-settings-page.php:210
 msgid "WB Plugins"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:158
-#: admin/class-infinite-loader-for-woocommerce-admin.php:232
+#: admin/class-infinite-loader-for-woocommerce-admin.php:263
+msgid "Overview"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:267
 msgid "General"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:161
-#: admin/class-infinite-loader-for-woocommerce-admin.php:183
-#: infinite-loader-for-woocommerce.php:83
-msgid "Infinite Loader for WooCommerce"
-msgstr ""
-
-#. translators: %s:
-#: admin/class-infinite-loader-for-woocommerce-admin.php:185
-msgid "Version %s"
-msgstr ""
-
-#: admin/class-infinite-loader-for-woocommerce-admin.php:228
-msgid "Welcome"
-msgstr ""
-
-#: admin/class-infinite-loader-for-woocommerce-admin.php:236
+#: admin/class-infinite-loader-for-woocommerce-admin.php:271
 msgid "Button Style"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:240
+#: admin/class-infinite-loader-for-woocommerce-admin.php:275
 msgid "Previous Button Style"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:244
+#: admin/class-infinite-loader-for-woocommerce-admin.php:279
 msgid "JavaScript/CSS"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:248
+#: admin/class-infinite-loader-for-woocommerce-admin.php:286
+msgid "Help"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:289
 msgid "FAQ"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:351
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:45
+msgid "Infinity Scroll"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:352
+msgid "Load More button"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:353
+msgid "AJAX pagination"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:357
+msgid "How your shop loads products"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:361
+msgid "Loading style"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:365
+msgid "Products per load"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:370
+msgid "Using the theme or WooCommerce default"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:375
+msgid "Address bar follows the shopper"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:379
+msgid "Yes - the Back button returns them where they were"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:380
+msgid "No"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:385
+#: infinite-loader-for-woocommerce.php:123
+msgid "WooCommerce"
+msgstr ""
+
+#. translators: %s: WooCommerce version.
+#: admin/class-infinite-loader-for-woocommerce-admin.php:390
+#, php-format
+msgid "%s active"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:391
+msgid "Not active"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:398
+msgid "Change how products load"
+msgstr ""
+
+#: admin/class-infinite-loader-for-woocommerce-admin.php:401
+msgid "View your shop"
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:22
@@ -96,1213 +175,617 @@ msgstr ""
 msgid "Yes, this plugin requires WooCommerce to be installed and activated."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:40
-msgid "Minimum Requirements:"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:42
-msgid "WordPress 5.0 or higher"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:43
-msgid "WooCommerce 3.0 or higher"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:44
-msgid "PHP 7.4 or higher"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:55
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:49
 msgid "What is \"Products Loading Type\" ?"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:58
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:52
 msgid "This setting allows you to choose how products are loaded on your shop page using ajax. You can select from:"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:60
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:54
 msgid "Load More Button: Users click a load more button to load more products."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:61
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:55
 msgid "Infinite Loading: Products automatically load as users scroll down."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:62
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:56
 msgid "Pagination: Products are split across multiple pages with navigation controls."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:73
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:67
 msgid "What does \"Prevent URL Update on Page Load\" mean?"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:76
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:70
 msgid "Enabling this option stops the browser from changing the URL when new products are loaded dynamically. This is useful for maintaining clean URLs and avoiding unnecessary reloads."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:86
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:80
 msgid "How to add custom css?"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:89
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:83
 msgid "Follow the below steps to apply custom css to the Load More/Load Previous Buttons :"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:91
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:85
 msgid "Navigate to Plugin Settings > Button Style > Custom CSS Class."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:92
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:86
 msgid "Add a custom class for the button in the field provided."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:93
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:87
 msgid "Navigate to Plugin Settings > Javascript/CSS > Custom CSS."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:94
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:88
 msgid "Add your custom css in the field provided and save the changes."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:96
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:90
 msgid "Note : Similarly you can add the custom css for the Load Previous Button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:19
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:24
 msgid "Button Style Settings"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:31
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:31
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:36
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:36
 msgid "Custom CSS Class"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:33
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:38
 msgid "Add a custom CSS class to apply additional styling to the Load More button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:42
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:42
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:47
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:47
 msgid "Button Preview"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:44
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:49
 msgid "Preview how the Load More button will appear with your current settings."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:55
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:60
 msgid "Load More Button Text"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:57
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:62
 msgid "Enter the text to display on the Load More button (e.g., “Load More”, “View More”)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:60
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:65
 msgid "Load More"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:66
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:66
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:71
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:71
 msgid "Button Background Color"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:68
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:73
 msgid "Select the background color of the Load More button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:78
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:78
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:83
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:83
 msgid "Button Hover Background Color"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:80
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:85
 msgid "Choose the background color that appears when hovering over the button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:90
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:90
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:95
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:95
 msgid "Button Border Color"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:92
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:97
 msgid "Set the border color of the Load More button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:102
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:102
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:107
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:107
 msgid "Button Text Color"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:104
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:109
 msgid "Choose the text color for the Load More button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:115
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:114
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:120
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:119
 msgid "Button Hover Text Color"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:117
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:122
 msgid "Set the text color when the button is hovered over."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:127
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:126
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:132
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:131
 msgid "Button Font Size"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:129
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:134
 msgid "Define the font size of the button text (in pixels)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:139
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:137
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:144
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:142
 msgid "Button Padding"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:141
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:146
 msgid "Set the inner spacing of the button (Top, Right, Bottom, Left in pixels)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:154
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:150
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:167
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:183
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:148
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:164
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:180
+msgid "Top"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:151
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:168
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:184
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:149
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:165
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:181
+msgid "Right"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:152
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:169
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:185
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:150
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:166
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:182
+msgid "Bottom"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:153
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:170
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:186
 #: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:151
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:167
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:183
+msgid "Left"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:161
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:158
 msgid "Button Margin"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:156
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:163
 msgid "Set the outer spacing of the button (Top, Right, Bottom, Left in pixels)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:168
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:165
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:177
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:174
 msgid "Button Border Width"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:170
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:179
 msgid "Specify the thickness of the button's border (in pixels)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:182
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:179
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:193
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:190
 msgid "Button Border Radius"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:184
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:195
 msgid "Adjust the roundness of the button corners (in pixels)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:34
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:199
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:204
+msgid "Top left"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:200
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:205
+msgid "Top right"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:201
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:206
+msgid "Bottom left"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:202
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:207
+msgid "Bottom right"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:39
 msgid "Custom CSS and Javascript Settings"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:46
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:51
 msgid "Custom CSS"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:48
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:53
 msgid "Add your custom CSS styles to customize the button appearance."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:57
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:62
 msgid "JavaScript Before Update"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:59
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:64
 msgid "Add custom JavaScript code that will run before the page updates."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:68
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:73
 msgid "JavaScript After Update"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:70
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:75
 msgid "Add custom JavaScript code that will run after the page updates."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:21
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:26
 msgid "General Settings"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:33
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:38
 msgid "Products Loading Type"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:35
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:40
 msgid "Select how products are displayed and loaded on your shop page."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:40
-msgid "Infinity Scroll"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:41
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:46
 msgid "Load More Button"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:42
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:47
 msgid "Pagination"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:49
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:54
 msgid "Products Per Page"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:50
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:55
 msgid "Specify the number of products to display per page."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:53
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:58
 msgid "Products per page"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:59
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:64
 msgid "Enable Font Awesome"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:61
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:66
 msgid "Enable the loading of Font Awesome icons within the plugin."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:77
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:83
 msgid "Loading Image"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:79
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:85
 msgid "Select the loading animation icon that appears while new products are being loaded."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:87
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:93
 msgid "Font Awesome"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:88
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:94
 msgid "Default"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:94
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:100
 msgid "Rotate image while loading"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:99
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:105
 msgid "Prevent URL Update on Page Load"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:100
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:106
 msgid "Enable this setting to prevent the page URL from changing when new products are loaded."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:19
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:24
 msgid "Previous Button Style Settings"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:33
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:38
 msgid "Add a custom CSS class to apply additional styling to the Load Previous button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:44
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:49
 msgid "Preview how the Load Previous button will appear with your current design settings."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:55
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:60
 msgid "Load Previous Button Text"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:57
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:62
 msgid "Enter the text you want to display on the Load Previous button (e.g., “Load Previous”, “View Earlier Products”)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:60
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:65
 msgid "Load Previous"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:68
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:73
 msgid "Select the background color for the Load Previous button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:80
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:85
 msgid "Choose the background color that appears when hovering over the Load Previous button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:92
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:97
 msgid "Set the border color of the Load Previous button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:104
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:109
 msgid "Choose the text color for the Load Previous button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:116
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:121
 msgid "Define the text color shown when the button is hovered over."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:128
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:133
 msgid "Set the font size of the Load Previous button text (in pixels)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:139
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:144
 msgid "Adjust the internal spacing of the button (Top, Right, Bottom, Left in pixels)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:153
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:160
 msgid "Set the external spacing around the button (Top, Right, Bottom, Left in pixels)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:167
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:176
 msgid "Specify the width of the button's border (in pixels)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:181
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:194
 msgid ""
 "Adjust the corner roundness of the button (in pixels).\n"
 ""
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:26
-msgid "Help &amp; Support Resources"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:27
-msgid "If you need assistance, here are some helpful resources. Our documentation is a great place to start, and our support team is available if you require further help."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:31
-msgid "Documentation"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:32
-msgid "Explore our detailed guide on Infinite Loader for WooCommerce to understand all the features and how to make the most of them."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:33
-msgid "Read Documentation"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:39
-msgid "Support Center"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:40
-msgid "Our support team is here to assist you with any questions or issues. Feel free to contact us anytime through our support center."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:41
-msgid "Get Support"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:46
-msgid "Share Your Feedback"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:47
-msgid "We’d love to hear about your experience with the plugin. Your feedback and suggestions help us improve future updates."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-welcome-page.php:48
-msgid "Send Feedback"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-license-page.php:9
-#: admin/wbcom/wbcom-paid-plugin-settings.php:31
-#: admin/wbcom/wbcom-paid-plugin-settings.php:32
-#: admin/wbcom/wbcom-paid-plugin-settings.php:49
-msgid "License"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-license-page.php:14
-msgid "Plugin License"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-license-page.php:20
-#: admin/wbcom/templates/wbcom-license-page.php:32
-#: edd-license/edd-plugin-license.php:409
-msgid "Product"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-license-page.php:21
-#: admin/wbcom/templates/wbcom-license-page.php:33
-#: edd-license/edd-plugin-license.php:410
-msgid "Version"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-license-page.php:22
-#: admin/wbcom/templates/wbcom-license-page.php:34
-#: edd-license/edd-plugin-license.php:411
-msgid "Key"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-license-page.php:23
-#: admin/wbcom/templates/wbcom-license-page.php:35
-#: edd-license/edd-plugin-license.php:412
-msgid "Status"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-license-page.php:24
-#: admin/wbcom/templates/wbcom-license-page.php:36
-#: edd-license/edd-plugin-license.php:413
-msgid "Action"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:9
-msgid "Themes & Extensions"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:17
-#: admin/wbcom/templates/wbcom-plugins-page.php:25
-msgid "Paid Extensions"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:18
-msgid "Free Extensions"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:19
-msgid "LearnDash Extensions"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:20
-#: admin/wbcom/templates/wbcom-plugins-page.php:366
-#: admin/wbcom/wbcom-admin-settings.php:239
-#: admin/wbcom/wbcom-admin-settings.php:240
-msgid "Our Themes"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:26
-#: admin/wbcom/templates/wbcom-plugins-page.php:327
-#: admin/wbcom/templates/wbcom-plugins-page.php:417
-msgid "View More Extensions"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:31
-msgid "Advanced Username Manager"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:32
-msgid "Allow users to change their usernames directly from their profile settings. Enhance flexibility for members while keeping admin-level approval and control over username updates."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:34
-#: admin/wbcom/templates/wbcom-plugins-page.php:44
-#: admin/wbcom/templates/wbcom-plugins-page.php:54
-#: admin/wbcom/templates/wbcom-plugins-page.php:64
-#: admin/wbcom/templates/wbcom-plugins-page.php:74
-#: admin/wbcom/templates/wbcom-plugins-page.php:84
-#: admin/wbcom/templates/wbcom-plugins-page.php:94
-#: admin/wbcom/templates/wbcom-plugins-page.php:104
-#: admin/wbcom/templates/wbcom-plugins-page.php:114
-#: admin/wbcom/templates/wbcom-plugins-page.php:124
-#: admin/wbcom/templates/wbcom-plugins-page.php:134
-#: admin/wbcom/templates/wbcom-plugins-page.php:144
-#: admin/wbcom/templates/wbcom-plugins-page.php:154
-#: admin/wbcom/templates/wbcom-plugins-page.php:164
-#: admin/wbcom/templates/wbcom-plugins-page.php:174
-#: admin/wbcom/templates/wbcom-plugins-page.php:184
-#: admin/wbcom/templates/wbcom-plugins-page.php:194
-#: admin/wbcom/templates/wbcom-plugins-page.php:204
-#: admin/wbcom/templates/wbcom-plugins-page.php:214
-#: admin/wbcom/templates/wbcom-plugins-page.php:224
-#: admin/wbcom/templates/wbcom-plugins-page.php:234
-#: admin/wbcom/templates/wbcom-plugins-page.php:244
-#: admin/wbcom/templates/wbcom-plugins-page.php:254
-#: admin/wbcom/templates/wbcom-plugins-page.php:264
-#: admin/wbcom/templates/wbcom-plugins-page.php:274
-#: admin/wbcom/templates/wbcom-plugins-page.php:284
-#: admin/wbcom/templates/wbcom-plugins-page.php:294
-#: admin/wbcom/templates/wbcom-plugins-page.php:304
-#: admin/wbcom/templates/wbcom-plugins-page.php:314
-#: admin/wbcom/templates/wbcom-plugins-page.php:335
-#: admin/wbcom/templates/wbcom-plugins-page.php:345
-#: admin/wbcom/templates/wbcom-plugins-page.php:355
-#: admin/wbcom/templates/wbcom-plugins-page.php:375
-#: admin/wbcom/templates/wbcom-plugins-page.php:385
-#: admin/wbcom/templates/wbcom-plugins-page.php:395
-#: admin/wbcom/templates/wbcom-plugins-page.php:405
-#: admin/wbcom/templates/wbcom-plugins-page.php:425
-#: admin/wbcom/templates/wbcom-plugins-page.php:435
-#: admin/wbcom/templates/wbcom-plugins-page.php:445
-#: admin/wbcom/templates/wbcom-plugins-page.php:455
-#: admin/wbcom/templates/wbcom-plugins-page.php:465
-#: admin/wbcom/templates/wbcom-plugins-page.php:475
-#: admin/wbcom/templates/wbcom-plugins-page.php:485
-#: admin/wbcom/templates/wbcom-plugins-page.php:495
-#: admin/wbcom/templates/wbcom-plugins-page.php:505
-#: admin/wbcom/templates/wbcom-plugins-page.php:515
-#: admin/wbcom/templates/wbcom-plugins-page.php:525
-#: admin/wbcom/templates/wbcom-plugins-page.php:535
-#: admin/wbcom/templates/wbcom-plugins-page.php:545
-#: admin/wbcom/templates/wbcom-plugins-page.php:555
-#: admin/wbcom/templates/wbcom-plugins-page.php:565
-#: admin/wbcom/templates/wbcom-plugins-page.php:575
-#: admin/wbcom/templates/wbcom-plugins-page.php:585
-#: admin/wbcom/templates/wbcom-plugins-page.php:595
-#: admin/wbcom/templates/wbcom-plugins-page.php:605
-#: admin/wbcom/templates/wbcom-plugins-page.php:615
-msgid "View Details"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:35
-#: admin/wbcom/templates/wbcom-plugins-page.php:45
-#: admin/wbcom/templates/wbcom-plugins-page.php:55
-#: admin/wbcom/templates/wbcom-plugins-page.php:65
-#: admin/wbcom/templates/wbcom-plugins-page.php:75
-#: admin/wbcom/templates/wbcom-plugins-page.php:85
-#: admin/wbcom/templates/wbcom-plugins-page.php:95
-#: admin/wbcom/templates/wbcom-plugins-page.php:105
-#: admin/wbcom/templates/wbcom-plugins-page.php:115
-#: admin/wbcom/templates/wbcom-plugins-page.php:125
-#: admin/wbcom/templates/wbcom-plugins-page.php:135
-#: admin/wbcom/templates/wbcom-plugins-page.php:145
-#: admin/wbcom/templates/wbcom-plugins-page.php:155
-#: admin/wbcom/templates/wbcom-plugins-page.php:165
-#: admin/wbcom/templates/wbcom-plugins-page.php:175
-#: admin/wbcom/templates/wbcom-plugins-page.php:185
-#: admin/wbcom/templates/wbcom-plugins-page.php:195
-#: admin/wbcom/templates/wbcom-plugins-page.php:205
-#: admin/wbcom/templates/wbcom-plugins-page.php:215
-#: admin/wbcom/templates/wbcom-plugins-page.php:225
-#: admin/wbcom/templates/wbcom-plugins-page.php:235
-#: admin/wbcom/templates/wbcom-plugins-page.php:245
-#: admin/wbcom/templates/wbcom-plugins-page.php:255
-#: admin/wbcom/templates/wbcom-plugins-page.php:265
-#: admin/wbcom/templates/wbcom-plugins-page.php:275
-#: admin/wbcom/templates/wbcom-plugins-page.php:285
-#: admin/wbcom/templates/wbcom-plugins-page.php:295
-#: admin/wbcom/templates/wbcom-plugins-page.php:305
-#: admin/wbcom/templates/wbcom-plugins-page.php:315
-#: admin/wbcom/templates/wbcom-plugins-page.php:336
-#: admin/wbcom/templates/wbcom-plugins-page.php:346
-#: admin/wbcom/templates/wbcom-plugins-page.php:356
-#: admin/wbcom/templates/wbcom-plugins-page.php:376
-#: admin/wbcom/templates/wbcom-plugins-page.php:386
-#: admin/wbcom/templates/wbcom-plugins-page.php:396
-#: admin/wbcom/templates/wbcom-plugins-page.php:406
-#: admin/wbcom/templates/wbcom-plugins-page.php:426
-#: admin/wbcom/templates/wbcom-plugins-page.php:436
-#: admin/wbcom/templates/wbcom-plugins-page.php:446
-#: admin/wbcom/templates/wbcom-plugins-page.php:456
-#: admin/wbcom/templates/wbcom-plugins-page.php:466
-#: admin/wbcom/templates/wbcom-plugins-page.php:476
-#: admin/wbcom/templates/wbcom-plugins-page.php:486
-#: admin/wbcom/templates/wbcom-plugins-page.php:496
-#: admin/wbcom/templates/wbcom-plugins-page.php:506
-#: admin/wbcom/templates/wbcom-plugins-page.php:516
-#: admin/wbcom/templates/wbcom-plugins-page.php:526
-#: admin/wbcom/templates/wbcom-plugins-page.php:536
-#: admin/wbcom/templates/wbcom-plugins-page.php:546
-#: admin/wbcom/templates/wbcom-plugins-page.php:556
-#: admin/wbcom/templates/wbcom-plugins-page.php:566
-#: admin/wbcom/templates/wbcom-plugins-page.php:576
-#: admin/wbcom/templates/wbcom-plugins-page.php:586
-#: admin/wbcom/templates/wbcom-plugins-page.php:596
-#: admin/wbcom/templates/wbcom-plugins-page.php:606
-#: admin/wbcom/templates/wbcom-plugins-page.php:616
-msgid "Docs"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:41
-msgid "BuddyLists"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:42
-msgid "Empower users to create personalized lists of friends, follow curated streams, and organize their connections for a better social experience within your community."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:51
-msgid "BuddyPress Schedule Activity"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:52
-msgid "Plan posts and activities in advance with easy scheduling tools. Keep your community active even during off-hours and automate important updates."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:61
-msgid "BuddyPress Anonymous Activity"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:62
-msgid "Enable members to share updates anonymously without revealing their identity, encouraging more honest, open, and candid conversations across your platform."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:71
-msgid "BuddyPress Edit Activity"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:72
-msgid "Let users edit their posted activities anytime. Help members fix mistakes or update their posts, keeping conversations fresh and accurate."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:81
-msgid "WP Stories"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:82
-msgid "Introduce Instagram-style stories where users can share photos and videos. Boost community engagement through visual storytelling and real-time content sharing."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:91
-msgid "BuddyPress Business Profile"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:92
-msgid "Allow businesses to set up profile pages, showcase their services, and directly connect with potential customers through your social network."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:101
-msgid "BuddyPress Moderation Pro"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:102
-msgid "Allow members to flag inappropriate content and maintain a safe, respectful, and welcoming community environment."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:111
-msgid "BuddyPress Resume Manager"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:112
-msgid "Let users upload and display professional resumes right on their profiles. Ideal for building career-focused communities."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:121
-msgid "BuddyPress Polls"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:122
-msgid "Let members create polls and surveys directly inside activity streams to collect opinions, boost participation, and spark discussions easily."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:131
-msgid "BuddyPress Private Community Pro"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:132
-msgid "Restrict access to BuddyPress areas. Protect member profiles and create a fully private, members-only experience."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:141
-msgid "BuddyPress Profile Pro"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:142
-msgid "Add custom repeater fields and groups to member profiles. Collect richer information and enhance profile personalization."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:151
-msgid "BuddyPress Check-ins Pro"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:152
-msgid "Allow users to check in at places like restaurants or events. Encourage social interactions and real-world meetups through your platform."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:161
-msgid "BuddyPress Ideapush Integration"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:162
-msgid "Streamline idea management. Let members submit ideas, provide feedback, and spark innovation directly within their profiles."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:171
-msgid "BuddyPress Contact Me"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:172
-msgid "Add easy-to-use contact forms on member profiles. Enable seamless communication between visitors and users without sharing personal information."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:181
-msgid "BuddyPress Member Blog Pro"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:182
-msgid "Offer personal blogging spaces for members. Let users share articles, stories, and updates, turning your community into a vibrant content hub."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:191
-msgid "BuddyVendor"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:192
-msgid "Combine e-commerce with social networking. Allow users to buy, sell, and interact on a community-driven multi-vendor marketplace."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:201
-msgid "BuddyPress Statistics"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:202
-msgid "Get detailed community analytics. Monitor activities, understand engagement patterns, and make smarter decisions to grow your site."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:211
-msgid "Who viewed my profile"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:212
-msgid "Give users visibility into who has visited their profile. Build curiosity, drive more profile views, and increase member engagement."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:221
-msgid "BuddyPress Friend & Follow Suggestion"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:222
-msgid "Provide personalized friend and follow suggestions based on profile data, boosting connections and community interactions."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:231
-msgid "BuddyPress Giphy"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:232
-msgid "Enable GIF sharing in activities, comments, and private messages. Make conversations more fun, expressive, and visually engaging."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:241
-msgid "Shortcodes for BuddyPress Pro"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:242
-msgid "Add BuddyPress components anywhere on your site with shortcodes and Elementor widgets. Enjoy full design freedom and flexibility."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:251
-msgid "BuddyPress Sticky Post"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:252
-msgid "Highlight important updates by pinning posts to the top of activity streams. Ensure key messages are always seen by members."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:261
-msgid "BuddyPress Quotes"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:262
-msgid "Let users decorate their posts with vibrant backgrounds and images, making activity updates more expressive and attention-grabbing."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:271
-msgid "BuddyPress Auto Friends"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:272
-msgid "Automatically add specific users as friends to new members, helping them build their network and feel connected from day one."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:281
-msgid "BuddyPress Newsfeed"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:282
-msgid "Organize activity updates into a familiar Facebook-style newsfeed, helping members find new content quickly and engage more."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:291
-msgid "BuddyPress Status"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:292
-msgid "Allow members to post quick status updates and react to activities, making your community more dynamic and lively."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:301
-msgid "BuddyPress Hashtags"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:302
-msgid "Boost discoverability and organize discussions by adding hashtag functionality across activities, posts, and comments."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:311
-msgid "BuddyPress Profanity Filter"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:312
-msgid "Block unwanted words and keep your community safe, family-friendly, and free from offensive language."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:326
-msgid "Extensions for LearnDash"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:332
-msgid "LMS Notes"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:333
-msgid "LMS Notes will extend the LMS functionality to create Notes for courses, lessons and topics."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:342
-msgid "Learndash wpForo"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:343
-msgid "The LearnDash wpForo integration allows you to create dedicated discussion channels for your learners and link your courses to multiple forums."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:352
-msgid "LearnDash Dashboard"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:353
-msgid "The LearnDash Dashboard provides admins, instructors, group leaders, and students with personalized dashboards, allowing them to easily manage their courses, lessons, and communication."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:367
-msgid "View More Themes"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:372
-msgid "Reign Theme"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:373
-msgid "Create your social network website for the company, school, sports team, or any niche community using a highly customizable WordPress, Community theme."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:382
-msgid "BuddyX Pro Theme"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:383
-msgid "Build a flexible, code-free online community website with full control. Enjoy unique layouts, clean code, and easy customization for BuddyPress/BossBoss Platform."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:392
-msgid "BuddyX Theme"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:393
-msgid "BuddyX is a free, fast, and responsive WordPress theme for creating social network sites like Facebook. Ideal for BuddyPress and BuddyBoss communities, memberships, eLearning, and marketplaces."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:402
-msgid "KnowX Theme"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:403
-msgid "A Free WordPress Knowledge base Theme. KnowX helps you set up a Knowledge Base in WordPress in less time than it takes to brew a coffee."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:416
-msgid "Our Free Extensions"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:422
-msgid "Wbcom Essential"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:423
-msgid "Get dozens of stylish widgets packed inside Wbcom Essential. Enhance your BuddyPress site's design with advanced customizations without needing any technical skills."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:432
-msgid "BuddyPress Member Type"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:433
-msgid "Effortlessly create and manage multiple member types. Personalize user experiences and organize your community more effectively based on user profiles."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:442
-msgid "BuddyPress Advertisement Placements"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:443
-msgid "Add advertisement placements across your BuddyPress community. Increase engagement and generate extra revenue with seamless ad integration."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:452
-msgid "reCaptcha for BuddyPress"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:453
-msgid "Secure your BuddyPress, WordPress, and WooCommerce sites by adding powerful Google reCaptcha protection against bots and spam activities."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:462
-msgid "BuddyPress Member Blog"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:463
-msgid "Allow community members to create and manage their blog posts directly from their BuddyPress profiles, boosting engagement and user-generated content."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:472
-msgid "BuddyPress WooCommerce Integration"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:473
-msgid "Easily integrate WooCommerce with BuddyPress. Showcase WooCommerce activities inside profiles and create a seamless social shopping experience."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:482
-msgid "BuddyPress Activity Link Preview"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:483
-msgid "Automatically generate rich link previews inside the activity feed, displaying title, description, and image to make posts more engaging."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:492
-msgid "BuddyPress Birthday Widget"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:493
-msgid "Celebrate community members' birthdays by displaying upcoming birthdays in a sidebar widget, fostering deeper social interactions."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:502
-msgid "BuddyPress Redirect"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:503
-msgid "Redirect users to custom pages after login or logout, based on their user roles, creating a more personalized navigation experience."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:512
-msgid "BuddyPress Activity Bump"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:513
-msgid "Move the most recent interactions to the top of the activity feed automatically, keeping your BuddyPress newsfeed lively and active."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:522
-msgid "BuddyPress Lock – Private Community"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:523
-msgid "Lock down selected BuddyPress components to create a private, members-only community and protect your site's content from the public."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:532
-msgid "Shortcodes for BuddyPress"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:533
-msgid "Use simple shortcodes to embed BuddyPress components like activity streams, member lists, or groups on any page or post."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:542
-msgid "BuddyPress User Todo List"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:543
-msgid "Allow users to create, organize, and manage personal to-do lists with categories directly from their BuddyPress profiles."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:552
-msgid "BuddyPress Job Manager"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:553
-msgid "Create dedicated job tabs for employers and candidates inside their BuddyPress profiles, enhancing your site's job board functionality."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:562
-msgid "BuddyPress Group Reviews"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:563
-msgid "Enable members to rate and review BuddyPress groups based on multiple criteria, improving group quality and encouraging community feedback."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:572
-msgid "BuddyPress Member Reviews"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:573
-msgid "Allow users to rate and review other member profiles based on customizable criteria, helping build trust and credibility within your community."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:582
-msgid "BuddyPress Check-ins"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:583
-msgid "Allow community members to post activity updates along with their current location, encouraging real-world interactions and meetups."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:592
-msgid "BuddyPress Activity Filter"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:593
-msgid "Display customized activity feeds by applying filters to show specific content types based on your community's needs."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:602
-msgid "BuddyPress Favorite Notification"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:603
-msgid "Send real-time notifications to members when someone favorites their content, boosting engagement and interaction across your community."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:612
-msgid "BuddyPress Activity Social Share"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:613
-msgid "Allow users to share their BuddyPress activity updates easily to external social media platforms, extending their reach. "
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-support-page.php:9
-#: admin/wbcom/wbcom-admin-settings.php:326
-msgid "Help & Support"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-support-page.php:14
-msgid "How can we help you?"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-support-page.php:15
-msgid "Our team is here to help you out at anytime. If you have any idea about how we could improve. You can share access to your site on our helpdesk if it can help getting faster."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-support-page.php:24
-msgid "Tickets Support"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-support-page.php:25
-msgid "Open a ticket on our helpdesk, we don't guarantee a fast response but within a week. Except if you've purchased one of our product we'll reply within 24 hours."
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-support-page.php:28
-msgid "Open a ticket"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-support-page.php:41
-#: admin/wbcom/templates/wbcom-support-page.php:45
-msgid "Contact Us"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-support-page.php:42
-msgid "Create a new thread on our plugin page - participation is open to anyone from around the world. We'll be there to help as well, but we can't guarantee response times."
-msgstr ""
-
-#: admin/wbcom/wbcom-admin-settings.php:200
-msgid "Activate"
-msgstr ""
-
-#: admin/wbcom/wbcom-admin-settings.php:201
-msgid "Deactivate"
-msgstr ""
-
-#: admin/wbcom/wbcom-admin-settings.php:231
-#: admin/wbcom/wbcom-admin-settings.php:232
-msgid "Our Plugins"
-msgstr ""
-
-#: admin/wbcom/wbcom-admin-settings.php:247
-#: admin/wbcom/wbcom-admin-settings.php:248
-msgid "Support"
-msgstr ""
-
-#: admin/wbcom/wbcom-admin-settings.php:314
-msgid "Settings"
-msgstr ""
-
-#: admin/wbcom/wbcom-admin-settings.php:320
-msgid "Themes & Extension"
-msgstr ""
-
-#: edd-license/edd-plugin-license.php:117
-#: edd-license/edd-plugin-license.php:155
-#: edd-license/edd-plugin-license.php:231
-#: edd-license/edd-plugin-license.php:493
-msgid "An error occurred, please try again."
-msgstr ""
-
-#. translators: %1$s: Expire Time
-#: edd-license/edd-plugin-license.php:127
-msgid "Your license key expired on %s."
-msgstr ""
-
-#: edd-license/edd-plugin-license.php:133
-msgid "Your license key has been disabled."
-msgstr ""
-
-#: edd-license/edd-plugin-license.php:137
-msgid "Invalid license."
-msgstr ""
-
-#: edd-license/edd-plugin-license.php:142
-msgid "Your license is not active for this URL."
-msgstr ""
-
-#. translators: %1$s: Item Name
-#: edd-license/edd-plugin-license.php:147
-msgid "This appears to be an invalid license key for %s."
-msgstr ""
-
-#: edd-license/edd-plugin-license.php:151
-msgid "Your license key has reached its activation limit."
-msgstr ""
-
-#. translators: %1$s: Expire Time
-#: edd-license/edd-plugin-license.php:333
-msgid "Your Infinite Loader For Woocommerce plugin license key expired on %s."
-msgstr ""
-
-#: edd-license/edd-plugin-license.php:364
-msgid "Please activate your Infinite Loader For Woocommerce plugin license key."
-msgstr ""
-
-#: edd-license/edd-plugin-license.php:434
-msgid "Deactivate License"
-msgstr ""
-
-#: edd-license/edd-plugin-license.php:439
-msgid "Activate License"
-msgstr ""
-
-#: edd-license/edd-plugin-license.php:512
-msgid "Expires %s."
-msgstr ""
-
-#: edd-license/edd-plugin-license.php:516
-msgid "You have %1$s/%2$s-sites activated."
-msgstr ""
-
-#: edd-license/EDD_WB_Infinite_Loader_Plugin_Updater.php:261
+#. translators: 1: plugin name, 2: opening link tag, 3: version number, 4: closing link tag.
+#: edd-license/class-edd-wb-infinite-loader-plugin-updater.php:261
+#, php-format
 msgid "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
 msgstr ""
 
-#: edd-license/EDD_WB_Infinite_Loader_Plugin_Updater.php:270
+#. translators: 1: plugin name, 2: opening details link, 3: version number, 4: closing details link, 5: opening update link, 6: closing update link.
+#: edd-license/class-edd-wb-infinite-loader-plugin-updater.php:270
+#, php-format
 msgid "There is a new version of %1$s available. %2$sView version %3$s details%4$s or %5$supdate now%6$s."
 msgstr ""
 
-#: edd-license/EDD_WB_Infinite_Loader_Plugin_Updater.php:465
+#: edd-license/class-edd-wb-infinite-loader-plugin-updater.php:465
 msgid "You do not have permission to install plugin updates"
 msgstr ""
 
-#: edd-license/EDD_WB_Infinite_Loader_Plugin_Updater.php:465
+#: edd-license/class-edd-wb-infinite-loader-plugin-updater.php:465
 msgid "Error"
 msgstr ""
 
-#: infinite-loader-for-woocommerce.php:84
-msgid "WooCommerce"
+#: edd-license/edd-plugin-license.php:122
+#: edd-license/edd-plugin-license.php:160
+#: edd-license/edd-plugin-license.php:236
+#: edd-license/edd-plugin-license.php:495
+msgid "An error occurred, please try again."
 msgstr ""
 
-#. Translators: %1$s: Cart Notice for WooCommerce, %2$s: WooCommerce
-#: infinite-loader-for-woocommerce.php:99
-msgid "%1$s requires %2$s plugin to be installed and active."
+#. translators: %s: Expiration date.
+#: edd-license/edd-plugin-license.php:132
+#, php-format
+msgid "Your license key expired on %s."
 msgstr ""
 
-#: public/class-infinite-loader-for-woocommerce-public.php:237
+#: edd-license/edd-plugin-license.php:138
+msgid "Your license key has been disabled."
+msgstr ""
+
+#: edd-license/edd-plugin-license.php:142
+msgid "Invalid license."
+msgstr ""
+
+#: edd-license/edd-plugin-license.php:147
+msgid "Your license is not active for this URL."
+msgstr ""
+
+#. translators: %s: Item name.
+#: edd-license/edd-plugin-license.php:152
+#, php-format
+msgid "This appears to be an invalid license key for %s."
+msgstr ""
+
+#: edd-license/edd-plugin-license.php:156
+msgid "Your license key has reached its activation limit."
+msgstr ""
+
+#. translators: %s: Expiration date.
+#: edd-license/edd-plugin-license.php:336
+#, php-format
+msgid "Your Infinite Loader For Woocommerce plugin license key expired on %s."
+msgstr ""
+
+#: edd-license/edd-plugin-license.php:367
+msgid "Please activate your Infinite Loader For Woocommerce plugin license key."
+msgstr ""
+
+#: edd-license/edd-plugin-license.php:411
+msgid "Product"
+msgstr ""
+
+#: edd-license/edd-plugin-license.php:412
+msgid "Version"
+msgstr ""
+
+#: edd-license/edd-plugin-license.php:413
+msgid "Key"
+msgstr ""
+
+#: edd-license/edd-plugin-license.php:414
+msgid "Status"
+msgstr ""
+
+#: edd-license/edd-plugin-license.php:415
+msgid "Action"
+msgstr ""
+
+#: edd-license/edd-plugin-license.php:436
+msgid "Deactivate License"
+msgstr ""
+
+#: edd-license/edd-plugin-license.php:441
+msgid "Activate License"
+msgstr ""
+
+#. translators: %s: Expiration date.
+#: edd-license/edd-plugin-license.php:514
+#, php-format
+msgid "Expires %s."
+msgstr ""
+
+#. translators: %1$s: Active site count, %2$s: License limit.
+#: edd-license/edd-plugin-license.php:518
+#, php-format
+msgid "You have %1$s/%2$s-sites activated."
+msgstr ""
+
+#: includes/class-infinite-loader-for-woocommerce-activator.php:41
+msgid "Infinite Loader for WooCommerce requires WooCommerce to be installed and activated."
+msgstr ""
+
+#: includes/class-infinite-loader-for-woocommerce-activator.php:42
+msgid "Plugin Activation Error"
+msgstr ""
+
+#: includes/class-infinite-loader-for-woocommerce.php:366
+msgid "Rate limit exceeded. Please try again later."
+msgstr ""
+
+#: includes/class-infinite-loader-for-woocommerce.php:367
+msgid "Too Many Requests"
+msgstr ""
+
+#: infinite-loader-for-woocommerce.php:122
+msgid "Infinite Loader for WooCommerce"
+msgstr ""
+
+#. translators: 1: Plugin name, 2: WooCommerce.
+#: infinite-loader-for-woocommerce.php:142
+#, php-format
+msgid "%1$s requires %2$s to be installed and active."
+msgstr ""
+
+#: infinite-loader-for-woocommerce.php:148
+msgid "Install WooCommerce"
+msgstr ""
+
+#: infinite-loader-for-woocommerce.php:169
+msgid "Infinite Loader for WooCommerce requires WooCommerce 3.0 or higher. Please update WooCommerce."
+msgstr ""
+
+#: infinite-loader-for-woocommerce.php:233
+msgid "Settings"
+msgstr ""
+
+#. translators: %d: number of active Wbcom plugins.
+#: lib/wbcom-settings/class-wbcom-settings-page.php:216
+#, php-format
+msgid "%d Wbcom plugin active on this site."
+msgid_plural "%d Wbcom plugins active on this site."
+msgstr[0] ""
+msgstr[1] ""
+
+#: lib/wbcom-settings/class-wbcom-settings-page.php:228
+msgid "No Wbcom plugins attached to this hub yet"
+msgstr ""
+
+#: lib/wbcom-settings/class-wbcom-settings-page.php:229
+msgid "Activate one and it will appear here automatically."
+msgstr ""
+
+#: lib/wbcom-settings/class-wbcom-settings-page.php:241
+msgid "Open settings"
+msgstr ""
+
+#: lib/wbcom-settings/class-wbcom-settings-page.php:250
+msgid "About WB Plugins"
+msgstr ""
+
+#: lib/wbcom-settings/class-wbcom-settings-page.php:253
+msgid "This hub is the single entry point for every Wbcom Designs plugin installed on your site. Each plugin lives on its own page under this menu and keeps its own settings, licence, and data."
+msgstr ""
+
+#: lib/wbcom-settings/class-wbcom-settings-page.php:257
+msgid "Visit wbcomdesigns.com for more plugins and themes"
+msgstr ""
+
+#: public/class-infinite-loader-for-woocommerce-public.php:275
+msgid "Loading"
+msgstr ""
+
+#: public/class-infinite-loader-for-woocommerce-public.php:321
 msgid "Unable to load more products. Please try again."
 msgstr ""
 
-#: public/class-infinite-loader-for-woocommerce-public.php:238
+#: public/class-infinite-loader-for-woocommerce-public.php:322
 msgid "Retry"
 msgstr ""
 
-#. translators: %d: total results
-#: public/class-infinite-loader-for-woocommerce-public.php:313
-msgid "Showing all %d result"
+#: public/class-infinite-loader-for-woocommerce-public.php:323
+msgid "No more products"
+msgstr ""
+
+#: public/class-infinite-loader-for-woocommerce-public.php:324
+msgid "Loading..."
+msgstr ""
+
+#: public/class-infinite-loader-for-woocommerce-public.php:404
+msgid "Showing the single result"
+msgstr ""
+
+#. translators: %d: total results.
+#: public/class-infinite-loader-for-woocommerce-public.php:408
+#, php-format
+msgid "Showing %d result"
+msgid_plural "Showing %d results"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: first result number, 2: last result number, 3: total results.
+#: public/class-infinite-loader-for-woocommerce-public.php:424
+#, php-format
+msgid "Showing %1$s&ndash;%2$s of %3$s results"
+msgstr ""
+
+#: public/class-infinite-loader-for-woocommerce-public.php:562
+msgid "Scroll to top"
 msgstr ""

@@ -199,7 +199,7 @@ assets/css/admin.css
 - [ ] **Quick actions** routing to the tab that changes the thing just described.
 - [ ] **Sidebar generated from a tab registry** - one array keyed by slug with `label`, `icon`, `group` (main / settings / account). Adding a screen touches one array, not markup in three places.
 - [ ] **Version pill in the header; dependency state shown on screen** rather than rendering an empty dashboard.
-- [ ] **Replace the shared `admin/wbcom/` header/nav framework** where present - do not layer the new shell on top of it.
+- [x] **Replace the shared `admin/wbcom/` header/nav framework** - DONE in 1.2.4. The fork is deleted; the screen now runs on the vendored `lib/wbcom-settings/` shell and contributes only `settings_nav_groups` + `settings_tab_content`.
 - [ ] **Verify at 1440px and 390px, light and dark, LTR and RTL.** Colours from CSS custom properties, never hardcoded hex.
 
 **Two things that will bite:**
@@ -266,9 +266,13 @@ WordPress Plugin Boilerplate (loader pattern). `Infinite_Loader_For_Woocommerce_
 | `includes/class-infinite-loader-for-woocommerce-i18n.php` | Text domain loading |
 | `admin/class-infinite-loader-for-woocommerce-admin.php` | Settings screens, option registration |
 | `public/class-infinite-loader-for-woocommerce-public.php` | Front-end: script data, selectors, button markup |
-| `admin/wbcom/wbcom-admin-settings.php` | Shared Wbcom admin header/nav framework |
-| `admin/wbcom/wbcom-paid-plugin-settings.php` | Shared Wbcom license UI |
-| `edd-license/EDD_WB_Infinite_Loader_Plugin_Updater.php` | EDD Software Licensing updater |
+| `lib/wbcom-settings/class-wbcom-settings-page.php` | Shared Wbcom admin shell (menu, sidebar, tab routing). Vendored - every Wbcom plugin ships a copy and the newest registered version wins |
+| `lib/wbcom-settings/loader.php` | Version registry that picks which vendored copy loads |
+| `assets/vendor/lucide.min.js` | Icon set the shell renders with. Ship it - without it every icon slot renders blank |
+| `edd-license/edd-plugin-license.php` | EDD Software Licensing bootstrap |
+| `edd-license/class-edd-wb-infinite-loader-plugin-updater.php` | EDD Software Licensing updater |
+| `bin/build-release.sh` | Builds the customer zip and refuses to emit one that is missing named runtime files |
+| `bin/verify-build-freshness.sh` | Fails when a committed `.min.js` no longer matches its source |
 
 ### Assets
 - `public/js/infinite_loader_products.js` - the scroll/append engine
