@@ -2,8 +2,9 @@
 Contributors: vapvarun,wbcomdesigns
 Donate link: https://wbcomdesigns.com/
 Tags: Woocommerce
-Requires at least: 5.0
+Requires at least: 6.5
 Tested up to: 7.0
+Requires PHP: 8.0
 Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -36,6 +37,7 @@ Woocommerce
 * Fix      - AJAX pagination replaced the grid again instead of stacking the next page underneath the current one.
 * Fix      - The result count now describes what is on screen ("Showing 1-16 of 17") instead of only the page that loaded last.
 * Fix      - The address bar now follows the shopper down the archive again, so the browser Back button returns them to where they were instead of page one. This had never worked: the setting was read in a way that always resolved to off.
+* Fix      - Button and Previous Button spacing fields (padding, margin, border, radius) now show which box each number controls and sit on one row, instead of four unlabelled stacked boxes.
 * New      - Settings rebuilt on the shared Wbcom admin shell, matching the other Wbcom WooCommerce plugins, with a new Overview tab showing how the shop currently loads products.
 * New      - Filter infinite_loader_scroll_threshold sets how close to the end of the list (in pixels, default 300) infinite scroll starts loading.
 * New      - Filter infinite_loader_render_products_only returns false to go back to rendering the full archive, for themes that build their shop loop outside the standard WooCommerce loop templates.

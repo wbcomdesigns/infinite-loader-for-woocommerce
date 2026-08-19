@@ -601,45 +601,10 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		return '';
 	}
 
-	/**
-	 * Include infinite loader for woocommerce admin general setting tab content file.
-	 */
-	public function infinite_loader_for_woocommerce_admin_general_content() {
-		$this->verify_admin_request();
-		include 'partials/infinite-loader-for-woocommerce-setting-general-tab.php';
-	}
 
-	/**
-	 * Include infinite loader for woocommerce admin button style tab content file.
-	 */
-	public function infinite_loader_for_woocommerce_admin_button_content() {
-		$this->verify_admin_request();
-		include 'partials/infinite-loader-for-woocommerce-setting-button-tab.php';
-	}
 
-	/**
-	 * Include infinite loader for woocommerce admin previous button style tab content file.
-	 */
-	public function infinite_loader_for_woocommerce_admin_previous_button_content() {
-		$this->verify_admin_request();
-		include 'partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php';
-	}
 
-	/**
-	 * Include infinite loader for woocommerce admin javascript/css setting tab content file.
-	 */
-	public function infinite_loader_for_woocommerce_admin_js_css_content() {
-		$this->verify_admin_request();
-		include 'partials/infinite-loader-for-woocommerce-setting-css-js-tab.php';
-	}
 
-	/**
-	 * Include infinite loader for woocommerce admin faq setting tab content file.
-	 */
-	public function infinite_loader_for_woocommerce_admin_faq_content() {
-		$this->verify_admin_request();
-		include 'partials/infinite-loader-for-woocommerce-faq-tab.php';
-	}
 
 	/**
 	 * Display load more preview button.

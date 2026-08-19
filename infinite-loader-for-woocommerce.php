@@ -23,8 +23,9 @@
  * Text Domain:       infinite-loader-for-woocommerce
  * Domain Path:       /languages
  * Requires Plugins: woocommerce
- * Requires at least: 5.0
- * Tested up to:      6.9
+ * Requires at least: 6.5
+ * Tested up to:      7.0
+ * Requires PHP:      8.0
  * WC requires at least: 3.0
  * WC tested up to:   8.5
  */
