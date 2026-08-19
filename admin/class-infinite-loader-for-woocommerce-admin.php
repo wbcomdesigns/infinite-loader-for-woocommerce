@@ -418,10 +418,17 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 * @author   Wbcom Designs
 	 */
 	public function infinite_loader_for_woocommerce_init_plugin_settings() {
-		register_setting( 'infinite_loader_admin_general_options', 'infinite_loader_admin_general_option', array( $this, 'validate_general_settings' ) );
-		register_setting( 'infinite_loader_admin_button_options', 'infinite_loader_admin_button_option', array( $this, 'validate_button_settings' ) );
-		register_setting( 'infinite_loader_admin_previous_button_options', 'infinite_loader_admin_previous_button_option', array( $this, 'validate_button_settings' ) );
-		register_setting( 'infinite_loader_admin_css_js_options', 'infinite_loader_admin_css_js_option', array( $this, 'validate_css_js_settings' ) );
+		/*
+		 * The sanitize_callback key is spelled out rather than relying on
+		 * register_setting()'s back-compat path, which wraps a bare callable
+		 * third argument for you. That path works - the validators did run -
+		 * but it reads like the callback is being ignored, and it is one core
+		 * deprecation away from silently becoming true.
+		 */
+		register_setting( 'infinite_loader_admin_general_options', 'infinite_loader_admin_general_option', array( 'sanitize_callback' => array( $this, 'validate_general_settings' ) ) );
+		register_setting( 'infinite_loader_admin_button_options', 'infinite_loader_admin_button_option', array( 'sanitize_callback' => array( $this, 'validate_button_settings' ) ) );
+		register_setting( 'infinite_loader_admin_previous_button_options', 'infinite_loader_admin_previous_button_option', array( 'sanitize_callback' => array( $this, 'validate_button_settings' ) ) );
+		register_setting( 'infinite_loader_admin_css_js_options', 'infinite_loader_admin_css_js_option', array( 'sanitize_callback' => array( $this, 'validate_css_js_settings' ) ) );
 	}
 
 	/**

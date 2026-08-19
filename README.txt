@@ -5,7 +5,7 @@ Tags: Woocommerce
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,13 @@ This section describes how to install the plugin and get it working.
 Woocommerce
 
 == Changelog ==
+= 1.3.1 =
+* Fix      - The FAQ tab now expands and collapses. Its accordion shipped with no styles at all, so every answer was permanently open and the questions looked like plain text.
+* Fix      - Settings tabs show their default values on a site where the options have not been saved yet, instead of an empty Products Per Page box.
+* Improve  - Multisite uninstall uses the supported get_sites() API rather than a direct database query.
+* Dev      - Settings registrations name their sanitize callback explicitly.
+* Dev      - The user guide is no longer packaged in the release zip.
+
 = 1.3.0 =
 * Fix      - Custom CSS from the JavaScript/CSS tab now applies rules that use child or sibling combinators. Output was HTML-escaped inside the style tag, so a selector like "ul.products > li.product" shipped with an encoded arrow and silently never matched, while simple selectors kept working.
 * Fix      - The bundled Font Awesome stylesheet now loads, so the default loading spinner is visible on themes that do not ship Font Awesome themselves. It was hooked too early to ever run.

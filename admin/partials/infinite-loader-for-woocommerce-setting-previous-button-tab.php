@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_previous_button_option' );
+$infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_previous_button_option', array() );
 ?>
 <div class="wbcom-tab-content">
 	<div class="wbcom-welcome-main-wrapper">

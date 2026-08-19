@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$infinite_loader_css_js_setting = get_option( 'infinite_loader_admin_css_js_option' );
+$infinite_loader_css_js_setting = get_option( 'infinite_loader_admin_css_js_option', array() );
 $infinite_loader_custom_css     = isset( $infinite_loader_css_js_setting['custom_css'] ) ? $infinite_loader_css_js_setting['custom_css'] : '';
 $infinite_loader_before_update  = isset( $infinite_loader_css_js_setting['before_update'] ) ? $infinite_loader_css_js_setting['before_update'] : '';
 $infinite_loader_after_update   = isset( $infinite_loader_css_js_setting['after_update'] ) ? $infinite_loader_css_js_setting['after_update'] : '';

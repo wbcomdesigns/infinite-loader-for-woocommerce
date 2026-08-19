@@ -62,10 +62,13 @@ if ( ! is_multisite() ) {
 	wp_cache_flush();
 } else {
 	// For Multisite.
-	global $wpdb;
-
-	// Get all blog ids.
-	$infinite_loader_blog_ids         = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
+	//
+	// get_sites() rather than a hand-written query against $wpdb->blogs: it is
+	// the supported API, it is cached, and it cannot go wrong on an install
+	// that stores sites differently. The raw query it replaces also tripped
+	// the prepared-SQL sniff, which had been silenced with a phpcs:ignore
+	// rather than resolved.
+	$infinite_loader_blog_ids         = get_sites( array( 'fields' => 'ids' ) );
 	$infinite_loader_original_blog_id = get_current_blog_id();
 
 	foreach ( $infinite_loader_blog_ids as $infinite_loader_blog_id ) {
