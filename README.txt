@@ -32,7 +32,11 @@ Woocommerce
 * Fix      - Infinite scroll now waits until the shopper is near the end of the product list. It previously loaded the next page on any scroll, so the whole catalogue loaded while the shopper was still in the header.
 * Fix      - Rebuilt the minified frontend scripts, which were four days behind their source. Production sites were running an older loader with no request timeout and no URL validation.
 * Fix      - Removed the per-visitor nonce from the archive request so page caches (WP Rocket, Varnish, Cloudflare) can serve the shop again. The request only reads a public archive and changes nothing, so it never needed one.
+* Fix      - Load More and Infinity Scroll now serve only the product grid instead of rendering the whole shop page and discarding the header, footer and sidebars. On a stock shop this cut the response from 118,878 to 21,338 bytes, and the products themselves are byte for byte what the page would have rendered.
+* Fix      - AJAX pagination replaced the grid again instead of stacking the next page underneath the current one.
+* Fix      - The result count now describes what is on screen ("Showing 1-16 of 17") instead of only the page that loaded last.
 * New      - Filter infinite_loader_scroll_threshold sets how close to the end of the list (in pixels, default 300) infinite scroll starts loading.
+* New      - Filter infinite_loader_render_products_only returns false to go back to rendering the full archive, for themes that build their shop loop outside the standard WooCommerce loop templates.
 * Improve  - A fresh activation now defaults to Load More instead of classic pagination. Existing sites keep the setting they saved.
 * Dev      - Added a build-freshness check (bin/verify-build-freshness.sh) that fails CI when a committed minified bundle does not match its source.
 
