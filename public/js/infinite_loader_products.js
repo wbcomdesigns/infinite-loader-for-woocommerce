@@ -127,7 +127,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 });
                 
                 // Handle browser history
-                if (infinite_loader_product_data.update_url === true) {
+                if (infinite_loader_product_data.update_url) {
                     window.onpopstate = function (event) {
                         var state = event.state;
                         if (state && state.blmp === 'br_lmp_popstate') {
@@ -205,7 +205,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                             return;
                         }
                         
-                        if (infinite_loader_product_data.update_url === true) {
+                        if (infinite_loader_product_data.update_url) {
                             update_browser_history(next_page);
                         }
                         
@@ -752,7 +752,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
             clearTimeout(br_load_more_html5_wait);
             
             br_load_more_html5_wait = setTimeout(function () {
-                if (infinite_loader_product_data.update_url === true && !infinite_loader_loading && infinite_loader_type !== 'pagination') {
+                if (infinite_loader_product_data.update_url && !infinite_loader_loading && infinite_loader_type !== 'pagination') {
                     var next_page = '';
                     
                     $('.infinite_loader_btn').each(function () {

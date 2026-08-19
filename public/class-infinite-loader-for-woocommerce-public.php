@@ -296,7 +296,18 @@ class Infinite_Loader_For_Woocommerce_Public {
 			'ajax_nonce'     => wp_create_nonce( 'infinite_loader_ajax_nonce' ),
 			'type'           => $page_loading_type,
 			'use_prev_btn'   => $use_prev_btn,
-			'update_url'     => empty( $general_settings['do_not_update_url'] ),
+			/*
+			 * '1' or '' rather than a boolean, because wp_localize_script
+			 * casts every value to a string: true would reach the script as
+			 * "1" and false as "", so a === true test there can never pass.
+			 *
+			 * The setting is an opt-OUT checkbox that stores 'yes' only when
+			 * the owner asks us to leave the URL alone. Reading it with
+			 * empty() treated the stored 'no' as "do not update" as well, so
+			 * the address bar never followed the shopper down the archive and
+			 * the browser Back button dropped them at page one.
+			 */
+			'update_url'     => ( isset( $general_settings['do_not_update_url'] ) && 'yes' === $general_settings['do_not_update_url'] ) ? '' : '1',
 			'load_image'     => $infinite_loader_icon,
 			'load_img_class' => '.infinite_loader_products_loading',
 			'load_more'      => $load_more_button,
