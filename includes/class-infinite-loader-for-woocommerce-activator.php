@@ -72,7 +72,12 @@ class Infinite_Loader_For_Woocommerce_Activator {
 	private static function infinite_loader_get_default_options() {
 		return array(
 			'infinite_loader_admin_general_option'         => array(
-				'product_loading_type' => 'pagination',
+				// The plugin exists to replace classic pagination, so a fresh
+				// activation has to show its own behaviour without the owner
+				// hunting for a setting first. Existing sites keep whatever
+				// they saved: activate() merges these defaults UNDER the
+				// stored option, so the stored value wins.
+				'product_loading_type' => 'load-more-button',
 				'product_per_page'     => '8',
 				'loading_image'        => 'fa-spinner',
 				'rotate_image'         => 'yes',

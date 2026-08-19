@@ -1218,19 +1218,20 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	}
 
 	/**
-	 * Handle AJAX requests with nonce verification
+	 * Mark the response to an archive load-more request.
+	 *
+	 * Deliberately unauthenticated: this only asks WordPress to render a public
+	 * shop archive that any visitor can already open directly, and it changes no
+	 * state, so there is nothing for a nonce to protect. Requiring one also made
+	 * the plugin unusable behind a page cache, because the per-user value landed
+	 * in the archive URL and turned every request into a cache miss.
 	 *
 	 * @since 1.0.0
 	 */
 	public function handle_infinite_loader_ajax() {
 		// Check if this is an infinite loader AJAX request.
-		if ( ! isset( $_REQUEST['infinite_loader_ajax'] ) ) {
+		if ( ! isset( $_REQUEST['infinite_loader_ajax'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only public archive request; see docblock.
 			return;
-		}
-
-		// Verify nonce.
-		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'infinite_loader_ajax_nonce' ) ) {
-			wp_die( esc_html__( 'Security check failed', 'infinite-loader-for-woocommerce' ), 403 );
 		}
 
 		// Add security headers.

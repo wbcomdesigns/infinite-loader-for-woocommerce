@@ -3,7 +3,7 @@ Contributors: vapvarun,wbcomdesigns
 Donate link: https://wbcomdesigns.com/
 Tags: Woocommerce
 Requires at least: 5.0
-Tested up to: 6.9
+Tested up to: 7.0
 Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -28,6 +28,14 @@ This section describes how to install the plugin and get it working.
 Woocommerce
 
 == Changelog ==
+= 1.2.4 =
+* Fix      - Infinite scroll now waits until the shopper is near the end of the product list. It previously loaded the next page on any scroll, so the whole catalogue loaded while the shopper was still in the header.
+* Fix      - Rebuilt the minified frontend scripts, which were four days behind their source. Production sites were running an older loader with no request timeout and no URL validation.
+* Fix      - Removed the per-visitor nonce from the archive request so page caches (WP Rocket, Varnish, Cloudflare) can serve the shop again. The request only reads a public archive and changes nothing, so it never needed one.
+* New      - Filter infinite_loader_scroll_threshold sets how close to the end of the list (in pixels, default 300) infinite scroll starts loading.
+* Improve  - A fresh activation now defaults to Load More instead of classic pagination. Existing sites keep the setting they saved.
+* Dev      - Added a build-freshness check (bin/verify-build-freshness.sh) that fails CI when a committed minified bundle does not match its source.
+
 = 1.2.2 =
 * Fix: (#25)Fixed save setting notice display
 * Fix: (#24)Fixed set all to default btn show empty alert box

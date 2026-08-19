@@ -136,6 +136,35 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                     };
                 }
                 
+                // True once the end of the product list has come close enough to
+                // the viewport to be worth loading the next page.
+                //
+                // This gate is what stops the whole catalogue chain-loading.
+                // Every finished request ends by firing a synthetic scroll (see
+                // trigger_lazy_load), so without a distance check each load
+                // immediately queues the next one and the shopper pulls the
+                // entire shop while still sitting in the header.
+                var infinite_loader_near_list_end = function () {
+                    var list = domCache.products && domCache.products.length ? domCache.products[0] : null;
+
+                    // Nothing measurable - keep the old always-load behaviour
+                    // rather than silently refusing to load anything.
+                    if (!list || typeof list.getBoundingClientRect !== 'function') {
+                        return true;
+                    }
+
+                    // wp_localize_script stringifies scalars, so this arrives as
+                    // "300", not 300. Parse before comparing or the
+                    // infinite_loader_scroll_threshold filter is silently
+                    // ignored and every site is stuck on the default.
+                    var threshold = parseInt(infinite_loader_product_data.scroll_threshold, 10);
+                    if (isNaN(threshold) || threshold < 0) {
+                        threshold = 300;
+                    }
+
+                    return list.getBoundingClientRect().bottom - domCache.window.height() <= threshold;
+                };
+
                 // Scroll handler
                 var scrollTimer;
                 domCache.window.on('scroll', function () {
@@ -143,8 +172,8 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                         clearTimeout(scrollTimer);
                         scrollTimer = setTimeout(function() {
                             br_load_more_html5();
-                            
-                            if (infinite_loader_type === 'infinity-scroll') {
+
+                            if (infinite_loader_type === 'infinity-scroll' && infinite_loader_near_list_end()) {
                                 infinite_loader_update_state();
                                 infinite_loader_load_next_page();
                             }
@@ -221,13 +250,17 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 infinite_loader_ajax_instance = $.ajax({
                     method: "GET",
                     url: next_page,
+                    // No nonce here on purpose. This is a read-only GET of a
+                    // public shop archive, so a nonce protects nothing - and a
+                    // per-user value in the URL makes every request a cache
+                    // miss, so Varnish/WP Rocket/Cloudflare never serve the
+                    // shop. infinite_loader_ajax is a constant, so it stays
+                    // cacheable.
                     data: {
-                        'infinite_loader_ajax': 1,
-                        'nonce': infinite_loader_product_data.ajax_nonce
+                        'infinite_loader_ajax': 1
                     },
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader('X-Braapfdisable', '1');
-                        xhr.setRequestHeader('X-WP-Nonce', infinite_loader_product_data.ajax_nonce);
                     },
                     success: function (data) {
                         processAjaxResponse(data, next_page, replace);

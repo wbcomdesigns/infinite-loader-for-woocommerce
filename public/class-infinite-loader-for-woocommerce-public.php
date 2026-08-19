@@ -311,6 +311,13 @@ class Infinite_Loader_For_Woocommerce_Public {
 			'retry_text'     => esc_html__( 'Retry', 'infinite-loader-for-woocommerce' ),
 			'no_more_text'   => esc_html__( 'No more products', 'infinite-loader-for-woocommerce' ),
 			'loading_text'   => esc_html__( 'Loading...', 'infinite-loader-for-woocommerce' ),
+			/**
+			 * Distance in pixels between the bottom of the product list and the
+			 * viewport at which infinite scroll asks for the next page.
+			 *
+			 * @param int $threshold Pixels. Default 300.
+			 */
+			'scroll_threshold' => (int) apply_filters( 'infinite_loader_scroll_threshold', 300 ),
 			'is_mobile'      => wp_is_mobile(),
 			'debug_mode'     => defined( 'WP_DEBUG' ) && WP_DEBUG,
 			'site_url'       => esc_url( home_url() ),
