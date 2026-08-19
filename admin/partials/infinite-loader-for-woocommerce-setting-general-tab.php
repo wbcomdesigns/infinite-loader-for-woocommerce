@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$infinite_loader_general_setting = get_option( 'infinite_loader_admin_general_option' );
+$infinite_loader_general_setting = get_option( 'infinite_loader_admin_general_option', array() );
 
 $infinite_loader_selected_icon = isset( $infinite_loader_general_setting['loading_image'] ) ? esc_attr( $infinite_loader_general_setting['loading_image'] ) : '';
 ?>
@@ -55,7 +55,7 @@ $infinite_loader_selected_icon = isset( $infinite_loader_general_setting['loadin
 							<p class="description"><?php esc_html_e( 'Specify the number of products to display per page.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
-							<input type="number" name="infinite_loader_admin_general_option[product_per_page]" placeholder="<?php esc_html_e( 'Products per page', 'infinite-loader-for-woocommerce' ); ?>" value="<?php echo ( isset( $infinite_loader_general_setting['product_per_page'] ) ) ? esc_attr( $infinite_loader_general_setting['product_per_page'] ) : ''; ?>">
+							<input type="number" name="infinite_loader_admin_general_option[product_per_page]" placeholder="<?php esc_html_e( 'Products per page', 'infinite-loader-for-woocommerce' ); ?>" value="<?php echo ( isset( $infinite_loader_general_setting['product_per_page'] ) ) ? esc_attr( $infinite_loader_general_setting['product_per_page'] ) : '8'; ?>">
 						</div>
 					</div>
 					<div class="wbcom-settings-section-wrap">
