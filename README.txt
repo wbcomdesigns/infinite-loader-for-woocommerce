@@ -5,7 +5,7 @@ Tags: Woocommerce
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.3.1
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,14 +29,9 @@ This section describes how to install the plugin and get it working.
 Woocommerce
 
 == Changelog ==
-= 1.3.1 =
+= 1.3.0 =
 * Fix      - The FAQ tab now expands and collapses. Its accordion shipped with no styles at all, so every answer was permanently open and the questions looked like plain text.
 * Fix      - Settings tabs show their default values on a site where the options have not been saved yet, instead of an empty Products Per Page box.
-* Improve  - Multisite uninstall uses the supported get_sites() API rather than a direct database query.
-* Dev      - Settings registrations name their sanitize callback explicitly.
-* Dev      - The user guide is no longer packaged in the release zip.
-
-= 1.3.0 =
 * Fix      - Custom CSS from the JavaScript/CSS tab now applies rules that use child or sibling combinators. Output was HTML-escaped inside the style tag, so a selector like "ul.products > li.product" shipped with an encoded arrow and silently never matched, while simple selectors kept working.
 * Fix      - The bundled Font Awesome stylesheet now loads, so the default loading spinner is visible on themes that do not ship Font Awesome themselves. It was hooked too early to ever run.
 * Fix      - Infinite scroll now waits until the shopper is near the end of the product list. It previously loaded the next page on any scroll, so the whole catalogue loaded while the shopper was still in the header.
@@ -50,7 +45,9 @@ Woocommerce
 * New      - Settings rebuilt on the shared Wbcom admin shell, matching the other Wbcom WooCommerce plugins, with a new Overview tab showing how the shop currently loads products.
 * New      - Filter infinite_loader_scroll_threshold sets how close to the end of the list (in pixels, default 300) infinite scroll starts loading.
 * New      - Filter infinite_loader_render_products_only returns false to go back to rendering the full archive, for themes that build their shop loop outside the standard WooCommerce loop templates.
+* Improve  - Multisite uninstall uses the supported get_sites() API rather than a direct database query.
 * Improve  - A fresh activation now defaults to Load More instead of classic pagination. Existing sites keep the setting they saved.
+* Dev      - Settings registrations name their sanitize callback explicitly, and the user guide is no longer packaged in the release zip.
 * Dev      - Added a build-freshness check (bin/verify-build-freshness.sh) that fails CI when a committed minified bundle does not match its source.
 
 = 1.2.2 =
