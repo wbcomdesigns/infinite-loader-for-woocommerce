@@ -1,0 +1,23 @@
+# Everything the customer zip must NOT carry.
+#
+# Anchored with a leading slash on purpose: an unanchored `vendor` or `src`
+# matches at every depth and has silently stripped bundled runtime code from a
+# Wbcom zip before. These entries are meant to hit the repo root only.
+/.git
+/.github
+/.gitignore
+/.gitattributes
+/.editorconfig
+/.distignore
+/node_modules
+/bin
+/dist
+/package.json
+/package-lock.json
+/gruntfile.js
+/Gruntfile.js
+/CLAUDE.md
+/README.md
+.DS_Store
+/developer-guide.md
+/faq-guide.md

@@ -27,6 +27,26 @@ jobs:
       - name: Check PHP syntax
         run: find . -name "*.php" -not -path "./vendor/*" -not -path "./node_modules/*" | xargs php -l
 
+  build-freshness:
+    name: Build freshness (min matches source)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install build tooling
+        run: npm install --no-audit --no-fund
+
+      # Deliberately NOT continue-on-error: a stale bundle ships broken code to
+      # every production site, which is exactly what this job exists to stop.
+      - name: Verify committed bundles match their sources
+        run: bash bin/verify-build-freshness.sh
+
   phpstan:
     name: PHPStan
     runs-on: ubuntu-latest

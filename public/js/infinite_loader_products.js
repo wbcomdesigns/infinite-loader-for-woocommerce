@@ -127,7 +127,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 });
                 
                 // Handle browser history
-                if (infinite_loader_product_data.update_url === true) {
+                if (infinite_loader_product_data.update_url) {
                     window.onpopstate = function (event) {
                         var state = event.state;
                         if (state && state.blmp === 'br_lmp_popstate') {
@@ -136,6 +136,35 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                     };
                 }
                 
+                // True once the end of the product list has come close enough to
+                // the viewport to be worth loading the next page.
+                //
+                // This gate is what stops the whole catalogue chain-loading.
+                // Every finished request ends by firing a synthetic scroll (see
+                // trigger_lazy_load), so without a distance check each load
+                // immediately queues the next one and the shopper pulls the
+                // entire shop while still sitting in the header.
+                var infinite_loader_near_list_end = function () {
+                    var list = domCache.products && domCache.products.length ? domCache.products[0] : null;
+
+                    // Nothing measurable - keep the old always-load behaviour
+                    // rather than silently refusing to load anything.
+                    if (!list || typeof list.getBoundingClientRect !== 'function') {
+                        return true;
+                    }
+
+                    // wp_localize_script stringifies scalars, so this arrives as
+                    // "300", not 300. Parse before comparing or the
+                    // infinite_loader_scroll_threshold filter is silently
+                    // ignored and every site is stuck on the default.
+                    var threshold = parseInt(infinite_loader_product_data.scroll_threshold, 10);
+                    if (isNaN(threshold) || threshold < 0) {
+                        threshold = 300;
+                    }
+
+                    return list.getBoundingClientRect().bottom - domCache.window.height() <= threshold;
+                };
+
                 // Scroll handler
                 var scrollTimer;
                 domCache.window.on('scroll', function () {
@@ -143,8 +172,8 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                         clearTimeout(scrollTimer);
                         scrollTimer = setTimeout(function() {
                             br_load_more_html5();
-                            
-                            if (infinite_loader_type === 'infinity-scroll') {
+
+                            if (infinite_loader_type === 'infinity-scroll' && infinite_loader_near_list_end()) {
                                 infinite_loader_update_state();
                                 infinite_loader_load_next_page();
                             }
@@ -176,11 +205,16 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                             return;
                         }
                         
-                        if (infinite_loader_product_data.update_url === true) {
+                        if (infinite_loader_product_data.update_url) {
                             update_browser_history(next_page);
                         }
                         
-                        infinite_loader_load_next_page(true, next_page);
+                        // 1 means "replace the grid", not "true". replace is a
+                        // three-state mode (1 replace, 2 prepend, falsy
+                        // append) that is compared with ===, so passing a
+                        // boolean here silently fell through to append and
+                        // paginating stacked page 2 underneath page 1.
+                        infinite_loader_load_next_page(1, next_page);
                     });
                 }
                 
@@ -221,13 +255,17 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 infinite_loader_ajax_instance = $.ajax({
                     method: "GET",
                     url: next_page,
+                    // No nonce here on purpose. This is a read-only GET of a
+                    // public shop archive, so a nonce protects nothing - and a
+                    // per-user value in the URL makes every request a cache
+                    // miss, so Varnish/WP Rocket/Cloudflare never serve the
+                    // shop. infinite_loader_ajax is a constant, so it stays
+                    // cacheable.
                     data: {
-                        'infinite_loader_ajax': 1,
-                        'nonce': infinite_loader_product_data.ajax_nonce
+                        'infinite_loader_ajax': 1
                     },
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader('X-Braapfdisable', '1');
-                        xhr.setRequestHeader('X-WP-Nonce', infinite_loader_product_data.ajax_nonce);
                     },
                     success: function (data) {
                         processAjaxResponse(data, next_page, replace);
@@ -268,7 +306,8 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 }
                 var currentUrl = decodeURIComponent(location.href);
                 if (is_valid_url(currentUrl)) {
-                    infinite_loader_load_next_page(true, currentUrl);
+                    // Replace mode - see the note on the pagination handler.
+                    infinite_loader_load_next_page(1, currentUrl);
                 }
             }
         }
@@ -529,6 +568,21 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
             setTimeout(display_hidden, 2500);
         }
         
+        // Substitute the running range into WooCommerce's result-count string.
+        //
+        // The markup ships placeholders instead of the numbers for the page it
+        // was rendered on, so the count can describe everything currently on
+        // screen ("Showing 1-16 of 17") rather than just the page that arrived
+        // last ("Showing 9-16 of 17"). The tokens used to be '-1' and '-2',
+        // which never appear in the rendered string, so the substitution
+        // silently did nothing and the count was always wrong once a second
+        // page had been appended.
+        function infinite_loader_format_count(template, start, end) {
+            return String(template)
+                .split('{{il_start}}').join(start)
+                .split('{{il_end}}').join(end);
+        }
+
         function update_result_count($data, replace) {
             if (infinite_loader_type === 'pagination') {
                 var newCountText = $data.find('.woocommerce-result-count:first').text();
@@ -549,10 +603,8 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 infinite_count_lastend = parseInt($count_element.data('end')) || 0;
                 infinite_count_laststart = parseInt($count_element.data('start')) || 0;
                 
-                var text_count = infinite_count_text
-                    .replace('-1', infinite_count_start)
-                    .replace('-2', infinite_count_end);
-                
+                var text_count = infinite_loader_format_count(infinite_count_text, infinite_count_start, infinite_count_end);
+
                 domCache.resultCount.text(text_count);
             } else {
                 var newCountText = $data.find('.woocommerce-result-count:first').text();
@@ -700,7 +752,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
             clearTimeout(br_load_more_html5_wait);
             
             br_load_more_html5_wait = setTimeout(function () {
-                if (infinite_loader_product_data.update_url === true && !infinite_loader_loading && infinite_loader_type !== 'pagination') {
+                if (infinite_loader_product_data.update_url && !infinite_loader_loading && infinite_loader_type !== 'pagination') {
                     var next_page = '';
                     
                     $('.infinite_loader_btn').each(function () {
@@ -753,10 +805,8 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 infinite_count_lastend = infinite_count_end;
                 infinite_count_laststart = infinite_count_start;
                 
-                var text_count = infinite_count_text
-                    .replace('-1', infinite_count_start)
-                    .replace('-2', infinite_count_end);
-                
+                var text_count = infinite_loader_format_count(infinite_count_text, infinite_count_start, infinite_count_end);
+
                 domCache.resultCount.text(text_count);
             }
         }

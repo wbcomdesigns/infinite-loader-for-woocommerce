@@ -11,6 +11,11 @@
  * @subpackage Infinite_Loader_For_Woocommerce/admin/partials
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_previous_button_option' );
 ?>
 <div class="wbcom-tab-content">
@@ -30,7 +35,7 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 							<label for="blogname">
 								<?php esc_html_e( 'Custom CSS Class', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Add a custom CSS class to apply additional styling to the Load Previous button.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Add a custom CSS class to apply additional styling to the Load Previous button.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="text" id="infinite_loader_default_custom_class"  class="infinite_loader_btn_settings" data-style="custom_css" name="infinite_loader_admin_previous_button_option[custom_class]"  value="<?php echo ( isset( $infinite_loader_previous_button_setting['custom_class'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['custom_class'] ) : ''; ?>">
@@ -41,7 +46,7 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 							<label for="blogname">
 								<?php esc_html_e( 'Button Preview', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Preview how the Load Previous button will appear with your current design settings.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Preview how the Load Previous button will appear with your current design settings.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<div class='infinite-loader-btn-preview-td'>
@@ -54,7 +59,7 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 							<label for="blogname">
 								<?php esc_html_e( 'Load Previous Button Text', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Enter the text you want to display on the Load Previous button (e.g., “Load Previous”, “View Earlier Products”).', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Enter the text you want to display on the Load Previous button (e.g., “Load Previous”, “View Earlier Products”).', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="text" id="infinite_loader_default_previous_botton_text" class="infinite_loader_btn_settings" data-default="Load Previous" data-style="text" name="infinite_loader_admin_previous_button_option[button_text]"  placeholder="<?php esc_html_e( 'Load Previous', 'infinite-loader-for-woocommerce' ); ?>" value="<?php echo ( isset( $infinite_loader_previous_button_setting['button_text'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['button_text'] ) : 'Load Previous'; ?>">
@@ -65,7 +70,7 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 							<label for="blogname">
 								<?php esc_html_e( 'Button Background Color', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Select the background color for the Load Previous button.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Select the background color for the Load Previous button.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="color" id="infinite_loader_default_bg_color" class="bg_btn_color" data-default="#1d76da" name="infinite_loader_admin_previous_button_option[background_color]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['background_color'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['background_color'] ) : ''; ?>">
@@ -77,7 +82,7 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 							<label for="blogname">
 								<?php esc_html_e( 'Button Hover Background Color', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Choose the background color that appears when hovering over the Load Previous button.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Choose the background color that appears when hovering over the Load Previous button.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="color" id="infinite_loader_default_bg_color_mouse_hover" class="bg_btn_color_hover" name="infinite_loader_admin_previous_button_option[background_color_mouse_hover]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['background_color_mouse_hover'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['background_color_mouse_hover'] ) : ''; ?>">
@@ -89,7 +94,7 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 							<label for="blogname">
 								<?php esc_html_e( 'Button Border Color', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Set the border color of the Load Previous button.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Set the border color of the Load Previous button.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="color"  class="btn_border_color" data-default="#000" data-color="#000" id="infinite_loader_default_border_color" name="infinite_loader_admin_previous_button_option[border_color]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_color'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_color'] ) : ''; ?>">
@@ -101,7 +106,7 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 							<label for="blogname">
 								<?php esc_html_e( 'Button Text Color', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Choose the text color for the Load Previous button.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Choose the text color for the Load Previous button.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="color" id="infinite_loader_default_text_color" class="txt_btn_color" name="infinite_loader_admin_previous_button_option[text_color]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['text_color'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['text_color'] ) : '#fff'; ?>">
@@ -113,7 +118,7 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 							<label for="blogname">
 								<?php esc_html_e( 'Button Hover Text Color', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Define the text color shown when the button is hovered over.', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Define the text color shown when the button is hovered over.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="color" id="infinite_loader_default_text_color_mouse_hover" class="txt_btn_color_hover" name="infinite_loader_admin_previous_button_option[text_color_mouse_hover]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['text_color_mouse_hover'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['text_color_mouse_hover'] ) : '#000'; ?>">
@@ -125,7 +130,7 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 							<label for="blogname">
 								<?php esc_html_e( 'Button Font Size', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Set the font size of the Load Previous button text (in pixels).', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Set the font size of the Load Previous button text (in pixels).', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
 							<input type="number"  id="infinite-loader_set-default-font-size" class="infinite_loader_btn_settings" data-style="font-size" data-type="px" data-default="16"  name="infinite_loader_admin_previous_button_option[text_font_size]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['text_font_size'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['text_font_size'] ) : '16'; ?>">
@@ -136,13 +141,15 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 							<label for="blogname">
 								<?php esc_html_e( 'Button Padding', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Adjust the internal spacing of the button (Top, Right, Bottom, Left in pixels).', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Adjust the internal spacing of the button (Top, Right, Bottom, Left in pixels).', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
-							<input type="number" id="infinite-loader_set-default-padding-top" class="infinite-loader-style infinite_loader_btn_settings" data-style="padding-top" data-type="px" data-default="13" name="infinite_loader_admin_previous_button_option[padding_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_top'] ) : '13'; ?>">
-							<input type="number" id="infinite-loader_set-default-padding-right" class="infinite-loader-style infinite_loader_btn_settings" data-style="padding-right" data-type="px" data-default="30" name="infinite_loader_admin_previous_button_option[padding_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_right'] ) : '30'; ?>">
-							<input type="number" id="infinite-loader_set-default-padding-bottom" class="infinite-loader-style infinite_loader_btn_settings" data-style="padding-bottom" data-type="px" data-default="13" name="infinite_loader_admin_previous_button_option[padding_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_bottom'] ) : '13'; ?>">
-							<input type="number" id="infinite-loader_set-default-padding-left" class="infinite-loader-style infinite_loader_btn_settings" data-style="padding-left" data-type="px" data-default="30" name="infinite_loader_admin_previous_button_option[padding_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_left'] ) : '30'; ?>">
+<div class="il-box-grid">
+<span class="il-box-field"><label for="infinite-loader_set-default-padding-top"><?php esc_html_e( 'Top', 'infinite-loader-for-woocommerce' ); ?></label><input type="number" id="infinite-loader_set-default-padding-top" class="infinite-loader-style infinite_loader_btn_settings" data-style="padding-top" data-type="px" data-default="13" name="infinite_loader_admin_previous_button_option[padding_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_top'] ) : '13'; ?>"></span>
+							<span class="il-box-field"><label for="infinite-loader_set-default-padding-right"><?php esc_html_e( 'Right', 'infinite-loader-for-woocommerce' ); ?></label><input type="number" id="infinite-loader_set-default-padding-right" class="infinite-loader-style infinite_loader_btn_settings" data-style="padding-right" data-type="px" data-default="30" name="infinite_loader_admin_previous_button_option[padding_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_right'] ) : '30'; ?>"></span>
+							<span class="il-box-field"><label for="infinite-loader_set-default-padding-bottom"><?php esc_html_e( 'Bottom', 'infinite-loader-for-woocommerce' ); ?></label><input type="number" id="infinite-loader_set-default-padding-bottom" class="infinite-loader-style infinite_loader_btn_settings" data-style="padding-bottom" data-type="px" data-default="13" name="infinite_loader_admin_previous_button_option[padding_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_bottom'] ) : '13'; ?>"></span>
+							<span class="il-box-field"><label for="infinite-loader_set-default-padding-left"><?php esc_html_e( 'Left', 'infinite-loader-for-woocommerce' ); ?></label><input type="number" id="infinite-loader_set-default-padding-left" class="infinite-loader-style infinite_loader_btn_settings" data-style="padding-left" data-type="px" data-default="30" name="infinite_loader_admin_previous_button_option[padding_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['padding_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['padding_left'] ) : '30'; ?>"></span>
+</div>
 						</div>
 					</div>
 					<div class="wbcom-settings-section-wrap">
@@ -150,13 +157,15 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 							<label for="blogname">
 								<?php esc_html_e( 'Button Margin', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Set the external spacing around the button (Top, Right, Bottom, Left in pixels).', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Set the external spacing around the button (Top, Right, Bottom, Left in pixels).', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
-							<input type="number" id="infinite-loader_set-default-margin-top" class="infinite-loader-style infinite_loader_btn_settings" data-style="margin-top" data-type="px" data-default="" name="infinite_loader_admin_previous_button_option[margin_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_top'] ) : 00; ?>">
-							<input type="number" id="infinite-loader_set-default-margin-right" class="infinite-loader-style infinite_loader_btn_settings" data-style="margin-right" data-type="px" data-default="" name="infinite_loader_admin_previous_button_option[margin_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_right'] ) : 00; ?>">
-							<input type="number" id="infinite-loader_set-default-margin-bottom" class="infinite-loader-style infinite_loader_btn_settings" data-style="margin-bottom" data-type="px" data-default="20" name="infinite_loader_admin_previous_button_option[margin_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_bottom'] ) : '20'; ?>">
-							<input type="number" id="infinite-loader_set-default-margin-left" class="infinite-loader-style infinite_loader_btn_settings" data-style="margin-left" data-type="px" data-default="" name="infinite_loader_admin_previous_button_option[margin_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_left'] ) : 00; ?>">
+<div class="il-box-grid">
+<span class="il-box-field"><label for="infinite-loader_set-default-margin-top"><?php esc_html_e( 'Top', 'infinite-loader-for-woocommerce' ); ?></label><input type="number" id="infinite-loader_set-default-margin-top" class="infinite-loader-style infinite_loader_btn_settings" data-style="margin-top" data-type="px" data-default="" name="infinite_loader_admin_previous_button_option[margin_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_top'] ) : 00; ?>"></span>
+							<span class="il-box-field"><label for="infinite-loader_set-default-margin-right"><?php esc_html_e( 'Right', 'infinite-loader-for-woocommerce' ); ?></label><input type="number" id="infinite-loader_set-default-margin-right" class="infinite-loader-style infinite_loader_btn_settings" data-style="margin-right" data-type="px" data-default="" name="infinite_loader_admin_previous_button_option[margin_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_right'] ) : 00; ?>"></span>
+							<span class="il-box-field"><label for="infinite-loader_set-default-margin-bottom"><?php esc_html_e( 'Bottom', 'infinite-loader-for-woocommerce' ); ?></label><input type="number" id="infinite-loader_set-default-margin-bottom" class="infinite-loader-style infinite_loader_btn_settings" data-style="margin-bottom" data-type="px" data-default="20" name="infinite_loader_admin_previous_button_option[margin_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_bottom'] ) : '20'; ?>"></span>
+							<span class="il-box-field"><label for="infinite-loader_set-default-margin-left"><?php esc_html_e( 'Left', 'infinite-loader-for-woocommerce' ); ?></label><input type="number" id="infinite-loader_set-default-margin-left" class="infinite-loader-style infinite_loader_btn_settings" data-style="margin-left" data-type="px" data-default="" name="infinite_loader_admin_previous_button_option[margin_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['margin_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['margin_left'] ) : 00; ?>"></span>
+</div>
 						</div>
 					</div>
 					<div class="wbcom-settings-section-wrap">
@@ -164,13 +173,15 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 							<label for="blogname">
 								<?php esc_html_e( 'Button Border Width', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Specify the width of the button\'s border (in pixels).', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description"><?php esc_html_e( 'Specify the width of the button\'s border (in pixels).', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
-							<input type="number" class="infinite-loader-style infinite_loader_btn_settings" data-style="border-top" data-type="px" data-default="1" data-field="border" id="infinite-loader_set-default-border-top"  name="infinite_loader_admin_previous_button_option[border_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_top'] ) : '1'; ?>">
-							<input type="number"  class="infinite-loader-style infinite_loader_btn_settings" data-style="border-right" data-type="px" data-default="1" data-field="border" id="infinite-loader_set-default-border-right" name="infinite_loader_admin_previous_button_option[border_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_right'] ) : '1'; ?>">
-							<input type="number"  class="infinite-loader-style infinite_loader_btn_settings" data-style="border-bottom" data-type="px" data-default="1" data-field="border" id="infinite-loader_set-default-border-bottom" name="infinite_loader_admin_previous_button_option[border_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_bottom'] ) : '1'; ?>">
-							<input type="number" class="infinite-loader-style infinite_loader_btn_settings" data-style="border-left" data-type="px" data-default="1" data-field="border" id="infinite-loader_set-default-border-left" name="infinite_loader_admin_previous_button_option[border_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_left'] ) : '1'; ?>">
+<div class="il-box-grid">
+<span class="il-box-field"><label for="infinite-loader_set-default-border-top"><?php esc_html_e( 'Top', 'infinite-loader-for-woocommerce' ); ?></label><input type="number" class="infinite-loader-style infinite_loader_btn_settings" data-style="border-top" data-type="px" data-default="1" data-field="border" id="infinite-loader_set-default-border-top"  name="infinite_loader_admin_previous_button_option[border_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_top'] ) : '1'; ?>"></span>
+							<span class="il-box-field"><label for="infinite-loader_set-default-border-right"><?php esc_html_e( 'Right', 'infinite-loader-for-woocommerce' ); ?></label><input type="number"  class="infinite-loader-style infinite_loader_btn_settings" data-style="border-right" data-type="px" data-default="1" data-field="border" id="infinite-loader_set-default-border-right" name="infinite_loader_admin_previous_button_option[border_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_right'] ) : '1'; ?>"></span>
+							<span class="il-box-field"><label for="infinite-loader_set-default-border-bottom"><?php esc_html_e( 'Bottom', 'infinite-loader-for-woocommerce' ); ?></label><input type="number"  class="infinite-loader-style infinite_loader_btn_settings" data-style="border-bottom" data-type="px" data-default="1" data-field="border" id="infinite-loader_set-default-border-bottom" name="infinite_loader_admin_previous_button_option[border_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_bottom'] ) : '1'; ?>"></span>
+							<span class="il-box-field"><label for="infinite-loader_set-default-border-left"><?php esc_html_e( 'Left', 'infinite-loader-for-woocommerce' ); ?></label><input type="number" class="infinite-loader-style infinite_loader_btn_settings" data-style="border-left" data-type="px" data-default="1" data-field="border" id="infinite-loader_set-default-border-left" name="infinite_loader_admin_previous_button_option[border_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_left'] ) : '1'; ?>"></span>
+</div>
 						</div>
 					</div>
 					<div class="wbcom-settings-section-wrap">
@@ -178,14 +189,23 @@ $infinite_loader_previous_button_setting = get_option( 'infinite_loader_admin_pr
 							<label for="blogname">
 								<?php esc_html_e( 'Button Border Radius', 'infinite-loader-for-woocommerce' ); ?>
 							</label>
-							<p class="description"><?php esc_html_e( 'Adjust the corner roundness of the button (in pixels).
-', 'infinite-loader-for-woocommerce' ) ?></p>
+							<p class="description">
+							<?php
+							esc_html_e(
+								'Adjust the corner roundness of the button (in pixels).
+',
+								'infinite-loader-for-woocommerce'
+							)
+							?>
+							</p>
 						</div>
 						<div class="wbcom-settings-section-options">
-							<input type="number" id="infinite-loader_set-default-border-radius-top" class="infinite-loader-style infinite_loader_btn_settings" data-type="px" data-style="border-top-left-radius"  data-default="50"  name="infinite_loader_admin_previous_button_option[border_radius_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_top'] ) : '50'; ?>">
-							<input type="number" id="infinite-loader_set-default-border-radius-right" class="infinite-loader-style infinite_loader_btn_settings" data-type="px" data-style="border-top-right-radius"  data-default="50"  name="infinite_loader_admin_previous_button_option[border_radius_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_right'] ) : '50'; ?>">
-							<input type="number" id="infinite-loader_set-default-border-radius-bottom" class="infinite-loader-style infinite_loader_btn_settings" data-type="px" data-style="border-bottom-left-radius"  data-default="50" name="infinite_loader_admin_previous_button_option[border_radius_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_bottom'] ) : '50'; ?>">
-							<input type="number" id="infinite-loader_set-default-border-radius-left" class="infinite-loader-style infinite_loader_btn_settings" data-type="px" data-style="border-bottom-right-radius"  data-default="50" name="infinite_loader_admin_previous_button_option[border_radius_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_left'] ) : '50'; ?>">
+<div class="il-box-grid">
+<span class="il-box-field"><label for="infinite-loader_set-default-border-radius-top"><?php esc_html_e( 'Top left', 'infinite-loader-for-woocommerce' ); ?></label><input type="number" id="infinite-loader_set-default-border-radius-top" class="infinite-loader-style infinite_loader_btn_settings" data-type="px" data-style="border-top-left-radius"  data-default="50"  name="infinite_loader_admin_previous_button_option[border_radius_top]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_top'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_top'] ) : '50'; ?>"></span>
+							<span class="il-box-field"><label for="infinite-loader_set-default-border-radius-right"><?php esc_html_e( 'Top right', 'infinite-loader-for-woocommerce' ); ?></label><input type="number" id="infinite-loader_set-default-border-radius-right" class="infinite-loader-style infinite_loader_btn_settings" data-type="px" data-style="border-top-right-radius"  data-default="50"  name="infinite_loader_admin_previous_button_option[border_radius_right]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_right'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_right'] ) : '50'; ?>"></span>
+							<span class="il-box-field"><label for="infinite-loader_set-default-border-radius-bottom"><?php esc_html_e( 'Bottom left', 'infinite-loader-for-woocommerce' ); ?></label><input type="number" id="infinite-loader_set-default-border-radius-bottom" class="infinite-loader-style infinite_loader_btn_settings" data-type="px" data-style="border-bottom-left-radius"  data-default="50" name="infinite_loader_admin_previous_button_option[border_radius_bottom]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_bottom'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_bottom'] ) : '50'; ?>"></span>
+							<span class="il-box-field"><label for="infinite-loader_set-default-border-radius-left"><?php esc_html_e( 'Bottom right', 'infinite-loader-for-woocommerce' ); ?></label><input type="number" id="infinite-loader_set-default-border-radius-left" class="infinite-loader-style infinite_loader_btn_settings" data-type="px" data-style="border-bottom-right-radius"  data-default="50" name="infinite_loader_admin_previous_button_option[border_radius_left]" value="<?php echo ( isset( $infinite_loader_previous_button_setting['border_radius_left'] ) ) ? esc_attr( $infinite_loader_previous_button_setting['border_radius_left'] ) : '50'; ?>"></span>
+</div>
 						</div>
 					</div>
 					<div class="wbcom-settings-section-options">

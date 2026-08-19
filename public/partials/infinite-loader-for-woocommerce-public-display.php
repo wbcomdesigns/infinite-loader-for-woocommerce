@@ -10,6 +10,11 @@
  * @package    Infinite_Loader_For_Woocommerce
  * @subpackage Infinite_Loader_For_Woocommerce/public/partials
  */
-?>
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+?>
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->

@@ -46,15 +46,19 @@ Infinite Loader for WooCommerce enhances your online store's browsing experience
 
 3. **Verify Installation**
    - Check that "WB Plugins" appears in your admin menu
-   - Navigate to WB Plugins → Infinite Loader for WooCommerce
+   - Navigate to WB Plugins → Infinite Loader
 
 ## Getting Started
 
 ### Quick Setup
 
 1. **Choose Loading Type**
-   - Go to WB Plugins → Infinite Loader for WooCommerce
-   - Select the "General" tab
+   - Go to WB Plugins → Infinite Loader
+   - The **Overview** tab opens first and shows how your shop currently loads
+     products: the loading style in use, how many products load at a time,
+     whether the address bar follows the shopper, and whether WooCommerce is
+     active.
+   - Select the **General** tab to change it
    - Choose your preferred loading type:
      - **Infinite Scroll** - Best for mobile and modern designs
      - **Load More Button** - Gives users control
@@ -67,6 +71,12 @@ Infinite Loader for WooCommerce enhances your online store's browsing experience
 3. **Save Changes**
    - Click "Save Changes"
    - Visit your shop page to see it in action!
+
+> **A fresh install already works.** From 1.2.4 a new activation defaults to
+> the **Load More Button** rather than classic pagination, so the plugin does
+> something visible before you open its settings. Sites that upgrade keep
+> whatever they had saved - the default only applies where no choice was ever
+> made.
 
 ## Configuration
 

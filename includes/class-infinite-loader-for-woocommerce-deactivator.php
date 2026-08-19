@@ -9,7 +9,7 @@
  * @subpackage Infinite_Loader_For_Woocommerce/includes
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -34,16 +34,16 @@ class Infinite_Loader_For_Woocommerce_Deactivator {
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
-		// Clear any scheduled hooks
+		// Clear any scheduled hooks.
 		wp_clear_scheduled_hook( 'infinite_loader_daily_cleanup' );
-		
-		// Clear plugin cache
+
+		// Clear plugin cache.
 		wp_cache_delete( 'infinite_loader_admin_general_option' );
 		wp_cache_delete( 'infinite_loader_admin_button_option' );
 		wp_cache_delete( 'infinite_loader_admin_previous_button_option' );
 		wp_cache_delete( 'infinite_loader_admin_css_js_option' );
-		
-		// Flush rewrite rules
+
+		// Flush rewrite rules.
 		flush_rewrite_rules();
 	}
 }

@@ -9,7 +9,7 @@
  * @subpackage Infinite_Loader_For_Woocommerce/includes
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
