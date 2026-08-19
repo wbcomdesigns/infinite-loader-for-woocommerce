@@ -39,6 +39,25 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION', '1.2.4' );
 
+if ( ! defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH' ) ) {
+	define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+}
+
+if ( ! defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_URL' ) ) {
+	define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+}
+
+/*
+ * The shared Wbcom settings shell. Every Wbcom plugin bundles a copy and
+ * registers its version; the loader keeps whichever is newest, and that single
+ * copy renders the menu for all of them. Guarded so a build that dropped the
+ * directory degrades to no settings screen rather than a fatal.
+ */
+if ( file_exists( INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'lib/wbcom-settings/loader.php' ) ) {
+	require_once INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'lib/wbcom-settings/loader.php';
+	wbcom_settings_register( '1.0.1', INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'lib/wbcom-settings/class-wbcom-settings-page.php' );
+}
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-infinite-loader-for-woocommerce-activator.php

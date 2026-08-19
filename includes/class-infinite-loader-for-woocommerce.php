@@ -145,13 +145,6 @@ class Infinite_Loader_For_Woocommerce {
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-infinite-loader-for-woocommerce-i18n.php';
 
 		/**
-		 * The class responsible add wrapper of admin settings.
-		 */
-		if ( file_exists( plugin_dir_path( __DIR__ ) . 'admin/wbcom/class-wbcom-admin-settings.php' ) ) {
-			require_once plugin_dir_path( __DIR__ ) . 'admin/wbcom/class-wbcom-admin-settings.php';
-		}
-
-		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'admin/class-infinite-loader-for-woocommerce-admin.php';
@@ -161,11 +154,6 @@ class Infinite_Loader_For_Woocommerce {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'public/class-infinite-loader-for-woocommerce-public.php';
-
-		/** This file adds the plugin license module UI. */
-		if ( file_exists( plugin_dir_path( __DIR__ ) . 'admin/wbcom/class-wbcom-paid-plugin-settings.php' ) ) {
-			require_once plugin_dir_path( __DIR__ ) . 'admin/wbcom/class-wbcom-paid-plugin-settings.php';
-		}
 
 		/** This file is responsible for the plugin license functionality. */
 		if ( file_exists( plugin_dir_path( __DIR__ ) . 'edd-license/edd-plugin-license.php' ) ) {
@@ -201,7 +189,8 @@ class Infinite_Loader_For_Woocommerce {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'infinite_loader_for_woocommerce_add_submenu_page_admin_settings' );
+		$this->loader->add_action( 'init', $plugin_admin, 'boot_settings_page', 1 );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'register_parent_menu', 5 );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'infinite_loader_for_woocommerce_init_plugin_settings' );
 		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_more_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_button_style', 10, 2 );
 		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_previous_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_previous_button_style', 10, 2 );

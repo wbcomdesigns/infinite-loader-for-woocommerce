@@ -27,6 +27,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Infinite_Loader_For_Woocommerce_Admin {
 
 	/**
+	 * Settings page slug.
+	 *
+	 * Unchanged from the pre-shell admin so existing bookmarks, the plugin
+	 * action link and any documentation still resolve.
+	 *
+	 * @since 1.2.4
+	 * @var   string
+	 */
+	const PAGE_SLUG = 'infinite-loader-for-woocommerce-settings';
+
+	/**
 	 * The ID of this plugin.
 	 *
 	 * @since    1.0.0
@@ -43,15 +54,6 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
-
-	/**
-	 * Plugin_settings_tabs
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @var mixed     $plugin_settings_tabs    The settings Tabs.
-	 */
-	public $plugin_settings_tabs;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -183,141 +185,243 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	}
 
 	/**
-	 * Actions performed on loading admin_menu.
+	 * Register this plugin's screen on the shared Wbcom settings shell.
 	 *
-	 * @since    1.0.0
-	 * @access   public
-	 * @author   Wbcom Designs
+	 * The shell (lib/wbcom-settings/) owns the menu entry, the sidebar, tab
+	 * routing, assets and third-party notice suppression. This plugin only
+	 * contributes nav entries and tab bodies, through the two prefixed seams
+	 * registered at the bottom of this method.
+	 *
+	 * @since 1.2.4
 	 */
-	public function infinite_loader_for_woocommerce_add_submenu_page_admin_settings() {
-		if ( empty( $GLOBALS['admin_page_hooks']['wbcomplugins'] ) && class_exists( 'WooCommerce' ) ) {
-			add_menu_page(
-				esc_html__( 'WB Plugins', 'infinite-loader-for-woocommerce' ),
-				esc_html__( 'WB Plugins', 'infinite-loader-for-woocommerce' ),
-				'manage_woocommerce',
-				'wbcomplugins',
-				array( $this, 'infinite_loader_for_woocommerce_admin_options_page' ),
-				'dashicons-lightbulb',
-				59
-			);
-
-			add_submenu_page(
-				'wbcomplugins',
-				esc_html__( 'General', 'infinite-loader-for-woocommerce' ),
-				esc_html__( 'General', 'infinite-loader-for-woocommerce' ),
-				'manage_woocommerce',
-				'wbcomplugins'
-			);
+	public function boot_settings_page() {
+		if ( ! class_exists( 'Wbcom_Settings_Page' ) ) {
+			return;
 		}
 
-		add_submenu_page(
+		Wbcom_Settings_Page::boot(
+			array(
+				'prefix'     => 'infinite_loader',
+				'slug'       => self::PAGE_SLUG,
+				'assets_url' => INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_URL,
+				'version'    => $this->version,
+				'icon'       => 'infinity',
+				'labels'     => array(
+					'menu_title' => __( 'Infinite Loader', 'infinite-loader-for-woocommerce' ),
+					'brand'      => __( 'Infinite Loader', 'infinite-loader-for-woocommerce' ),
+					'subtitle'   => __( 'Load more and infinite scroll for WooCommerce', 'infinite-loader-for-woocommerce' ),
+					'nav_label'  => __( 'Infinite Loader settings sections', 'infinite-loader-for-woocommerce' ),
+					'pro_badge'  => __( 'Pro', 'infinite-loader-for-woocommerce' ),
+				),
+			)
+		);
+
+		add_filter( 'infinite_loader_settings_nav_groups', array( $this, 'settings_nav_groups' ) );
+		add_action( 'infinite_loader_settings_tab_content', array( $this, 'render_settings_tab' ) );
+	}
+
+	/**
+	 * Create the shared "WB Plugins" parent menu when no other Wbcom plugin has.
+	 *
+	 * @since 1.2.4
+	 */
+	public function register_parent_menu() {
+		if ( ! class_exists( 'Wbcom_Settings_Page' ) || ! empty( $GLOBALS['admin_page_hooks']['wbcomplugins'] ) ) {
+			return;
+		}
+
+		add_menu_page(
+			esc_html__( 'WB Plugins', 'infinite-loader-for-woocommerce' ),
+			esc_html__( 'WB Plugins', 'infinite-loader-for-woocommerce' ),
+			'manage_options',
 			'wbcomplugins',
-			esc_html__( 'Infinite Loader for WooCommerce', 'infinite-loader-for-woocommerce' ),
-			esc_html__( 'Infinite Loader for WooCommerce', 'infinite-loader-for-woocommerce' ),
-			'manage_woocommerce',
-			'infinite-loader-for-woocommerce-settings',
-			array( $this, 'infinite_loader_for_woocommerce_admin_options_page' )
+			array( 'Wbcom_Settings_Page', 'render_welcome' ),
+			'dashicons-lightbulb',
+			59
 		);
 	}
 
 	/**
-	 * Actions performed to create a submenu page content.
+	 * Declare the settings nav.
 	 *
-	 * @since    1.0.0
-	 * @access public
+	 * This array IS the tab registry: the shell builds the sidebar, the routing
+	 * and the default tab from it, so adding a screen means one entry here plus
+	 * a case in render_settings_tab().
+	 *
+	 * Overview leads, so opening the plugin answers "what is this doing to my
+	 * shop right now?" before offering an input.
+	 *
+	 * @since  1.2.4
+	 * @param  array $groups Groups declared so far.
+	 * @return array
 	 */
-	public function infinite_loader_for_woocommerce_admin_options_page() {
+	public function settings_nav_groups( $groups ) {
+		$groups['main'] = array(
+			'label' => __( 'Infinite Loader', 'infinite-loader-for-woocommerce' ),
+			'items' => array(
+				'overview'        => array(
+					'title' => __( 'Overview', 'infinite-loader-for-woocommerce' ),
+					'icon'  => 'layout-dashboard',
+				),
+				'general'         => array(
+					'title' => __( 'General', 'infinite-loader-for-woocommerce' ),
+					'icon'  => 'settings-2',
+				),
+				'button'          => array(
+					'title' => __( 'Button Style', 'infinite-loader-for-woocommerce' ),
+					'icon'  => 'square-mouse-pointer',
+				),
+				'previous-button' => array(
+					'title' => __( 'Previous Button Style', 'infinite-loader-for-woocommerce' ),
+					'icon'  => 'arrow-up-narrow-wide',
+				),
+				'javascript-css'  => array(
+					'title' => __( 'JavaScript/CSS', 'infinite-loader-for-woocommerce' ),
+					'icon'  => 'code',
+				),
+			),
+		);
+
+		$groups['help'] = array(
+			'label' => __( 'Help', 'infinite-loader-for-woocommerce' ),
+			'items' => array(
+				'faq' => array(
+					'title' => __( 'FAQ', 'infinite-loader-for-woocommerce' ),
+					'icon'  => 'circle-help',
+				),
+			),
+		);
+
+		return $groups;
+	}
+
+	/**
+	 * Render one settings tab.
+	 *
+	 * Each partial owns its own <form>, settings_fields() and submit button, so
+	 * the shell only has to place the right one.
+	 *
+	 * @since 1.2.4
+	 * @param string $tab Current tab id.
+	 */
+	public function render_settings_tab( $tab ) {
 		$this->verify_admin_request();
 
-		$tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'infinite-loader-for-woocommerce-welcome'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		?>
-		<div class="wrap">
-			<div class="wbcom-bb-plugins-offer-wrapper">
-				<div id="wb_admin_logo"></div>
-			</div>		
-			<div class="wbcom-wrap">
-				<div class="blpro-header">
-					<div class="wbcom_admin_header-wrapper">
-						<div id="wb_admin_plugin_name">
-							<?php esc_html_e( 'Infinite Loader for WooCommerce', 'infinite-loader-for-woocommerce' ); ?>
-							<?php /* translators: %s: Version number */ ?>
-							<span><?php printf( esc_html__( 'Version %s', 'infinite-loader-for-woocommerce' ), esc_html( INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION ) ); ?></span>
-						</div>
-						<?php echo do_shortcode( '[wbcom_admin_setting_header]' ); ?>
-					</div>
-				</div>
-				<div class="wbcom-admin-settings-page wb-infinite-loader">
-					<?php
-					settings_errors();
-					$this->infinite_loader_for_woocommerce_plugin_settings_tabs();
-					settings_fields( $tab );
-					do_settings_sections( $tab );
-					?>
-				</div>
-			</div>
-		</div>
-		<?php
-	}
+		switch ( $tab ) {
+			case 'general':
+				include 'partials/infinite-loader-for-woocommerce-setting-general-tab.php';
+				break;
 
-	/**
-	 * Actions performed to create tabs on the sub menu page.
-	 */
-	public function infinite_loader_for_woocommerce_plugin_settings_tabs() {
-		$current_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'infinite-loader-for-woocommerce-welcome'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			case 'button':
+				include 'partials/infinite-loader-for-woocommerce-setting-button-tab.php';
+				break;
 
-		echo '<div class="wbcom-tabs-section"><div class="nav-tab-wrapper"><div class="wb-responsive-menu"><span>' . esc_html( 'Menu' ) . '</span><input class="wb-toggle-btn" type="checkbox" id="wb-toggle-btn"><label class="wb-toggle-icon" for="wb-toggle-btn"><span class="wb-icon-bars"></span></label></div><ul>';
+			case 'previous-button':
+				include 'partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php';
+				break;
 
-		foreach ( $this->plugin_settings_tabs as $tab_key => $tab_caption ) {
-			$active = $current_tab === $tab_key ? 'nav-tab-active' : '';
-			echo '<li><a class="nav-tab ' . esc_attr( $active ) . '" id="' . esc_attr( $tab_key ) . '-tab" href="?page=infinite-loader-for-woocommerce-settings&tab=' . esc_attr( $tab_key ) . '">' . esc_html( $tab_caption ) . '</a></li>';
+			case 'javascript-css':
+				include 'partials/infinite-loader-for-woocommerce-setting-css-js-tab.php';
+				break;
+
+			case 'faq':
+				include 'partials/infinite-loader-for-woocommerce-faq-tab.php';
+				break;
+
+			case 'overview':
+			default:
+				$this->render_overview_tab();
+				break;
 		}
-
-		echo '</div></ul></div>';
 	}
 
 	/**
-	 * Actions performed on loading plugin settings
+	 * The Overview tab: what the plugin is doing to this shop right now.
+	 *
+	 * @since 1.2.4
+	 */
+	private function render_overview_tab() {
+		$general = get_option( 'infinite_loader_admin_general_option', array() );
+
+		$mode      = isset( $general['product_loading_type'] ) ? $general['product_loading_type'] : 'pagination';
+		$per_page  = isset( $general['product_per_page'] ) ? (int) $general['product_per_page'] : 0;
+		$track_url = ! ( isset( $general['do_not_update_url'] ) && 'yes' === $general['do_not_update_url'] );
+
+		$mode_labels = array(
+			'infinity-scroll'   => __( 'Infinity Scroll', 'infinite-loader-for-woocommerce' ),
+			'load-more-button'  => __( 'Load More button', 'infinite-loader-for-woocommerce' ),
+			'pagination'        => __( 'AJAX pagination', 'infinite-loader-for-woocommerce' ),
+		);
+		$mode_label  = isset( $mode_labels[ $mode ] ) ? $mode_labels[ $mode ] : $mode;
+
+		Wbcom_Settings_Page::card_open( __( 'How your shop loads products', 'infinite-loader-for-woocommerce' ) );
+		?>
+		<table class="form-table" role="presentation">
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Loading style', 'infinite-loader-for-woocommerce' ); ?></th>
+				<td><?php echo esc_html( $mode_label ); ?></td>
+			</tr>
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Products per load', 'infinite-loader-for-woocommerce' ); ?></th>
+				<td>
+					<?php
+					echo $per_page > 0
+						? esc_html( (string) $per_page )
+						: esc_html__( 'Using the theme or WooCommerce default', 'infinite-loader-for-woocommerce' );
+					?>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Address bar follows the shopper', 'infinite-loader-for-woocommerce' ); ?></th>
+				<td>
+					<?php
+					echo $track_url
+						? esc_html__( 'Yes - the Back button returns them where they were', 'infinite-loader-for-woocommerce' )
+						: esc_html__( 'No', 'infinite-loader-for-woocommerce' );
+					?>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><?php esc_html_e( 'WooCommerce', 'infinite-loader-for-woocommerce' ); ?></th>
+				<td>
+					<?php
+					echo defined( 'WC_VERSION' )
+						/* translators: %s: WooCommerce version. */
+						? esc_html( sprintf( __( '%s active', 'infinite-loader-for-woocommerce' ), WC_VERSION ) )
+						: esc_html__( 'Not active', 'infinite-loader-for-woocommerce' );
+					?>
+				</td>
+			</tr>
+		</table>
+		<p>
+			<a class="wbcom-btn" href="<?php echo esc_url( Wbcom_Settings_Page::tab_url( self::PAGE_SLUG, 'general' ) ); ?>">
+				<?php esc_html_e( 'Change how products load', 'infinite-loader-for-woocommerce' ); ?>
+			</a>
+			<a class="wbcom-btn" href="<?php echo esc_url( get_permalink( wc_get_page_id( 'shop' ) ) ); ?>">
+				<?php esc_html_e( 'View your shop', 'infinite-loader-for-woocommerce' ); ?>
+			</a>
+		</p>
+		<?php
+		Wbcom_Settings_Page::card_close();
+	}
+
+	/**
+	 * Register the option groups the settings tabs save into.
+	 *
+	 * Only register_setting() now. The tab registry and add_settings_section()
+	 * calls that used to live here went with the old admin shell: the nav comes
+	 * from settings_nav_groups() and each partial owns its own form, so the
+	 * Settings API is only needed for the save + sanitize contract.
 	 *
 	 * @since    1.0.9
 	 * @access   public
 	 * @author   Wbcom Designs
 	 */
 	public function infinite_loader_for_woocommerce_init_plugin_settings() {
-		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-welcome'] = esc_html__( 'Welcome', 'infinite-loader-for-woocommerce' );
-		register_setting(
-			'infinite_loader_for_woocommerce_admin_welcome_options',
-			'infinite_loader_for_woocommerce_admin_welcome_options',
-			array(
-				'sanitize_callback' => 'sanitize_text_field',
-			)
-		);
-		add_settings_section( 'infinite-loader-for-woocommerce-welcome', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_welcome_content' ), 'infinite-loader-for-woocommerce-welcome' );
-
-		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-general'] = esc_html__( 'General', 'infinite-loader-for-woocommerce' );
 		register_setting( 'infinite_loader_admin_general_options', 'infinite_loader_admin_general_option', array( $this, 'validate_general_settings' ) );
-		add_settings_section( 'infinite-loader-for-woocommerce-general', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_general_content' ), 'infinite-loader-for-woocommerce-general' );
-
-		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-button'] = esc_html__( 'Button Style', 'infinite-loader-for-woocommerce' );
 		register_setting( 'infinite_loader_admin_button_options', 'infinite_loader_admin_button_option', array( $this, 'validate_button_settings' ) );
-		add_settings_section( 'infinite-loader-for-woocommerce-button', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_button_content' ), 'infinite-loader-for-woocommerce-button' );
-
-		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-previous-button'] = esc_html__( 'Previous Button Style', 'infinite-loader-for-woocommerce' );
 		register_setting( 'infinite_loader_admin_previous_button_options', 'infinite_loader_admin_previous_button_option', array( $this, 'validate_button_settings' ) );
-		add_settings_section( 'infinite-loader-for-woocommerce-previous-button', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_previous_button_content' ), 'infinite-loader-for-woocommerce-previous-button' );
-
-		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-css-js'] = esc_html__( 'JavaScript/CSS', 'infinite-loader-for-woocommerce' );
 		register_setting( 'infinite_loader_admin_css_js_options', 'infinite_loader_admin_css_js_option', array( $this, 'validate_css_js_settings' ) );
-		add_settings_section( 'infinite-loader-for-woocommerce-css-js', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_js_css_content' ), 'infinite-loader-for-woocommerce-css-js' );
-
-		$this->plugin_settings_tabs['infinite-loader-for-woocommerce-faq'] = esc_html__( 'FAQ', 'infinite-loader-for-woocommerce' );
-		register_setting(
-			'infinite_loader_for_woocommerce_admin_faq_options',
-			'infinite_loader_for_woocommerce_admin_faq_options',
-			array(
-				'sanitize_callback' => 'sanitize_text_field',
-			)
-		);
-		add_settings_section( 'infinite-loader-for-woocommerce-faq', ' ', array( $this, 'infinite_loader_for_woocommerce_admin_faq_content' ), 'infinite-loader-for-woocommerce-faq' );
 	}
 
 	/**
@@ -495,14 +599,6 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		}
 
 		return '';
-	}
-
-	/**
-	 * Include infinite loader for woocommerce admin welcome setting tab content file.
-	 */
-	public function infinite_loader_for_woocommerce_admin_welcome_content() {
-		$this->verify_admin_request();
-		include 'partials/infinite-loader-for-woocommerce-welcome-page.php';
 	}
 
 	/**
