@@ -215,7 +215,12 @@ class Infinite_Loader_For_Woocommerce {
 		$this->loader->add_action( 'wp_head', $plugin_public, 'infinite_loader_for_woocommerce_display_custom_css' );
 		$this->loader->add_action( 'wp_head', $plugin_public, 'infinite_loader_add_load_more_hover_css' );
 		$this->loader->add_action( 'wp_head', $plugin_public, 'infinite_loader_add_previous_hover_css' );
-		$this->loader->add_action( 'init', $plugin_public, 'infinite_loader_for_woocommerce_enqueue_fontawesome_file' );
+		// wp_enqueue_scripts, not init: this callback gates on is_shop() and
+		// is_product_taxonomy(), and conditional tags are always false on init
+		// because the main query has not run yet. Hooked there it could never
+		// enqueue anything, so the default fa-spinner loading icon rendered as
+		// nothing on any theme that does not bundle Font Awesome itself.
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'infinite_loader_for_woocommerce_enqueue_fontawesome_file' );
 		$this->loader->add_action( 'wp_head', $plugin_public, 'infinite_loader_add_css_js_for_loading_products' );
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'infinite_loader_for_woo_scroll_top_button' );
 		$this->loader->add_action( 'woocommerce_before_template_part', $plugin_public, 'infinite_loader_before_template_part', 1 );

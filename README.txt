@@ -5,7 +5,7 @@ Tags: Woocommerce
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.2.4
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,7 +29,9 @@ This section describes how to install the plugin and get it working.
 Woocommerce
 
 == Changelog ==
-= 1.2.4 =
+= 1.3.0 =
+* Fix      - Custom CSS from the JavaScript/CSS tab now applies rules that use child or sibling combinators. Output was HTML-escaped inside the style tag, so a selector like "ul.products > li.product" shipped with an encoded arrow and silently never matched, while simple selectors kept working.
+* Fix      - The bundled Font Awesome stylesheet now loads, so the default loading spinner is visible on themes that do not ship Font Awesome themselves. It was hooked too early to ever run.
 * Fix      - Infinite scroll now waits until the shopper is near the end of the product list. It previously loaded the next page on any scroll, so the whole catalogue loaded while the shopper was still in the header.
 * Fix      - Rebuilt the minified frontend scripts, which were four days behind their source. Production sites were running an older loader with no request timeout and no URL validation.
 * Fix      - Removed the per-visitor nonce from the archive request so page caches (WP Rocket, Varnish, Cloudflare) can serve the shop again. The request only reads a public archive and changes nothing, so it never needed one.

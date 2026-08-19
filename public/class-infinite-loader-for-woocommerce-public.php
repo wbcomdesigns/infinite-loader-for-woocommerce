@@ -123,9 +123,17 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$custom_css     = isset( $css_js_setting['custom_css'] ) ? $css_js_setting['custom_css'] : '';
 
 		if ( ! empty( $custom_css ) ) {
-			// Additional sanitization before output.
+			/*
+			 * wp_strip_all_tags() is the sanitiser here, exactly as it is for
+			 * the two hover-CSS blocks further down. esc_html() must NOT be
+			 * added on top: inside a <style> element it encodes the very
+			 * characters CSS combinators are made of, so `ul.products > li`
+			 * shipped as `ul.products &gt; li` and every rule using > or +
+			 * silently stopped matching while simple selectors kept working.
+			 */
 			$custom_css = wp_strip_all_tags( $custom_css );
-			echo '<style type="text/css" id="infinite-loader-custom-css">' . esc_html( $custom_css ) . '</style>';
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_strip_all_tags is the correct sanitiser for a style element; see above.
+			echo '<style type="text/css" id="infinite-loader-custom-css">' . $custom_css . '</style>';
 		}
 	}
 
