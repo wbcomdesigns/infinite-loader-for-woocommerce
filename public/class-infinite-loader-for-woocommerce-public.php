@@ -398,11 +398,21 @@ class Infinite_Loader_For_Woocommerce_Public {
 				esc_html( number_format_i18n( $total ) )
 			);
 		} else {
+			/*
+			 * The range numbers are placeholders, not values. As more pages are
+			 * appended the visible range grows (1-8 becomes 1-16), so the script
+			 * substitutes the running first/last into this string after every
+			 * load - see update_result_count() in infinite_loader_products.js.
+			 * Baking the current page's numbers in here is what made the count
+			 * report a single page's range while the whole catalogue was on
+			 * screen. The real numbers for this page stay in data-start/data-end
+			 * below, which is where the arithmetic reads them from.
+			 */
 			printf(
 				/* translators: 1: first result number, 2: last result number, 3: total results. */
 				esc_html__( 'Showing %1$s&ndash;%2$s of %3$s results', 'infinite-loader-for-woocommerce' ),
-				esc_html( number_format_i18n( $first ) ),
-				esc_html( number_format_i18n( $last ) ),
+				'{{il_start}}',
+				'{{il_end}}',
 				esc_html( number_format_i18n( $total ) )
 			);
 		}

@@ -209,7 +209,12 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                             update_browser_history(next_page);
                         }
                         
-                        infinite_loader_load_next_page(true, next_page);
+                        // 1 means "replace the grid", not "true". replace is a
+                        // three-state mode (1 replace, 2 prepend, falsy
+                        // append) that is compared with ===, so passing a
+                        // boolean here silently fell through to append and
+                        // paginating stacked page 2 underneath page 1.
+                        infinite_loader_load_next_page(1, next_page);
                     });
                 }
                 
@@ -301,7 +306,8 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 }
                 var currentUrl = decodeURIComponent(location.href);
                 if (is_valid_url(currentUrl)) {
-                    infinite_loader_load_next_page(true, currentUrl);
+                    // Replace mode - see the note on the pagination handler.
+                    infinite_loader_load_next_page(1, currentUrl);
                 }
             }
         }
@@ -562,6 +568,21 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
             setTimeout(display_hidden, 2500);
         }
         
+        // Substitute the running range into WooCommerce's result-count string.
+        //
+        // The markup ships placeholders instead of the numbers for the page it
+        // was rendered on, so the count can describe everything currently on
+        // screen ("Showing 1-16 of 17") rather than just the page that arrived
+        // last ("Showing 9-16 of 17"). The tokens used to be '-1' and '-2',
+        // which never appear in the rendered string, so the substitution
+        // silently did nothing and the count was always wrong once a second
+        // page had been appended.
+        function infinite_loader_format_count(template, start, end) {
+            return String(template)
+                .split('{{il_start}}').join(start)
+                .split('{{il_end}}').join(end);
+        }
+
         function update_result_count($data, replace) {
             if (infinite_loader_type === 'pagination') {
                 var newCountText = $data.find('.woocommerce-result-count:first').text();
@@ -582,10 +603,8 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 infinite_count_lastend = parseInt($count_element.data('end')) || 0;
                 infinite_count_laststart = parseInt($count_element.data('start')) || 0;
                 
-                var text_count = infinite_count_text
-                    .replace('-1', infinite_count_start)
-                    .replace('-2', infinite_count_end);
-                
+                var text_count = infinite_loader_format_count(infinite_count_text, infinite_count_start, infinite_count_end);
+
                 domCache.resultCount.text(text_count);
             } else {
                 var newCountText = $data.find('.woocommerce-result-count:first').text();
@@ -786,10 +805,8 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 infinite_count_lastend = infinite_count_end;
                 infinite_count_laststart = infinite_count_start;
                 
-                var text_count = infinite_count_text
-                    .replace('-1', infinite_count_start)
-                    .replace('-2', infinite_count_end);
-                
+                var text_count = infinite_loader_format_count(infinite_count_text, infinite_count_start, infinite_count_end);
+
                 domCache.resultCount.text(text_count);
             }
         }
