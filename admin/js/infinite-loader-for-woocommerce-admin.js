@@ -29,17 +29,24 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 	jQuery(document).ready(function ($) {
-		$('#infinity-loader-loading-type').select2({
-			placeholder: "Select Button Action",
-			allowClear: true // If you want a remove (clear) button
-		});
-		
-		$(document).on('click',"#infinite_loader_enable_font_awesome", function () {
-			if( $(this).is(':checked') ){
-				$(document).find('.infinite_loader_image_wrapper').show();
-			}else{
-				$(document).find('.infinite_loader_image_wrapper').hide();
-			}
+		/*
+		 * The loading-type select is native now.
+		 *
+		 * It used to be a select2 widget, configured with allowClear so an owner
+		 * could empty a required setting, and with the placeholder "Select Button
+		 * Action" - copy belonging to a different field. select2 was loaded, CSS
+		 * and JS, for that one three-option list; both are gone with it.
+		 */
+
+		/*
+		 * Show the loading-image row only when Font Awesome is on. Uses a class
+		 * rather than .show()/.hide() so the state is expressed in the markup
+		 * and survives anything else that touches inline styles. Bound on
+		 * `change`, not `click`, so a keyboard toggle counts too - with `click`
+		 * the row did not react to the spacebar.
+		 */
+		$(document).on('change', '#infinite_loader_enable_font_awesome', function () {
+			$('.infinite_loader_image_wrapper').toggleClass('is-hidden', !$(this).is(':checked'));
 		});
 
 		$(document).on('click',"#infinite-loader-default-color", function () {

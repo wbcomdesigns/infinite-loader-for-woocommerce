@@ -11,7 +11,15 @@
     width: 65px;
 }
 
-.form-table,
+/*
+ * `resize` and `min-height` belong to the code textarea, not to the settings
+ * table. Applied to both, they put a drag handle on the corner of every
+ * settings card and forced 200px of height onto short tabs.
+ */
+.form-table {
+    width: 100%;
+}
+
 #infinite-loader-css-js-area {
     width: 100%;
     resize: vertical;
@@ -438,4 +446,105 @@ select#infinity-loader-loading-type+.select2-container--default .select2-selecti
 	color: #50575e;
 	font-size: 13px;
 	line-height: 1.6;
+}
+
+/* =========================================================================
+ * Settings layout
+ *
+ * Scoped to this plugin's own settings page on purpose. The grid, the label
+ * column and the row padding all come from lib/wbcom-settings, which is
+ * vendored and shared by every Wbcom plugin - widening a column there would
+ * silently reflow six other products. The body class WordPress already puts on
+ * this screen is the narrowest scope that cannot leak.
+ * ========================================================================= */
+
+/*
+ * The shell's label column is a fixed 240px and the descriptions live in it,
+ * so every description wrapped to roughly four words a line while ~390px of
+ * the 672px control column sat empty. Letting the label column grow puts the
+ * space where the text actually is.
+ */
+body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-section-wrap {
+	grid-template-columns: minmax(240px, 22rem) 1fr;
+}
+
+/*
+ * One control width for every text-like field, so a number box, a text box and
+ * a dropdown line up down the page instead of each being its own size.
+ */
+body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-section-options input[type="text"],
+body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-section-options input[type="number"],
+body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-section-options input[type="url"],
+body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-section-options select {
+	width: 100%;
+	max-width: 22rem;
+	min-height: 36px;
+	box-sizing: border-box;
+}
+
+/* A number field does not need to be as wide as a sentence. */
+body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-section-options input[type="number"] {
+	max-width: 8rem;
+}
+
+/*
+ * Checkboxes get a real label beside them.
+ *
+ * The bare 16px box that used to sit alone in the control column was the whole
+ * of the click target, and nothing tied it to the wording in the label column.
+ */
+.infinite-loader-check {
+	display: inline-flex;
+	align-items: center;
+	gap: .5em;
+	min-height: 36px;
+	cursor: pointer;
+}
+
+.infinite-loader-check input[type="checkbox"] {
+	margin: 0;
+	flex: 0 0 auto;
+}
+
+/* The loading-image row is only relevant once Font Awesome is on. */
+.infinite_loader_image_wrapper.is-hidden {
+	display: none;
+}
+
+/*
+ * Chosen icon preview: the glyph at the size it renders on the shop, with its
+ * name beside it, so "what is selected" is answerable without opening the
+ * picker.
+ */
+.infinite_loader_select_fontawesome {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: .6em;
+	margin-bottom: .75em;
+}
+
+.infinite_selected_icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+	background: #fff;
+	font-size: 16px;
+}
+
+.infinite-loader-icon-name {
+	color: #646970;
+	font-size: 12px;
+	font-family: Menlo, Consolas, monospace;
+}
+
+@media screen and (max-width: 782px) {
+
+	body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-section-wrap {
+		grid-template-columns: 1fr;
+	}
 }

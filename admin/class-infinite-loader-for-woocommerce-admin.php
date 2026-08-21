@@ -109,13 +109,14 @@ class Infinite_Loader_For_Woocommerce_Admin {
 				'all'
 			);
 
-			wp_enqueue_style(
-				'infinity-loader-select2',
-				plugin_dir_url( __FILE__ ) . 'css/vendor/select2.min.css',
-				array(),
-				$this->version,
-				'all'
-			);
+			/*
+			 * select2 is no longer enqueued.
+			 *
+			 * It was loaded - stylesheet and script - to decorate a single
+			 * three-option dropdown, which is now a native select. The vendor
+			 * files stay in the repo so nothing else that might reference them
+			 * breaks, but no settings screen pays for them any more.
+			 */
 		}
 	}
 
@@ -144,14 +145,6 @@ class Infinite_Loader_For_Woocommerce_Admin {
 				$this->plugin_name,
 				plugin_dir_url( __FILE__ ) . 'js' . $path . '/infinite-loader-for-woocommerce-admin' . $extension,
 				array( 'jquery', 'wp-color-picker' ),
-				$this->version,
-				false
-			);
-
-			wp_enqueue_script(
-				'infinity-loader-select2-min',
-				plugin_dir_url( __FILE__ ) . 'js/vendor/select2.min.js',
-				array( 'jquery' ),
 				$this->version,
 				false
 			);
