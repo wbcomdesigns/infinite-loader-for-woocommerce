@@ -56,7 +56,7 @@ if ( ! defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_URL' ) ) {
  */
 if ( file_exists( INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'lib/wbcom-settings/loader.php' ) ) {
 	require_once INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'lib/wbcom-settings/loader.php';
-	wbcom_settings_register( '1.0.1', INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'lib/wbcom-settings/class-wbcom-settings-page.php' );
+	wbcom_settings_register( '1.0.2', INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'lib/wbcom-settings/class-wbcom-settings-page.php' );
 }
 
 /**

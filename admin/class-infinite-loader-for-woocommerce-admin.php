@@ -110,6 +110,29 @@ class Infinite_Loader_For_Woocommerce_Admin {
 			);
 
 			/*
+			 * Font Awesome for the icon picker on the General tab.
+			 *
+			 * The picker renders its icons with `fa` classes, but no icon
+			 * stylesheet was loaded in wp-admin, so the "Choose icon" grid showed
+			 * blank squares. This loads the SAME file the frontend uses -
+			 * fontawesome5.min.css, which is Font Awesome 5 Free with its
+			 * webfonts bundled beside it - so the picker shows exactly the icons
+			 * the loader will render on the storefront. (The sibling
+			 * font-awesome.min.css is a Font Awesome 5 Pro build whose fonts are
+			 * not shipped, so it renders nothing - do not enqueue it.) Only on
+			 * this plugin's own settings screen, not the shared hub.
+			 */
+			if ( self::PAGE_SLUG === $wbcom_setting_page ) {
+				wp_enqueue_style(
+					$this->plugin_name . '-font-awesome',
+					INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_URL . 'public/css/fontawesome5.min.css',
+					array(),
+					$this->version,
+					'all'
+				);
+			}
+
+			/*
 			 * select2 is no longer enqueued.
 			 *
 			 * It was loaded - stylesheet and script - to decorate a single
