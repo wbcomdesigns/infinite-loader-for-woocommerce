@@ -298,31 +298,8 @@ select#infinity-loader-loading-type+.select2-container--default .select2-selecti
     content: "\f125";
 }
 
-#setting-error-settings_updated {
-    position: absolute;
-    right: 50px;
-    z-index: 99;
-    border-radius: 10px;
-    line-height: normal;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    color: #10AB00;
-    display: inline-block !important;
-    margin: 0;
-}
-
 @media screen and (max-width: 1189px) {
-    #setting-error-settings_updated {
-        margin: 0;
-        position: relative;
-        right: auto;
-        left: auto;
-    }
-}
-
-#setting-error-settings_updated button.notice-dismiss:before {
-    color: red !important;
+    
 }
 
 .support-options {
