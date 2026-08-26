@@ -15,7 +15,7 @@
  * Plugin Name:       Wbcom Designs – Infinite Loader for WooCommerce
  * Plugin URI:        https://wbcomdesigns.com/downloads/infinite-loader-for-woocommerce/
  * Description:       Streamline product browsing with AJAX-powered infinite scroll or a "Load More" button. Enhance user experience, reduce page loads, and keep customers engaged on your WooCommerce store.
- * Version:           1.3.0
+ * Version:           1.3.1
  * Author:            Wbcom Designs
  * Author URI:        https://wbcomdesigns.com/
  * License:           GPL-2.0+
@@ -38,7 +38,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION', '1.3.0' );
+define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION', '1.3.1' );
 
 if ( ! defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH' ) ) {
 	define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
