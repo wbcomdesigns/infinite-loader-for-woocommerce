@@ -611,15 +611,4 @@ class Infinite_Loader_For_Woocommerce_Public {
 
 		return $default;
 	}
-
-	/**
-	 * Debug log helper
-	 *
-	 * @param mixed $message Message to log.
-	 */
-	private function debug_log( $message ) {
-		if ( defined( 'WP_DEBUG' ) && WP_DEBUG && defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
-			error_log( 'Infinite Loader: ' . print_r( $message, true ) );
-		}
-	}
 }
