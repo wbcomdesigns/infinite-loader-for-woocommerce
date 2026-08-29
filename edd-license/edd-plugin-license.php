@@ -457,69 +457,73 @@ add_action( 'wbcom_add_plugin_license_code', 'edd_wbcom_infinite_loader_render_l
 function edd_infinite_loader_active_license_message() {
 	global $wp_version, $pagenow;
 
-	if ( $pagenow === 'plugins.php' || $pagenow === 'index.php' || ( isset( $_GET['page'] ) && $_GET['page'] === 'wbcom-license-page' ) ) { //phpcs:ignore
+	// Always return a well-formed array so any renderer (including the shared
+	// wbcom_add_plugin_license_code hook on other admin pages) can safely read
+	// ['message'] and ['license_data']->license without a PHP warning.
+	$output = array(
+		'message'      => '',
+		'license_data' => (object) array( 'license' => '' ),
+	);
 
-		$license_data = get_transient( 'edd_wbcom_infinite_loader_license_key_data' );
-		$license      = trim( get_option( 'edd_wbcom_infinite_loader_license_key' ) );
-
-			$api_params = array(
-				'edd_action' => 'check_license',
-				'license'    => $license,
-				'item_name'  => rawurlencode( EDD_INFINITE_LOADER_ITEM_NAME ),
-				'url'        => home_url(),
-			);
-
-			// Call the custom API.
-			$response = wp_remote_post(
-				EDD_INFINITE_LOADER_STORE_URL,
-				array(
-					'timeout'   => 15,
-					'sslverify' => false,
-					'body'      => $api_params,
-				)
-			);
-
-		if ( is_wp_error( $response ) ) {
-			return false;
-		}
-
-			$output                 = array();
-			$output['license_data'] = json_decode( wp_remote_retrieve_body( $response ) );
-			$message                = '';
-			// Make sure the response came back okay.
-		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
-
-			if ( is_wp_error( $response ) ) {
-				$message = $response->get_error_message();
-			} else {
-				$message = __( 'An error occurred, please try again.', 'infinite-loader-for-woocommerce' );
-			}
-		} else {
-			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-			// Get expire date.
-			$expires = false;
-			if ( isset( $license_data->expires ) && 'lifetime' !== $license_data->expires ) {
-				$expires = date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, time() ) );
-			} elseif ( isset( $license_data->expires ) && 'lifetime' === $license_data->expires ) {
-				$expires = 'lifetime';
-			}
-
-			if ( 'valid' === $license_data->license ) {
-				// Get site counts.
-				$site_count    = $license_data->site_count;
-				$license_limit = $license_data->license_limit;
-				$message       = 'License key is active.';
-				if ( isset( $expires ) && 'lifetime' !== $expires ) {
-					/* translators: %s: Expiration date. */
-					$message .= sprintf( __( 'Expires %s.', 'infinite-loader-for-woocommerce' ), $expires ) . ' ';
-				}
-				if ( $license_limit ) {
-					/* translators: %1$s: Active site count, %2$s: License limit. */
-					$message .= sprintf( __( 'You have %1$s/%2$s-sites activated.', 'infinite-loader-for-woocommerce' ), $site_count, $license_limit );
-				}
-			}
-		}
-			$output['message'] = $message;
-			return $output;
+	// The remote license check only runs on the plugin/license pages; every
+	// other admin page gets the safe default above instead of null.
+	if ( ! ( $pagenow === 'plugins.php' || $pagenow === 'index.php' || ( isset( $_GET['page'] ) && $_GET['page'] === 'wbcom-license-page' ) ) ) { //phpcs:ignore
+		return $output;
 	}
+
+	$license = trim( get_option( 'edd_wbcom_infinite_loader_license_key' ) );
+
+	$api_params = array(
+		'edd_action' => 'check_license',
+		'license'    => $license,
+		'item_name'  => rawurlencode( EDD_INFINITE_LOADER_ITEM_NAME ),
+		'url'        => home_url(),
+	);
+
+	// Call the custom API.
+	$response = wp_remote_post(
+		EDD_INFINITE_LOADER_STORE_URL,
+		array(
+			'timeout'   => 15,
+			'sslverify' => false,
+			'body'      => $api_params,
+		)
+	);
+
+	// Make sure the response came back okay.
+	if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+		$output['message'] = is_wp_error( $response ) ? $response->get_error_message() : __( 'An error occurred, please try again.', 'infinite-loader-for-woocommerce' );
+		return $output;
+	}
+
+	$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+	if ( is_object( $license_data ) ) {
+		$output['license_data'] = $license_data;
+	}
+
+	// Get expire date.
+	$expires = false;
+	if ( isset( $license_data->expires ) && 'lifetime' !== $license_data->expires ) {
+		$expires = date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, time() ) );
+	} elseif ( isset( $license_data->expires ) && 'lifetime' === $license_data->expires ) {
+		$expires = 'lifetime';
+	}
+
+	if ( isset( $license_data->license ) && 'valid' === $license_data->license ) {
+		// Get site counts.
+		$site_count    = $license_data->site_count;
+		$license_limit = $license_data->license_limit;
+		$message       = 'License key is active.';
+		if ( isset( $expires ) && 'lifetime' !== $expires ) {
+			/* translators: %s: Expiration date. */
+			$message .= sprintf( __( 'Expires %s.', 'infinite-loader-for-woocommerce' ), $expires ) . ' ';
+		}
+		if ( $license_limit ) {
+			/* translators: %1$s: Active site count, %2$s: License limit. */
+			$message .= sprintf( __( 'You have %1$s/%2$s-sites activated.', 'infinite-loader-for-woocommerce' ), $site_count, $license_limit );
+		}
+		$output['message'] = $message;
+	}
+
+	return $output;
 }
