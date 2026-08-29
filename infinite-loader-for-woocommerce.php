@@ -216,8 +216,8 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-infinite-loader-for-woocom
  * @since    1.0.0
  */
 function run_infinite_loader_for_woocommerce() {
-	$plugin = new Infinite_Loader_For_Woocommerce();
-	$plugin->run();
+	// The constructor registers every hook directly with WordPress.
+	new Infinite_Loader_For_Woocommerce();
 }
 
 /**

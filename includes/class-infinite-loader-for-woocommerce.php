@@ -34,16 +34,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Infinite_Loader_For_Woocommerce {
 
 	/**
-	 * The loader that's responsible for maintaining and registering all hooks that power
-	 * the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      Infinite_Loader_For_Woocommerce_Loader    $loader    Maintains and registers all hooks for the plugin.
-	 */
-	protected $loader;
-
-	/**
 	 * The unique identifier of this plugin.
 	 *
 	 * @since    1.0.0
@@ -119,24 +109,14 @@ class Infinite_Loader_For_Woocommerce {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Infinite_Loader_For_Woocommerce_Loader. Orchestrates the hooks of the plugin.
 	 * - Infinite_Loader_For_Woocommerce_I18n. Defines internationalization functionality.
 	 * - Infinite_Loader_For_Woocommerce_Admin. Defines all hooks for the admin area.
 	 * - Infinite_Loader_For_Woocommerce_Public. Defines all hooks for the public side of the site.
-	 *
-	 * Create an instance of the loader which will be used to register the hooks
-	 * with WordPress.
 	 *
 	 * @since    1.0.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
-		/**
-		 * The class responsible for orchestrating the actions and filters of the
-		 * core plugin.
-		 */
-		require_once plugin_dir_path( __DIR__ ) . 'includes/class-infinite-loader-for-woocommerce-loader.php';
-
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
@@ -158,8 +138,6 @@ class Infinite_Loader_For_Woocommerce {
 		if ( file_exists( plugin_dir_path( __DIR__ ) . 'edd-license/edd-plugin-license.php' ) ) {
 			require_once plugin_dir_path( __DIR__ ) . 'edd-license/edd-plugin-license.php';
 		}
-
-		$this->loader = new Infinite_Loader_For_Woocommerce_Loader();
 	}
 
 	/**
@@ -173,7 +151,7 @@ class Infinite_Loader_For_Woocommerce {
 	 */
 	private function set_locale() {
 		$plugin_i18n = new Infinite_Loader_For_Woocommerce_I18n();
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		add_action( 'plugins_loaded', array( $plugin_i18n, 'load_plugin_textdomain' ) );
 	}
 
 	/**
@@ -186,17 +164,17 @@ class Infinite_Loader_For_Woocommerce {
 	private function define_admin_hooks() {
 		$plugin_admin = new Infinite_Loader_For_Woocommerce_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'init', $plugin_admin, 'boot_settings_page', 1 );
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'register_parent_menu', 5 );
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'infinite_loader_for_woocommerce_init_plugin_settings' );
-		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_more_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_button_style', 10, 2 );
-		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_previous_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_button_style', 10, 2 );
-		$this->loader->add_action( 'in_admin_header', $plugin_admin, 'wbcom_hide_all_admin_notices_from_setting_page' );
+		add_action( 'admin_enqueue_scripts', array( $plugin_admin, 'enqueue_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $plugin_admin, 'enqueue_scripts' ) );
+		add_action( 'init', array( $plugin_admin, 'boot_settings_page' ), 1 );
+		add_action( 'admin_menu', array( $plugin_admin, 'register_parent_menu' ), 5 );
+		add_action( 'admin_init', array( $plugin_admin, 'infinite_loader_for_woocommerce_init_plugin_settings' ) );
+		add_filter( 'infinite_loader_for_woocommerce_load_more_button_style', array( $plugin_admin, 'infinite_loader_for_woocommerce_button_style' ), 10, 2 );
+		add_filter( 'infinite_loader_for_woocommerce_load_previous_button_style', array( $plugin_admin, 'infinite_loader_for_woocommerce_button_style' ), 10, 2 );
+		add_action( 'in_admin_header', array( $plugin_admin, 'wbcom_hide_all_admin_notices_from_setting_page' ) );
 
 		// Add AJAX handler.
-		$this->loader->add_action( 'template_redirect', $plugin_admin, 'handle_infinite_loader_ajax' );
+		add_action( 'template_redirect', array( $plugin_admin, 'handle_infinite_loader_ajax' ) );
 	}
 
 	/**
@@ -209,21 +187,21 @@ class Infinite_Loader_For_Woocommerce {
 	private function define_public_hooks() {
 		$plugin_public = new Infinite_Loader_For_Woocommerce_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-		$this->loader->add_action( 'wp_head', $plugin_public, 'infinite_loader_for_woocommerce_display_custom_css' );
-		$this->loader->add_action( 'wp_head', $plugin_public, 'infinite_loader_add_load_more_hover_css' );
-		$this->loader->add_action( 'wp_head', $plugin_public, 'infinite_loader_add_previous_hover_css' );
+		add_action( 'wp_enqueue_scripts', array( $plugin_public, 'enqueue_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $plugin_public, 'enqueue_scripts' ) );
+		add_action( 'wp_head', array( $plugin_public, 'infinite_loader_for_woocommerce_display_custom_css' ) );
+		add_action( 'wp_head', array( $plugin_public, 'infinite_loader_add_load_more_hover_css' ) );
+		add_action( 'wp_head', array( $plugin_public, 'infinite_loader_add_previous_hover_css' ) );
 		// wp_enqueue_scripts, not init: this callback gates on is_shop() and
 		// is_product_taxonomy(), and conditional tags are always false on init
 		// because the main query has not run yet. Hooked there it could never
 		// enqueue anything, so the default fa-spinner loading icon rendered as
 		// nothing on any theme that does not bundle Font Awesome itself.
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'infinite_loader_for_woocommerce_enqueue_fontawesome_file' );
-		$this->loader->add_action( 'wp_head', $plugin_public, 'infinite_loader_add_css_js_for_loading_products' );
-		$this->loader->add_action( 'wp_footer', $plugin_public, 'infinite_loader_for_woo_scroll_top_button' );
-		$this->loader->add_action( 'woocommerce_before_template_part', $plugin_public, 'infinite_loader_before_template_part', 1 );
-		$this->loader->add_filter( 'loop_shop_per_page', $plugin_public, 'infinite_loader_set_product_per_page', 20 );
+		add_action( 'wp_enqueue_scripts', array( $plugin_public, 'infinite_loader_for_woocommerce_enqueue_fontawesome_file' ) );
+		add_action( 'wp_head', array( $plugin_public, 'infinite_loader_add_css_js_for_loading_products' ) );
+		add_action( 'wp_footer', array( $plugin_public, 'infinite_loader_for_woo_scroll_top_button' ) );
+		add_action( 'woocommerce_before_template_part', array( $plugin_public, 'infinite_loader_before_template_part' ), 1 );
+		add_filter( 'loop_shop_per_page', array( $plugin_public, 'infinite_loader_set_product_per_page' ), 20 );
 	}
 
 	/**
@@ -234,13 +212,13 @@ class Infinite_Loader_For_Woocommerce {
 	 */
 	private function define_security_hooks() {
 		// Add Content Security Policy headers.
-		$this->loader->add_action( 'send_headers', $this, 'add_security_headers' );
+		add_action( 'send_headers', array( $this, 'add_security_headers' ) );
 
 		// Sanitize options on save.
-		$this->loader->add_filter( 'pre_update_option_infinite_loader_admin_css_js_option', $this, 'sanitize_css_js_option', 10, 2 );
+		add_filter( 'pre_update_option_infinite_loader_admin_css_js_option', array( $this, 'sanitize_css_js_option' ), 10, 2 );
 
 		// Add rate limiting check.
-		$this->loader->add_action( 'init', $this, 'check_rate_limit' );
+		add_action( 'init', array( $this, 'check_rate_limit' ) );
 	}
 
 	/**
@@ -400,15 +378,6 @@ class Infinite_Loader_For_Woocommerce {
 	}
 
 	/**
-	 * Run the loader to execute all of the hooks with WordPress.
-	 *
-	 * @since    1.0.0
-	 */
-	public function run() {
-		$this->loader->run();
-	}
-
-	/**
 	 * The name of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
@@ -417,16 +386,6 @@ class Infinite_Loader_For_Woocommerce {
 	 */
 	public function get_plugin_name() {
 		return $this->plugin_name;
-	}
-
-	/**
-	 * The reference to the class that orchestrates the hooks with the plugin.
-	 *
-	 * @since     1.0.0
-	 * @return    Infinite_Loader_For_Woocommerce_Loader    Orchestrates the hooks of the plugin.
-	 */
-	public function get_loader() {
-		return $this->loader;
 	}
 
 	/**
