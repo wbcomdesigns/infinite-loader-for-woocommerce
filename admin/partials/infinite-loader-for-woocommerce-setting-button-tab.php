@@ -73,7 +73,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<p class="description"><?php esc_html_e( 'Select the background color of the Load More button.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
-							<input type="color" id="infinite_loader_default_bg_color" class="bg_btn_color" data-default="#1d76da" name="infinite_loader_admin_button_option[background_color]" value="<?php echo ( isset( $infinite_loader_button_setting['background_color'] ) ) ? esc_attr( $infinite_loader_button_setting['background_color'] ) : ''; ?>">
+							<input type="color" id="infinite_loader_default_bg_color" class="bg_btn_color" data-default="#1d76da" name="infinite_loader_admin_button_option[background_color]" value="<?php echo ( isset( $infinite_loader_button_setting['background_color'] ) ) ? esc_attr( $infinite_loader_button_setting['background_color'] ) : '#1d76da'; ?>">
 							<input type="button" id="infinite-loader-default-color" value="Default" class="button">
 						</div>
 					</div>
@@ -85,7 +85,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<p class="description"><?php esc_html_e( 'Choose the background color that appears when hovering over the button.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
-							<input type="color" id="infinite_loader_default_bg_color_mouse_hover" class="bg_btn_color_hover" name="infinite_loader_admin_button_option[background_color_mouse_hover]" value="<?php echo ( isset( $infinite_loader_button_setting['background_color_mouse_hover'] ) ) ? esc_attr( $infinite_loader_button_setting['background_color_mouse_hover'] ) : ''; ?>">
+							<input type="color" id="infinite_loader_default_bg_color_mouse_hover" class="bg_btn_color_hover" data-default="#0e4da0" name="infinite_loader_admin_button_option[background_color_mouse_hover]" value="<?php echo ( isset( $infinite_loader_button_setting['background_color_mouse_hover'] ) ) ? esc_attr( $infinite_loader_button_setting['background_color_mouse_hover'] ) : '#0e4da0'; ?>">
 							<input type="button" value="Default" class="button" id="infinite-loader-default-bg-color-mouse-hover">
 						</div>
 					</div>
@@ -97,7 +97,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<p class="description"><?php esc_html_e( 'Set the border color of the Load More button.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
-							<input type="color" class="btn_border_color" data-default="#000" data-color="#000" id="infinite_loader_default_border_color" name="infinite_loader_admin_button_option[border_color]" value="<?php echo ( isset( $infinite_loader_button_setting['border_color'] ) ) ? esc_attr( $infinite_loader_button_setting['border_color'] ) : ''; ?>">
+							<input type="color" class="btn_border_color" data-default="#1d76da" data-color="#1d76da" id="infinite_loader_default_border_color" name="infinite_loader_admin_button_option[border_color]" value="<?php echo ( isset( $infinite_loader_button_setting['border_color'] ) ) ? esc_attr( $infinite_loader_button_setting['border_color'] ) : '#1d76da'; ?>">
 							<input type="button" value="Default" class="button" id="infinite-loader-default-border-color">
 						</div>
 					</div>
@@ -122,7 +122,7 @@ $infinite_loader_button_setting = get_option( 'infinite_loader_admin_button_opti
 							<p class="description"><?php esc_html_e( 'Set the text color when the button is hovered over.', 'infinite-loader-for-woocommerce' ); ?></p>
 						</div>
 						<div class="wbcom-settings-section-options">
-							<input type="color" id="infinite_loader_default_text_color_mouse_hover" class="txt_btn_color_hover" name="infinite_loader_admin_button_option[text_color_mouse_hover]" value="<?php echo ( isset( $infinite_loader_button_setting['text_color_mouse_hover'] ) ) ? esc_attr( $infinite_loader_button_setting['text_color_mouse_hover'] ) : ''; ?>">
+							<input type="color" id="infinite_loader_default_text_color_mouse_hover" class="txt_btn_color_hover" data-default="#ffffff" name="infinite_loader_admin_button_option[text_color_mouse_hover]" value="<?php echo ( isset( $infinite_loader_button_setting['text_color_mouse_hover'] ) ) ? esc_attr( $infinite_loader_button_setting['text_color_mouse_hover'] ) : '#ffffff'; ?>">
 							<input type="button" value="Default" class="button" id="infinite-loader-default-text-color-mouse-hover">	
 						</div>
 					</div>
