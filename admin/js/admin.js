@@ -22,10 +22,7 @@
     return berocket_apply_styles_for_button_free($button, $parent);
   };
   berocket_apply_styles_for_button_free = function ($button, $parent) {
-    var $settings = $parent
-      .find("div.wbcom-settings-section-wrap")
-      .not(".br_trbtn_for_use_image");
-    $settings = $settings.find(".infinite_loader_btn_settings");
+    var $settings = $parent.find(".infinite_loader_btn_settings");
 
     $button = berocket_apply_style_from_list($button, $settings);
     $button.css("background-color", $parent.find(".bg_btn_color").val());
@@ -49,11 +46,7 @@
             $style,
             value +
               "px solid " +
-              $(this)
-                .parents(".form-table")
-                .first()
-                .find(".btn_border_color")
-                .val()
+              $(this).closest("form").find(".btn_border_color").val()
           );
         } else {
           if ($style == "text") {
@@ -73,62 +66,37 @@
   $(document).ready(function () {
     setTimeout(function () {
       $(".infinite_loader_btn_load .infinite_button").each(function () {
-        berocket_apply_styles_for_button(
-          $(this).parents(".form-table").first()
-        );
+        berocket_apply_styles_for_button($(this).closest("form"));
       });
     }, 10);
-    $(document).on("change", ".lmp_hide_element", function () {
-      var value = $(this).val();
-      var hide = $(this).data("hide");
-      if ($(this).attr("type") == "checkbox") {
-        if (!$(this).prop("checked")) {
-          value = "false";
-        }
-      }
-      var $hide = $(hide);
-      $hide.each(function () {
-        $(this).parents("div.wbcom-settings-section-wrap").first().hide();
-      });
-      var $hide = $(hide + value);
-      $hide.each(function () {
-        $(this).parents("div.wbcom-settings-section-wrap").first().show();
-      });
+
+    // Reset a single native colour input to its data-default, then repaint the
+    // preview. One delegated handler scoped to the field replaces the old set of
+    // id-specific handlers, so it works on both button forms without caring
+    // which one it is or that their ids are now distinct.
+    $(document).on("click", ".infinite-loader-color-reset", function (event) {
+      event.preventDefault();
+      var $color = $(this)
+        .closest(".wbcom-field-control")
+        .find('input[type="color"]');
+      $color.val($color.data("default") || "#000000").trigger("change");
     });
 
     $(document).on(
       "change",
-      ".form-table .infinite_loader_btn_settings, .bg_btn_color, .txt_btn_color, .btn_border_color",
+      ".infinite_loader_btn_settings, .bg_btn_color, .txt_btn_color, .btn_border_color",
       function () {
-        berocket_apply_styles_for_button(
-          $(this).parents(".form-table").first()
-        );
+        berocket_apply_styles_for_button($(this).closest("form"));
       }
     );
     $(document).on(
       "mouseenter",
       ".infinite_loader_btn_load .infinite_button",
       function () {
-        $button = $(this)
-          .parents(".form-table")
-          .first()
-          .find(".infinite_loader_btn_load .infinite_button");
-        $button.css(
-          "background-color",
-          $(this)
-            .parents(".form-table")
-            .first()
-            .find(".bg_btn_color_hover")
-            .val()
-        );
-        $button.css(
-          "color",
-          $(this)
-            .parents(".form-table")
-            .first()
-            .find(".txt_btn_color_hover")
-            .val()
-        );
+        var $form = $(this).closest("form");
+        $button = $form.find(".infinite_loader_btn_load .infinite_button");
+        $button.css("background-color", $form.find(".bg_btn_color_hover").val());
+        $button.css("color", $form.find(".txt_btn_color_hover").val());
         $button.trigger("infinite_loader_button_changed");
       }
     );
@@ -136,18 +104,10 @@
       "mouseleave",
       ".infinite_loader_btn_load .infinite_button",
       function () {
-        $button = $(this)
-          .parents(".form-table")
-          .first()
-          .find(".infinite_loader_btn_load .infinite_button");
-        $button.css(
-          "background-color",
-          $(this).parents(".form-table").first().find(".bg_btn_color").val()
-        );
-        $button.css(
-          "color",
-          $(this).parents(".form-table").first().find(".txt_btn_color").val()
-        );
+        var $form = $(this).closest("form");
+        $button = $form.find(".infinite_loader_btn_load .infinite_button");
+        $button.css("background-color", $form.find(".bg_btn_color").val());
+        $button.css("color", $form.find(".txt_btn_color").val());
         $button.trigger("infinite_loader_button_changed");
       }
     );
@@ -156,13 +116,13 @@
       ".infinite-loader-set-load-more-options",
       function (event) {
         event.preventDefault();
-        $(
-          ".form-table .infinite_loader_btn_settings, .form-table .lmp_button_settings_hover"
-        ).each(function (i, o) {
+        var $form = $(this).closest("form");
+        $form.find(".infinite_loader_btn_settings").each(function (i, o) {
           $(o).val($(o).data("default")).trigger("change");
         });
-        $(".form-table .button-settings").trigger("change");
-        $(".br_colorpicker_default").click();
+        // Reset the native colour inputs too, so "Set all to default" really
+        // does reset every field the form holds.
+        $form.find(".infinite-loader-color-reset").trigger("click");
       }
     );
   });
