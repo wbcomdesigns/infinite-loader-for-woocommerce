@@ -211,41 +211,10 @@ class Infinite_Loader_For_Woocommerce {
 	 * @access   private
 	 */
 	private function define_security_hooks() {
-		// Add Content Security Policy headers.
-		add_action( 'send_headers', array( $this, 'add_security_headers' ) );
-
-		// Sanitize options on save.
+		// Sanitize custom CSS/JS on save. This is the single choke point: it runs
+		// on pre_update_option, so every writer of the option (Settings API or a
+		// direct update_option call) is scrubbed here.
 		add_filter( 'pre_update_option_infinite_loader_admin_css_js_option', array( $this, 'sanitize_css_js_option' ), 10, 2 );
-
-		// Add rate limiting check.
-		add_action( 'init', array( $this, 'check_rate_limit' ) );
-	}
-
-	/**
-	 * Add security headers
-	 */
-	public function add_security_headers() {
-		// Only add headers on frontend where plugin is active.
-		if ( is_admin() ) {
-			return;
-		}
-
-		// Check if we're on a WooCommerce page.
-		if ( ! is_shop() && ! is_product_category() && ! is_product_tag() && ! is_product_taxonomy() ) {
-			return;
-		}
-
-		// Prevent XSS attacks.
-		header( 'X-XSS-Protection: 1; mode=block' );
-
-		// Prevent clickjacking.
-		header( 'X-Frame-Options: SAMEORIGIN' );
-
-		// Prevent MIME type sniffing.
-		header( 'X-Content-Type-Options: nosniff' );
-
-		// Referrer Policy.
-		header( 'Referrer-Policy: strict-origin-when-cross-origin' );
 	}
 
 	/**
@@ -319,62 +288,6 @@ class Infinite_Loader_For_Woocommerce {
 		}
 
 		return $new_value;
-	}
-
-	/**
-	 * Check rate limit for AJAX requests
-	 */
-	public function check_rate_limit() {
-		// Only check for AJAX requests.
-		if ( ! isset( $_REQUEST['infinite_loader_ajax'] ) ) {
-			return;
-		}
-
-		$user_ip       = $this->get_client_ip();
-		$transient_key = 'infinite_loader_rate_' . md5( $user_ip );
-		$requests      = get_transient( $transient_key );
-
-		if ( false === $requests ) {
-			$requests = 0;
-		}
-
-		++$requests;
-
-		// Default rate limit: 30 requests per minute.
-		$rate_limit = apply_filters( 'infinite_loader_rate_limit', 30 );
-
-		if ( $requests > $rate_limit ) {
-			wp_die(
-				esc_html__( 'Rate limit exceeded. Please try again later.', 'infinite-loader-for-woocommerce' ),
-				esc_html__( 'Too Many Requests', 'infinite-loader-for-woocommerce' ),
-				array( 'response' => 429 )
-			);
-		}
-
-		set_transient( $transient_key, $requests, MINUTE_IN_SECONDS );
-	}
-
-	/**
-	 * Get client IP address
-	 *
-	 * @return string Client IP address.
-	 */
-	private function get_client_ip() {
-		$ip_keys = array( 'HTTP_CF_CONNECTING_IP', 'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR' );
-
-		foreach ( $ip_keys as $key ) {
-			if ( true === array_key_exists( $key, $_SERVER ) ) {
-				foreach ( explode( ',', sanitize_text_field( wp_unslash( $_SERVER[ $key ] ) ) ) as $ip ) {
-					$ip = trim( $ip );
-
-					if ( false !== filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
-						return $ip;
-					}
-				}
-			}
-		}
-
-		return isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '0.0.0.0';
 	}
 
 	/**
