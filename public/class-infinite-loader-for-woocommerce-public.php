@@ -179,7 +179,6 @@ class Infinite_Loader_For_Woocommerce_Public {
 				'pagination'   => apply_filters( 'infinite_loader_pagination_selector', 'nav.woocommerce-pagination' ),
 				'next_page'    => apply_filters( 'infinite_loader_next_page_selector', 'a.next.page-numbers' ),
 				'prev_page'    => apply_filters( 'infinite_loader_prev_page_selector', 'a.prev.page-numbers' ),
-				'result_count' => apply_filters( 'infinite_loader_result_count_selector', '.woocommerce-result-count' ),
 			);
 
 			// Add support for WooCommerce blocks if active.
@@ -329,7 +328,6 @@ class Infinite_Loader_For_Woocommerce_Public {
 			'error_message'  => esc_html__( 'Unable to load more products. Please try again.', 'infinite-loader-for-woocommerce' ),
 			'retry_text'     => esc_html__( 'Retry', 'infinite-loader-for-woocommerce' ),
 			'no_more_text'   => esc_html__( 'No more products', 'infinite-loader-for-woocommerce' ),
-			'loading_text'   => esc_html__( 'Loading...', 'infinite-loader-for-woocommerce' ),
 			/**
 			 * Distance in pixels between the bottom of the product list and the
 			 * viewport at which infinite scroll asks for the next page.
@@ -339,8 +337,6 @@ class Infinite_Loader_For_Woocommerce_Public {
 			'scroll_threshold' => (int) apply_filters( 'infinite_loader_scroll_threshold', 300 ),
 			'is_mobile'      => wp_is_mobile(),
 			'debug_mode'     => defined( 'WP_DEBUG' ) && WP_DEBUG,
-			'site_url'       => esc_url( home_url() ),
-			'is_ssl'         => is_ssl(),
 		);
 
 		// Add compatibility data.
@@ -449,47 +445,40 @@ class Infinite_Loader_For_Woocommerce_Public {
 	/**
 	 * Get product count data with proper error handling.
 	 *
-	 * @throws Exception If WooCommerce data is invalid or unavailable.
 	 * @return array|false Product count data or false on error.
 	 */
 	private function infinite_loader_get_product_count_data() {
-		try {
-			if ( class_exists( 'WC_Query' ) && method_exists( 'WC_Query', 'product_query' ) && function_exists( 'wc_get_loop_prop' ) ) {
-				$total    = wc_get_loop_prop( 'total' );
-				$per_page = wc_get_loop_prop( 'per_page' );
-				$paged    = wc_get_loop_prop( 'current_page' );
+		if ( class_exists( 'WC_Query' ) && method_exists( 'WC_Query', 'product_query' ) && function_exists( 'wc_get_loop_prop' ) ) {
+			$total    = wc_get_loop_prop( 'total' );
+			$per_page = wc_get_loop_prop( 'per_page' );
+			$paged    = wc_get_loop_prop( 'current_page' );
 
-				// Validate WooCommerce data.
-				if ( ! is_numeric( $total ) || ! is_numeric( $per_page ) || ! is_numeric( $paged ) ) {
-					throw new Exception( 'Invalid WooCommerce loop properties' );
-				}
-			} else {
-				global $wp_query;
+			// Validate WooCommerce data.
+			if ( ! is_numeric( $total ) || ! is_numeric( $per_page ) || ! is_numeric( $paged ) ) {
+				return false;
+			}
+		} else {
+			global $wp_query;
 
-				if ( ! isset( $wp_query ) || ! is_object( $wp_query ) ) {
-					throw new Exception( 'WP_Query not available' );
-				}
-
-				$paged    = max( 1, $wp_query->get( 'paged' ) );
-				$per_page = $wp_query->get( 'posts_per_page' );
-				$total    = $wp_query->found_posts;
+			if ( ! isset( $wp_query ) || ! is_object( $wp_query ) ) {
+				return false;
 			}
 
-			// Calculate first and last with bounds checking.
-			$first = max( 1, ( $per_page * $paged ) - $per_page + 1 );
-			$last  = min( $total, $per_page * $paged );
+			$paged    = max( 1, $wp_query->get( 'paged' ) );
+			$per_page = $wp_query->get( 'posts_per_page' );
+			$total    = $wp_query->found_posts;
+		}
 
-			// Ensure logical consistency.
-			if ( $first > $last || $last > $total ) {
-				throw new Exception( 'Inconsistent pagination calculation' );
-			}
+		// Calculate first and last with bounds checking.
+		$first = max( 1, ( $per_page * $paged ) - $per_page + 1 );
+		$last  = min( $total, $per_page * $paged );
 
-			return compact( 'total', 'per_page', 'paged', 'first', 'last' );
-
-		} catch ( Exception $e ) {
-			error_log( 'Infinite Loader: Product count calculation failed - ' . $e->getMessage() );
+		// Ensure logical consistency.
+		if ( $first > $last || $last > $total ) {
 			return false;
 		}
+
+		return compact( 'total', 'per_page', 'paged', 'first', 'last' );
 	}
 
 	/**
@@ -600,15 +589,6 @@ class Infinite_Loader_For_Woocommerce_Public {
 	 * @return string          Sanitized hex color.
 	 */
 	private function sanitize_hex_color( $color, $default = '' ) {
-		if ( '' === $color ) {
-			return $default;
-		}
-
-		// 3 or 6 hex digits, or the empty string.
-		if ( preg_match( '|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) ) {
-			return $color;
-		}
-
-		return $default;
+		return sanitize_hex_color( $color ) ?: $default;
 	}
 }
