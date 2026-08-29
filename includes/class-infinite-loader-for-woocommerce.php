@@ -96,7 +96,6 @@ class Infinite_Loader_For_Woocommerce {
 		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_FILE', __FILE__ );
 		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_URL', plugin_dir_url( __DIR__ ) );
 		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PATH', plugin_dir_path( __DIR__ ) );
-		$this->define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_TEMPLATE_PATH', plugin_dir_path( __DIR__ ) . '/templates/' );
 	}
 
 	/**
@@ -193,7 +192,7 @@ class Infinite_Loader_For_Woocommerce {
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'register_parent_menu', 5 );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'infinite_loader_for_woocommerce_init_plugin_settings' );
 		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_more_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_button_style', 10, 2 );
-		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_previous_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_previous_button_style', 10, 2 );
+		$this->loader->add_filter( 'infinite_loader_for_woocommerce_load_previous_button_style', $plugin_admin, 'infinite_loader_for_woocommerce_button_style', 10, 2 );
 		$this->loader->add_action( 'in_admin_header', $plugin_admin, 'wbcom_hide_all_admin_notices_from_setting_page' );
 
 		// Add AJAX handler.

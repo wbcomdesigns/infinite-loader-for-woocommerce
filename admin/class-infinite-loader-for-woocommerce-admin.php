@@ -495,11 +495,11 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		$validated['button_text']  = isset( $input['button_text'] ) ? sanitize_text_field( $input['button_text'] ) : 'Load More';
 
 		// Colors.
-		$validated['background_color']             = isset( $input['background_color'] ) ? $this->sanitize_hex_color( $input['background_color'] ) : '#1d76da';
-		$validated['background_color_mouse_hover'] = isset( $input['background_color_mouse_hover'] ) ? $this->sanitize_hex_color( $input['background_color_mouse_hover'] ) : '#0e4da0';
-		$validated['border_color']                 = isset( $input['border_color'] ) ? $this->sanitize_hex_color( $input['border_color'] ) : '#1d76da';
-		$validated['text_color']                   = isset( $input['text_color'] ) ? $this->sanitize_hex_color( $input['text_color'] ) : '#ffffff';
-		$validated['text_color_mouse_hover']       = isset( $input['text_color_mouse_hover'] ) ? $this->sanitize_hex_color( $input['text_color_mouse_hover'] ) : '#ffffff';
+		$validated['background_color']             = isset( $input['background_color'] ) ? sanitize_hex_color( $input['background_color'] ) : '#1d76da';
+		$validated['background_color_mouse_hover'] = isset( $input['background_color_mouse_hover'] ) ? sanitize_hex_color( $input['background_color_mouse_hover'] ) : '#0e4da0';
+		$validated['border_color']                 = isset( $input['border_color'] ) ? sanitize_hex_color( $input['border_color'] ) : '#1d76da';
+		$validated['text_color']                   = isset( $input['text_color'] ) ? sanitize_hex_color( $input['text_color'] ) : '#ffffff';
+		$validated['text_color_mouse_hover']       = isset( $input['text_color_mouse_hover'] ) ? sanitize_hex_color( $input['text_color_mouse_hover'] ) : '#ffffff';
 
 		// Dimensions.
 		$dimension_fields = array(
@@ -604,28 +604,6 @@ class Infinite_Loader_For_Woocommerce_Admin {
 
 		return $js;
 	}
-
-	/**
-	 * Sanitize hex color
-	 *
-	 * @param  string $color Hex color.
-	 * @return string        Sanitized hex color.
-	 */
-	private function sanitize_hex_color( $color ) {
-		if ( '' === $color ) {
-			return '';
-		}
-
-		// 3 or 6 hex digits, or the empty string.
-		if ( preg_match( '|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) ) {
-			return $color;
-		}
-
-		return '';
-	}
-
-
-
 
 
 
@@ -739,18 +717,6 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		}
 
 		return implode( '; ', $styles );
-	}
-
-	/**
-	 * The Function is responsible for the load previous button style.
-	 *
-	 * @param  string $style   Current style.
-	 * @param  array  $setting Button settings.
-	 * @return string          Button style.
-	 */
-	public function infinite_loader_for_woocommerce_previous_button_style( $style, $setting = array() ) {
-		// Use the same logic as load more button.
-		return $this->infinite_loader_for_woocommerce_button_style( $style, $setting );
 	}
 
 	/**
