@@ -537,72 +537,20 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	 * @return array        Validated data.
 	 */
 	public function validate_css_js_settings( $input ) {
-		$validated = array();
-
-		// Sanitize custom CSS.
-		if ( isset( $input['custom_css'] ) ) {
-			// Remove any script tags and PHP.
-			$validated['custom_css'] = wp_strip_all_tags( $input['custom_css'] );
-
-			// Remove @import statements to prevent external resource loading.
-			$validated['custom_css'] = preg_replace( '/@import\s+(?:url\s*\(\s*)?["\']?[^"\')]+["\']?\s*\)?[^;]*;?/i', '', $validated['custom_css'] );
-
-			// Remove JavaScript URLs.
-			$validated['custom_css'] = preg_replace( '/javascript\s*:/i', '', $validated['custom_css'] );
-		} else {
-			$validated['custom_css'] = '';
+		if ( ! is_array( $input ) ) {
+			return array();
 		}
 
-		// Sanitize JavaScript fields.
-		$js_fields = array( 'before_update', 'after_update' );
-		foreach ( $js_fields as $field ) {
-			if ( isset( $input[ $field ] ) ) {
-				$validated[ $field ] = $this->sanitize_javascript( $input[ $field ] );
-			} else {
-				$validated[ $field ] = '';
-			}
-		}
-
-		return $validated;
-	}
-
-	/**
-	 * Sanitize JavaScript code
-	 *
-	 * @param  string $js JavaScript code.
-	 * @return string     Sanitized JavaScript.
-	 */
-	private function sanitize_javascript( $js ) {
-		// Remove PHP tags.
-		$js = str_replace( array( '<?php', '<?', '?>' ), '', $js );
-
-		// Remove script tags.
-		$js = preg_replace( '/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/mi', '', $js );
-
-		// Check for dangerous functions and patterns.
-		$dangerous_patterns = array(
-			'/\beval\s*\(/i',
-			'/\bnew\s+Function\s*\([^)]*\)/i',
-			'/\bdocument\.write/i',
-			'/\bdocument\.writeln/i',
-			'/\bdocument\.cookie/i',
-			'/\blocalStorage/i',
-			'/\bsessionStorage/i',
-			'/\bwindow\.location\s*=/i',
-			'/\bdocument\.location\s*=/i',
+		// Whitelist the known fields and cast to string. The dangerous-pattern
+		// scrubbing for both CSS and JS is centralized in the single choke point,
+		// Infinite_Loader_For_Woocommerce::sanitize_css_js_option(), which runs on
+		// pre_update_option for every writer of this option. Keeping it in one
+		// place avoids two drifting copies of the same block list.
+		return array(
+			'custom_css'    => isset( $input['custom_css'] ) ? (string) $input['custom_css'] : '',
+			'before_update' => isset( $input['before_update'] ) ? (string) $input['before_update'] : '',
+			'after_update'  => isset( $input['after_update'] ) ? (string) $input['after_update'] : '',
 		);
-
-		foreach ( $dangerous_patterns as $pattern ) {
-			if ( preg_match( $pattern, $js ) ) {
-				// Log security issue.
-				error_log( 'Infinite Loader: Potentially dangerous JavaScript detected: ' . $pattern );
-
-				// Remove the dangerous code.
-				$js = preg_replace( $pattern, '/* Code removed for security */', $js );
-			}
-		}
-
-		return $js;
 	}
 
 
