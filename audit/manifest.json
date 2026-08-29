@@ -1,0 +1,236 @@
+{
+  "$schema": "https://wpmediaverse.com/schemas/wp-plugin-manifest-v2.json",
+  "plugin": {
+    "slug": "infinite-loader-for-woocommerce",
+    "name": "Wbcom Designs – Infinite Loader for WooCommerce",
+    "version": "1.3.1",
+    "namespace": null,
+    "class_prefix": "Infinite_Loader_For_Woocommerce_",
+    "main_file": "infinite-loader-for-woocommerce.php",
+    "text_domain": "infinite-loader-for-woocommerce",
+    "requires_plugins": "woocommerce",
+    "requires_wp": "6.5",
+    "requires_php": "8.0",
+    "wc_requires": "3.0",
+    "hpos_compatible": true,
+    "extends": null,
+    "extension_hook_consumed": null,
+    "extension_hook_fired": null,
+    "description": "AJAX-powered infinite scroll, Load More button, or AJAX pagination for WooCommerce shop archives. On a shop / category / tag / product-taxonomy archive the frontend script fetches the next archive page over AJAX (GET with infinite_loader_ajax=1), and the plugin answers with the product grid alone (not the whole page), appending it beneath the current products; a configurable loading icon (Font Awesome 5 Free) animates while it loads. Owner configures loading style, per-page count, icon, and button styling on a shared Wbcom settings screen."
+  },
+  "rest": {
+    "namespace": null,
+    "endpoints": [],
+    "note": "No REST API. The only server request is a public, unauthenticated read of the WooCommerce archive on template_redirect, keyed by the infinite_loader_ajax request flag — see public_read_endpoint below."
+  },
+  "ajax": [],
+  "ajax_note": "No admin-ajax.php (wp_ajax_) actions. wp_create_nonce('infinite_loader_ajax_nonce') is generated and localized to the frontend script but the read endpoint deliberately does not verify it — the request only renders a public archive and mutates nothing, and dropping the per-visitor nonce is what restores full-page-cache compatibility (WP Rocket / Varnish / Cloudflare). See public_read_endpoint.",
+  "public_read_endpoint": {
+    "handler": "Infinite_Loader_For_Woocommerce_Admin::handle_infinite_loader_ajax",
+    "hook": "template_redirect",
+    "trigger": "$_REQUEST['infinite_loader_ajax'] present (frontend sends =1)",
+    "auth": "unauthenticated by design (public archive, read-only, no state change; nonce dropped for page-cache compatibility)",
+    "renderer": "Infinite_Loader_For_Woocommerce_Admin::render_products_only (private) — emits result count + product loop (wc_get_template_part content/product) + pagination only, then exit; strips its own infinite_loader_ajax marker from the request/REQUEST_URI first so WooCommerce add-to-cart links do not inherit it",
+    "response_headers": [
+      "X-Content-Type-Options: nosniff",
+      "X-Frame-Options: SAMEORIGIN",
+      "X-Robots-Tag: noindex, nofollow",
+      "Content-Type: text/html; charset=<blog charset>"
+    ],
+    "full_page_fallback": "apply_filters('infinite_loader_render_products_only', true) — return false to render the whole archive (pre-1.2.4 behaviour) for themes whose loop is built outside the standard WooCommerce loop templates",
+    "source": "admin/class-infinite-loader-for-woocommerce-admin.php:1315-1415"
+  },
+  "rate_limiter": {
+    "handler": "Infinite_Loader_For_Woocommerce::check_rate_limit",
+    "hook": "init",
+    "scope": "requests carrying infinite_loader_ajax",
+    "limit": "30 requests / minute per client IP (apply_filters('infinite_loader_rate_limit', 30))",
+    "store": "transient infinite_loader_rate_<md5(ip)>, MINUTE_IN_SECONDS",
+    "over_limit": "wp_die( 429 Too Many Requests )",
+    "client_ip": "Infinite_Loader_For_Woocommerce::get_client_ip — walks CF-Connecting-IP / Client-IP / X-Forwarded-* / Forwarded / REMOTE_ADDR, validates each with FILTER_VALIDATE_IP (no private/reserved)",
+    "source": "includes/class-infinite-loader-for-woocommerce.php:350-401"
+  },
+  "security_headers": {
+    "handler": "Infinite_Loader_For_Woocommerce::add_security_headers",
+    "hook": "send_headers",
+    "scope": "frontend WooCommerce archive pages (is_shop / is_product_category / is_product_tag / is_product_taxonomy)",
+    "headers": [
+      "X-XSS-Protection: 1; mode=block",
+      "X-Frame-Options: SAMEORIGIN",
+      "X-Content-Type-Options: nosniff",
+      "Referrer-Policy: strict-origin-when-cross-origin"
+    ],
+    "source": "includes/class-infinite-loader-for-woocommerce.php:250-272"
+  },
+  "admin_pages": [
+    {
+      "title": "WB Plugins",
+      "slug": "wbcomplugins",
+      "parent": null,
+      "capability": "manage_options",
+      "source": "admin/class-infinite-loader-for-woocommerce-admin.php:244-258 register_parent_menu (only when no other Wbcom plugin already created it)"
+    },
+    {
+      "title": "Infinite Loader (settings)",
+      "slug": "infinite-loader-for-woocommerce-settings",
+      "parent": "wbcomplugins",
+      "capability": "manage_woocommerce (verify_admin_request gate on tab render)",
+      "renders_tabs": [
+        "overview (default) — read-only summary of how the shop currently loads products",
+        "general — loading style, products per load, Font Awesome toggle, loading-icon picker, spin toggle, do-not-update-URL toggle",
+        "button — Load More button text/colours/spacing/border/radius",
+        "previous-button — Previous button text/colours/spacing/border/radius",
+        "javascript-css — custom CSS + before/after-update JS hooks",
+        "faq — help accordion"
+      ],
+      "shell": "Shared Wbcom_Settings_Page shell (lib/wbcom-settings/); this plugin contributes nav via filter infinite_loader_settings_nav_groups and tab bodies via action infinite_loader_settings_tab_content",
+      "source": "admin/class-infinite-loader-for-woocommerce-admin.php:213-352"
+    }
+  ],
+  "settings": [
+    {
+      "key": "infinite_loader_admin_general_option",
+      "group": "infinite_loader_admin_general_options",
+      "type": "array",
+      "sanitize_callback": "validate_general_settings",
+      "controls": "product_loading_type (infinity-scroll | load-more-button | pagination), product_per_page (1-100), enable_font_awesome (yes|''), rotate_image (yes|''), do_not_update_url (yes|''), loading_image (Font Awesome class or image URL)"
+    },
+    {
+      "key": "infinite_loader_admin_button_option",
+      "group": "infinite_loader_admin_button_options",
+      "type": "array",
+      "sanitize_callback": "validate_button_settings",
+      "controls": "Load More button — custom_class, button_text, background_color / _mouse_hover, border_color, text_color / _mouse_hover, text_font_size, padding/margin/border/border-radius per side (0-999)"
+    },
+    {
+      "key": "infinite_loader_admin_previous_button_option",
+      "group": "infinite_loader_admin_previous_button_options",
+      "type": "array",
+      "sanitize_callback": "validate_button_settings",
+      "controls": "Previous button — same field set as the Load More button"
+    },
+    {
+      "key": "infinite_loader_admin_css_js_option",
+      "group": "infinite_loader_admin_css_js_options",
+      "type": "array",
+      "sanitize_callback": "validate_css_js_settings + pre_update_option filter sanitize_css_js_option",
+      "controls": "custom_css (tags/@import/javascript: stripped), before_update / after_update (JS hooks; PHP + <script> + dangerous-pattern stripped)"
+    },
+    {
+      "key": "infinite_loader_license_key",
+      "group": "— (EDD license, optional edd-license/)",
+      "type": "string",
+      "controls": "EDD Software Licensing key"
+    },
+    {
+      "key": "infinite_loader_license_status",
+      "group": "— (EDD license)",
+      "type": "string",
+      "controls": "EDD license activation status"
+    }
+  ],
+  "transients": [
+    "infinite_loader_rate_<md5(ip)> — rate-limit counter, 60s",
+    "infinite_loader_license_data — EDD license cache"
+  ],
+  "object_cache": "get_cached_option() wraps each option in wp_cache_get/set (default group, HOUR_IN_SECONDS) so the 4 option reads per archive request are not repeated DB hits",
+  "shortcodes": [],
+  "blocks": [],
+  "post_types": [],
+  "taxonomies": [],
+  "tables": [],
+  "cron": [],
+  "wp_cli": [],
+  "capabilities": {
+    "admin_settings": "manage_woocommerce (tab render) + manage_options (menu)",
+    "uninstall": "activate_plugins + check_admin_referer('delete-plugin')"
+  },
+  "hooks_fired": {
+    "filters": [
+      "infinite_loader_render_products_only (bool, default true) — products-only vs full-page response",
+      "infinite_loader_should_load_assets (bool) — which pages enqueue the frontend assets",
+      "infinite_loader_products_selector / _item_selector / _pagination_selector / _next_page_selector / _prev_page_selector / _result_count_selector — override the WooCommerce DOM selectors the script scrapes",
+      "infinite_loader_products_per_page (int) — final per-page count",
+      "infinite_loader_scroll_threshold (int px, default 300) — how close to list end infinite scroll triggers",
+      "infinite_loader_rate_limit (int, default 30) — requests/minute ceiling",
+      "infinite_loader_js_data (array) — the whole localized data object",
+      "infinite_loader_js_function (array) — before/after-update JS payload",
+      "wbcom_infinite_loader_image (html) — the loading icon markup",
+      "infinite_loader_for_woocommerce_load_more_button_style / _load_previous_button_style (css) — inline button style string",
+      "infinite_loader_lm_btn_hover_css / infinite_loader_previous_btn_hover_css (css) — hover CSS blocks",
+      "infinite_loader_settings_nav_groups (array) — settings-shell nav registry"
+    ],
+    "actions": [
+      "infinite_loader_settings_tab_content (string $tab) — settings-shell tab body dispatch"
+    ]
+  },
+  "frontend_assets": {
+    "js": [
+      "public/js/infinite_loader_products.js (+ min/) — the loader engine: infinity-scroll / load-more / AJAX-pagination, next-page GET with infinite_loader_ajax=1, XHR abort on re-trigger, URL validation (is_valid_url), browser history.replaceState (address bar follows shopper), running result-count substitution, retry on error",
+      "public/js/infinite-loader-for-woocommerce-public.js (+ min/) — secondary public bundle"
+    ],
+    "css": [
+      "public/css/infinite_loader_products.css (+ min/, rtl/) — loader / button / spinner styling",
+      "public/css/infinite-loader-for-woocommerce-public.css (+ min/, rtl/) — secondary public stylesheet"
+    ],
+    "fonts": [
+      "public/css/fontawesome5.min.css — Font Awesome 5 Free (bundled webfonts). Enqueued on the storefront only when the owner enables Font Awesome, and in wp-admin on the settings screen so the icon picker shows real icons. The sibling public/css/font-awesome.min.css is a FA5 Pro build whose fonts are NOT shipped and is intentionally never enqueued.",
+      "public/css/webfonts/ — fa-solid-900 + fa-regular-400 (ttf/woff/woff2)"
+    ],
+    "load_condition": "is_shop() || is_product_category() || is_product_tag() || is_product_taxonomy() (filterable via infinite_loader_should_load_assets)"
+  },
+  "admin_assets": {
+    "js": [
+      "admin/js/infinite-loader-for-woocommerce-admin.js (+ min/)",
+      "admin/js/admin.js (+ min/) — icon-picker popup, colour pickers"
+    ],
+    "css": [
+      "admin/css/infinite-loader-for-woocommerce-admin.css (+ min/, rtl/)"
+    ],
+    "deps": "jquery, wp-color-picker; fontawesome5.min.css enqueued for the General-tab icon picker",
+    "removed": "select2 no longer enqueued (a single 3-option dropdown became a native select; vendor files kept in repo)"
+  },
+  "shared_shell": {
+    "path": "lib/wbcom-settings/",
+    "registered_version": "1.0.2",
+    "loader": "wbcom_settings_register('1.0.2', ...) — highest bundled version across active Wbcom plugins wins and renders the menu for all",
+    "icons": "assets/vendor/lucide.min.js (Lucide, used by the shell nav)"
+  },
+  "edd_license": {
+    "present": true,
+    "path": "edd-license/",
+    "classes": [
+      "EDD_WB_Infinite_Loader_Plugin_Updater (edd-license/class-edd-wb-infinite-loader-plugin-updater.php)"
+    ],
+    "loaded": "Guarded require in load_dependencies() — optional"
+  },
+  "security": {
+    "public_read": "Unauthenticated by design; read-only; changes no state. Security headers set on the response (nosniff, SAMEORIGIN, noindex/nofollow).",
+    "rate_limit": "30 req/min per IP on the read endpoint (filterable), 429 on breach.",
+    "archive_headers": "X-XSS-Protection, X-Frame-Options, X-Content-Type-Options, Referrer-Policy on archive page loads.",
+    "css_sanitize": "custom_css run through wp_strip_all_tags + @import / javascript: / expression() stripping at save AND via pre_update_option; NOT esc_html'd inside <style> (would break CSS combinators).",
+    "js_sanitize": "before/after-update JS strips PHP tags, <script>, and a denylist of dangerous patterns (eval, new Function, document.write, innerHTML=, document.cookie, local/sessionStorage, window/document.location=, setTimeout/setInterval string form, execScript) at save.",
+    "colors": "hex-only regex validation on every colour field.",
+    "uninstall": "activate_plugins cap + check_admin_referer('delete-plugin'); multisite path uses get_sites()."
+  },
+  "primary_flows": {
+    "owner": "Plugins → WB Plugins → Infinite Loader → General: choose loading style (Load More / Infinite Scroll / AJAX pagination), set products per load, enable Font Awesome and pick a loading icon; Button Style / Previous Button Style tabs style the buttons; save. Overview tab summarises the live behaviour.",
+    "shopper": "Open the shop archive on a supported page: scrolling near the end (infinite scroll) or clicking Load More fetches the next page via AJAX (GET infinite_loader_ajax=1), appends the product grid, updates the visible 'Showing X-Y of Z' count, and (unless the owner opted out) updates the address bar so Back returns them where they were."
+  },
+  "static_analysis": {
+    "notes": "No REST, no cron, no custom tables, no shortcodes, no blocks, no WP-CLI — the plugin is a frontend loader over WooCommerce archives plus a settings screen. The single server entry point is the public read endpoint on template_redirect. No companion Free/Pro pair.",
+    "recent_release_fixes": [
+      "1.3.1 — admin icon picker showed blank squares (no icon font in wp-admin); now loads the bundled Font Awesome",
+      "1.3.0 — dropped per-visitor nonce for page-cache compatibility; products-only AJAX response (118,878 → 21,338 bytes on a stock shop); scroll threshold added; address-bar tracking fixed; running result-count fixed; FAQ accordion and default-value fixes; build-freshness CI guard"
+    ]
+  },
+  "generated": {
+    "at": "2026-08-29T00:00:00Z",
+    "from": "manual enumeration from source (docs/QA pass, no runtime scan)",
+    "branch": "master",
+    "head_commit": "a1d71c8",
+    "schema_version": "v2.1",
+    "scan_scope": "source (excludes node_modules/, dist/)",
+    "php_file_count": 14
+  }
+}
