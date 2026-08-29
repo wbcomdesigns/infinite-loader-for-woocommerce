@@ -167,7 +167,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 			wp_enqueue_script(
 				$this->plugin_name,
 				plugin_dir_url( __FILE__ ) . 'js' . $path . '/infinite-loader-for-woocommerce-admin' . $extension,
-				array( 'jquery', 'wp-color-picker' ),
+				array( 'jquery' ),
 				$this->version,
 				false
 			);
@@ -175,13 +175,10 @@ class Infinite_Loader_For_Woocommerce_Admin {
 			wp_enqueue_script(
 				'admin-js',
 				plugin_dir_url( __FILE__ ) . 'js' . $path . '/admin' . $extension,
-				array( 'jquery', 'wp-color-picker' ),
+				array( 'jquery' ),
 				$this->version,
 				false
 			);
-
-			// Add color picker.
-			wp_enqueue_style( 'wp-color-picker' );
 		}
 	}
 
@@ -372,43 +369,41 @@ class Infinite_Loader_For_Woocommerce_Admin {
 
 		Wbcom_Settings_Page::card_open( __( 'How your shop loads products', 'infinite-loader-for-woocommerce' ) );
 		?>
-		<table class="form-table" role="presentation">
-			<tr>
-				<th scope="row"><?php esc_html_e( 'Loading style', 'infinite-loader-for-woocommerce' ); ?></th>
-				<td><?php echo esc_html( $mode_label ); ?></td>
-			</tr>
-			<tr>
-				<th scope="row"><?php esc_html_e( 'Products per load', 'infinite-loader-for-woocommerce' ); ?></th>
-				<td>
-					<?php
-					echo $per_page > 0
-						? esc_html( (string) $per_page )
-						: esc_html__( 'Using the theme or WooCommerce default', 'infinite-loader-for-woocommerce' );
-					?>
-				</td>
-			</tr>
-			<tr>
-				<th scope="row"><?php esc_html_e( 'Address bar follows the shopper', 'infinite-loader-for-woocommerce' ); ?></th>
-				<td>
-					<?php
-					echo $track_url
-						? esc_html__( 'Yes - the Back button returns them where they were', 'infinite-loader-for-woocommerce' )
-						: esc_html__( 'No', 'infinite-loader-for-woocommerce' );
-					?>
-				</td>
-			</tr>
-			<tr>
-				<th scope="row"><?php esc_html_e( 'WooCommerce', 'infinite-loader-for-woocommerce' ); ?></th>
-				<td>
-					<?php
-					echo defined( 'WC_VERSION' )
-						/* translators: %s: WooCommerce version. */
-						? esc_html( sprintf( __( '%s active', 'infinite-loader-for-woocommerce' ), WC_VERSION ) )
-						: esc_html__( 'Not active', 'infinite-loader-for-woocommerce' );
-					?>
-				</td>
-			</tr>
-		</table>
+		<div class="wbcom-field wbcom-field-group">
+			<div class="wbcom-field-info"><label><?php esc_html_e( 'Loading style', 'infinite-loader-for-woocommerce' ); ?></label></div>
+			<div class="wbcom-field-control"><?php echo esc_html( $mode_label ); ?></div>
+		</div>
+		<div class="wbcom-field wbcom-field-group">
+			<div class="wbcom-field-info"><label><?php esc_html_e( 'Products per load', 'infinite-loader-for-woocommerce' ); ?></label></div>
+			<div class="wbcom-field-control">
+				<?php
+				echo $per_page > 0
+					? esc_html( (string) $per_page )
+					: esc_html__( 'Using the theme or WooCommerce default', 'infinite-loader-for-woocommerce' );
+				?>
+			</div>
+		</div>
+		<div class="wbcom-field wbcom-field-group">
+			<div class="wbcom-field-info"><label><?php esc_html_e( 'Address bar follows the shopper', 'infinite-loader-for-woocommerce' ); ?></label></div>
+			<div class="wbcom-field-control">
+				<?php
+				echo $track_url
+					? esc_html__( 'Yes - the Back button returns them where they were', 'infinite-loader-for-woocommerce' )
+					: esc_html__( 'No', 'infinite-loader-for-woocommerce' );
+				?>
+			</div>
+		</div>
+		<div class="wbcom-field wbcom-field-group">
+			<div class="wbcom-field-info"><label><?php esc_html_e( 'WooCommerce', 'infinite-loader-for-woocommerce' ); ?></label></div>
+			<div class="wbcom-field-control">
+				<?php
+				echo defined( 'WC_VERSION' )
+					/* translators: %s: WooCommerce version. */
+					? esc_html( sprintf( __( '%s active', 'infinite-loader-for-woocommerce' ), WC_VERSION ) )
+					: esc_html__( 'Not active', 'infinite-loader-for-woocommerce' );
+				?>
+			</div>
+		</div>
 		<p>
 			<a class="wbcom-btn" href="<?php echo esc_url( Wbcom_Settings_Page::tab_url( self::PAGE_SLUG, 'general' ) ); ?>">
 				<?php esc_html_e( 'Change how products load', 'infinite-loader-for-woocommerce' ); ?>

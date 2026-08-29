@@ -3,24 +3,10 @@
  * included in this file.
  */
 
-.wbcom-settings-section-wrap {
-    overflow: inherit;
-}
-
-.form-table .infinite-loader-style {
-    width: 65px;
-}
-
-/*
- * `resize` and `min-height` belong to the code textarea, not to the settings
- * table. Applied to both, they put a drag handle on the corner of every
- * settings card and forced 200px of height onto short tabs.
- */
-.form-table {
-    width: 100%;
-}
-
-#infinite-loader-css-js-area {
+/* The three code editors on the JavaScript/CSS tab. A shared class because the
+ * three textareas each carry their own id now - one for CSS, one for each JS
+ * hook - so a `for=` label points at the right box and no id is reused. */
+.infinite-loader-code-area {
     width: 100%;
     resize: vertical;
     min-height: 200px;
@@ -49,7 +35,10 @@
     box-sizing: border-box;
 }
 
-input.infinite-loader-set-load-more-options.button[value="Set all to default"] {
+/* Keyed on the class, not the button's value: the label is translated, so a
+ * [value="Set all to default"] selector would drop the styling in every locale
+ * but English. */
+input.infinite-loader-set-load-more-options.button {
     background: #e20101;
     line-height: 55px;
     padding: 0 30px;
@@ -63,7 +52,7 @@ input.infinite-loader-set-load-more-options.button[value="Set all to default"] {
     border-radius: 12px;
 }
 
-input.infinite-loader-set-load-more-options.button[value="Set all to default"]:hover {
+input.infinite-loader-set-load-more-options.button:hover {
     background: #bf0101;
 }
 
@@ -252,26 +241,20 @@ select#infinity-loader-loading-type+.select2-container--default .select2-selecti
     text-align: center;
 }
 
-.form-table .infinite_select_icon {
-    margin-top: 18px;
-}
-
-.form-table .infinite_default_icon {
-    margin-top: 24px;
-}
-
 .infinite_loader_btn_load a {
     text-decoration: none;
 }
 
-.wb-infinite-loader .form-table td input[type="color"] {
-    width: 40px;
-    height: 38px;
-    box-shadow: none !important;
-    border: none;
-    cursor: pointer;
+/* Native colour swatches on the two button tabs. Kept compact so a row of a
+ * swatch plus its Default button reads as one control, not a full-width bar. */
+.wbcom-settings-body input[type="color"] {
+    width: 44px;
+    height: 34px;
     padding: 0;
-    margin-top: -3px;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: middle;
 }
 
 .nav-tab-wrapper ul li a#infinite-loader-for-woocommerce-general-tab:before {
@@ -345,123 +328,21 @@ select#infinity-loader-loading-type+.select2-container--default .select2-selecti
 	}
 }
 
-/* FAQ accordion.
+/* FAQ answers.
  *
- * The markup and the toggle script both shipped without any styles, so every
- * answer was permanently open and the questions rendered as plain text with no
- * hint they could be clicked.
- *
- * The script sets an inline max-height on the panel to open it and clears that
- * value to close it, so the closed state has to come from CSS here - without a
- * max-height of 0 there is nothing for "cleared" to fall back to.
- */
-.wbcom-faq-accordion {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 10px;
-	width: 100%;
+ * The FAQ tab is the shell's native <details>/<summary> component now, so the
+ * question header, the open/close chevron and the panel all come from
+ * lib/wbcom-settings. Only the ordered list inside an answer needs a nudge: the
+ * shell pads its <p> but not a <ol>, so the list would otherwise sit flush to
+ * the item edge and out of line with the paragraph above it. */
+.wbcom-settings-body .wbcom-faq__item > ol {
 	margin: 0;
-	padding: 14px 18px;
-	border: 1px solid #dcdcde;
-	border-radius: 4px;
-	background: #f6f7f7;
-	color: #1d2327;
-	font-size: 14px;
-	font-weight: 600;
-	text-align: left;
-	cursor: pointer;
-	transition: background 0.15s ease;
+	padding: 0 14px 12px 34px;
+	color: var(--wbcom-muted, #646970);
 }
 
-.wbcom-faq-accordion + .wbcom-faq-accordion,
-.wbcom-faq-panel + .wbcom-faq-accordion {
-	margin-top: 8px;
-}
-
-.wbcom-faq-accordion:hover,
-.wbcom-faq-accordion:focus-visible {
-	background: #eceded;
-}
-
-.wbcom-faq-accordion:focus-visible {
-	outline: 2px solid #2271b1;
-	outline-offset: 1px;
-}
-
-/* Chevron, rotated when the question is open. */
-.wbcom-faq-accordion::after {
-	content: "";
-	flex: 0 0 auto;
-	width: 8px;
-	height: 8px;
-	border-right: 2px solid currentColor;
-	border-bottom: 2px solid currentColor;
-	transform: rotate(45deg) translate(-2px, -2px);
-	transition: transform 0.15s ease;
-}
-
-.wbcom-faq-accordion.active::after {
-	transform: rotate(-135deg) translate(-2px, -2px);
-}
-
-.wbcom-faq-accordion.active {
-	background: #e8f0f7;
-	border-color: #c3d4e3;
-}
-
-.wbcom-faq-panel {
-	max-height: 0;
-	overflow: hidden;
-	padding: 0 18px;
-	border-inline: 1px solid transparent;
-	transition: max-height 0.2s ease;
-}
-
-.wbcom-faq-panel p {
-	margin: 14px 0;
-	color: #50575e;
-	font-size: 13px;
-	line-height: 1.6;
-}
-
-/* =========================================================================
- * Settings layout
- *
- * Scoped to this plugin's own settings page on purpose. The grid, the label
- * column and the row padding all come from lib/wbcom-settings, which is
- * vendored and shared by every Wbcom plugin - widening a column there would
- * silently reflow six other products. The body class WordPress already puts on
- * this screen is the narrowest scope that cannot leak.
- * ========================================================================= */
-
-/*
- * The shell's label column is a fixed 240px and the descriptions live in it,
- * so every description wrapped to roughly four words a line while ~390px of
- * the 672px control column sat empty. Letting the label column grow puts the
- * space where the text actually is.
- */
-body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-section-wrap {
-	grid-template-columns: minmax(240px, 22rem) 1fr;
-}
-
-/*
- * One control width for every text-like field, so a number box, a text box and
- * a dropdown line up down the page instead of each being its own size.
- */
-body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-section-options input[type="text"],
-body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-section-options input[type="number"],
-body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-section-options input[type="url"],
-body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-section-options select {
-	width: 100%;
-	max-width: 22rem;
-	min-height: 36px;
-	box-sizing: border-box;
-}
-
-/* A number field does not need to be as wide as a sentence. */
-body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-section-options input[type="number"] {
-	max-width: 8rem;
+.wbcom-settings-body .wbcom-faq__item > ol li {
+	margin: 2px 0;
 }
 
 /*
@@ -517,11 +398,4 @@ body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-se
 	color: #646970;
 	font-size: 12px;
 	font-family: Menlo, Consolas, monospace;
-}
-
-@media screen and (max-width: 782px) {
-
-	body.wb-plugins_page_infinite-loader-for-woocommerce-settings .wbcom-settings-section-wrap {
-		grid-template-columns: 1fr;
-	}
 }

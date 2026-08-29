@@ -49,27 +49,14 @@
 			$('.infinite_loader_image_wrapper').toggleClass('is-hidden', !$(this).is(':checked'));
 		});
 
-		$(document).on('click',"#infinite-loader-default-color", function () {
-			document.getElementById("infinite_loader_default_bg_color").value = "#1d76da";
-		});
+		/*
+		 * The colour "Default" buttons are handled generically in admin.js: one
+		 * delegated .infinite-loader-color-reset handler reads each native colour
+		 * input's data-default and repaints the preview. That replaced five
+		 * id-specific handlers here, and let the Load More and Load Previous forms
+		 * carry distinct ids without a per-id copy each.
+		 */
 
-		$(document).on('click',"#infinite-loader-default-bg-color-mouse-hover", function () {
-			document.getElementById("infinite_loader_default_bg_color_mouse_hover").value = "#0e4da0";
-		});
-
-		$(document).on('click',"#infinite-loader-default-border-color", function () {
-			document.getElementById("infinite_loader_default_border_color").value = "#1d76da";
-		});
-
-		$(document).on('click',"#infinite-loader-default-text-color", function () {
-			document.getElementById("infinite_loader_default_text_color").value = "#ffffff";
-		});
-
-		$(document).on('click',"#infinite-loader-default-text-color-mouse-hover", function () {
-			document.getElementById("infinite_loader_default_text_color_mouse_hover").value = "#ffffff";
-		});
-
-		
 		var infinite_select_icon_for = $('.infinite_display_icon_popup');
 		$(document).on('click', '.infinite_loader_select_fontawesome .infinite_select_icon',function(event) {
             event.preventDefault();
@@ -137,22 +124,8 @@
             event.stopPropagation();
         });
 
-		$(function(){
-			
-			const accordionElements = document.getElementsByClassName('wbcom-faq-accordion');
-
-			for (let i = 0; i < accordionElements.length; i++) {
-				accordionElements[i].onclick = function () {
-					this.classList.toggle('active');
-					const panel = this.nextElementSibling;
-
-					if (panel.style.maxHeight) {
-						panel.style.maxHeight = null;
-					} else {
-						panel.style.maxHeight = panel.scrollHeight + 'px';
-					}
-				};
-			}
-		})
+		// The FAQ tab is native <details>/<summary> now, so it opens and closes
+		// on its own - no accordion script, and it stays keyboard-accessible
+		// without one.
 	});
 })( jQuery );
