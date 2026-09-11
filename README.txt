@@ -5,7 +5,7 @@ Tags: Woocommerce
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,12 @@ This section describes how to install the plugin and get it working.
 Woocommerce
 
 == Changelog ==
+= 1.3.2 - September 2026 =
+
+* Improve  - Admin rebuilt on the shared Wbcom settings shell.
+* Fix      - Black colour defaults corrected and a license-helper PHP warning removed.
+* Dev      - Removed the WPPB loader (hooks register directly), trimmed over-built security on the read-only load-more endpoint, and cleared dead code.
+
 = 1.3.1 =
 * Fix      - The admin icon picker ("Choose icon" on General Settings) showed blank squares because no icon font loaded in wp-admin. It now loads the same Font Awesome the storefront uses, so the grid shows the icons you can pick.
 * Improve  - The "Settings saved" confirmation on the settings screen matches the admin design and sits at the top of the page, through the shared Wbcom admin shell.
