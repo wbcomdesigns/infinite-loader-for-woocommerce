@@ -83,36 +83,33 @@ infinite-loader-for-woocommerce/
 
 ## Hooks and Filters
 
-### Actions
+### JavaScript Events
 
-#### Frontend Actions
-```php
-// Triggered when AJAX loading starts
-do_action('infinite_loader_product_start');
+The plugin does not fire any PHP `do_action` hooks on the frontend. All frontend
+extension points are jQuery events fired on `document` by
+`public/js/infinite_loader_products.js`. Listen for them with `$(document).on(...)`.
 
-// Triggered when loading previous products
-do_action('infinite_loader_product_start_prev');
-
-// Triggered when loading next products
-do_action('infinite_loader_product_start_next');
-
-// Triggered after products are loaded
-do_action('infinite_loader_ajax_load_products');
-
-// Triggered after all AJAX operations complete
-do_action('infinite_loader_ajax_btn_end');
-```
-
-#### JavaScript Events
 ```javascript
-// Before products load
-$(document).trigger('infinite_loader_product_start');
+// AJAX loading is starting.
+$(document).on('infinite_loader_product_start', function () { /* ... */ });
 
-// After products load
-$(document).trigger('infinite_loader_products_loaded');
+// Loading the previous page (Previous button / prepend).
+$(document).on('infinite_loader_product_start_prev', function () { /* ... */ });
 
-// When style is set
-$(document).trigger('infinite_loader_after_style_set');
+// Loading the next page (scroll / Load More / pagination).
+$(document).on('infinite_loader_product_start_next', function () { /* ... */ });
+
+// A batch of products has been requested (fired alongside the button-end event).
+$(document).on('infinite_loader_ajax_load_products', function () { /* ... */ });
+
+// A load cycle's button handling has finished.
+$(document).on('infinite_loader_ajax_btn_end', function () { /* ... */ });
+
+// New products are in the DOM - the event to reinitialise your own features.
+$(document).on('infinite_loader_products_loaded', function () { /* ... */ });
+
+// The plugin has (re)applied its inline styles.
+$(document).on('infinite_loader_after_style_set', function () { /* ... */ });
 ```
 
 ### Filters
@@ -122,7 +119,7 @@ $(document).trigger('infinite_loader_after_style_set');
 ```php
 // How close to the end of the product list infinite scroll starts loading,
 // in pixels. Default 300. Raise it to prefetch earlier, lower it to load
-// later. Before 1.2.4 there was no distance check at all and the whole
+// later. Before 1.3.0 there was no distance check at all and the whole
 // catalogue loaded from the first scroll event.
 add_filter( 'infinite_loader_scroll_threshold', function () {
     return 800;
@@ -130,7 +127,7 @@ add_filter( 'infinite_loader_scroll_threshold', function () {
 
 // Answer a load-more request with the product grid alone (default), or return
 // false to render the full archive and let the script scrape it, as versions
-// before 1.2.4 did.
+// before 1.3.0 did.
 //
 // Only worth turning off for a theme that builds its shop loop somewhere
 // other than the standard WooCommerce loop templates, where the appended
@@ -154,34 +151,90 @@ add_filter('infinite_loader_item_selector', function($selector) {
 add_filter('infinite_loader_pagination_selector', function($selector) {
     return 'nav.woocommerce-pagination, .custom-pagination';
 });
+
+// Customize the "next page" link selector (default 'a.next.page-numbers')
+add_filter('infinite_loader_next_page_selector', function($selector) {
+    return 'a.next.page-numbers, .my-next-link';
+});
+
+// Customize the "previous page" link selector (default 'a.prev.page-numbers')
+add_filter('infinite_loader_prev_page_selector', function($selector) {
+    return 'a.prev.page-numbers, .my-prev-link';
+});
 ```
 
 #### Style Filters
 ```php
-// Modify load more button style
+// Modify Load More button inline style (2 args: style string, settings array)
 add_filter('infinite_loader_for_woocommerce_load_more_button_style', function($style, $settings) {
     $style .= 'text-transform: uppercase;';
     return $style;
 }, 10, 2);
 
-// Modify button hover CSS
+// Modify Previous button inline style (2 args: style string, settings array)
+add_filter('infinite_loader_for_woocommerce_load_previous_button_style', function($style, $settings) {
+    $style .= 'text-transform: uppercase;';
+    return $style;
+}, 10, 2);
+
+// Modify Load More button hover CSS (injected in wp_head)
 add_filter('infinite_loader_lm_btn_hover_css', function($css) {
     $css .= '.infinite_button:hover { transform: scale(1.05); }';
+    return $css;
+});
+
+// Modify Previous button hover CSS (injected in wp_head)
+add_filter('infinite_loader_previous_btn_hover_css', function($css) {
+    $css .= '.infinite_previous_button:hover { transform: scale(1.05); }';
     return $css;
 });
 ```
 
 #### Data Filters
 ```php
-// Modify JavaScript data
+// Modify the whole localized JavaScript config object
 add_filter('infinite_loader_js_data', function($data) {
     $data['custom_param'] = 'value';
     return $data;
 });
 
-// Customize products per page
+// Modify the before/after-update JS snippets passed to the script
+// (array with 'before_update' and 'after_update' keys)
+add_filter('infinite_loader_js_function', function($js) {
+    $js['after_update'] = 'console.log("products updated");';
+    return $js;
+});
+
+// Customize products per page (also clamped to 1-100 by the plugin)
 add_filter('infinite_loader_products_per_page', function($per_page) {
-    return is_mobile() ? 10 : 20;
+    return wp_is_mobile() ? 10 : 20;
+});
+```
+
+#### Asset Loading Filter
+```php
+// Decide whether the plugin's CSS/JS load on the current request. By default
+// they load on shop / product-category / product-tag / product-taxonomy
+// archives only. Return true to force-load elsewhere, false to suppress.
+add_filter('infinite_loader_should_load_assets', function($should_load) {
+    return $should_load;
+});
+```
+
+#### Loading Icon Filter
+```php
+// Replace the loading-icon HTML fragment shown while the next page is fetched.
+add_filter('wbcom_infinite_loader_image', function($icon_html) {
+    return '<div class="infinite_loader_products_loading"><span class="my-spinner"></span></div>';
+});
+```
+
+#### Admin Filter
+```php
+// Add or reorder groups in the plugin's settings navigation (shared Wbcom
+// settings shell). Receives and returns the nav-groups array.
+add_filter('infinite_loader_settings_nav_groups', function($groups) {
+    return $groups;
 });
 ```
 
@@ -209,8 +262,7 @@ infinite_loader_update_lazyload();
 ### Configuration Object
 ```javascript
 infinite_loader_product_data = {
-    ajax_url: '',           // WordPress AJAX URL
-    ajax_nonce: '',         // Security nonce
+    ajax_url: '',           // WordPress admin-ajax URL (present but unused by the loader)
     type: '',               // Loading type
     products: '',           // Products selector
     item: '',               // Item selector
@@ -242,41 +294,62 @@ $(document).on('infinite_loader_product_start', function() {
 
 ## AJAX Implementation
 
-### Request Flow
+The next-page request is a plain **GET to the archive URL** with a single
+constant marker, `infinite_loader_ajax=1`. There is no nonce: the request only
+reads a public shop archive and changes nothing, and a per-user token in the URL
+would make every request a cache miss (Varnish / WP Rocket / Cloudflare could no
+longer serve the shop). See [Security Considerations](#security-considerations).
 
-1. **Frontend Request**
+1. **Frontend Request** (`public/js/infinite_loader_products.js`)
 ```javascript
 $.ajax({
-    url: next_page,
+    method: 'GET',
+    url: next_page,               // the WooCommerce archive page URL, e.g. /shop/page/2/
     data: {
-        'infinite_loader_ajax': 1,
-        'nonce': infinite_loader_product_data.ajax_nonce
+        'infinite_loader_ajax': 1 // constant marker - keeps the response cacheable
     },
-    beforeSend: function(xhr) {
-        xhr.setRequestHeader('X-WP-Nonce', nonce);
+    success: function (data) {
+        // The script keeps only the products, result count and pagination
+        // out of the returned markup and discards the rest.
     }
 });
 ```
 
-2. **Server Processing**
-```php
-// Hook into template_redirect
-add_action('template_redirect', 'handle_infinite_loader_ajax');
+2. **Server Processing** (`Infinite_Loader_For_Woocommerce_Admin::handle_infinite_loader_ajax`)
 
-function handle_infinite_loader_ajax() {
-    if (!isset($_REQUEST['infinite_loader_ajax'])) {
+The handler is registered by the main class on `template_redirect` and lives on
+the **Admin** class, not the Public class:
+
+```php
+// includes/class-infinite-loader-for-woocommerce.php
+add_action( 'template_redirect', array( $plugin_admin, 'handle_infinite_loader_ajax' ) );
+```
+
+```php
+// admin/class-infinite-loader-for-woocommerce-admin.php
+public function handle_infinite_loader_ajax() {
+    // Only act on our own marked request.
+    if ( ! isset( $_REQUEST['infinite_loader_ajax'] ) ) {
         return;
     }
-    
-    // Verify nonce
-    if (!wp_verify_nonce($_REQUEST['nonce'], 'infinite_loader_ajax_nonce')) {
-        wp_die('Security check failed');
+
+    // Read-only public request - no nonce, by design (see Security Considerations).
+    header( 'X-Content-Type-Options: nosniff' );
+    header( 'X-Frame-Options: SAMEORIGIN' );
+    header( 'X-Robots-Tag: noindex, nofollow' );
+
+    // Render just the product grid (filterable), then exit.
+    if ( ! apply_filters( 'infinite_loader_render_products_only', true ) ) {
+        return; // fall back to the full themed archive render
     }
-    
-    // Let WordPress render the page normally
-    // JavaScript will parse the response
+
+    $this->render_products_only();
 }
 ```
+
+By default the handler renders the **product grid alone** - result count,
+product loop, pagination - built from the same loop templates the archive uses,
+so appended products match those already on screen, and then `exit`s.
 
 ### Response Handling
 
@@ -303,35 +376,6 @@ function processAjaxResponse(data, next_page, replace) {
 ```
 
 ## Customization Guide
-
-### Adding Custom Loading Types
-
-```php
-// Add new loading type option
-add_filter('infinite_loader_loading_types', function($types) {
-    $types['custom-type'] = __('Custom Loading', 'text-domain');
-    return $types;
-});
-
-// Handle custom type in JavaScript
-add_filter('infinite_loader_js_data', function($data) {
-    if ($data['type'] === 'custom-type') {
-        $data['custom_behavior'] = true;
-    }
-    return $data;
-});
-```
-
-### Custom Button Templates
-
-```php
-// Override button HTML
-add_filter('infinite_loader_load_more_button_html', function($html) {
-    return '<div class="custom-button-wrapper">
-        <button class="custom-load-more">Load More</button>
-    </div>';
-});
-```
 
 ### Integration with Other Plugins
 
@@ -369,20 +413,25 @@ add_action('init', 'my_theme_infinite_loader_selectors');
 
 ## Security Considerations
 
-### Nonce Verification
-```php
-// Always verify nonces in AJAX handlers
-if (!wp_verify_nonce($_REQUEST['nonce'], 'infinite_loader_ajax_nonce')) {
-    wp_die('Security check failed', 403);
-}
-```
+### Why there is no nonce (by design)
 
-### Input Sanitization
-```php
-// Sanitize all inputs
-$page = isset($_GET['page']) ? absint($_GET['page']) : 1;
-$per_page = isset($_GET['per_page']) ? absint($_GET['per_page']) : 12;
-```
+The next-page request is a **read-only GET of a public shop archive**. It creates
+nothing, updates nothing, and returns only markup any visitor could already load
+by opening the same archive URL in a browser. A nonce protects against CSRF on
+*state-changing* requests; there is no state to change here, so it protects
+nothing.
+
+There is a positive reason to leave it out, too: a nonce is a per-user value, so
+putting one in the URL makes every request unique and defeats full-page caches -
+Varnish, WP Rocket, Cloudflare and the like would never serve the shop archive
+again. The marker `infinite_loader_ajax=1` is a constant, so cached responses
+still work. The per-visitor nonce was removed in 1.3.0 for exactly this reason.
+
+The handler still sets defensive response headers
+(`X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`,
+`X-Robots-Tag: noindex, nofollow`) and validates the target URL client-side
+before requesting (see below). It does **not** call `wp_verify_nonce` /
+`check_ajax_referer`.
 
 ### Output Escaping
 ```php
@@ -404,6 +453,32 @@ function is_valid_url(url) {
     }
 }
 ```
+
+## Licensing & Updates
+
+When the `edd-license/` directory is present, the plugin wires itself to
+[EDD Software Licensing](https://easydigitaldownloads.com/downloads/software-licensing/)
+for automatic updates from `https://wbcomdesigns.com/`. If the directory is
+absent (for example a wordpress.org build), none of this loads and the plugin
+runs unlicensed.
+
+**Where the key is entered:** the license row renders on the shared **WB Plugins
+license screen** (`admin.php?page=wbcom-license-page`) via the shared
+`wbcom_add_plugin_license_code` action, alongside every other Wbcom plugin's key.
+The site owner pastes the key, clicks **Activate**, and can later **Deactivate**.
+
+**What is stored (options table):**
+
+| Option | Holds |
+|---|---|
+| `edd_wbcom_infinite_loader_license_key` | The license key string. |
+| `edd_wbcom_infinite_loader_license_status` | Activation status (`valid`, `expired`, `invalid`, …). |
+
+The last successful license check is cached in the transient
+`edd_wbcom_infinite_loader_license_key_data` (12 hours). Entering a new key
+clears the stored status so it must be re-activated. Activation and deactivation
+requests to the store are `edd_action=activate_license` / `deactivate_license`;
+update checks use `edd_action=get_version`.
 
 ## Performance Optimization
 

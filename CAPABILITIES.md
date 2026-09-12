@@ -1,6 +1,6 @@
 # Infinite Loader for WooCommerce — Capabilities
 
-**Slug:** `infinite-loader-for-woocommerce` · **Version:** 1.3.1 · **Requires:** WordPress 6.5+, PHP 8.0+, WooCommerce 3.0+ · **HPOS:** compatible · **Companion Pro/Free pair:** none
+**Slug:** `infinite-loader-for-woocommerce` · **Version:** 1.3.2 · **Requires:** WordPress 6.5+, PHP 8.0+, WooCommerce 3.0+ · **HPOS:** compatible · **Companion Pro/Free pair:** none
 
 ## What it does
 
@@ -52,9 +52,9 @@ WooCommerce archives only — `is_shop()`, `is_product_category()`, `is_product_
 | `infinite_loader_admin_button_option` | Load More button text / colours / spacing / border / radius. |
 | `infinite_loader_admin_previous_button_option` | Previous button styling (same shape). |
 | `infinite_loader_admin_css_js_option` | Custom CSS, before/after-update JS. |
-| `infinite_loader_license_key`, `infinite_loader_license_status` | EDD Software Licensing (optional). |
+| `edd_wbcom_infinite_loader_license_key`, `edd_wbcom_infinite_loader_license_status` | EDD Software Licensing (optional). |
 
-Transients: `infinite_loader_rate_<md5(ip)>` (rate-limit counter, 60s), `infinite_loader_license_data` (license cache). `uninstall.php` removes all of the above (single-site and, via `get_sites()`, multisite).
+Transients: `edd_wbcom_infinite_loader_license_key_data` (license-check cache, 12h). `uninstall.php` removes the four settings option arrays on single-site and, via `get_sites()`, multisite. (There is no rate-limiting transient - the rate limiter was removed in 1.3.2. Note: `uninstall.php` still targets old license option keys `infinite_loader_license_key/_status`, which do not match the `edd_wbcom_*` keys the license code actually writes, so license options are not currently cleaned up on uninstall.)
 
 ## Bundled icon assets
 
