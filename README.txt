@@ -5,7 +5,7 @@ Tags: Woocommerce
 Requires at least: 6.5
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,12 @@ This section describes how to install the plugin and get it working.
 Woocommerce
 
 == Changelog ==
+= 1.3.3 - September 2026 =
+
+* Fix      - License options are now removed on uninstall (they were saved under a different key and left behind).
+* Improve  - Admin settings radio options no longer wrap mid-label and stack cleanly on phones.
+* Dev      - Corrected the developer/FAQ docs (removed references to a security model that was intentionally removed), refreshed the translation template, and removed dead load-more JS.
+
 = 1.3.2 - September 2026 =
 
 * Improve  - Admin rebuilt on the shared Wbcom settings shell.
