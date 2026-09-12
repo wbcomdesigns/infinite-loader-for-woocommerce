@@ -22,3 +22,8 @@
 /developer-guide.md
 /faq-guide.md
 /user-guide.md
+# Internal dev/QA metadata - never ships to customers.
+/CAPABILITIES.md
+/docs
+/audit
+/.contract-audit-baseline.json
