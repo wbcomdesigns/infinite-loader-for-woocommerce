@@ -52,11 +52,11 @@ if ( ! is_multisite() ) {
 	delete_option( 'infinite_loader_admin_button_option' );
 	delete_option( 'infinite_loader_admin_previous_button_option' );
 	delete_option( 'infinite_loader_admin_css_js_option' );
-	delete_option( 'infinite_loader_license_key' );
-	delete_option( 'infinite_loader_license_status' );
+	delete_option( 'edd_wbcom_infinite_loader_license_key' );
+	delete_option( 'edd_wbcom_infinite_loader_license_status' );
 
 	// Delete transients.
-	delete_transient( 'infinite_loader_license_data' );
+	delete_transient( 'edd_wbcom_infinite_loader_license_key_data' );
 
 	// Clear any cached data.
 	wp_cache_flush();
@@ -79,11 +79,11 @@ if ( ! is_multisite() ) {
 		delete_option( 'infinite_loader_admin_button_option' );
 		delete_option( 'infinite_loader_admin_previous_button_option' );
 		delete_option( 'infinite_loader_admin_css_js_option' );
-		delete_option( 'infinite_loader_license_key' );
-		delete_option( 'infinite_loader_license_status' );
+		delete_option( 'edd_wbcom_infinite_loader_license_key' );
+		delete_option( 'edd_wbcom_infinite_loader_license_status' );
 
 		// Delete transients.
-		delete_transient( 'infinite_loader_license_data' );
+		delete_transient( 'edd_wbcom_infinite_loader_license_key_data' );
 	}
 
 	switch_to_blog( $infinite_loader_original_blog_id );
