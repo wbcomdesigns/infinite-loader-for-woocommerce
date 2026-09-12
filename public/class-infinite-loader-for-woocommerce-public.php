@@ -182,22 +182,13 @@ class Infinite_Loader_For_Woocommerce_Public {
 			);
 
 			// Add support for WooCommerce blocks if active.
-			if ( $this->is_woocommerce_blocks_active() ) {
+			if ( class_exists( 'Automattic\WooCommerce\Blocks\Package' ) ) {
 				$this->selectors['products'] .= ', .wc-block-grid__products';
 				$this->selectors['item']     .= ', .wc-block-grid__product';
 			}
 		}
 
 		return $this->selectors;
-	}
-
-	/**
-	 * Check if WooCommerce blocks is active
-	 *
-	 * @return bool
-	 */
-	private function is_woocommerce_blocks_active() {
-		return class_exists( 'Automattic\WooCommerce\Blocks\Package' );
 	}
 
 	/**
@@ -335,7 +326,6 @@ class Infinite_Loader_For_Woocommerce_Public {
 			 * @param int $threshold Pixels. Default 300.
 			 */
 			'scroll_threshold' => (int) apply_filters( 'infinite_loader_scroll_threshold', 300 ),
-			'is_mobile'      => wp_is_mobile(),
 			'debug_mode'     => defined( 'WP_DEBUG' ) && WP_DEBUG,
 		);
 
@@ -485,41 +475,40 @@ class Infinite_Loader_For_Woocommerce_Public {
 	 * Add load more button Hover css on front-end.
 	 */
 	public function infinite_loader_add_load_more_hover_css() {
-		if ( ! $this->infinite_loader_should_load_assets() ) {
-			return;
-		}
-
-		$button_setting   = $this->get_cached_option( 'infinite_loader_admin_button_option' );
-		$bg_hover_color   = isset( $button_setting['background_color_mouse_hover'] ) ? $button_setting['background_color_mouse_hover'] : '#0e4da0';
-		$hover_text_color = isset( $button_setting['text_color_mouse_hover'] ) ? $button_setting['text_color_mouse_hover'] : '#ffffff';
-
-		// Sanitize colors.
-		$bg_hover_color   = $this->sanitize_hex_color( $bg_hover_color, '#0e4da0' );
-		$hover_text_color = $this->sanitize_hex_color( $hover_text_color, '#ffffff' );
-
-		$style = '
-		.infinite_loader_btn_setting .infinite_button:hover {
-			background-color: ' . esc_attr( $bg_hover_color ) . ' !important;
-			color: ' . esc_attr( $hover_text_color ) . ' !important;
-		}';
-
-		$style = apply_filters( 'infinite_loader_lm_btn_hover_css', $style );
-
-		if ( ! empty( $style ) ) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_strip_all_tags is used for CSS sanitization.
-			echo '<style type="text/css" id="infinite-loader-hover-css">' . wp_strip_all_tags( $style ) . '</style>';
-		}
+		$this->output_hover_css(
+			'infinite_loader_admin_button_option',
+			'.infinite_loader_btn_setting .infinite_button:hover',
+			'infinite_loader_lm_btn_hover_css',
+			'infinite-loader-hover-css'
+		);
 	}
 
 	/**
 	 * Add Previous button Hover css on front-end.
 	 */
 	public function infinite_loader_add_previous_hover_css() {
+		$this->output_hover_css(
+			'infinite_loader_admin_previous_button_option',
+			'.infinite_loader_prev_btn_setting .infinite_button:hover',
+			'infinite_loader_previous_btn_hover_css',
+			'infinite-loader-prev-hover-css'
+		);
+	}
+
+	/**
+	 * Output a button hover-color style block in the document head.
+	 *
+	 * @param string $option_key Settings option holding the hover colors.
+	 * @param string $selector   CSS selector for the button hover state.
+	 * @param string $filter     Filter applied to the generated style.
+	 * @param string $style_id   ID for the emitted <style> element.
+	 */
+	private function output_hover_css( $option_key, $selector, $filter, $style_id ) {
 		if ( ! $this->infinite_loader_should_load_assets() ) {
 			return;
 		}
 
-		$button_setting   = $this->get_cached_option( 'infinite_loader_admin_previous_button_option' );
+		$button_setting   = $this->get_cached_option( $option_key );
 		$bg_hover_color   = isset( $button_setting['background_color_mouse_hover'] ) ? $button_setting['background_color_mouse_hover'] : '#0e4da0';
 		$hover_text_color = isset( $button_setting['text_color_mouse_hover'] ) ? $button_setting['text_color_mouse_hover'] : '#ffffff';
 
@@ -528,16 +517,16 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$hover_text_color = $this->sanitize_hex_color( $hover_text_color, '#ffffff' );
 
 		$style = '
-		.infinite_loader_prev_btn_setting .infinite_button:hover {
+		' . $selector . ' {
 			background-color: ' . esc_attr( $bg_hover_color ) . ' !important;
 			color: ' . esc_attr( $hover_text_color ) . ' !important;
 		}';
 
-		$style = apply_filters( 'infinite_loader_previous_btn_hover_css', $style );
+		$style = apply_filters( $filter, $style );
 
 		if ( ! empty( $style ) ) {
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_strip_all_tags is used for CSS sanitization.
-			echo '<style type="text/css" id="infinite-loader-prev-hover-css">' . wp_strip_all_tags( $style ) . '</style>';
+			echo '<style type="text/css" id="' . esc_attr( $style_id ) . '">' . wp_strip_all_tags( $style ) . '</style>';
 		}
 	}
 
