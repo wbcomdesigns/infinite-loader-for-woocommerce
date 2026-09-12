@@ -3,7 +3,7 @@ Contributors: vapvarun,wbcomdesigns
 Donate link: https://wbcomdesigns.com/
 Tags: Woocommerce
 Requires at least: 6.5
-Tested up to: 7.0
+Tested up to: 6.9
 Requires PHP: 8.0
 Stable tag: 1.3.2
 License: GPLv2 or later
@@ -14,6 +14,23 @@ Load your all WooCommerce products on single store page.
 == Description ==
 
 Infinite Loader for WooCommerce Plugin allows you to change the default product page pagination into Infinite Scroll or Ajax pagination with Lazy Load. When a user scrolls down to the bottom of the page, the next page loads automatically.
+
+The next-page request is a read-only GET of the public shop archive and carries no per-visitor nonce, so it stays compatible with full-page caches (WP Rocket, Varnish, Cloudflare).
+
+== Settings ==
+
+All settings live under **WB Plugins - Infinite Loader** in wp-admin (visible to users with the `manage_woocommerce` capability).
+
+* **Overview** - a read-only summary of how your shop currently loads products (loading style, products per load, whether the address bar updates, WooCommerce status).
+* **General** - choose the loading style (Infinite Scroll, Load More button, or AJAX pagination), set products per load (1-100), toggle Font Awesome icons, pick the loading icon and spin animation, and choose whether to update the address bar while browsing.
+* **Button Style** - text, colours (base and hover), font size, and per-side padding / margin / border / border-radius for the Load More button.
+* **Previous Button Style** - the same styling fields for the Previous button.
+* **JavaScript / CSS** - custom CSS and before/after-update JavaScript snippets.
+* **FAQ** - built-in help.
+
+A fresh activation defaults to the Load More button; sites that upgrade keep whatever they had saved.
+
+**Developers:** the plugin exposes filters for selectors, per-page count, button styles, the loading icon and asset loading (for example `infinite_loader_products_selector`, `infinite_loader_scroll_threshold`, `infinite_loader_render_products_only`, `infinite_loader_should_load_assets`), plus jQuery events such as `infinite_loader_products_loaded`. See `developer-guide.md` in the plugin source for the full list.
 
 == Installation ==
 

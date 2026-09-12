@@ -39,9 +39,9 @@ Yes, the plugin is free to use. We also offer a Pro version with additional feat
 ## Installation & Setup
 
 ### What are the requirements?
-- WordPress 5.0 or higher
+- WordPress 6.5 or higher
 - WooCommerce 3.0 or higher
-- PHP 7.2 or higher
+- PHP 8.0 or higher
 - Modern browser with JavaScript enabled
 
 ### Why isn't the plugin working after activation?
@@ -238,7 +238,7 @@ $(document).on('filter_ajax_complete', function() {
    - Configure CDN for static assets
 
 3. **Server Optimization**
-   - PHP 7.4+ recommended
+   - PHP 8.0+ required (8.1+ recommended)
    - Adequate memory limit (256MB+)
    - Enable OPcache
 
@@ -348,18 +348,24 @@ infinite_loader_product_data.javascript.after_update = `
 
 ### How does the AJAX loading work?
 1. User triggers load (scroll/click)
-2. JavaScript sends AJAX request with nonce
-3. WordPress processes request normally
-4. Plugin extracts product HTML from response
-5. JavaScript updates DOM with new products
+2. JavaScript sends a plain GET request for the next archive page (with the marker `infinite_loader_ajax=1`)
+3. WordPress renders just the product grid for that request
+4. Plugin extracts the products, result count and pagination from the response
+5. JavaScript updates the page with the new products
 
 ### Is the plugin secure?
-Yes, security measures include:
-- Nonce verification on all AJAX requests
-- Input sanitization and validation
-- Output escaping
-- Rate limiting to prevent abuse
+Yes. The relevant measures are:
+- Output escaping on everything the plugin prints
+- The custom CSS and before/after-update JavaScript you enter in settings are sanitized when saved
+- The next-page request validates the target URL before requesting it
+- Defensive response headers (`X-Content-Type-Options`, `X-Frame-Options`, `X-Robots-Tag`) on the load-more response
 - No direct database queries
+
+The next-page request is deliberately **nonce-free**. It only reads a public
+shop archive and changes nothing, so a nonce would protect nothing - and because
+a nonce is a per-visitor value, adding one to the URL would make every request a
+cache miss and stop page caches (WP Rocket, Varnish, Cloudflare) from serving
+your shop. The per-visitor nonce was removed in 1.3.0 for this reason.
 
 ### Can I use it with a headless setup?
 The plugin is designed for traditional WordPress setups. For headless applications, you'd need to:

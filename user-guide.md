@@ -28,9 +28,9 @@ Infinite Loader for WooCommerce enhances your online store's browsing experience
 ## Installation
 
 ### Requirements
-- WordPress 5.0 or higher
+- WordPress 6.5 or higher
 - WooCommerce 3.0 or higher
-- PHP 7.2 or higher
+- PHP 8.0 or higher
 
 ### Installation Steps
 
@@ -72,7 +72,7 @@ Infinite Loader for WooCommerce enhances your online store's browsing experience
    - Click "Save Changes"
    - Visit your shop page to see it in action!
 
-> **A fresh install already works.** From 1.2.4 a new activation defaults to
+> **A fresh install already works.** From 1.3.0 a new activation defaults to
 > the **Load More Button** rather than classic pagination, so the plugin does
 > something visible before you open its settings. Sites that upgrade keep
 > whatever they had saved - the default only applies where no choice was ever
