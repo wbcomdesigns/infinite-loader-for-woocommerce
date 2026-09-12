@@ -125,7 +125,7 @@ done
 while IFS= read -r leaked; do
 	echo "build-release: DEV FILE LEAKED INTO ZIP: $leaked" >&2
 	MISSING=1
-done < <( printf '%s\n' "$ZIP_CONTENTS" | grep -E "/(node_modules|\.git|bin|dist)/|/(CLAUDE\.md|package\.json|gruntfile\.js|\.distignore)$" || true )
+done < <( printf '%s\n' "$ZIP_CONTENTS" | grep -E "/(node_modules|\.git|bin|dist|docs|audit)/|/(CLAUDE\.md|CAPABILITIES\.md|package\.json|gruntfile\.js|\.distignore|\.contract-audit-baseline\.json)$" || true )
 
 if [ "$MISSING" -ne 0 ]; then
 	rm -f "$ZIP"
