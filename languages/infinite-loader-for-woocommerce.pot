@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Wbcom Designs – Infinite Loader for WooCommerce 1.2.4\n"
+"Project-Id-Version: Wbcom Designs – Infinite Loader for WooCommerce 1.3.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/infinite-loader-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-19T07:11:04+00:00\n"
+"POT-Creation-Date: 2026-09-12T05:35:57+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: infinite-loader-for-woocommerce\n"
@@ -43,534 +43,553 @@ msgstr ""
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:210
-#: admin/class-infinite-loader-for-woocommerce-admin.php:211
-#: admin/class-infinite-loader-for-woocommerce-admin.php:260
+#: admin/class-infinite-loader-for-woocommerce-admin.php:223
+#: admin/class-infinite-loader-for-woocommerce-admin.php:224
+#: admin/class-infinite-loader-for-woocommerce-admin.php:273
 msgid "Infinite Loader"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:212
+#: admin/class-infinite-loader-for-woocommerce-admin.php:225
 msgid "Load more and infinite scroll for WooCommerce"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:213
+#: admin/class-infinite-loader-for-woocommerce-admin.php:226
 msgid "Infinite Loader settings sections"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:214
+#: admin/class-infinite-loader-for-woocommerce-admin.php:227
 msgid "Pro"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:234
-#: admin/class-infinite-loader-for-woocommerce-admin.php:235
+#: admin/class-infinite-loader-for-woocommerce-admin.php:247
+#: admin/class-infinite-loader-for-woocommerce-admin.php:248
 #: lib/wbcom-settings/class-wbcom-settings-page.php:210
 msgid "WB Plugins"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:263
+#: admin/class-infinite-loader-for-woocommerce-admin.php:276
 msgid "Overview"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:267
+#: admin/class-infinite-loader-for-woocommerce-admin.php:280
 msgid "General"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:271
+#: admin/class-infinite-loader-for-woocommerce-admin.php:284
 msgid "Button Style"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:275
+#: admin/class-infinite-loader-for-woocommerce-admin.php:288
 msgid "Previous Button Style"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:279
+#: admin/class-infinite-loader-for-woocommerce-admin.php:292
 msgid "JavaScript/CSS"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:286
+#: admin/class-infinite-loader-for-woocommerce-admin.php:299
 msgid "Help"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:289
+#: admin/class-infinite-loader-for-woocommerce-admin.php:302
 msgid "FAQ"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:351
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:45
+#: admin/class-infinite-loader-for-woocommerce-admin.php:364
 msgid "Infinity Scroll"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:352
+#: admin/class-infinite-loader-for-woocommerce-admin.php:365
 msgid "Load More button"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:353
+#: admin/class-infinite-loader-for-woocommerce-admin.php:366
 msgid "AJAX pagination"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:357
+#: admin/class-infinite-loader-for-woocommerce-admin.php:370
 msgid "How your shop loads products"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:361
+#: admin/class-infinite-loader-for-woocommerce-admin.php:373
 msgid "Loading style"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:365
+#: admin/class-infinite-loader-for-woocommerce-admin.php:377
 msgid "Products per load"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:370
+#: admin/class-infinite-loader-for-woocommerce-admin.php:382
 msgid "Using the theme or WooCommerce default"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:375
+#: admin/class-infinite-loader-for-woocommerce-admin.php:387
 msgid "Address bar follows the shopper"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:379
+#: admin/class-infinite-loader-for-woocommerce-admin.php:391
 msgid "Yes - the Back button returns them where they were"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:380
+#: admin/class-infinite-loader-for-woocommerce-admin.php:392
 msgid "No"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:385
+#: admin/class-infinite-loader-for-woocommerce-admin.php:397
 #: infinite-loader-for-woocommerce.php:123
 msgid "WooCommerce"
 msgstr ""
 
 #. translators: %s: WooCommerce version.
-#: admin/class-infinite-loader-for-woocommerce-admin.php:390
+#: admin/class-infinite-loader-for-woocommerce-admin.php:402
 #, php-format
 msgid "%s active"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:391
+#: admin/class-infinite-loader-for-woocommerce-admin.php:403
 msgid "Not active"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:398
+#: admin/class-infinite-loader-for-woocommerce-admin.php:409
 msgid "Change how products load"
 msgstr ""
 
-#: admin/class-infinite-loader-for-woocommerce-admin.php:401
+#: admin/class-infinite-loader-for-woocommerce-admin.php:412
 msgid "View your shop"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:22
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:19
 msgid "Frequently Asked Questions"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:24
-msgid "Find answers to the most common questions about the Infinite Loader for WooCommerce plugin."
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:20
+msgid "Answers to the most common questions about Infinite Loader for WooCommerce."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:36
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:24
 msgid "Does this plugin require WooCommerce?"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:39
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:25
 msgid "Yes, this plugin requires WooCommerce to be installed and activated."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:49
-msgid "What is \"Products Loading Type\" ?"
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:29
+msgid "What is \"Products Loading Type\"?"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:52
-msgid "This setting allows you to choose how products are loaded on your shop page using ajax. You can select from:"
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:30
+msgid "This setting lets you choose how products load on your shop page using AJAX. You can select from:"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:54
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:32
 msgid "Load More Button: Users click a load more button to load more products."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:55
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:33
 msgid "Infinite Loading: Products automatically load as users scroll down."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:56
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:34
 msgid "Pagination: Products are split across multiple pages with navigation controls."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:67
-msgid "What does \"Prevent URL Update on Page Load\" mean?"
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:39
+msgid "What does \"Keep the address bar unchanged\" mean?"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:70
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:40
 msgid "Enabling this option stops the browser from changing the URL when new products are loaded dynamically. This is useful for maintaining clean URLs and avoiding unnecessary reloads."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:80
-msgid "How to add custom css?"
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:44
+msgid "How do I add custom CSS?"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:83
-msgid "Follow the below steps to apply custom css to the Load More/Load Previous Buttons :"
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:45
+msgid "Follow the steps below to apply custom CSS to the Load More / Load Previous buttons:"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:85
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:47
 msgid "Navigate to Plugin Settings > Button Style > Custom CSS Class."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:86
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:48
 msgid "Add a custom class for the button in the field provided."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:87
-msgid "Navigate to Plugin Settings > Javascript/CSS > Custom CSS."
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:49
+msgid "Navigate to Plugin Settings > JavaScript/CSS > Custom CSS."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:88
-msgid "Add your custom css in the field provided and save the changes."
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:50
+msgid "Add your custom CSS in the field provided and save the changes."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:90
-msgid "Note : Similarly you can add the custom css for the Load Previous Button."
+#: admin/partials/infinite-loader-for-woocommerce-faq-tab.php:52
+msgid "Note: You can add custom CSS for the Load Previous button in the same way."
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:24
 msgid "Button Style Settings"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:36
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:36
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:27
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:27
 msgid "Custom CSS Class"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:38
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:28
 msgid "Add a custom CSS class to apply additional styling to the Load More button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:47
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:47
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:33
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:33
 msgid "Button Preview"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:49
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:34
 msgid "Preview how the Load More button will appear with your current settings."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:60
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:41
 msgid "Load More Button Text"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:62
-msgid "Enter the text to display on the Load More button (e.g., “Load More”, “View More”)."
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:42
+msgid "Enter the text to display on the Load More button (e.g., \"Load More\", \"View More\")."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:65
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:43
 msgid "Load More"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:71
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:71
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:48
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:48
 msgid "Button Background Color"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:73
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:49
 msgid "Select the background color of the Load More button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:83
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:83
-msgid "Button Hover Background Color"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:85
-msgid "Choose the background color that appears when hovering over the button."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:95
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:95
-msgid "Button Border Color"
-msgstr ""
-
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:53
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:64
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:75
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:86
 #: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:97
-msgid "Set the border color of the Load More button."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:107
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:107
-msgid "Button Text Color"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:109
-msgid "Choose the text color for the Load More button."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:120
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:119
-msgid "Button Hover Text Color"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:122
-msgid "Set the text color when the button is hovered over."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:132
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:131
-msgid "Button Font Size"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:134
-msgid "Define the font size of the button text (in pixels)."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:144
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:142
-msgid "Button Padding"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:146
-msgid "Set the inner spacing of the button (Top, Right, Bottom, Left in pixels)."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:150
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:167
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:183
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:148
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:164
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:180
-msgid "Top"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:151
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:168
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:184
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:149
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:165
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:181
-msgid "Right"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:152
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:169
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:185
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:150
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:166
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:182
-msgid "Bottom"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:153
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:170
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:186
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:151
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:167
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:183
-msgid "Left"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:161
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:158
-msgid "Button Margin"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:163
-msgid "Set the outer spacing of the button (Top, Right, Bottom, Left in pixels)."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:177
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:174
-msgid "Button Border Width"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:179
-msgid "Specify the thickness of the button's border (in pixels)."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:193
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:190
-msgid "Button Border Radius"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:195
-msgid "Adjust the roundness of the button corners (in pixels)."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:199
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:204
-msgid "Top left"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:200
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:205
-msgid "Top right"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:201
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:206
-msgid "Bottom left"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:202
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:207
-msgid "Bottom right"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:39
-msgid "Custom CSS and Javascript Settings"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:51
-msgid "Custom CSS"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:53
-msgid "Add your custom CSS styles to customize the button appearance."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:62
-msgid "JavaScript Before Update"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:64
-msgid "Add custom JavaScript code that will run before the page updates."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:73
-msgid "JavaScript After Update"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:75
-msgid "Add custom JavaScript code that will run after the page updates."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:26
-msgid "General Settings"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:38
-msgid "Products Loading Type"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:40
-msgid "Select how products are displayed and loaded on your shop page."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:46
-msgid "Load More Button"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:47
-msgid "Pagination"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:54
-msgid "Products Per Page"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:55
-msgid "Specify the number of products to display per page."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:58
-msgid "Products per page"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:64
-msgid "Enable Font Awesome"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:66
-msgid "Enable the loading of Font Awesome icons within the plugin."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:83
-msgid "Loading Image"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:85
-msgid "Select the loading animation icon that appears while new products are being loaded."
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:93
-msgid "Font Awesome"
-msgstr ""
-
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:94
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:53
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:64
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:75
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:86
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:97
 msgid "Default"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:100
-msgid "Rotate image while loading"
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:59
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:59
+msgid "Button Hover Background Color"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:105
-msgid "Prevent URL Update on Page Load"
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:60
+msgid "Choose the background color that appears when hovering over the button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:106
-msgid "Enable this setting to prevent the page URL from changing when new products are loaded."
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:70
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:70
+msgid "Button Border Color"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:71
+msgid "Set the border color of the Load More button."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:81
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:81
+msgid "Button Text Color"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:82
+msgid "Choose the text color for the Load More button."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:92
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:92
+msgid "Button Hover Text Color"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:93
+msgid "Set the text color when the button is hovered over."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:102
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:102
+msgid "Button Font Size"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:103
+msgid "Define the font size of the button text (in pixels)."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:108
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:108
+msgid "Button Padding"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:109
+msgid "Set the inner spacing of the button (Top, Right, Bottom, Left in pixels)."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:111
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:122
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:133
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:111
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:122
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:133
+msgid "Top"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:112
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:123
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:134
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:112
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:123
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:134
+msgid "Right"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:113
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:124
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:135
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:113
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:124
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:135
+msgid "Bottom"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:114
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:125
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:136
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:114
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:125
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:136
+msgid "Left"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:119
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:119
+msgid "Button Margin"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:120
+msgid "Set the outer spacing of the button (Top, Right, Bottom, Left in pixels)."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:130
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:130
+msgid "Button Border Width"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:131
+msgid "Specify the thickness of the button's border (in pixels)."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:141
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:141
+msgid "Button Border Radius"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:142
+msgid "Adjust the roundness of the button corners (in pixels)."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:144
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:144
+msgid "Top left"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:145
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:145
+msgid "Top right"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:146
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:146
+msgid "Bottom left"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:147
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:147
+msgid "Bottom right"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-button-tab.php:152
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:152
+msgid "Set all to default"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:27
+msgid "Custom CSS and JavaScript"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:30
+msgid "Custom CSS"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:31
+msgid "Add your custom CSS styles to customize the button appearance."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:35
+msgid "JavaScript Before Update"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:36
+msgid "Add custom JavaScript code that will run before the page updates."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:40
+msgid "JavaScript After Update"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-css-js-tab.php:41
+msgid "Add custom JavaScript code that will run after the page updates."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:37
+msgid "General Settings"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:40
+msgid "Products Loading Type"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:41
+msgid "How shoppers move through the product list on your shop page."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:47
+msgid "Load More button - shoppers click to see more"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:50
+msgid "Infinite scroll - more products load automatically"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:53
+msgid "Pagination - numbered pages, no AJAX"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:59
+msgid "Products Per Page"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:60
+msgid "How many products load at a time. Between 1 and 100."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:76
+msgid "Enable Font Awesome"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:77
+msgid "Loads the bundled Font Awesome icons so you can pick a loading spinner below."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:92
+msgid "Loading Image"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:93
+msgid "The icon shown while more products are loading. Pick one, or keep the default spinner."
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:103
+msgid "Default spinner"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:112
+msgid "Choose icon"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:113
+msgid "Use default"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:121
+msgid "Spin the icon while loading"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:127
+msgid "Keep the address bar unchanged"
+msgstr ""
+
+#: admin/partials/infinite-loader-for-woocommerce-setting-general-tab.php:128
+msgid "By default the address bar follows the shopper as they load more, so the Back button returns them where they were. Turn this on to leave the address bar alone."
 msgstr ""
 
 #: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:24
 msgid "Previous Button Style Settings"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:38
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:28
 msgid "Add a custom CSS class to apply additional styling to the Load Previous button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:49
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:34
 msgid "Preview how the Load Previous button will appear with your current design settings."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:60
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:41
 msgid "Load Previous Button Text"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:62
-msgid "Enter the text you want to display on the Load Previous button (e.g., “Load Previous”, “View Earlier Products”)."
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:42
+msgid "Enter the text you want to display on the Load Previous button (e.g., \"Load Previous\", \"View Earlier Products\")."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:65
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:43
 msgid "Load Previous"
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:73
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:49
 msgid "Select the background color for the Load Previous button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:85
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:60
 msgid "Choose the background color that appears when hovering over the Load Previous button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:97
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:71
 msgid "Set the border color of the Load Previous button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:109
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:82
 msgid "Choose the text color for the Load Previous button."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:121
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:93
 msgid "Define the text color shown when the button is hovered over."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:133
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:103
 msgid "Set the font size of the Load Previous button text (in pixels)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:144
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:109
 msgid "Adjust the internal spacing of the button (Top, Right, Bottom, Left in pixels)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:160
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:120
 msgid "Set the external spacing around the button (Top, Right, Bottom, Left in pixels)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:176
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:131
 msgid "Specify the width of the button's border (in pixels)."
 msgstr ""
 
-#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:194
-msgid ""
-"Adjust the corner roundness of the button (in pixels).\n"
-""
+#: admin/partials/infinite-loader-for-woocommerce-setting-previous-button-tab.php:142
+msgid "Adjust the corner roundness of the button (in pixels)."
 msgstr ""
 
 #. translators: 1: plugin name, 2: opening link tag, 3: version number, 4: closing link tag.
@@ -667,13 +686,13 @@ msgid "Activate License"
 msgstr ""
 
 #. translators: %s: Expiration date.
-#: edd-license/edd-plugin-license.php:514
+#: edd-license/edd-plugin-license.php:519
 #, php-format
 msgid "Expires %s."
 msgstr ""
 
 #. translators: %1$s: Active site count, %2$s: License limit.
-#: edd-license/edd-plugin-license.php:518
+#: edd-license/edd-plugin-license.php:523
 #, php-format
 msgid "You have %1$s/%2$s-sites activated."
 msgstr ""
@@ -684,14 +703,6 @@ msgstr ""
 
 #: includes/class-infinite-loader-for-woocommerce-activator.php:42
 msgid "Plugin Activation Error"
-msgstr ""
-
-#: includes/class-infinite-loader-for-woocommerce.php:366
-msgid "Rate limit exceeded. Please try again later."
-msgstr ""
-
-#: includes/class-infinite-loader-for-woocommerce.php:367
-msgid "Too Many Requests"
 msgstr ""
 
 #: infinite-loader-for-woocommerce.php:122
@@ -748,32 +759,28 @@ msgstr ""
 msgid "Visit wbcomdesigns.com for more plugins and themes"
 msgstr ""
 
-#: public/class-infinite-loader-for-woocommerce-public.php:275
+#: public/class-infinite-loader-for-woocommerce-public.php:282
 msgid "Loading"
 msgstr ""
 
-#: public/class-infinite-loader-for-woocommerce-public.php:321
+#: public/class-infinite-loader-for-woocommerce-public.php:328
 msgid "Unable to load more products. Please try again."
 msgstr ""
 
-#: public/class-infinite-loader-for-woocommerce-public.php:322
+#: public/class-infinite-loader-for-woocommerce-public.php:329
 msgid "Retry"
 msgstr ""
 
-#: public/class-infinite-loader-for-woocommerce-public.php:323
+#: public/class-infinite-loader-for-woocommerce-public.php:330
 msgid "No more products"
 msgstr ""
 
-#: public/class-infinite-loader-for-woocommerce-public.php:324
-msgid "Loading..."
-msgstr ""
-
-#: public/class-infinite-loader-for-woocommerce-public.php:404
+#: public/class-infinite-loader-for-woocommerce-public.php:408
 msgid "Showing the single result"
 msgstr ""
 
 #. translators: %d: total results.
-#: public/class-infinite-loader-for-woocommerce-public.php:408
+#: public/class-infinite-loader-for-woocommerce-public.php:412
 #, php-format
 msgid "Showing %d result"
 msgid_plural "Showing %d results"
@@ -781,11 +788,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: 1: first result number, 2: last result number, 3: total results.
-#: public/class-infinite-loader-for-woocommerce-public.php:424
+#: public/class-infinite-loader-for-woocommerce-public.php:428
 #, php-format
 msgid "Showing %1$s&ndash;%2$s of %3$s results"
 msgstr ""
 
-#: public/class-infinite-loader-for-woocommerce-public.php:562
+#: public/class-infinite-loader-for-woocommerce-public.php:559
 msgid "Scroll to top"
 msgstr ""
