@@ -44,6 +44,30 @@ find . -name '*.php' -not -path './node_modules/*' -not -path './dist/*' -not -p
 	-print0 | xargs -0 -n1 -P4 php -l > /dev/null
 echo "build-release: PHP lint clean"
 
+# --- Gate 2b: coding standards, when a ruleset is committed. ----------------
+PHPCS_RULESET="$( ls phpcs.xml.dist phpcs.xml 2>/dev/null | head -1 || true )"
+if [ -n "$PHPCS_RULESET" ]; then
+	PHPCS_BIN=""
+	for c in "vendor/bin/phpcs" "$HOME/.composer/vendor/bin/phpcs" "$( command -v phpcs || true )"; do
+		[ -x "$c" ] && { PHPCS_BIN="$c"; break; }
+	done
+	if [ -n "$PHPCS_BIN" ]; then
+		"$PHPCS_BIN" -q --report=summary >/dev/null && echo "build-release: WPCS clean"
+	else
+		echo "build-release: phpcs not installed, coding-standard gate SKIPPED" >&2
+	fi
+fi
+
+# --- Gate 2c: cross-surface contracts. -------------------------------------
+# Catches key/hook mismatches; verified false positives (dynamically or
+# cron-fired hooks) are recorded in .contract-audit-baseline.json.
+AUDIT="$HOME/.claude/skills/wp-contract-audit/scripts/contract-audit.php"
+if [ -f "$AUDIT" ]; then
+	php "$AUDIT" . > /dev/null && echo "build-release: contract audit clean"
+else
+	echo "build-release: contract audit script not found, skipping" >&2
+fi
+
 # --- Gate 3: shipped bundles must match their sources. ----------------------
 bash bin/verify-build-freshness.sh
 
