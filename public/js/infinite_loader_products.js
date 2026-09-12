@@ -1,4 +1,4 @@
-var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_load_next_page, infinite_loader_ajax_instance = false, infinite_loader_update_lazyload, infinite_loader_init, infinite_loader_init_buttons;
+var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_load_next_page, infinite_loader_ajax_instance = false, infinite_loader_init, infinite_loader_init_buttons;
 
 (function ($) {
     'use strict';
@@ -196,27 +196,25 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 });
                 
                 // Pagination click handler
-                if (!infinite_loader_product_data.is_AAPF || typeof the_ajax_script === 'undefined') {
-                    $(document).on('click', infinite_loader_product_data.pagination + ' a', function (event) {
-                        event.preventDefault();
-                        var next_page = $(this).attr('href');
-                        
-                        if (!is_valid_url(next_page)) {
-                            return;
-                        }
-                        
-                        if (infinite_loader_product_data.update_url) {
-                            update_browser_history(next_page);
-                        }
-                        
-                        // 1 means "replace the grid", not "true". replace is a
-                        // three-state mode (1 replace, 2 prepend, falsy
-                        // append) that is compared with ===, so passing a
-                        // boolean here silently fell through to append and
-                        // paginating stacked page 2 underneath page 1.
-                        infinite_loader_load_next_page(1, next_page);
-                    });
-                }
+                $(document).on('click', infinite_loader_product_data.pagination + ' a', function (event) {
+                    event.preventDefault();
+                    var next_page = $(this).attr('href');
+
+                    if (!is_valid_url(next_page)) {
+                        return;
+                    }
+
+                    if (infinite_loader_product_data.update_url) {
+                        update_browser_history(next_page);
+                    }
+
+                    // 1 means "replace the grid", not "true". replace is a
+                    // three-state mode (1 replace, 2 prepend, falsy
+                    // append) that is compared with ===, so passing a
+                    // boolean here silently fell through to append and
+                    // paginating stacked page 2 underneath page 1.
+                    infinite_loader_load_next_page(1, next_page);
+                });
                 
                 // Integration events
                 $(document).on('infinite_loader_ajax_filter_start', function () {
@@ -449,11 +447,6 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                     return;
                 }
                 
-                // Process lazy loading attributes
-                if (should_lazy_load()) {
-                    prepare_lazy_load_content($data);
-                }
-                
                 // Mark first item with URL
                 mark_first_item($data, next_page);
                 
@@ -468,9 +461,6 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 } else {
                     domCache.products.append($products);
                 }
-                
-                // Update lazy loading
-                infinite_loader_update_lazyload();
                 
                 // Update result count
                 update_result_count($data, replace);
@@ -495,23 +485,6 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 console.error('Infinite Loader: Error processing response', e);
                 end_ajax_loading();
             }
-        }
-        
-        function should_lazy_load() {
-            var is_mobile = domCache.window.width() <= (infinite_loader_product_data.mobile_width || 768);
-            return (infinite_loader_product_data.lazy_load_m && is_mobile) || 
-                   (infinite_loader_product_data.lazy_load && !is_mobile);
-        }
-        
-        function prepare_lazy_load_content($data) {
-            $data.find(infinite_loader_product_data.products + ' .lazy,' + infinite_loader_product_data.item + ', .infinite_loader_extra_data')
-                .find('img').each(function () {
-                    var $img = $(this);
-                    $img.attr('data-src', $img.attr('src')).removeAttr('src');
-                    $img.attr('data-srcset', $img.attr('srcset')).removeAttr('srcset');
-                });
-            
-            $data.find(infinite_loader_product_data.item + ', .infinite_loader_extra_data').addClass('lazy');
         }
         
         function mark_first_item($data, next_page) {
@@ -669,13 +642,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 }
             }
             
-            var is_mobile = domCache.window.width() <= (infinite_loader_product_data.mobile_width || 768);
-            
-            if (infinite_loader_product_data.use_mobile && is_mobile) {
-                set_style(infinite_loader_product_data.mobile_type);
-            } else {
-                set_style(infinite_loader_product_data.type);
-            }
+            set_style(infinite_loader_product_data.type);
         }
         
         var test_prev_page_timeout = false;
@@ -811,52 +778,9 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
             }
         }
         
-        // Update lazy load function
-        infinite_loader_update_lazyload = function () {
-            if (typeof domCache.window.lazyLoadXT !== 'undefined' && should_lazy_load()) {
-                $(infinite_loader_product_data.products + ' .lazy').find('img').lazyLoadXT();
-                
-                domCache.products.find('.lazy').on('lazyshow', function () {
-                    var $this = $(this);
-                    $this.removeClass('lazy')
-                        .addClass('animated')
-                        .addClass(infinite_loader_product_data.LLanimation || 'fadeIn');
-                    
-                    if ($this.is('img')) {
-                        $this.attr('srcset', $this.data('srcset'));
-                    } else {
-                        $this.find('img').each(function () {
-                            $(this).attr('srcset', $(this).data('srcset'));
-                        });
-                    }
-                    
-                    if (!$this.is('.infinite_loader_extra_data')) {
-                        $this.next('.infinite_loader_extra_data')
-                            .removeClass('lazy')
-                            .addClass('animated')
-                            .addClass(infinite_loader_product_data.LLanimation || 'fadeIn');
-                    }
-                });
-            }
-        };
-        
         // Events
         $(document).on('infinite_loader_ajax_loader', function () {
             infinite_loader_update_state(true);
-            
-            if (typeof domCache.window.lazyLoadXT !== 'undefined' && should_lazy_load()) {
-                $(infinite_loader_product_data.item + ', .infinite_loader_extra_data')
-                    .addClass('lazy')
-                    .find('img')
-                    .each(function () {
-                        var $img = $(this);
-                        $img.attr('data-src', $img.attr('src')).removeAttr('src')
-                            .attr('data-srcset', $img.attr('srcset')).removeAttr('srcset');
-                    })
-                    .lazyLoadXT();
-            }
-            
-            infinite_loader_update_lazyload();
         });
         
         $(document).on('infinite_loader_after_style_set', function () {
