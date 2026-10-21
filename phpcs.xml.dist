@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<ruleset name="Infinite Loader for WooCommerce">
+	<description>Coding standards for Infinite Loader for WooCommerce (own source only).</description>
+
+	<!-- Our own source. Vendored and generated code is not ours to sniff. -->
+	<file>infinite-loader-for-woocommerce.php</file>
+	<file>uninstall.php</file>
+	<file>includes</file>
+	<file>admin</file>
+	<file>public</file>
+
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/lib/*</exclude-pattern>
+	<exclude-pattern>*/edd-license/*</exclude-pattern>
+	<exclude-pattern>*/dist/*</exclude-pattern>
+	<exclude-pattern>*/*.min.js</exclude-pattern>
+	<exclude-pattern>*/min/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="colors"/>
+	<arg value="ps"/>
+
+	<rule ref="WordPress"/>
+
+	<!-- Project context, so the standard stops guessing. -->
+	<config name="minimum_wp_version" value="6.5"/>
+	<config name="testVersion" value="8.1-"/>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="infinite-loader-for-woocommerce"/>
+				<element value="default"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- manage_woocommerce is a real WooCommerce capability; the sniff only knows core caps. -->
+	<rule ref="WordPress.WP.Capabilities">
+		<properties>
+			<property name="custom_capabilities" type="array">
+				<element value="manage_woocommerce"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- $default reads clearly for a fallback value in a parameter position on 8.1+.
+	     Low value, so it does not block the build. -->
+	<rule ref="Universal.NamingConventions.NoReservedKeywordParameterNames.defaultFound">
+		<severity>0</severity>
+	</rule>
+</ruleset>

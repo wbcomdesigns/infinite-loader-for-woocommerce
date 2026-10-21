@@ -93,7 +93,7 @@ $infinite_loader_image_row_class = $infinite_loader_font_awesome ? '' : ' is-hid
 		<p class="description"><?php esc_html_e( 'The icon shown while more products are loading. Pick one, or keep the default spinner.', 'infinite-loader-for-woocommerce' ); ?></p>
 		<div class="infinite_loader_select_fontawesome">
 			<?php
-			echo Infinite_Loader_For_Woocommerce_Admin::infinite_loader_icon_popup(); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo $this->infinite_loader_icon_popup(); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			?>
 			<span class="infinite_selected_icon" aria-hidden="true"><i class="fa <?php echo esc_attr( $infinite_loader_selected_icon ); ?>"></i></span>
 			<span class="infinite-loader-icon-name">

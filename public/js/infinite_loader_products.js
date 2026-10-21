@@ -54,8 +54,13 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
             infinite_count_end = 0,
             infinite_count_laststart = 0,
             infinite_count_lastend = 0,
-            infinite_count_text = '';
-            
+            infinite_count_text = '',
+            // Pages already appended/prepended this page-load, keyed by normalised
+            // URL. Nothing else de-duplicates: if a theme renders a second element
+            // matching the next-page selector, the fallback document-wide search can
+            // re-serve a URL already loaded and the same products get added twice.
+            infinite_loader_loaded_pages = {};
+
         // Initialize cache
         domCache.init();
         
@@ -249,7 +254,17 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                     end_ajax_loading();
                     return;
                 }
-                
+
+                // De-duplicate. replace === 1 is explicit pagination navigation
+                // (the shopper chose that page) so it may re-show a page; append
+                // (infinity scroll / load more) and prepend must never load a URL
+                // that is already on screen, regardless of the theme's markup.
+                var page_key = safe_encode_url(next_page);
+                if (1 !== replace && infinite_loader_loaded_pages[page_key]) {
+                    end_ajax_loading();
+                    return;
+                }
+
                 infinite_loader_ajax_instance = $.ajax({
                     method: "GET",
                     url: next_page,
@@ -266,6 +281,7 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                         xhr.setRequestHeader('X-Braapfdisable', '1');
                     },
                     success: function (data) {
+                        infinite_loader_loaded_pages[page_key] = true;
                         processAjaxResponse(data, next_page, replace);
                     },
                     error: function(xhr, status, error) {
@@ -459,7 +475,11 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                 } else if (replace === 2) {
                     handle_prepend_products($data);
                 } else {
-                    domCache.products.append($products);
+                    // Drop any product already on the page before appending, so no
+                    // theme markup or reload path can show the same product twice.
+                    var $incoming = $data.find(infinite_loader_product_data.products);
+                    infinite_loader_dedupe_items($incoming);
+                    domCache.products.append($incoming.html());
                 }
                 
                 // Update result count
@@ -501,8 +521,23 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
             }
         }
         
+        // Remove products already on the page (keyed by WooCommerce's post-<id>
+        // class) from an incoming set. Keying on the product id makes a repeat
+        // impossible whatever the theme's pagination markup does, which the
+        // URL-level guard alone cannot promise.
+        function infinite_loader_dedupe_items($container) {
+            $container.find(infinite_loader_product_data.item).each(function () {
+                var match = ( this.className || '' ).match(/\bpost-(\d+)\b/);
+                if (match && domCache.products.find('.post-' + match[1]).length) {
+                    $(this).remove();
+                }
+            });
+            return $container;
+        }
+
         function handle_prepend_products($data) {
             var $products = $data.find(infinite_loader_product_data.products);
+            infinite_loader_dedupe_items($products);
             $products.find(infinite_loader_product_data.item).addClass('infnite_loader_hidden');
             
             var count_images = $products.find('img').length;

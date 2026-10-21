@@ -76,13 +76,20 @@ rm -rf "$DIST"
 mkdir -p "$STAGE"
 
 EXCLUDES=()
-while IFS= read -r line; do
+# `|| [ -n "$line" ]` keeps the last entry when .distignore has no trailing
+# newline - otherwise read returns non-zero on it and the loop drops it.
+while IFS= read -r line || [ -n "$line" ]; do
 	[ -z "$line" ] && continue
 	case "$line" in \#*) continue ;; esac
 	EXCLUDES+=( --exclude "$line" )
 done < .distignore
 
 rsync -a "${EXCLUDES[@]}" ./ "$STAGE/"
+
+# Belt and suspenders: strip any stray dotfile or editor turd that rsync carried
+# in. Plugin Check rejects a zip that contains hidden files, and .distignore only
+# lists the ones we already know about.
+find "$STAGE" \( -name 'Thumbs.db' -o -name '.DS_Store' -o \( -name '.*' -type f \) \) -delete
 
 ( cd "$DIST" && zip -qr "$SLUG-$VERSION.zip" "$SLUG" )
 
@@ -125,7 +132,10 @@ done
 while IFS= read -r leaked; do
 	echo "build-release: DEV FILE LEAKED INTO ZIP: $leaked" >&2
 	MISSING=1
-done < <( printf '%s\n' "$ZIP_CONTENTS" | grep -E "/(node_modules|\.git|bin|dist|docs|audit)/|/(CLAUDE\.md|CAPABILITIES\.md|package\.json|gruntfile\.js|\.distignore|\.contract-audit-baseline\.json)$" || true )
+# The root composer vendor dir is anchored to the top level (^slug/vendor/) on
+# purpose: assets/vendor/ and admin/js/vendor/ are bundled RUNTIME code that must
+# ship, so a bare `vendor` match would wrongly strip them (the unanchored-vendor bug).
+done < <( printf '%s\n' "$ZIP_CONTENTS" | grep -E "/(node_modules|\.git|bin|dist|docs|audit)/|^[^/]+/vendor/|/(CLAUDE\.md|CAPABILITIES\.md|package\.json|gruntfile\.js|\.distignore|\.contract-audit-baseline\.json|composer\.json|composer\.lock|phpcs\.xml\.dist|phpstan\.neon\.dist)$|/\.[^/]+$" || true )
 
 if [ "$MISSING" -ne 0 ]; then
 	rm -f "$ZIP"

@@ -1,0 +1,56 @@
+{
+    "product": "Infinite Loader for WooCommerce",
+    "productType": "plugin",
+    "shortId": "wooinfiniteloader",
+    "sections": [
+        {
+            "slug": "getting-started",
+            "title": "Getting Started",
+            "pages": [
+                { "slug": "installation", "title": "Installation", "file": "getting-started/installation.md" },
+                { "slug": "quick-start", "title": "Quick Start", "file": "getting-started/quick-start.md" }
+            ]
+        },
+        {
+            "slug": "features",
+            "title": "Features",
+            "pages": [
+                { "slug": "overview", "title": "What It Does", "file": "features/overview.md" },
+                { "slug": "loading-modes", "title": "Loading Modes", "file": "features/loading-modes.md" }
+            ]
+        },
+        {
+            "slug": "usage",
+            "title": "Usage",
+            "pages": [
+                { "slug": "settings", "title": "Settings Reference", "file": "usage/settings.md" },
+                { "slug": "button-styling", "title": "Button Styling", "file": "usage/button-styling.md" },
+                { "slug": "custom-css-and-js", "title": "Custom CSS and JavaScript", "file": "usage/custom-css-and-js.md" }
+            ]
+        },
+        {
+            "slug": "developer-guide",
+            "title": "Developer Guide",
+            "pages": [
+                { "slug": "hooks-and-filters", "title": "Hooks and Filters", "file": "developer-guide/hooks-and-filters.md" },
+                { "slug": "javascript-events", "title": "JavaScript Events and API", "file": "developer-guide/javascript-events.md" },
+                { "slug": "ajax-and-rendering", "title": "How Loading Works", "file": "developer-guide/ajax-and-rendering.md" },
+                { "slug": "licensing-and-updates", "title": "Licensing and Updates", "file": "developer-guide/licensing-and-updates.md" }
+            ]
+        },
+        {
+            "slug": "faq",
+            "title": "FAQ",
+            "pages": [
+                { "slug": "faq", "title": "Frequently Asked Questions", "file": "faq/faq.md" }
+            ]
+        },
+        {
+            "slug": "troubleshooting",
+            "title": "Troubleshooting",
+            "pages": [
+                { "slug": "troubleshooting", "title": "Troubleshooting", "file": "troubleshooting/troubleshooting.md" }
+            ]
+        }
+    ]
+}
