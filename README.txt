@@ -3,8 +3,10 @@ Contributors: vapvarun,wbcomdesigns
 Donate link: https://wbcomdesigns.com/
 Tags: Woocommerce
 Requires at least: 6.5
-Tested up to: 6.9
-Requires PHP: 8.0
+Tested up to: 7.1
+Requires PHP: 8.1
+Tested with WooCommerce 11.1.1
+Tested with WooCommerce 11.1.1
 Stable tag: 1.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
