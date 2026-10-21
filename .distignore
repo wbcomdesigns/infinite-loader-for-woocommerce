@@ -27,3 +27,9 @@
 /docs
 /audit
 /.contract-audit-baseline.json
+# Dev tooling (static analysis + coding standards) - not part of the product.
+/composer.json
+/composer.lock
+/vendor
+/phpcs.xml.dist
+/phpstan.neon.dist

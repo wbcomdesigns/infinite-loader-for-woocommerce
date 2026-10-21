@@ -1,0 +1,23 @@
+includes:
+	- vendor/szepeviktor/phpstan-wordpress/extension.neon
+parameters:
+	level: 5
+	paths:
+		- infinite-loader-for-woocommerce.php
+		- uninstall.php
+		- includes
+		- admin
+		- public
+	# Scanned for symbols (the shared settings shell + EDD SDK define classes and
+	# functions our code calls) but not analysed - they are vendored, not our code.
+	scanDirectories:
+		- lib
+		- edd-license
+	excludePaths:
+		- admin/partials/*
+	bootstrapFiles:
+		- vendor/php-stubs/woocommerce-stubs/woocommerce-stubs.php
+		- bin/phpstan-bootstrap.php
+	# WordPress core PHPDoc overstates how certain its return types are; our
+	# defensive is_array()/is_string() guards are real runtime checks, not dead code.
+	treatPhpDocTypesAsCertain: false

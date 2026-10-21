@@ -174,11 +174,11 @@ class Infinite_Loader_For_Woocommerce_Public {
 	private function get_woocommerce_selectors() {
 		if ( null === $this->selectors ) {
 			$this->selectors = array(
-				'products'     => apply_filters( 'infinite_loader_products_selector', 'ul.products' ),
-				'item'         => apply_filters( 'infinite_loader_item_selector', 'li.product' ),
-				'pagination'   => apply_filters( 'infinite_loader_pagination_selector', 'nav.woocommerce-pagination' ),
-				'next_page'    => apply_filters( 'infinite_loader_next_page_selector', 'a.next.page-numbers' ),
-				'prev_page'    => apply_filters( 'infinite_loader_prev_page_selector', 'a.prev.page-numbers' ),
+				'products'   => apply_filters( 'infinite_loader_products_selector', 'ul.products' ),
+				'item'       => apply_filters( 'infinite_loader_item_selector', 'li.product' ),
+				'pagination' => apply_filters( 'infinite_loader_pagination_selector', 'nav.woocommerce-pagination' ),
+				'next_page'  => apply_filters( 'infinite_loader_next_page_selector', 'a.next.page-numbers' ),
+				'prev_page'  => apply_filters( 'infinite_loader_prev_page_selector', 'a.prev.page-numbers' ),
 			);
 
 			// Add support for WooCommerce blocks if active.
@@ -254,7 +254,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 		$css_js_settings      = $this->get_cached_option( 'infinite_loader_admin_css_js_option' );
 
 		$check_rotate      = isset( $general_settings['rotate_image'] ) && 'yes' === $general_settings['rotate_image'];
-		$page_loading_type = isset( $general_settings['product_loading_type'] ) ? $general_settings['product_loading_type'] : 'pagination';
+		$page_loading_type = isset( $general_settings['product_loading_type'] ) ? $general_settings['product_loading_type'] : 'load-more-button';
 		$use_prev_btn      = ( 'load-more-button' === $page_loading_type || 'infinity-scroll' === $page_loading_type ) ? 'yes' : '';
 
 		// Get selectors.
@@ -290,10 +290,11 @@ class Infinite_Loader_For_Woocommerce_Public {
 
 		// Prepare data for JavaScript with security enhancements.
 		$js_data = array(
-			'ajax_url'       => admin_url( 'admin-ajax.php' ),
-			'ajax_nonce'     => wp_create_nonce( 'infinite_loader_ajax_nonce' ),
-			'type'           => $page_loading_type,
-			'use_prev_btn'   => $use_prev_btn,
+			'ajax_url'         => admin_url( 'admin-ajax.php' ),
+			'ajax_nonce'       => wp_create_nonce( 'infinite_loader_ajax_nonce' ),
+			'type'             => $page_loading_type,
+			'use_prev_btn'     => $use_prev_btn,
+
 			/*
 			 * '1' or '' rather than a boolean, because wp_localize_script
 			 * casts every value to a string: true would reach the script as
@@ -305,20 +306,20 @@ class Infinite_Loader_For_Woocommerce_Public {
 			 * the address bar never followed the shopper down the archive and
 			 * the browser Back button dropped them at page one.
 			 */
-			'update_url'     => ( isset( $general_settings['do_not_update_url'] ) && 'yes' === $general_settings['do_not_update_url'] ) ? '' : '1',
-			'load_image'     => $infinite_loader_icon,
-			'load_img_class' => '.infinite_loader_products_loading',
-			'load_more'      => $load_more_button,
-			'load_prev'      => $previous_button,
-			'javascript'     => apply_filters( 'infinite_loader_js_function', $safe_js_settings ),
-			'products'       => esc_attr( $selectors['products'] ),
-			'item'           => esc_attr( $selectors['item'] ),
-			'pagination'     => esc_attr( $selectors['pagination'] ),
-			'next_page'      => esc_attr( $selectors['next_page'] ),
-			'prev_page'      => esc_attr( $selectors['prev_page'] ),
-			'error_message'  => esc_html__( 'Unable to load more products. Please try again.', 'infinite-loader-for-woocommerce' ),
-			'retry_text'     => esc_html__( 'Retry', 'infinite-loader-for-woocommerce' ),
-			'no_more_text'   => esc_html__( 'No more products', 'infinite-loader-for-woocommerce' ),
+			'update_url'       => ( isset( $general_settings['do_not_update_url'] ) && 'yes' === $general_settings['do_not_update_url'] ) ? '' : '1',
+			'load_image'       => $infinite_loader_icon,
+			'load_img_class'   => '.infinite_loader_products_loading',
+			'load_more'        => $load_more_button,
+			'load_prev'        => $previous_button,
+			'javascript'       => apply_filters( 'infinite_loader_js_function', $safe_js_settings ),
+			'products'         => esc_attr( $selectors['products'] ),
+			'item'             => esc_attr( $selectors['item'] ),
+			'pagination'       => esc_attr( $selectors['pagination'] ),
+			'next_page'        => esc_attr( $selectors['next_page'] ),
+			'prev_page'        => esc_attr( $selectors['prev_page'] ),
+			'error_message'    => esc_html__( 'Unable to load more products. Please try again.', 'infinite-loader-for-woocommerce' ),
+			'retry_text'       => esc_html__( 'Retry', 'infinite-loader-for-woocommerce' ),
+			'no_more_text'     => esc_html__( 'No more products', 'infinite-loader-for-woocommerce' ),
 			/**
 			 * Distance in pixels between the bottom of the product list and the
 			 * viewport at which infinite scroll asks for the next page.
@@ -326,7 +327,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 			 * @param int $threshold Pixels. Default 300.
 			 */
 			'scroll_threshold' => (int) apply_filters( 'infinite_loader_scroll_threshold', 300 ),
-			'debug_mode'     => defined( 'WP_DEBUG' ) && WP_DEBUG,
+			'debug_mode'       => defined( 'WP_DEBUG' ) && WP_DEBUG,
 		);
 
 		// Add compatibility data.
@@ -365,8 +366,8 @@ class Infinite_Loader_For_Woocommerce_Public {
 	 */
 	public function infinite_loader_before_template_part( $template_name ) {
 		if ( 'loop/result-count.php' === $template_name ) {
-			add_filter( 'ngettext', array( $this, 'infinite_loader_products_count_additional' ), 1, 9999 );
-			add_filter( 'ngettext_with_context', array( $this, 'infinite_loader_products_count_additional' ), 1, 9999 );
+			add_filter( 'ngettext', array( $this, 'infinite_loader_products_count_additional' ), 1, 1 );
+			add_filter( 'ngettext_with_context', array( $this, 'infinite_loader_products_count_additional' ), 1, 1 );
 		}
 	}
 
@@ -377,8 +378,8 @@ class Infinite_Loader_For_Woocommerce_Public {
 	 * @return string
 	 */
 	public function infinite_loader_products_count_additional( $text ) {
-		remove_filter( 'ngettext', array( $this, 'infinite_loader_products_count_additional' ), 1, 9999 );
-		remove_filter( 'ngettext_with_context', array( $this, 'infinite_loader_products_count_additional' ), 1, 9999 );
+		remove_filter( 'ngettext', array( $this, 'infinite_loader_products_count_additional' ), 1 );
+		remove_filter( 'ngettext_with_context', array( $this, 'infinite_loader_products_count_additional' ), 1 );
 
 		// Get product count data with fallback.
 		$infinite_loader_count_data = $this->infinite_loader_get_product_count_data();
@@ -438,7 +439,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 	 * @return array|false Product count data or false on error.
 	 */
 	private function infinite_loader_get_product_count_data() {
-		if ( class_exists( 'WC_Query' ) && method_exists( 'WC_Query', 'product_query' ) && function_exists( 'wc_get_loop_prop' ) ) {
+		if ( class_exists( 'WC_Query' ) && function_exists( 'wc_get_loop_prop' ) ) {
 			$total    = wc_get_loop_prop( 'total' );
 			$per_page = wc_get_loop_prop( 'per_page' );
 			$paged    = wc_get_loop_prop( 'current_page' );
@@ -541,7 +542,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 		}
 
 		$general_settings = $this->get_cached_option( 'infinite_loader_admin_general_option' );
-		$loading_type     = isset( $general_settings['product_loading_type'] ) ? $general_settings['product_loading_type'] : 'pagination';
+		$loading_type     = isset( $general_settings['product_loading_type'] ) ? $general_settings['product_loading_type'] : 'load-more-button';
 
 		if ( 'load-more-button' === $loading_type || 'infinity-scroll' === $loading_type ) {
 			?>
@@ -559,12 +560,15 @@ class Infinite_Loader_For_Woocommerce_Public {
 	 * @return mixed               Option value.
 	 */
 	private function get_cached_option( $option_name ) {
-		$cache_key = 'infinite_loader_' . $option_name;
-		$cached    = wp_cache_get( $cache_key );
+		// The cache key is the option name itself. The old 'infinite_loader_' prefix
+		// double-prefixed the already-namespaced option (infinite_loader_admin_*), so
+		// the deactivator and the save-time invalidation - which delete the bare name -
+		// never cleared what this getter wrote. Keeping them identical is the contract.
+		$cached = wp_cache_get( $option_name );
 
 		if ( false === $cached ) {
 			$cached = get_option( $option_name, array() );
-			wp_cache_set( $cache_key, $cached, '', HOUR_IN_SECONDS );
+			wp_cache_set( $option_name, $cached, '', HOUR_IN_SECONDS );
 		}
 
 		return $cached;
@@ -578,6 +582,7 @@ class Infinite_Loader_For_Woocommerce_Public {
 	 * @return string          Sanitized hex color.
 	 */
 	private function sanitize_hex_color( $color, $default = '' ) {
-		return sanitize_hex_color( $color ) ?: $default;
+		$sanitized = sanitize_hex_color( $color );
+		return ( null === $sanitized || '' === $sanitized ) ? $default : $sanitized;
 	}
 }

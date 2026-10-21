@@ -5,9 +5,9 @@ Tags: Woocommerce
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.1
-Tested with WooCommerce 11.1.1
-Tested with WooCommerce 11.1.1
-Stable tag: 1.3.3
+WC requires at least: 3.0
+WC tested up to: 11.2
+Stable tag: 1.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,14 @@ This section describes how to install the plugin and get it working.
 Woocommerce
 
 == Changelog ==
+= 1.3.4 - October 2026 =
+
+* Fix      - Saved loading-type and style changes now apply immediately on stores running a persistent object cache (Redis/Memcached); the settings cache is cleared on every save and no longer stored under a mismatched key.
+* Fix      - Products are de-duplicated before being added to the grid, so a theme with a second pagination link can no longer re-append a page that was already loaded.
+* Fix      - The Overview tab and storefront now fall back to the Load More button (the activation default) instead of AJAX pagination when the loading-type option is missing.
+* Fix      - The security log for a blocked JavaScript snippet is written only when WP_DEBUG is on, so it no longer writes to the production error log on every save.
+* Dev      - PHPStan and WPCS now fail the build on real violations (committed phpcs.xml and phpstan.neon; the advisory continue-on-error was removed), and the PHP lint matrix covers 8.1 to 8.5.
+
 = 1.3.3 - September 2026 =
 
 * Fix      - License options are now removed on uninstall (they were saved under a different key and left behind).

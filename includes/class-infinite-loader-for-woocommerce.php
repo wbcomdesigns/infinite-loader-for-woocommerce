@@ -275,8 +275,10 @@ class Infinite_Loader_For_Woocommerce {
 
 				foreach ( $dangerous_patterns as $pattern ) {
 					if ( preg_match( $pattern, $js ) ) {
-						// Log potential security issue.
-						error_log( 'Infinite Loader: Potentially dangerous JavaScript pattern detected: ' . $pattern );
+						// Log potential security issue only when debugging; never write to a production error log.
+						if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+							error_log( 'Infinite Loader: Potentially dangerous JavaScript pattern detected: ' . $pattern ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+						}
 
 						// Remove the dangerous code.
 						$js = preg_replace( $pattern, '/* Code removed for security */', $js );

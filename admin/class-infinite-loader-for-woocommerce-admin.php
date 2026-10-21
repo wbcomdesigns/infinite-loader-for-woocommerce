@@ -356,14 +356,14 @@ class Infinite_Loader_For_Woocommerce_Admin {
 	private function render_overview_tab() {
 		$general = get_option( 'infinite_loader_admin_general_option', array() );
 
-		$mode      = isset( $general['product_loading_type'] ) ? $general['product_loading_type'] : 'pagination';
+		$mode      = isset( $general['product_loading_type'] ) ? $general['product_loading_type'] : 'load-more-button';
 		$per_page  = isset( $general['product_per_page'] ) ? (int) $general['product_per_page'] : 0;
 		$track_url = ! ( isset( $general['do_not_update_url'] ) && 'yes' === $general['do_not_update_url'] );
 
 		$mode_labels = array(
-			'infinity-scroll'   => __( 'Infinity Scroll', 'infinite-loader-for-woocommerce' ),
-			'load-more-button'  => __( 'Load More button', 'infinite-loader-for-woocommerce' ),
-			'pagination'        => __( 'AJAX pagination', 'infinite-loader-for-woocommerce' ),
+			'infinity-scroll'  => __( 'Infinity Scroll', 'infinite-loader-for-woocommerce' ),
+			'load-more-button' => __( 'Load More button', 'infinite-loader-for-woocommerce' ),
+			'pagination'       => __( 'AJAX pagination', 'infinite-loader-for-woocommerce' ),
 		);
 		$mode_label  = isset( $mode_labels[ $mode ] ) ? $mode_labels[ $mode ] : $mode;
 
@@ -440,6 +440,24 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		register_setting( 'infinite_loader_admin_button_options', 'infinite_loader_admin_button_option', array( 'sanitize_callback' => array( $this, 'validate_button_settings' ) ) );
 		register_setting( 'infinite_loader_admin_previous_button_options', 'infinite_loader_admin_previous_button_option', array( 'sanitize_callback' => array( $this, 'validate_button_settings' ) ) );
 		register_setting( 'infinite_loader_admin_css_js_options', 'infinite_loader_admin_css_js_option', array( 'sanitize_callback' => array( $this, 'validate_css_js_settings' ) ) );
+
+		// Clear the cached option the moment any of ours is written, so a saved
+		// setting applies at once on sites with a persistent object cache. The
+		// cache key equals the option name (see get_cached_option()).
+		add_action( 'updated_option', array( $this, 'infinite_loader_flush_option_cache' ) );
+		add_action( 'added_option', array( $this, 'infinite_loader_flush_option_cache' ) );
+	}
+
+	/**
+	 * Invalidate the cached copy of one of this plugin's options after it is saved.
+	 *
+	 * @param  string $option The option name that was just added or updated.
+	 * @return void
+	 */
+	public function infinite_loader_flush_option_cache( $option ) {
+		if ( is_string( $option ) && 0 === strpos( $option, 'infinite_loader_admin_' ) ) {
+			wp_cache_delete( $option );
+		}
 	}
 
 	/**
@@ -455,7 +473,7 @@ class Infinite_Loader_For_Woocommerce_Admin {
 		$allowed_types                     = array( 'infinity-scroll', 'load-more-button', 'pagination' );
 		$validated['product_loading_type'] = isset( $input['product_loading_type'] ) && in_array( $input['product_loading_type'], $allowed_types, true )
 			? $input['product_loading_type']
-			: 'pagination';
+			: 'load-more-button';
 
 		// Validate products per page.
 		$validated['product_per_page'] = isset( $input['product_per_page'] ) ? absint( $input['product_per_page'] ) : 8;

@@ -133,7 +133,7 @@
     "infinite_loader_rate_<md5(ip)> — rate-limit counter, 60s",
     "infinite_loader_license_data — EDD license cache"
   ],
-  "object_cache": "get_cached_option() wraps each option in wp_cache_get/set (default group, HOUR_IN_SECONDS) so the 4 option reads per archive request are not repeated DB hits",
+  "object_cache": "get_cached_option() wraps each option in wp_cache_get/set under the option name as the cache key (default group, HOUR_IN_SECONDS). The cache is invalidated on save via updated_option/added_option -> Infinite_Loader_For_Woocommerce_Admin::infinite_loader_flush_option_cache(), and the deactivator/uninstall delete the same keys, so a saved setting applies at once even behind a persistent object cache.",
   "shortcodes": [],
   "blocks": [],
   "post_types": [],
@@ -225,9 +225,9 @@
     ]
   },
   "generated": {
-    "at": "2026-08-29T00:00:00Z",
-    "from": "manual enumeration from source (docs/QA pass, no runtime scan)",
-    "branch": "master",
+    "at": "2026-10-21T00:00:00Z",
+    "from": "manual enumeration from source (1.3.4 fix pass: cache-key + invalidation, JS de-dup, CI gates)",
+    "branch": "1.3.4",
     "head_commit": "a1d71c8",
     "schema_version": "v2.1",
     "scan_scope": "source (excludes node_modules/, dist/)",
