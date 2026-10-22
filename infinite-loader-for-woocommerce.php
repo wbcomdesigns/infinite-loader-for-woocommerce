@@ -140,9 +140,6 @@ add_action(
 	'admin_init',
 	static function (): void {
 		$preset_key = INFINITE_LOADER_FOR_WOOCOMMERCE_FREE_LICENSE_KEY;
-		if ( '' === $preset_key ) {
-			return;
-		}
 
 		// Owner opt-out for air-gapped / privacy-strict installs.
 		if ( defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_NO_LICENSE_PHONE_HOME' ) && INFINITE_LOADER_FOR_WOOCOMMERCE_NO_LICENSE_PHONE_HOME ) {
