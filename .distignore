@@ -12,8 +12,9 @@
 /node_modules
 /bin
 /dist
-/package.json
-/package-lock.json
+# Dev manifests, excluded at any depth (root + bundled SDK) - never runtime.
+package.json
+package-lock.json
 /gruntfile.js
 /Gruntfile.js
 /CLAUDE.md
@@ -28,8 +29,8 @@
 /audit
 /.contract-audit-baseline.json
 # Dev tooling (static analysis + coding standards) - not part of the product.
-/composer.json
-/composer.lock
+composer.json
+composer.lock
 /vendor
 /phpcs.xml.dist
 /phpstan.neon.dist
