@@ -110,8 +110,8 @@ REQUIRED_FILES=(
 	"$SLUG/lib/wbcom-settings/settings.css"
 	"$SLUG/lib/wbcom-settings/settings.js"
 	"$SLUG/assets/vendor/lucide.min.js"
-	"$SLUG/edd-license/edd-plugin-license.php"
-	"$SLUG/edd-license/class-edd-wb-infinite-loader-plugin-updater.php"
+	"$SLUG/libs/edd-sl-sdk/edd-sl-sdk.php"
+	"$SLUG/libs/edd-sl-sdk/vendor/autoload.php"
 )
 
 # List the archive ONCE. Piping `unzip | grep -q` per file looks tidier but is
