@@ -52,10 +52,14 @@ if ( ! is_multisite() ) {
 	delete_option( 'infinite_loader_admin_button_option' );
 	delete_option( 'infinite_loader_admin_previous_button_option' );
 	delete_option( 'infinite_loader_admin_css_js_option' );
+	// Licensing: new SDK options + legacy hand-rolled options (removed in 1.3.5).
+	delete_option( 'infinite-loader-for-woocommerce_license_key' );
+	delete_option( 'infinite_loader_for_woocommerce_preset_activated' );
 	delete_option( 'edd_wbcom_infinite_loader_license_key' );
 	delete_option( 'edd_wbcom_infinite_loader_license_status' );
 
 	// Delete transients.
+	delete_transient( 'infinite_loader_for_woocommerce_preset_activation_backoff' );
 	delete_transient( 'edd_wbcom_infinite_loader_license_key_data' );
 
 	// Clear any cached data.
@@ -79,10 +83,14 @@ if ( ! is_multisite() ) {
 		delete_option( 'infinite_loader_admin_button_option' );
 		delete_option( 'infinite_loader_admin_previous_button_option' );
 		delete_option( 'infinite_loader_admin_css_js_option' );
+		// Licensing: new SDK options + legacy hand-rolled options (removed in 1.3.5).
+		delete_option( 'infinite-loader-for-woocommerce_license_key' );
+		delete_option( 'infinite_loader_for_woocommerce_preset_activated' );
 		delete_option( 'edd_wbcom_infinite_loader_license_key' );
 		delete_option( 'edd_wbcom_infinite_loader_license_status' );
 
 		// Delete transients.
+		delete_transient( 'infinite_loader_for_woocommerce_preset_activation_backoff' );
 		delete_transient( 'edd_wbcom_infinite_loader_license_key_data' );
 	}
 

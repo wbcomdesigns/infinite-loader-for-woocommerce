@@ -15,7 +15,7 @@
  * Plugin Name:       Wbcom Designs – Infinite Loader for WooCommerce
  * Plugin URI:        https://wbcomdesigns.com/downloads/infinite-loader-for-woocommerce/
  * Description:       Streamline product browsing with AJAX-powered infinite scroll or a "Load More" button. Enhance user experience, reduce page loads, and keep customers engaged on your WooCommerce store.
- * Version:           1.3.4
+ * Version:           1.3.5
  * Author:            Wbcom Designs
  * Author URI:        https://wbcomdesigns.com/
  * License:           GPL-2.0+
@@ -38,7 +38,11 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION', '1.3.4' );
+define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION', '1.3.5' );
+
+if ( ! defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_FILE' ) ) {
+	define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_FILE', __FILE__ );
+}
 
 if ( ! defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH' ) ) {
 	define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
@@ -46,6 +50,28 @@ if ( ! defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH' ) ) {
 
 if ( ! defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_URL' ) ) {
 	define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+}
+
+/*
+ * EDD download id on store.wbcomdesigns.com (verified against the store's
+ * get_version response: item_id 1629838 => "Infinite Loader for WooCommerce").
+ */
+if ( ! defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_EDD_ITEM_ID' ) ) {
+	define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_EDD_ITEM_ID', 1629838 );
+}
+
+/*
+ * Preset, unlimited-activation licence key for the FREE download. This is how
+ * every free, non-wordpress.org Wbcom plugin authorises updates with zero
+ * customer setup (see BuddyWoo / Jetonomy). Licence state only authorises
+ * update downloads; it never gates any feature.
+ *
+ * Unlimited-activation, lifetime key for download 1629838, validated against the
+ * store (edd_action=check_license => item "Infinite Loader for WooCommerce",
+ * expires "lifetime", license_limit 0; activate_license => "valid").
+ */
+if ( ! defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_FREE_LICENSE_KEY' ) ) {
+	define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_FREE_LICENSE_KEY', '1e7cb1353087c12ff3add1e7f0930351' );
 }
 
 /*
@@ -58,6 +84,103 @@ if ( file_exists( INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'lib/wbcom-setti
 	require_once INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'lib/wbcom-settings/loader.php';
 	wbcom_settings_register( '1.0.3', INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'lib/wbcom-settings/class-wbcom-settings-page.php' );
 }
+
+// ---------------------------------------------------------------------------
+// EDD Software Licensing SDK — automatic updates for this free, self-hosted
+// plugin. The old hand-rolled edd-license/ wrapper was removed: its licence
+// form was hooked to the deleted wbcom_add_plugin_license_code action and its
+// redirect target (wbcom-license-page) no longer existed, so the key could not
+// be entered anywhere while a red notice nagged on every admin page. The SDK
+// (vendored at libs/edd-sl-sdk, the portfolio's single update mechanism) needs
+// no custom screen, and the preset free key below pre-activates it so updates
+// work with zero customer setup. Mirrors BuddyWoo / BuddyNext / Jetonomy.
+// ---------------------------------------------------------------------------
+add_action(
+	'edd_sl_sdk_registry',
+	static function ( $registry ): void {
+		$registry->register(
+			array(
+				'id'      => 'infinite-loader-for-woocommerce',
+				'url'     => 'https://wbcomdesigns.com',
+				'item_id' => INFINITE_LOADER_FOR_WOOCOMMERCE_EDD_ITEM_ID,
+				'version' => INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION,
+				'file'    => INFINITE_LOADER_FOR_WOOCOMMERCE_FILE,
+				'license' => INFINITE_LOADER_FOR_WOOCOMMERCE_FREE_LICENSE_KEY,
+			)
+		);
+	}
+);
+
+// Load the vendored SDK only when the package is COMPLETE. A partial build that
+// keeps the entry file but drops libs/edd-sl-sdk/src or the SDK's own
+// vendor/autoload.php (which edd-sl-sdk.php require_once's unconditionally)
+// would fatal on load, so guard on all three and degrade to "updates disabled"
+// with a soft admin notice instead of a white screen — licensing only gates
+// updates, never features.
+if ( file_exists( INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'libs/edd-sl-sdk/edd-sl-sdk.php' )
+	&& file_exists( INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'libs/edd-sl-sdk/src/Versions.php' )
+	&& file_exists( INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'libs/edd-sl-sdk/vendor/autoload.php' ) ) {
+	require_once INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'libs/edd-sl-sdk/edd-sl-sdk.php';
+} elseif ( is_admin() ) {
+	add_action(
+		'admin_notices',
+		static function () {
+			echo '<div class="notice notice-warning"><p>'
+				. esc_html__( 'Infinite Loader for WooCommerce: the bundled licensing and update SDK is incomplete, so automatic updates are turned off. Reinstall the plugin from a complete package to restore them. Every other feature works normally.', 'infinite-loader-for-woocommerce' )
+				. '</p></div>';
+		}
+	);
+}
+
+// Auto-activate the preset free key once per site so store-authorised downloads
+// work without the customer touching anything. Skips entirely until the preset
+// key is set. Backs off for 12h after any attempt so an install that cannot
+// reach the store never repeats a blocking request on every admin pageview.
+add_action(
+	'admin_init',
+	static function (): void {
+		$preset_key = INFINITE_LOADER_FOR_WOOCOMMERCE_FREE_LICENSE_KEY;
+		if ( '' === $preset_key ) {
+			return;
+		}
+
+		// Owner opt-out for air-gapped / privacy-strict installs.
+		if ( defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_NO_LICENSE_PHONE_HOME' ) && INFINITE_LOADER_FOR_WOOCOMMERCE_NO_LICENSE_PHONE_HOME ) {
+			return;
+		}
+
+		if ( get_option( 'infinite_loader_for_woocommerce_preset_activated' ) ) {
+			return;
+		}
+		if ( get_transient( 'infinite_loader_for_woocommerce_preset_activation_backoff' ) ) {
+			return;
+		}
+		set_transient( 'infinite_loader_for_woocommerce_preset_activation_backoff', 1, 12 * HOUR_IN_SECONDS );
+
+		// Store the key where the SDK reads it.
+		update_option( 'infinite-loader-for-woocommerce_license_key', $preset_key, false );
+
+		$response = wp_remote_post(
+			'https://wbcomdesigns.com',
+			array(
+				'timeout' => 5,
+				'body'    => array(
+					'edd_action' => 'activate_license',
+					'license'    => $preset_key,
+					'item_id'    => INFINITE_LOADER_FOR_WOOCOMMERCE_EDD_ITEM_ID,
+					'url'        => home_url(),
+				),
+			)
+		);
+
+		if ( ! is_wp_error( $response ) ) {
+			$body = json_decode( wp_remote_retrieve_body( $response ), true );
+			if ( 'valid' === ( $body['license'] ?? '' ) ) {
+				update_option( 'infinite_loader_for_woocommerce_preset_activated', 1, false );
+			}
+		}
+	}
+);
 
 /**
  * The code that runs during plugin activation.
