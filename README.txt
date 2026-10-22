@@ -7,7 +7,7 @@ Tested up to: 7.1
 Requires PHP: 8.1
 WC requires at least: 3.0
 WC tested up to: 11.2
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,14 @@ This section describes how to install the plugin and get it working.
 Woocommerce
 
 == Changelog ==
+= 1.3.5 - October 2026 =
+
+Licensing and updates now run through the shared EDD Software Licensing SDK, pre-activated so updates work with no setup.
+
+* Fix      - The license activation screen is reachable again; the old form pointed at a page that returned a 403 and could not be opened anywhere in wp-admin.
+* Fix      - Removed the error notice that asked for license activation on every admin page while giving no way to enter a key.
+* Dev      - Replaced the bundled hand-rolled license wrapper with the shared EDD Software Licensing SDK used across Wbcom plugins, pre-activated with a built-in key so automatic updates work with zero setup.
+
 = 1.3.4 - October 2026 =
 
 * Fix      - Saved loading-type and style changes now apply immediately on stores running a persistent object cache (Redis/Memcached); the settings cache is cleared on every save and no longer stored under a mismatched key.

@@ -12,7 +12,7 @@ parameters:
 	# functions our code calls) but not analysed - they are vendored, not our code.
 	scanDirectories:
 		- lib
-		- edd-license
+		- libs/edd-sl-sdk
 	excludePaths:
 		- admin/partials/*
 	bootstrapFiles:

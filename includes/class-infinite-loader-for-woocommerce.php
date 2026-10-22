@@ -134,10 +134,9 @@ class Infinite_Loader_For_Woocommerce {
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'public/class-infinite-loader-for-woocommerce-public.php';
 
-		/** This file is responsible for the plugin license functionality. */
-		if ( file_exists( plugin_dir_path( __DIR__ ) . 'edd-license/edd-plugin-license.php' ) ) {
-			require_once plugin_dir_path( __DIR__ ) . 'edd-license/edd-plugin-license.php';
-		}
+		// Licensing + updates are handled by the vendored EDD SL SDK, wired in
+		// the main plugin file (libs/edd-sl-sdk). The old hand-rolled
+		// edd-license/ wrapper was removed in 1.3.5.
 	}
 
 	/**
