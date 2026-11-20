@@ -172,53 +172,8 @@ if ( file_exists( INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'libs/edd-sl-sdk
 	);
 }
 
-// Auto-activate the preset free key once per site so store-authorised downloads
-// work without the customer touching anything. Skips entirely until the preset
-// key is set. Backs off for 12h after any attempt so an install that cannot
-// reach the store never repeats a blocking request on every admin pageview.
-add_action(
-	'admin_init',
-	static function (): void {
-		$preset_key = INFINITE_LOADER_FOR_WOOCOMMERCE_FREE_LICENSE_KEY;
-
-		// Owner opt-out for air-gapped / privacy-strict installs.
-		if ( defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_NO_LICENSE_PHONE_HOME' ) && INFINITE_LOADER_FOR_WOOCOMMERCE_NO_LICENSE_PHONE_HOME ) {
-			return;
-		}
-
-		if ( get_option( 'infinite_loader_for_woocommerce_preset_activated' ) ) {
-			return;
-		}
-		if ( get_transient( 'infinite_loader_for_woocommerce_preset_activation_backoff' ) ) {
-			return;
-		}
-		set_transient( 'infinite_loader_for_woocommerce_preset_activation_backoff', 1, 12 * HOUR_IN_SECONDS );
-
-		// Store the key where the SDK reads it.
-		update_option( 'infinite-loader-for-woocommerce_license_key', $preset_key, false );
-
-		// Through the SDK (new host, old host as fallback); false = no host answered, retried after the backoff.
-		// This runs inline on an admin page, so both hosts share one 5s budget (the SDK's own timeout is 15s each).
-		$deadline = microtime( true ) + 5;
-		$cap      = static function ( $args ) use ( $deadline ) {
-			$args['timeout'] = max( 1, min( (float) ( $args['timeout'] ?? 5 ), $deadline - microtime( true ) ) );
-			return $args;
-		};
-		add_filter( 'http_request_args', $cap );
-		$body = infinite_loader_for_woocommerce_licence_request(
-			array(
-				'edd_action' => 'activate_license',
-				'license'    => $preset_key,
-				'item_id'    => INFINITE_LOADER_FOR_WOOCOMMERCE_EDD_ITEM_ID,
-			)
-		);
-		remove_filter( 'http_request_args', $cap );
-
-		if ( $body && 'valid' === ( $body->license ?? '' ) ) {
-			update_option( 'infinite_loader_for_woocommerce_preset_activated', 1, false );
-		}
-	}
-);
+// Activate the preset free key once per site (retries, 5s budget, never overwrites an owner's key).
+require_once INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'includes/infinite-loader-for-woocommerce-preset-activation.php';
 
 /**
  * The code that runs during plugin activation.

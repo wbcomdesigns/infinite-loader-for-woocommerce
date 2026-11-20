@@ -52,9 +52,9 @@ WooCommerce archives only — `is_shop()`, `is_product_category()`, `is_product_
 | `infinite_loader_admin_button_option` | Load More button text / colours / spacing / border / radius. |
 | `infinite_loader_admin_previous_button_option` | Previous button styling (same shape). |
 | `infinite_loader_admin_css_js_option` | Custom CSS, before/after-update JS. |
-| `infinite-loader-for-woocommerce_license_key`, `infinite_loader_for_woocommerce_preset_activated` | EDD SL SDK preset licence. |
+| `infinite-loader-for-woocommerce_license_key`, `infinite_loader_for_woocommerce_preset_activated`, `infinite_loader_for_woocommerce_preset_owner_managed` | EDD SL SDK preset licence. |
 
-Transients: `infinite_loader_for_woocommerce_preset_activation_backoff` (12h between preset activation attempts). `uninstall.php` removes the settings and licence options on single-site and, via `get_sites()`, multisite.
+Transients: `infinite_loader_for_woocommerce_preset_activation_backoff` (retry window between preset activation attempts). `uninstall.php` removes the settings and licence options on single-site and, via `get_sites()`, multisite.
 
 ## Bundled icon assets
 

@@ -323,6 +323,7 @@ Codebase: ~5,900 PHP LOC across 27 files.
 | `infinite_loader_admin_css_js_option` | Custom CSS/JS settings |
 | `infinite-loader-for-woocommerce_license_key` | Preset licence key the SDK reads |
 | `infinite_loader_for_woocommerce_preset_activated` | Preset activation done |
+| `infinite_loader_for_woocommerce_preset_owner_managed` | Owner manages the licence; preset activation stopped for good |
 
 No custom tables, no post meta, no CPTs.
 
@@ -333,4 +334,5 @@ No custom tables, no post meta, no CPTs.
 - **Theme selectors are the fragile seam.** The loader finds products and the next-page link by CSS selector. Any theme with non-standard shop markup needs `infinite_loader_item_selector` / `infinite_loader_next_page_selector` rather than a code change. Prefer widening the filter defaults over hardcoding a theme.
 - **Test on a generic theme first** (Storefront / Twenty Twenty-*), not only on Reign or BuddyX. Most installs do not run a Wbcom theme.
 - **Big-site behaviour:** this plugin *is* the pagination layer. Any change must be checked against a catalogue of 2,000+ products for query cost and duplicate-item bugs on rapid scroll.
+- Preset activation lives in `includes/infinite-loader-for-woocommerce-preset-activation.php` (inline on admin_init, 5s budget across both hosts, never overwrites an owner's key, never stops retrying).
 - Licensing: every direct licence call goes through `infinite_loader_for_woocommerce_licence_request()` (new host, old host as fallback). Never call wbcomdesigns.com directly.

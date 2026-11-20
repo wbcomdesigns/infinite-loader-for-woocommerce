@@ -55,6 +55,7 @@ if ( ! is_multisite() ) {
 	// Licensing: new SDK options + legacy hand-rolled options (removed in 1.3.5).
 	delete_option( 'infinite-loader-for-woocommerce_license_key' );
 	delete_option( 'infinite_loader_for_woocommerce_preset_activated' );
+	delete_option( 'infinite_loader_for_woocommerce_preset_owner_managed' );
 	delete_option( 'edd_wbcom_infinite_loader_license_key' );
 	delete_option( 'edd_wbcom_infinite_loader_license_status' );
 
@@ -86,6 +87,7 @@ if ( ! is_multisite() ) {
 		// Licensing: new SDK options + legacy hand-rolled options (removed in 1.3.5).
 		delete_option( 'infinite-loader-for-woocommerce_license_key' );
 		delete_option( 'infinite_loader_for_woocommerce_preset_activated' );
+		delete_option( 'infinite_loader_for_woocommerce_preset_owner_managed' );
 		delete_option( 'edd_wbcom_infinite_loader_license_key' );
 		delete_option( 'edd_wbcom_infinite_loader_license_status' );
 

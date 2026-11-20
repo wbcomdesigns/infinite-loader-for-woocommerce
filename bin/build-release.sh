@@ -113,6 +113,7 @@ REQUIRED_FILES=(
 	"$SLUG/libs/edd-sl-sdk/edd-sl-sdk.php"
 	"$SLUG/libs/edd-sl-sdk/src/Versions.php"
 	"$SLUG/libs/edd-sl-sdk/src/Requests/API.php"
+	"$SLUG/includes/infinite-loader-for-woocommerce-preset-activation.php"
 	"$SLUG/libs/package-signatures/package-signatures.php"
 	"$SLUG/libs/package-signatures/src/class-guard.php"
 	"$SLUG/libs/package-signatures/src/class-verifier.php"
