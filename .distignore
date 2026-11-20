@@ -34,3 +34,7 @@ composer.lock
 /vendor
 /phpcs.xml.dist
 /phpstan.neon.dist
+# Bundled libraries: dev manifests and docs, named explicitly so the release gate can see them.
+/libs/edd-sl-sdk/composer.json
+/libs/edd-sl-sdk/composer.lock
+/libs/package-signatures/README.md

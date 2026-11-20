@@ -269,8 +269,8 @@ WordPress Plugin Boilerplate (loader pattern). `Infinite_Loader_For_Woocommerce_
 | `lib/wbcom-settings/class-wbcom-settings-page.php` | Shared Wbcom admin shell (menu, sidebar, tab routing). Vendored - every Wbcom plugin ships a copy and the newest registered version wins |
 | `lib/wbcom-settings/loader.php` | Version registry that picks which vendored copy loads |
 | `assets/vendor/lucide.min.js` | Icon set the shell renders with. Ship it - without it every icon slot renders blank |
-| `edd-license/edd-plugin-license.php` | EDD Software Licensing bootstrap |
-| `edd-license/class-edd-wb-infinite-loader-plugin-updater.php` | EDD Software Licensing updater |
+| `libs/edd-sl-sdk/` | Wbcom fork of the EDD SL SDK (tag 1.0.4-wbcom.4, registers 1.0.4.3). Never patch in place: re-copy a newer tag |
+| `libs/package-signatures/` | Update-package signature check (1.0.2, warn mode, product = store slug) |
 | `bin/build-release.sh` | Builds the customer zip and refuses to emit one that is missing named runtime files |
 | `bin/verify-build-freshness.sh` | Fails when a committed `.min.js` no longer matches its source |
 
@@ -286,14 +286,15 @@ Codebase: ~5,900 PHP LOC across 27 files.
 
 | Constant | Value |
 |----------|-------|
-| `INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION` | `'1.2.2'` |
+| `INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION` | current version |
 | `INFINITE_LOADER_FOR_WOOCOMMERCE_FILE` | `__FILE__` |
 | `INFINITE_LOADER_FOR_WOOCOMMERCE_URL` | plugin URL |
 | `INFINITE_LOADER_FOR_WOOCOMMERCE_PATH` | plugin path |
 | `INFINITE_LOADER_FOR_WOOCOMMERCE_TEMPLATE_PATH` | `/templates/` |
-| `EDD_INFINITE_LOADER_STORE_URL` | `'https://wbcomdesigns.com/'` |
-| `EDD_INFINITE_LOADER_ITEM_NAME` | `'Infinite Loader For Woocommerce'` |
-| `EDD_INFINITE_LOADER_PLUGIN_LICENSE_PAGE` | `'wbcom-license-page'` |
+| `INFINITE_LOADER_FOR_WOOCOMMERCE_EDD_ITEM_ID` | `1629838` |
+| `INFINITE_LOADER_FOR_WOOCOMMERCE_LICENCE_HOST` | `'https://updates.wbcomdesigns.com'` (SDK falls back to wbcomdesigns.com) |
+| `INFINITE_LOADER_FOR_WOOCOMMERCE_FREE_LICENSE_KEY` | preset free key |
+| `INFINITE_LOADER_FOR_WOOCOMMERCE_NO_LICENSE_PHONE_HOME` | define true to switch the preset activation off |
 
 ## Hooks & Filters (plugin-defined)
 
@@ -320,8 +321,8 @@ Codebase: ~5,900 PHP LOC across 27 files.
 | `infinite_loader_admin_button_option` | Load More button settings |
 | `infinite_loader_admin_previous_button_option` | Load Previous button settings |
 | `infinite_loader_admin_css_js_option` | Custom CSS/JS settings |
-| `infinite_loader_license_key` / `infinite_loader_license_status` | License state |
-| `edd_wbcom_infinite_loader_license_key` / `_status` | EDD license state |
+| `infinite-loader-for-woocommerce_license_key` | Preset licence key the SDK reads |
+| `infinite_loader_for_woocommerce_preset_activated` | Preset activation done |
 
 No custom tables, no post meta, no CPTs.
 
@@ -332,4 +333,4 @@ No custom tables, no post meta, no CPTs.
 - **Theme selectors are the fragile seam.** The loader finds products and the next-page link by CSS selector. Any theme with non-standard shop markup needs `infinite_loader_item_selector` / `infinite_loader_next_page_selector` rather than a code change. Prefer widening the filter defaults over hardcoding a theme.
 - **Test on a generic theme first** (Storefront / Twenty Twenty-*), not only on Reign or BuddyX. Most installs do not run a Wbcom theme.
 - **Big-site behaviour:** this plugin *is* the pagination layer. Any change must be checked against a catalogue of 2,000+ products for query cost and duplicate-item bugs on rapid scroll.
-- Two license option pairs exist (`infinite_loader_license_*` and `edd_wbcom_infinite_loader_license_*`). Confirm which one the updater actually reads before touching either - divergent key pairs are a known bug class in this portfolio.
+- Licensing: every direct licence call goes through `infinite_loader_for_woocommerce_licence_request()` (new host, old host as fallback). Never call wbcomdesigns.com directly.

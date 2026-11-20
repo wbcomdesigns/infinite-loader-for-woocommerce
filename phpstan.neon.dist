@@ -13,6 +13,7 @@ parameters:
 	scanDirectories:
 		- lib
 		- libs/edd-sl-sdk
+		- libs/package-signatures
 	excludePaths:
 		- admin/partials/*
 	bootstrapFiles:
@@ -21,3 +22,11 @@ parameters:
 	# WordPress core PHPDoc overstates how certain its return types are; our
 	# defensive is_array()/is_string() guards are real runtime checks, not dead code.
 	treatPhpDocTypesAsCertain: false
+	ignoreErrors:
+		# infinite_loader_for_woocommerce_licence_request(): the method_exists() guard on set_fallback() is for a
+		# newer upstream EDD SDK copy winning the version contest, which has no set_fallback(). PHPStan only sees
+		# the bundled copy. Same rule as SnipShare 1.1.1.
+		-
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: infinite-loader-for-woocommerce.php
