@@ -66,7 +66,12 @@ function infinite_loader_for_woocommerce_uninstall_site() {
 }
 
 if ( is_multisite() ) {
-	foreach ( get_sites( array( 'fields' => 'ids', 'number' => 0 ) ) as $infinite_loader_blog_id ) {
+	foreach ( get_sites(
+		array(
+			'fields' => 'ids',
+			'number' => 0,
+		)
+	) as $infinite_loader_blog_id ) {
 		switch_to_blog( $infinite_loader_blog_id );
 		infinite_loader_for_woocommerce_uninstall_site();
 		restore_current_blog();
