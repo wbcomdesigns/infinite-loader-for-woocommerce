@@ -48,13 +48,11 @@ This section describes how to install the plugin and get it working.
 Woocommerce
 
 == Changelog ==
-= 1.3.5 - October 2026 =
+= 1.3.5 - November 2026 =
 
-Licensing and updates now run through the shared EDD Software Licensing SDK, pre-activated so updates work with no setup.
-
-* Fix      - The license activation screen is reachable again; the old form pointed at a page that returned a 403 and could not be opened anywhere in wp-admin.
-* Fix      - Removed the error notice that asked for license activation on every admin page while giving no way to enter a key.
-* Dev      - Replaced the bundled hand-rolled license wrapper with the shared EDD Software Licensing SDK used across Wbcom plugins, pre-activated with a built-in key so automatic updates work with zero setup.
+* Fix      - Deleting the plugin now works from the Plugins screen and removes all of its settings.
+* Security - Licence screen requests now require an administrator and a valid security token.
+* Dev      - Moved licence updates to the signed update flow with a fallback host.
 
 = 1.3.4 - October 2026 =
 
@@ -62,7 +60,10 @@ Licensing and updates now run through the shared EDD Software Licensing SDK, pre
 * Fix      - Products are de-duplicated before being added to the grid, so a theme with a second pagination link can no longer re-append a page that was already loaded.
 * Fix      - The Overview tab and storefront now fall back to the Load More button (the activation default) instead of AJAX pagination when the loading-type option is missing.
 * Fix      - The security log for a blocked JavaScript snippet is written only when WP_DEBUG is on, so it no longer writes to the production error log on every save.
+* Fix      - The license activation screen is reachable again; the old form pointed at a page that returned a 403 and could not be opened anywhere in wp-admin.
+* Fix      - Removed the error notice that asked for license activation on every admin page while giving no way to enter a key.
 * Dev      - PHPStan and WPCS now fail the build on real violations (committed phpcs.xml and phpstan.neon; the advisory continue-on-error was removed), and the PHP lint matrix covers 8.1 to 8.5.
+* Dev      - Replaced the bundled hand-rolled license wrapper with the shared EDD Software Licensing SDK used across Wbcom plugins, pre-activated with a built-in key so automatic updates work with zero setup.
 
 = 1.3.3 - September 2026 =
 

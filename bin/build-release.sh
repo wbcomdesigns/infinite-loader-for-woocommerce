@@ -111,7 +111,12 @@ REQUIRED_FILES=(
 	"$SLUG/lib/wbcom-settings/settings.js"
 	"$SLUG/assets/vendor/lucide.min.js"
 	"$SLUG/libs/edd-sl-sdk/edd-sl-sdk.php"
-	"$SLUG/libs/edd-sl-sdk/vendor/autoload.php"
+	"$SLUG/libs/edd-sl-sdk/src/Versions.php"
+	"$SLUG/libs/edd-sl-sdk/src/Requests/API.php"
+	"$SLUG/includes/infinite-loader-for-woocommerce-preset-activation.php"
+	"$SLUG/libs/package-signatures/package-signatures.php"
+	"$SLUG/libs/package-signatures/src/class-guard.php"
+	"$SLUG/libs/package-signatures/src/class-verifier.php"
 )
 
 # List the archive ONCE. Piping `unzip | grep -q` per file looks tidier but is

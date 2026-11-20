@@ -25,7 +25,7 @@ Replaces WooCommerce's classic archive pagination with one of three AJAX loading
 | Object-cached option reads | Stable | Each of the 4 option arrays is wrapped in `wp_cache_*` (1h) to avoid repeat DB reads per archive request. |
 | Page-cache compatibility | Stable | Read endpoint is nonce-free by design so WP Rocket / Varnish / Cloudflare can serve the shop. |
 | WooCommerce Blocks archive support | Basic | Selectors extended with `.wc-block-grid__products` / `__product` when WC Blocks is active. |
-| EDD Software Licensing updater | Optional | Loaded only if `edd-license/` is present. |
+| EDD Software Licensing SDK (updates) | Stable | `libs/edd-sl-sdk` (Wbcom fork), preset free key, updates host with fallback, package signatures in warn mode. |
 
 ## Admin surfaces
 
@@ -52,9 +52,9 @@ WooCommerce archives only — `is_shop()`, `is_product_category()`, `is_product_
 | `infinite_loader_admin_button_option` | Load More button text / colours / spacing / border / radius. |
 | `infinite_loader_admin_previous_button_option` | Previous button styling (same shape). |
 | `infinite_loader_admin_css_js_option` | Custom CSS, before/after-update JS. |
-| `edd_wbcom_infinite_loader_license_key`, `edd_wbcom_infinite_loader_license_status` | EDD Software Licensing (optional). |
+| `infinite-loader-for-woocommerce_license_key`, `infinite_loader_for_woocommerce_preset_activated`, `infinite_loader_for_woocommerce_preset_owner_managed` | EDD SL SDK preset licence. |
 
-Transients: `edd_wbcom_infinite_loader_license_key_data` (license-check cache, 12h). `uninstall.php` removes the four settings option arrays on single-site and, via `get_sites()`, multisite. (There is no rate-limiting transient - the rate limiter was removed in 1.3.2. Note: `uninstall.php` still targets old license option keys `infinite_loader_license_key/_status`, which do not match the `edd_wbcom_*` keys the license code actually writes, so license options are not currently cleaned up on uninstall.)
+Transients: `infinite_loader_for_woocommerce_preset_activation_backoff` (retry window between preset activation attempts). `uninstall.php` removes the settings and licence options on single-site and, via `get_sites()`, multisite.
 
 ## Bundled icon assets
 

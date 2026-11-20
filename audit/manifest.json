@@ -117,21 +117,27 @@
       "controls": "custom_css (tags/@import/javascript: stripped), before_update / after_update (JS hooks; PHP + <script> + dangerous-pattern stripped)"
     },
     {
-      "key": "infinite_loader_license_key",
-      "group": "— (EDD license, optional edd-license/)",
+      "key": "infinite-loader-for-woocommerce_license_key",
+      "group": "— (EDD SL SDK, libs/edd-sl-sdk)",
       "type": "string",
-      "controls": "EDD Software Licensing key"
+      "controls": "Preset free licence key the SDK reads (written on admin_init)"
     },
     {
-      "key": "infinite_loader_license_status",
-      "group": "— (EDD license)",
-      "type": "string",
-      "controls": "EDD license activation status"
+      "key": "infinite_loader_for_woocommerce_preset_activated",
+      "group": "— (EDD SL SDK)",
+      "type": "int",
+      "controls": "1 once the preset key activated (valid reply via infinite_loader_for_woocommerce_licence_request)"
+    },
+    {
+      "key": "infinite_loader_for_woocommerce_preset_owner_managed",
+      "group": "— (EDD SL SDK)",
+      "type": "int",
+      "controls": "1 once the owner manages the licence (own key or valid status); the preset activation then stops for good"
     }
   ],
   "transients": [
     "infinite_loader_rate_<md5(ip)> — rate-limit counter, 60s",
-    "infinite_loader_license_data — EDD license cache"
+    "infinite_loader_for_woocommerce_preset_activation_backoff — retry window between preset activation attempts (12h; 30 min after a skipped fallback; earliest SDK pause end + 1 min when both hosts are paused)"
   ],
   "object_cache": "get_cached_option() wraps each option in wp_cache_get/set under the option name as the cache key (default group, HOUR_IN_SECONDS). The cache is invalidated on save via updated_option/added_option -> Infinite_Loader_For_Woocommerce_Admin::infinite_loader_flush_option_cache(), and the deactivator/uninstall delete the same keys, so a saved setting applies at once even behind a persistent object cache.",
   "shortcodes": [],
@@ -198,11 +204,12 @@
   },
   "edd_license": {
     "present": true,
-    "path": "edd-license/",
-    "classes": [
-      "EDD_WB_Infinite_Loader_Plugin_Updater (edd-license/class-edd-wb-infinite-loader-plugin-updater.php)"
-    ],
-    "loaded": "Guarded require in load_dependencies() — optional"
+    "path": "libs/edd-sl-sdk/",
+    "sdk": "vapvarun/edd-sl-sdk tag 1.0.4-wbcom.4 (registers 1.0.4.3)",
+    "registration": "edd_sl_sdk_registry: id infinite-loader-for-woocommerce, item_id 1629838, url INFINITE_LOADER_FOR_WOOCOMMERCE_LICENCE_HOST (https://updates.wbcomdesigns.com), fallback_url https://wbcomdesigns.com",
+    "helper": "infinite_loader_for_woocommerce_licence_request( array $params ): object|false — every direct licence call",
+    "package_signatures": "libs/package-signatures 1.0.2, product infinite-loader-for-woocommerce (store slug), mode warn",
+    "loaded": "Guarded require in the main plugin file (entry + src/Versions.php present), soft admin notice otherwise"
   },
   "security": {
     "public_read": "Unauthenticated by design; read-only; changes no state. Security headers set on the response (nosniff, SAMEORIGIN, noindex/nofollow).",

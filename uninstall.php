@@ -25,77 +25,57 @@
  */
 
 // If uninstall not called from WordPress, then exit.
-if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-	exit;
-}
+//
+// Core only includes this file from a capability-checked delete (single Delete
+// link, AJAX delete or bulk delete), so no nonce or request check belongs here:
+// core's AJAX delete sends its nonce as _ajax_nonce, which a check_admin_referer()
+// gate rejects, leaving the plugin installed or its options orphaned.
+defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 
-// Check user capabilities.
-if ( ! current_user_can( 'activate_plugins' ) ) {
-	return;
-}
-
-// Check if it's the correct plugin.
-$infinite_loader_plugin = isset( $_REQUEST['plugin'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['plugin'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-$infinite_loader_action = isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-
-if ( 'infinite-loader-for-woocommerce/infinite-loader-for-woocommerce.php' !== $infinite_loader_plugin || 'delete-plugin' !== $infinite_loader_action ) {
-	return;
-}
-
-// Security check.
-check_admin_referer( 'delete-plugin' );
-
-// For Single site.
-if ( ! is_multisite() ) {
-	// Delete plugin options.
+/**
+ * Remove every option, transient and cron event this plugin writes, for the current site.
+ *
+ * @return void
+ */
+function infinite_loader_for_woocommerce_uninstall_site() {
+	// Settings (written by the activator and the settings screens).
 	delete_option( 'infinite_loader_admin_general_option' );
 	delete_option( 'infinite_loader_admin_button_option' );
 	delete_option( 'infinite_loader_admin_previous_button_option' );
 	delete_option( 'infinite_loader_admin_css_js_option' );
-	// Licensing: new SDK options + legacy hand-rolled options (removed in 1.3.5).
+
+	// Licence: the SDK keys these by the plugin folder name.
 	delete_option( 'infinite-loader-for-woocommerce_license_key' );
-	delete_option( 'infinite_loader_for_woocommerce_preset_activated' );
+	delete_option( 'infinite-loader-for-woocommerce_license' );
+	delete_option( 'infinite-loader-for-woocommerce_license_key_allow_tracking' );
+	// Legacy hand-rolled licence options (removed in 1.3.5).
 	delete_option( 'edd_wbcom_infinite_loader_license_key' );
 	delete_option( 'edd_wbcom_infinite_loader_license_status' );
 
-	// Delete transients.
+	// Preset free-licence activation.
+	delete_option( 'infinite_loader_for_woocommerce_preset_activated' );
+	delete_option( 'infinite_loader_for_woocommerce_preset_owner_managed' );
+
+	// Transients.
+	delete_transient( 'infinite_loader_activation_redirect' );
 	delete_transient( 'infinite_loader_for_woocommerce_preset_activation_backoff' );
 	delete_transient( 'edd_wbcom_infinite_loader_license_key_data' );
 
-	// Clear any cached data.
-	wp_cache_flush();
-} else {
-	// For Multisite.
-	//
-	// get_sites() rather than a hand-written query against $wpdb->blogs: it is
-	// the supported API, it is cached, and it cannot go wrong on an install
-	// that stores sites differently. The raw query it replaces also tripped
-	// the prepared-SQL sniff, which had been silenced with a phpcs:ignore
-	// rather than resolved.
-	$infinite_loader_blog_ids         = get_sites( array( 'fields' => 'ids' ) );
-	$infinite_loader_original_blog_id = get_current_blog_id();
+	// SDK weekly licence check, if it was ever scheduled.
+	wp_clear_scheduled_hook( 'edd_sl_sdk_weekly_license_check_infinite-loader-for-woocommerce' );
+}
 
-	foreach ( $infinite_loader_blog_ids as $infinite_loader_blog_id ) {
+if ( is_multisite() ) {
+	foreach ( get_sites(
+		array(
+			'fields' => 'ids',
+			'number' => 0,
+		)
+	) as $infinite_loader_blog_id ) {
 		switch_to_blog( $infinite_loader_blog_id );
-
-		// Delete plugin options.
-		delete_option( 'infinite_loader_admin_general_option' );
-		delete_option( 'infinite_loader_admin_button_option' );
-		delete_option( 'infinite_loader_admin_previous_button_option' );
-		delete_option( 'infinite_loader_admin_css_js_option' );
-		// Licensing: new SDK options + legacy hand-rolled options (removed in 1.3.5).
-		delete_option( 'infinite-loader-for-woocommerce_license_key' );
-		delete_option( 'infinite_loader_for_woocommerce_preset_activated' );
-		delete_option( 'edd_wbcom_infinite_loader_license_key' );
-		delete_option( 'edd_wbcom_infinite_loader_license_status' );
-
-		// Delete transients.
-		delete_transient( 'infinite_loader_for_woocommerce_preset_activation_backoff' );
-		delete_transient( 'edd_wbcom_infinite_loader_license_key_data' );
+		infinite_loader_for_woocommerce_uninstall_site();
+		restore_current_blog();
 	}
-
-	switch_to_blog( $infinite_loader_original_blog_id );
-
-	// Clear any cached data.
-	wp_cache_flush();
+} else {
+	infinite_loader_for_woocommerce_uninstall_site();
 }

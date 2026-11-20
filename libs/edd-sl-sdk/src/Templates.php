@@ -12,26 +12,25 @@ namespace EasyDigitalDownloads\Updater;
 defined( 'ABSPATH' ) || exit; // @codeCoverageIgnore
 
 use EasyDigitalDownloads\Updater\Utilities\Path;
+
+/**
+ * Class Templates
+ *
+ * @since 1.0.0
+ */
 class Templates {
 
+	/**
+	 * Loads a template.
+	 *
+	 * @since 1.0.0
+	 * @param string $file The template file name, relative to the templates directory, without the extension.
+	 * @param array  $args Optional; arguments to pass to the template.
+	 * @return void
+	 */
 	public static function load( string $file, array $args = array() ) {
-		// Wbcom security hardening (2026-10-22): $file can originate from an
-		// AJAX GET param (Handler::ajax_get_license_overlay), so contain it to
-		// the templates directory. basename() strips any path components
-		// (../, absolute paths); the realpath check rejects anything that still
-		// resolves outside the templates dir (e.g. via a symlink). Divergence
-		// from the shared libs/edd-sl-sdk tracked for portfolio re-sync.
-		$file           = basename( $file );
-		$templates_path = self::get_templates_path();
-		$template       = $templates_path . $file . '.php';
-
-		$real_base = realpath( $templates_path );
-		$real_tmpl = realpath( $template );
-		if ( false === $real_base || false === $real_tmpl || 0 !== strpos( $real_tmpl, trailingslashit( $real_base ) ) ) {
-			return;
-		}
-
-		if ( ! file_exists( $template ) ) {
+		$template = self::get_template( $file );
+		if ( ! $template ) {
 			return;
 		}
 
@@ -46,5 +45,28 @@ class Templates {
 	 */
 	private static function get_templates_path() {
 		return apply_filters( 'edd_sl_sdk_templates_path', trailingslashit( Path::get_dir() ) . 'templates/' );
+	}
+
+	/**
+	 * Resolves a template name to a file inside the templates directory.
+	 *
+	 * @since 1.0.4
+	 * @param string $file The template file name, relative to the templates directory, without the extension.
+	 * @return string|false The absolute path to the template, or false if it is not a valid template.
+	 */
+	private static function get_template( string $file ) {
+		// realpath() throws on a null byte, so reject one rather than let it become a fatal error.
+		if ( false !== strpos( $file, "\0" ) ) {
+			return false;
+		}
+
+		$templates_path = self::get_templates_path();
+		$base           = realpath( $templates_path );
+		$template       = realpath( $templates_path . $file . '.php' );
+		if ( ! $base || ! $template ) {
+			return false;
+		}
+
+		return 0 === strpos( $template, $base . DIRECTORY_SEPARATOR ) ? $template : false;
 	}
 }

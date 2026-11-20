@@ -15,7 +15,7 @@
  * Plugin Name:       Wbcom Designs – Infinite Loader for WooCommerce
  * Plugin URI:        https://wbcomdesigns.com/downloads/infinite-loader-for-woocommerce/
  * Description:       Streamline product browsing with AJAX-powered infinite scroll or a "Load More" button. Enhance user experience, reduce page loads, and keep customers engaged on your WooCommerce store.
- * Version:           1.3.4
+ * Version:           1.3.5
  * Author:            Wbcom Designs
  * Author URI:        https://wbcomdesigns.com/
  * License:           GPL-2.0+
@@ -38,7 +38,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION', '1.3.4' );
+define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION', '1.3.5' );
 
 if ( ! defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_FILE' ) ) {
 	define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_FILE', __FILE__ );
@@ -70,6 +70,11 @@ if ( ! defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_EDD_ITEM_ID' ) ) {
  * store (edd_action=check_license => item "Infinite Loader for WooCommerce",
  * expires "lifetime", license_limit 0; activate_license => "valid").
  */
+// Licence and update host (since 1.3.5); the SDK falls back to https://wbcomdesigns.com when it cannot be reached.
+if ( ! defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_LICENCE_HOST' ) ) {
+	define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_LICENCE_HOST', 'https://updates.wbcomdesigns.com' );
+}
+
 if ( ! defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_FREE_LICENSE_KEY' ) ) {
 	define( 'INFINITE_LOADER_FOR_WOOCOMMERCE_FREE_LICENSE_KEY', '1e7cb1353087c12ff3add1e7f0930351' );
 }
@@ -100,26 +105,61 @@ add_action(
 	static function ( $registry ): void {
 		$registry->register(
 			array(
-				'id'      => 'infinite-loader-for-woocommerce',
-				'url'     => 'https://wbcomdesigns.com',
-				'item_id' => INFINITE_LOADER_FOR_WOOCOMMERCE_EDD_ITEM_ID,
-				'version' => INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION,
-				'file'    => INFINITE_LOADER_FOR_WOOCOMMERCE_FILE,
-				'license' => INFINITE_LOADER_FOR_WOOCOMMERCE_FREE_LICENSE_KEY,
+				'id'           => 'infinite-loader-for-woocommerce',
+				'url'          => INFINITE_LOADER_FOR_WOOCOMMERCE_LICENCE_HOST,
+				'fallback_url' => 'https://wbcomdesigns.com',
+				'item_id'      => INFINITE_LOADER_FOR_WOOCOMMERCE_EDD_ITEM_ID,
+				'version'      => INFINITE_LOADER_FOR_WOOCOMMERCE_VERSION,
+				'file'         => INFINITE_LOADER_FOR_WOOCOMMERCE_FILE,
+				'license'      => INFINITE_LOADER_FOR_WOOCOMMERCE_FREE_LICENSE_KEY,
 			)
 		);
 	}
 );
 
+/**
+ * One licence-server request (activate, deactivate, check or version). Goes through the bundled SDK, so it uses
+ * the same host as update checks and falls back to wbcomdesigns.com when that host cannot be reached.
+ *
+ * @since 1.3.5
+ *
+ * @param array $params EDD Software Licensing parameters (edd_action, license, item_id).
+ * @return object|false Decoded reply, or false when no host answered.
+ */
+function infinite_loader_for_woocommerce_licence_request( array $params ) {
+	if ( ! class_exists( '\\EasyDigitalDownloads\\Updater\\Requests\\API' ) ) {
+		return false;
+	}
+	// Name the fallback here too: on an early request the SDK registry has not run yet. The guard covers a
+	// newer upstream EDD copy winning the version contest, which has no set_fallback().
+	if ( method_exists( '\\EasyDigitalDownloads\\Updater\\Requests\\API', 'set_fallback' ) ) {
+		\EasyDigitalDownloads\Updater\Requests\API::set_fallback( INFINITE_LOADER_FOR_WOOCOMMERCE_LICENCE_HOST, 'https://wbcomdesigns.com' );
+	}
+	return ( new \EasyDigitalDownloads\Updater\Requests\API( INFINITE_LOADER_FOR_WOOCOMMERCE_LICENCE_HOST ) )->make_request( $params );
+}
+
+// Each update package must carry its release signature. Warn mode: the result is logged (option
+// package_signatures_log) and the update installs either way. The product name is the store slug.
+if ( file_exists( INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'libs/package-signatures/package-signatures.php' ) ) {
+	require_once INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'libs/package-signatures/package-signatures.php';
+	package_signatures_register(
+		array(
+			'product'  => 'infinite-loader-for-woocommerce',
+			'plugin'   => plugin_basename( INFINITE_LOADER_FOR_WOOCOMMERCE_FILE ),
+			'hosts'    => array( 'wbcomdesigns.com', 'updates.wbcomdesigns.com' ),
+			'keys'     => array( 'wbcom-2026-1' => 'kr+2P1WqRbENpZw0BXZmwFnA2tMLi6MlHbBa6jB13U4=' ),
+			'mode'     => 'warn',
+			'fallback' => 'https://wbcomdesigns.com/package-signatures/{product}/{version}/',
+		)
+	);
+}
+
 // Load the vendored SDK only when the package is COMPLETE. A partial build that
-// keeps the entry file but drops libs/edd-sl-sdk/src or the SDK's own
-// vendor/autoload.php (which edd-sl-sdk.php require_once's unconditionally)
-// would fatal on load, so guard on all three and degrade to "updates disabled"
-// with a soft admin notice instead of a white screen — licensing only gates
-// updates, never features.
+// keeps the entry file but drops libs/edd-sl-sdk/src would fatal on load, so
+// guard on it being present and degrade to "updates disabled" with a soft admin
+// notice instead of a white screen - licensing only gates updates, never features.
 if ( file_exists( INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'libs/edd-sl-sdk/edd-sl-sdk.php' )
-	&& file_exists( INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'libs/edd-sl-sdk/src/Versions.php' )
-	&& file_exists( INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'libs/edd-sl-sdk/vendor/autoload.php' ) ) {
+	&& file_exists( INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'libs/edd-sl-sdk/src/Versions.php' ) ) {
 	require_once INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'libs/edd-sl-sdk/edd-sl-sdk.php';
 } elseif ( is_admin() ) {
 	add_action(
@@ -132,52 +172,8 @@ if ( file_exists( INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'libs/edd-sl-sdk
 	);
 }
 
-// Auto-activate the preset free key once per site so store-authorised downloads
-// work without the customer touching anything. Skips entirely until the preset
-// key is set. Backs off for 12h after any attempt so an install that cannot
-// reach the store never repeats a blocking request on every admin pageview.
-add_action(
-	'admin_init',
-	static function (): void {
-		$preset_key = INFINITE_LOADER_FOR_WOOCOMMERCE_FREE_LICENSE_KEY;
-
-		// Owner opt-out for air-gapped / privacy-strict installs.
-		if ( defined( 'INFINITE_LOADER_FOR_WOOCOMMERCE_NO_LICENSE_PHONE_HOME' ) && INFINITE_LOADER_FOR_WOOCOMMERCE_NO_LICENSE_PHONE_HOME ) {
-			return;
-		}
-
-		if ( get_option( 'infinite_loader_for_woocommerce_preset_activated' ) ) {
-			return;
-		}
-		if ( get_transient( 'infinite_loader_for_woocommerce_preset_activation_backoff' ) ) {
-			return;
-		}
-		set_transient( 'infinite_loader_for_woocommerce_preset_activation_backoff', 1, 12 * HOUR_IN_SECONDS );
-
-		// Store the key where the SDK reads it.
-		update_option( 'infinite-loader-for-woocommerce_license_key', $preset_key, false );
-
-		$response = wp_remote_post(
-			'https://wbcomdesigns.com',
-			array(
-				'timeout' => 5,
-				'body'    => array(
-					'edd_action' => 'activate_license',
-					'license'    => $preset_key,
-					'item_id'    => INFINITE_LOADER_FOR_WOOCOMMERCE_EDD_ITEM_ID,
-					'url'        => home_url(),
-				),
-			)
-		);
-
-		if ( ! is_wp_error( $response ) ) {
-			$body = json_decode( wp_remote_retrieve_body( $response ), true );
-			if ( 'valid' === ( $body['license'] ?? '' ) ) {
-				update_option( 'infinite_loader_for_woocommerce_preset_activated', 1, false );
-			}
-		}
-	}
-);
+// Activate the preset free key once per site (retries, 5s budget, never overwrites an owner's key).
+require_once INFINITE_LOADER_FOR_WOOCOMMERCE_PLUGIN_PATH . 'includes/infinite-loader-for-woocommerce-preset-activation.php';
 
 /**
  * The code that runs during plugin activation.
