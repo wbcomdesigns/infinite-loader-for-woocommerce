@@ -51,6 +51,7 @@ Woocommerce
 = 1.3.5 - November 2026 =
 
 * Fix      - Deleting the plugin now works from the Plugins screen and removes all of its settings.
+* Fix      - The "No more products" notice and the load-error notice now show as a styled card that follows the theme colours, dark mode and right-to-left layouts.
 * Security - Licence screen requests now require an administrator and a valid security token.
 * Dev      - Moved licence updates to the signed update flow with a fallback host.
 
