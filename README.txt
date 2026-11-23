@@ -52,6 +52,7 @@ Woocommerce
 
 * Fix      - Deleting the plugin now works from the Plugins screen and removes all of its settings.
 * Fix      - The "No more products" notice and the load-error notice now show as a styled card that follows the theme colours, dark mode and right-to-left layouts.
+* Fix      - Infinite scroll no longer re-requests a page that failed to load over and over; it waits for the shopper to press Retry.
 * Security - Licence screen requests now require an administrator and a valid security token.
 * Dev      - Moved licence updates to the signed update flow with a fallback host.
 
