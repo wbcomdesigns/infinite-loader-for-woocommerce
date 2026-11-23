@@ -178,7 +178,10 @@ var infinite_loader_update_state, infinite_loader_product_data, infinite_loader_
                         scrollTimer = setTimeout(function() {
                             br_load_more_html5();
 
-                            if (infinite_loader_type === 'infinity-scroll' && infinite_loader_near_list_end()) {
+                            // A failed load fires a synthetic scroll too, so without the
+                            // error check the same failing page is requested again in a
+                            // tight loop. While the error shows, only Retry loads.
+                            if (infinite_loader_type === 'infinity-scroll' && infinite_loader_near_list_end() && !$('.infinite-loader-error').length) {
                                 infinite_loader_update_state();
                                 infinite_loader_load_next_page();
                             }

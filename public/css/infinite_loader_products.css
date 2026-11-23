@@ -73,3 +73,46 @@ body {
     background-repeat: no-repeat;
     display: none;
 }
+
+/*
+ * End-of-list ("No more products") and load-error notices.
+ * Colours come only from the active theme's tokens: BuddyX --bx-color-*, then Reign --reign-*,
+ * then theme.json presets, then currentColor mixes for themes with none. Theme dark modes
+ * (Reign/BuddyX data-bx-mode="dark") flip those tokens, so no dark rule is needed here.
+ */
+.infinite-loader-no-more,
+.infinite-loader-error {
+	--infinite-surface: var(--bx-color-bg-elevated, var(--reign-site-sections-bg-color, var(--wp--preset--color--base, color-mix(in srgb, currentColor 4%, transparent))));
+	--infinite-muted: var(--bx-color-fg-muted, var(--reign-site-alternate-text-color, currentColor));
+	--infinite-border: var(--bx-color-border, var(--reign-site-border-color, color-mix(in srgb, currentColor 15%, transparent)));
+	--infinite-danger: var(--bx-color-error, var(--reign-color-error, currentColor));
+	--infinite-radius: var(--reign-global-border-radius, 6px);
+	clear: both;
+	box-sizing: border-box;
+	inline-size: 100%;
+	margin-block: 1.5em;
+	padding-block: 1em;
+	padding-inline: 1.25em;
+	text-align: center;
+	color: var(--infinite-muted);
+	background-color: var(--infinite-surface);
+	border: 1px solid var(--infinite-border);
+	border-radius: var(--infinite-radius);
+}
+.infinite-loader-error {
+	border-inline-start: 4px solid var(--infinite-danger);
+}
+.infinite-loader-error p {
+	margin-block: 0 0.75em;
+	margin-inline: 0;
+}
+.infinite-loader-error .infinite-loader-retry {
+	margin: 0;
+}
+@media (max-width: 480px) {
+	.infinite-loader-no-more,
+	.infinite-loader-error {
+		margin-block: 1em;
+		padding-inline: 1em;
+	}
+}
