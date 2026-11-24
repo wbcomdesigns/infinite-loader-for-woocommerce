@@ -36,6 +36,14 @@ Yes. When WooCommerce Blocks is active, the plugin adds the block grid selectors
 
 Yes. All user-facing strings are translatable, and the button text can be translated. RTL stylesheets are included. A `.pot` template ships in the `languages` folder.
 
+## What does the shopper see when products cannot load?
+
+An error notice with a **Retry** button appears, and at the end of the list a "No more products" notice. Both follow your theme colours, dark mode and right-to-left layouts. See [Loading Modes](../features/loading-modes.md).
+
+## Can I delete the plugin and remove its settings?
+
+Yes. Deleting the plugin from the Plugins screen removes its settings and licence data.
+
 ## Does the plugin store any customer or order data?
 
 No. It stores only its own settings (four options) and, when licensed, the EDD license key and status. There are no custom tables, no custom post types, and no post meta. Everything it stores is removed on uninstall.

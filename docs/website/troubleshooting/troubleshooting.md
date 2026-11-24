@@ -19,6 +19,10 @@ This is almost always a theme markup mismatch. The loader finds the product grid
 
 Some themes build their shop loop with non-standard markup, so the "products only" response can come back different from the first paint. Return false from `infinite_loader_render_products_only` to fall back to rendering the full archive and letting the script scrape it.
 
+## An error message with a Retry button appears
+
+The page request failed, for example because of a dropped connection or a server error. Press **Retry** to load the same page again. In Infinite scroll mode nothing more loads until Retry is pressed, which is intentional so a failing request is not repeated in a loop. If it keeps failing, check the browser Network tab for the failing request and the server error log.
+
 ## The loading icon is missing
 
 The default spinner uses Font Awesome. Make sure **Enable Font Awesome** is on in General settings; the plugin then loads its bundled Font Awesome on shop archives. If your theme also ships Font Awesome, either source works. You can replace the icon HTML entirely with the `wbcom_infinite_loader_image` filter.

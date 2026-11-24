@@ -28,6 +28,12 @@ Best for shoppers who prefer classic, precise page-by-page navigation.
 - **Address-bar tracking** is on by default in every mode, so the browser Back button works as expected. It can be turned off (see [Settings Reference](../usage/settings.md)).
 - **The result count** updates to describe what is on screen as pages are appended, rather than only the most recently loaded page.
 
+## When there are no more products, or a page fails to load
+
+At the end of the list the shopper sees a "No more products" notice. If a page cannot be loaded, an error notice appears with a **Retry** button. Both notices are styled cards that follow your theme colours, dark mode and right-to-left layouts.
+
+In Infinite scroll mode the plugin does not keep requesting a page that failed. It waits until the shopper presses **Retry**, so a temporary server problem does not turn into a stream of repeated requests.
+
 ## Loading icon and scroll-to-top
 
 While a page is being fetched, a loading icon is shown. By default this is a spinning Font Awesome spinner. In Load More and Infinite scroll modes, a "scroll to top" button is also added to the storefront.
